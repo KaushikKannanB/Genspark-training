@@ -13,41 +13,41 @@ BEGIN
 END;
 $$;
 
+select * from inventory where film_id=8
 
+
+select * from inventory
 ---12 Simulate a failure in a multi-step transaction (update film + insert into inventory) and roll back.
-DO $$
-BEGIN
-    -- Step 1: Update a film
-    UPDATE film
-    SET title = 'Exploding Kittens: The Movie'
-    WHERE film_id = 8;
+do $$
+declare n_film_id int;
+begin
+	update film
+	set title = 'Good Bad Ugly' where film_id=8
+	returning film_id into n_film_id;
 
-    -- Step 2: Insert into inventory
-    INSERT INTO inventory (film_id, store_id, last_update)
-    VALUES (8, 1, CURRENT_TIMESTAMP);
+	insert into inventory(film_id, store_id, last_update)
+	values (n_film_id, 1, current_timestamp);
 
-    -- Step 3: Simulate failure
-    RAISE EXCEPTION 'Simulated failure: Rolling back entire transaction';
-
-    -- COMMIT is implicit in DO block if no errors occur
-END;
-$$;
+	raise exception 'stop updating!';
+end $$
 
 ---13 Create a transaction that transfers an inventory item from one store to another.
-DO $$
-BEGIN
-    IF EXISTS (
-        SELECT 1 FROM inventory WHERE inventory_id = 100 AND store_id = 1
-    ) THEN
-        UPDATE inventory
-        SET store_id = 2,
-            last_update = CURRENT_TIMESTAMP
-        WHERE inventory_id = 100;
-    ELSE
-        RAISE NOTICE 'Inventory not found in the specified source store.';
-    END IF;
-END;
-$$;
+select * from inventory where inventory_id=1;
+
+do $$
+declare our_store_id int;
+begin
+	select store_id into our_store_id
+	from inventory where inventory_id=1;
+	
+	if our_store_id =1
+		then update inventory set store_id =2 where inventory_id=1;
+	elseif our_store_id =2
+		then update inventory set store_id =1 where inventory_id=1;
+	end if;
+
+	raise notice 'store changed';
+end $$;
 
 ---14 Demonstrate SAVEPOINT and ROLLBACK TO SAVEPOINT by updating payment amounts, then undoing one.
 
@@ -98,7 +98,7 @@ BEGIN
     DELETE FROM customer
     WHERE customer_id = target_customer_id;
 
-    -- You can raise a notice to confirm before commit
+   
     RAISE NOTICE 'Customer %, rentals, and payments deleted.', target_customer_id;
 
 END $$;
