@@ -19,8 +19,8 @@ end $$;
 select * from summary;
 
 --- 2 Using a cursor, print the titles of films in the 'Comedy' category rented more than 10 times.
-
-do $$
+create or replace procedure proc_category_count_rent(my_category varchar(100), threshold_count int)
+as $$
 declare
 	rec record;
 	cur cursor for (select i.film_id, f.title, count(*) as RCount 
@@ -28,17 +28,22 @@ declare
 					join film_category fc on fc.film_id=i.film_id 
 					join category c on c.category_id=fc.category_id
 					join film f on f.film_id=i.film_id
-					where c.name='Comedy'
+					where c.name=my_category
 					group by i.film_id, f.title
-					having count(*)>=10);
-begin
-	open cur;
-	loop
-		fetch cur into rec;
-		exit when not found;
-		raise notice 'title: %', rec.title;
-	end loop;
-end $$;
+					having count(*)>=threshold_count);
+BEGIN
+	begin
+		open cur;
+		loop
+			fetch cur into rec;
+			exit when not found;
+			raise notice 'title: %, Count:%', rec.title, rec.Rcount;
+		end loop;
+	close cur;
+end;
+end $$ language plpgsql;
+
+call proc_category_count_rent('Comedy',10)
 
 ---3 Create a cursor to go through each store and count the number of distinct films available, and insert results into a report table.
 
@@ -139,39 +144,45 @@ COMMIT;
 select * from payment order by payment_id;
 
 ---4 
-select * from inventory order by last_update desc;
-select * from rental
-select * from payment
-DO $$
+
+select * from rental where inventory_id=2
+select * from payment order by payment_date desc
+
+create or replace procedure proc_change_store_id(my_inv_id int)
+as $$
 DECLARE 
     our_store_id INT;
+	our_film_id int;
+Begin
+	BEGIN
+	    SELECT store_id, film_id INTO our_store_id, our_film_id
+	    FROM inventory WHERE inventory_id = my_inv_id;
+	
+	    
+	    DELETE FROM payment
+	    WHERE rental_id IN (
+	        SELECT rental_id FROM rental WHERE inventory_id = my_inv_id
+	    );
+	
+	    
+	    DELETE FROM rental
+	    WHERE inventory_id = my_inv_id;
+	    
+	
+	    DELETE FROM inventory WHERE inventory_id = my_inv_id;
+	
+	    IF our_store_id = 1 THEN
+	        INSERT INTO inventory(film_id, store_id, last_update)
+	        VALUES (our_film_id, 2, NOW());
+	    ELSIF our_store_id = 2 THEN
+	        INSERT INTO inventory(film_id, store_id, last_update)
+	        VALUES (our_film_id, 1, NOW());
+	    END IF;
+	end;
+END $$ language plpgsql;
 
-BEGIN
-    SELECT store_id INTO our_store_id
-    FROM inventory WHERE inventory_id = 1;
-
-    
-    DELETE FROM payment
-    WHERE rental_id IN (
-        SELECT rental_id FROM rental WHERE inventory_id = 1
-    );
-
-    
-    DELETE FROM rental
-    WHERE inventory_id = 1;
-    
-
-    DELETE FROM inventory WHERE inventory_id = 1;
-
-    IF our_store_id = 1 THEN
-        INSERT INTO inventory(film_id, store_id, last_update)
-        VALUES (1, 2, NOW());
-    ELSIF our_store_id = 2 THEN
-        INSERT INTO inventory(film_id, store_id, last_update)
-        VALUES (1, 1, NOW());
-    END IF;
-END $$;
-
+select * from inventory order by last_update desc
+call proc_change_store_id(2);
 
 --- 5
 DO $$
