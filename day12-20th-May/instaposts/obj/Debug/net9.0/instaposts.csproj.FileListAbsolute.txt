@@ -1,0 +1,15 @@
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\obj\Debug\net9.0\instaposts.GeneratedMSBuildEditorConfig.editorconfig
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\obj\Debug\net9.0\instaposts.AssemblyInfoInputs.cache
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\obj\Debug\net9.0\instaposts.AssemblyInfo.cs
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\obj\Debug\net9.0\instaposts.csproj.CoreCompileInputs.cache
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\obj\Debug\net9.0\instaposts.sourcelink.json
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\bin\Debug\net9.0\instaposts.exe
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\bin\Debug\net9.0\instaposts.deps.json
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\bin\Debug\net9.0\instaposts.runtimeconfig.json
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\bin\Debug\net9.0\instaposts.dll
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\bin\Debug\net9.0\instaposts.pdb
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\obj\Debug\net9.0\instaposts.dll
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\obj\Debug\net9.0\refint\instaposts.dll
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\obj\Debug\net9.0\instaposts.pdb
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\obj\Debug\net9.0\instaposts.genruntimeconfig.cache
+D:\Presidio\Genspark-training\day12-20th-May\instaposts\obj\Debug\net9.0\ref\instaposts.dll

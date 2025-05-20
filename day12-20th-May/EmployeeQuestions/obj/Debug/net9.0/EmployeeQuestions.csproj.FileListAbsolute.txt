@@ -1,0 +1,15 @@
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\obj\Debug\net9.0\EmployeeQuestions.GeneratedMSBuildEditorConfig.editorconfig
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\obj\Debug\net9.0\EmployeeQuestions.AssemblyInfoInputs.cache
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\obj\Debug\net9.0\EmployeeQuestions.AssemblyInfo.cs
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\obj\Debug\net9.0\EmployeeQuestions.csproj.CoreCompileInputs.cache
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\obj\Debug\net9.0\EmployeeQuestions.sourcelink.json
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\bin\Debug\net9.0\EmployeeQuestions.exe
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\bin\Debug\net9.0\EmployeeQuestions.deps.json
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\bin\Debug\net9.0\EmployeeQuestions.runtimeconfig.json
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\bin\Debug\net9.0\EmployeeQuestions.dll
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\bin\Debug\net9.0\EmployeeQuestions.pdb
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\obj\Debug\net9.0\EmployeeQuestions.dll
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\obj\Debug\net9.0\refint\EmployeeQuestions.dll
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\obj\Debug\net9.0\EmployeeQuestions.pdb
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\obj\Debug\net9.0\EmployeeQuestions.genruntimeconfig.cache
+D:\Presidio\Genspark-training\day12-20th-May\EmployeeQuestions\obj\Debug\net9.0\ref\EmployeeQuestions.dll
