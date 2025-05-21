@@ -1,0 +1,15 @@
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\bin\Debug\net9.0\Cardiologist.exe
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\bin\Debug\net9.0\Cardiologist.deps.json
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\bin\Debug\net9.0\Cardiologist.runtimeconfig.json
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\bin\Debug\net9.0\Cardiologist.dll
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\bin\Debug\net9.0\Cardiologist.pdb
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\obj\Debug\net9.0\Cardiologist.GeneratedMSBuildEditorConfig.editorconfig
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\obj\Debug\net9.0\Cardiologist.AssemblyInfoInputs.cache
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\obj\Debug\net9.0\Cardiologist.AssemblyInfo.cs
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\obj\Debug\net9.0\Cardiologist.csproj.CoreCompileInputs.cache
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\obj\Debug\net9.0\Cardiologist.sourcelink.json
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\obj\Debug\net9.0\Cardiologist.dll
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\obj\Debug\net9.0\refint\Cardiologist.dll
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\obj\Debug\net9.0\Cardiologist.pdb
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\obj\Debug\net9.0\Cardiologist.genruntimeconfig.cache
+D:\Presidio\Genspark-training\day13-21st-May\Cardiologist\obj\Debug\net9.0\ref\Cardiologist.dll
