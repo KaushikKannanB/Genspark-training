@@ -1,0 +1,15 @@
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\bin\Debug\net9.0\StudentMonitoringSOLID.exe
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\bin\Debug\net9.0\StudentMonitoringSOLID.deps.json
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\bin\Debug\net9.0\StudentMonitoringSOLID.runtimeconfig.json
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\bin\Debug\net9.0\StudentMonitoringSOLID.dll
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\bin\Debug\net9.0\StudentMonitoringSOLID.pdb
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\obj\Debug\net9.0\StudentMonitoringSOLID.GeneratedMSBuildEditorConfig.editorconfig
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\obj\Debug\net9.0\StudentMonitoringSOLID.AssemblyInfoInputs.cache
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\obj\Debug\net9.0\StudentMonitoringSOLID.AssemblyInfo.cs
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\obj\Debug\net9.0\StudentMonitoringSOLID.csproj.CoreCompileInputs.cache
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\obj\Debug\net9.0\StudentMonitoringSOLID.sourcelink.json
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\obj\Debug\net9.0\StudentMonitoringSOLID.dll
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\obj\Debug\net9.0\refint\StudentMonitoringSOLID.dll
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\obj\Debug\net9.0\StudentMonitoringSOLID.pdb
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\obj\Debug\net9.0\StudentMonitoringSOLID.genruntimeconfig.cache
+D:\Presidio\Genspark-training\day14-22nd-May\StudentMonitoringSOLID\obj\Debug\net9.0\ref\StudentMonitoringSOLID.dll

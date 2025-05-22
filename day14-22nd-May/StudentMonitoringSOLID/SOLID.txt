@@ -1,0 +1,35 @@
+S- Single Responsibility Principle
+** A class should have one and only reason to change
+Each file, i.e., each class has its one solo Responsibility
+For example: Student class - only holds student data, 
+StudentRepositor class: storage and retrieval
+StudentService: Business logic
+StudentConsoleUi: UI Menu
+
+O-Open/Closed Principle:
+**Class should be open foe Extension, not modification
+to change an existinf piece of a working model, we need not modify but can extend its functionality
+
+example: we can add a new repository withiut changing the existing classes.
+
+L-Liskov Substitution Principle
+** Superclass's objects should be replaceable with objects of its subclasses
+example:
+Studentservice >>> depends on >>> Interface:IStudentRepository
+StudentRepositor >>> implements >>> Interface:IStudentRepository
+
+Studentserice can work with any class that implements the IStudentRepository interface.
+StudentService doesn’t care which class you give it — as long as it follows the IStudentRepository contract.
+You can replace the superclass (IStudentRepository) with any subclass (StudentRepository, DatabaseStudentRepository) and the system still works.
+
+I-Interface Segregation Principle:
+**Interfaces should be focused and not bloated
+Focused methods, only related methods mentioned in the interface, 
+if unrelated tasks/functions mentioned, the implementing class(repository) should have to perform those unrelated functions too.
+
+D-Dependency Inversion principle:
+**Tough Coupling should be eradictaed. Dependencies should be on interfaces not concrete classes.
+
+Example: StudentService depends on IStudentRepository, and uses StudentRepositor class, 
+Now i can replace StudentRepositor class with anything else that implements IStudentRepository without changing StudentService class.
+

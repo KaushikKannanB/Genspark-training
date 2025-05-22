@@ -1,0 +1,15 @@
+D:\Presidio\Genspark-training\day14-22nd-May\Application\obj\Debug\net9.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Presidio\Genspark-training\day14-22nd-May\Application\obj\Debug\net9.0\Application.AssemblyInfoInputs.cache
+D:\Presidio\Genspark-training\day14-22nd-May\Application\obj\Debug\net9.0\Application.AssemblyInfo.cs
+D:\Presidio\Genspark-training\day14-22nd-May\Application\obj\Debug\net9.0\Application.csproj.CoreCompileInputs.cache
+D:\Presidio\Genspark-training\day14-22nd-May\Application\obj\Debug\net9.0\Application.sourcelink.json
+D:\Presidio\Genspark-training\day14-22nd-May\Application\bin\Debug\net9.0\Application.exe
+D:\Presidio\Genspark-training\day14-22nd-May\Application\bin\Debug\net9.0\Application.deps.json
+D:\Presidio\Genspark-training\day14-22nd-May\Application\bin\Debug\net9.0\Application.runtimeconfig.json
+D:\Presidio\Genspark-training\day14-22nd-May\Application\bin\Debug\net9.0\Application.dll
+D:\Presidio\Genspark-training\day14-22nd-May\Application\bin\Debug\net9.0\Application.pdb
+D:\Presidio\Genspark-training\day14-22nd-May\Application\obj\Debug\net9.0\Application.dll
+D:\Presidio\Genspark-training\day14-22nd-May\Application\obj\Debug\net9.0\refint\Application.dll
+D:\Presidio\Genspark-training\day14-22nd-May\Application\obj\Debug\net9.0\Application.pdb
+D:\Presidio\Genspark-training\day14-22nd-May\Application\obj\Debug\net9.0\Application.genruntimeconfig.cache
+D:\Presidio\Genspark-training\day14-22nd-May\Application\obj\Debug\net9.0\ref\Application.dll
