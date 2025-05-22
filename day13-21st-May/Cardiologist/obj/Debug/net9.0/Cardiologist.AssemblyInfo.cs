@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cardiologist")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+215a98c11c281c6c637463c57de442f8f02807d7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf24bdf1d3d9b0a428acc9f5b32dfa7a8234a5d1")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cardiologist")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cardiologist")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
