@@ -29,7 +29,9 @@ namespace StudentMonitoringSOLID.UI
                 switch (choice)
                 {
                     case "1":
-                        var newStudent = TakeInputFromUser();
+                        Console.WriteLine("Is this a scholarship student? (y/n): ");
+                        string typeChoice = Console.ReadLine()?.ToLower();
+                        var newStudent = TakeInputFromUser(typeChoice == "y");
                         Console.WriteLine(_studentService.AddStudent(newStudent));
                         break;
 
@@ -47,7 +49,9 @@ namespace StudentMonitoringSOLID.UI
                         else
                         {
                             Console.WriteLine("Enter updated details:");
-                            var updatedStudent = TakeInputFromUser();
+                            Console.WriteLine("Is this a scholarship student? (y/n): ");
+                            string updateChoice = Console.ReadLine()?.ToLower();
+                            var updatedStudent = TakeInputFromUser(updateChoice == "y");
                             updatedStudent.Id = id;
                             _studentService.UpdateStudent(updatedStudent);
                         }
@@ -99,7 +103,7 @@ namespace StudentMonitoringSOLID.UI
             }
         }
 
-        public static Student TakeInputFromUser()
+        public static Student TakeInputFromUser(bool isScholarshipStudent)
         {
             Console.WriteLine("Enter Student ID:");
             int id;
@@ -119,6 +123,18 @@ namespace StudentMonitoringSOLID.UI
             while (!double.TryParse(Console.ReadLine(), out cgpa))
             {
                 Console.WriteLine("Enter a valid value as CGPA");
+            }
+
+            if (isScholarshipStudent)
+            {
+                Console.WriteLine("Enter Scholarship Amount:");
+                double amount;
+                while (!double.TryParse(Console.ReadLine(), out amount))
+                {
+                    Console.WriteLine("Enter a valid scholarship amount");
+                }
+
+                return new ScholarshipStudent(id, name, dept, cgpa, amount);
             }
 
             return new Student(id, name, dept, cgpa);

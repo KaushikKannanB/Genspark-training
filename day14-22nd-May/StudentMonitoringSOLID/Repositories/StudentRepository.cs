@@ -28,6 +28,10 @@ namespace StudentMonitoringSOLID.Repositories
                 existing.department = student.department;
                 existing.cgpa = student.cgpa;
             }
+            if (existing is ScholarshipStudent existingScholar && student is ScholarshipStudent newScholar)
+        {
+            existingScholar.ScholarshipAmount = newScholar.ScholarshipAmount;
+        }
         }
 
         public Student GetStudentById(int id)

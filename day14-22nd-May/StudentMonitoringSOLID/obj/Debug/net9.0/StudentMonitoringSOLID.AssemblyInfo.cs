@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StudentMonitoringSOLID")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf24bdf1d3d9b0a428acc9f5b32dfa7a8234a5d1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+719e091135cf838e07d3bc81deaedb3133c67ff8")]
 [assembly: System.Reflection.AssemblyProductAttribute("StudentMonitoringSOLID")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StudentMonitoringSOLID")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
