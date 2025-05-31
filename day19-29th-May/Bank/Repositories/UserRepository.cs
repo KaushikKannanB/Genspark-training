@@ -1,6 +1,7 @@
 using Bank.Contexts;
 using Bank.Interfaces;
 using Bank.Models;
+using Bank.Models.DTOs;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 namespace Bank.Repositories
@@ -14,9 +15,11 @@ namespace Bank.Repositories
         }
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return await context.Users.ToListAsync();
+            return await context.Users
+                .Include(u => u.Transactions)
+                .ToListAsync();
         }
-        public async Task<int> AddUser(User User)
+        public async Task<string> AddUser(User User)
         {
 
             await context.Users.AddAsync(User);
@@ -24,10 +27,12 @@ namespace Bank.Repositories
             var u = await GetUserByMail(User.Email);
             return u.Id;
         }
-        public async Task<User> GetUserById(int id)
+        
+        public async Task<User> GetUserById(string id)
         {
-            var user = context.Users.FirstOrDefaultAsync(u => u.Id == id);
-            return await user;
+            return await context.Users
+                .Include(u => u.Transactions)
+                .FirstOrDefaultAsync(u => u.Id == id);
         }
         public async Task<User> GetUserByMail(string mail)
         {

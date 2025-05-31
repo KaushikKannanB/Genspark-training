@@ -8,6 +8,7 @@ namespace Bank.Interfaces
         public Task<Transaction> GetTransactionById(int id);
         public Task<int> AddTransaction(Transaction transaction);
         public Task<int> Deposit(DepositRequestDTO depositRequest);
+        public Task<int> InitialDeposit(DepositRequestDTO depositRequest);
         public Task<int> Withdraw(WithdrawRequestDTO withdrawRequest);
         public Task<int> BankTransfer(BankTransferDTO bankTransferRequest);
     }

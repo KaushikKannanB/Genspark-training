@@ -9,12 +9,12 @@ namespace Bank.Controllers
     [Route("api/[controller]")]
     public class BankController : ControllerBase
     {
-        private readonly IUserRepository _userRepo;
+        private readonly IUserService _userRepo;
         // private readonly ITransactionRepository _userRepo;
 
         private readonly ITransactionServices _transactionService;
 
-        public BankController(IUserRepository userRepo, ITransactionServices transactionService)
+        public BankController(IUserService userRepo, ITransactionServices transactionService)
         {
             _userRepo = userRepo;
             _transactionService = transactionService;
@@ -23,7 +23,7 @@ namespace Bank.Controllers
         // User Endpoints
 
         [HttpPost("create-user")]
-        public async Task<IActionResult> CreateUser(User user)
+        public async Task<IActionResult> CreateUser(UserRequestDTO user)
         {
             var id = await _userRepo.AddUser(user);
             return Ok(new { Message = "User created", UserId = id });
@@ -37,7 +37,7 @@ namespace Bank.Controllers
         }
 
         [HttpGet("users/{id}")]
-        public async Task<IActionResult> GetUserById(int id)
+        public async Task<IActionResult> GetUserById(string id)
         {
             var user = await _userRepo.GetUserById(id);
             if (user == null)

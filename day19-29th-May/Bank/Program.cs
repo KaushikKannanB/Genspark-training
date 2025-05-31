@@ -15,6 +15,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 // Register services
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITransactionServices, TransactionService>();
 // builder.Services.AddScoped<IUserServices, UserService>();  // if you have IUserServices and UserService
 

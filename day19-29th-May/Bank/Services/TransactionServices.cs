@@ -18,7 +18,6 @@ namespace Bank.Services
             transactionRepo = t;
             context = c;
         }
-
         public async Task<int> AddTransaction(Transaction tr)
         {
             return await transactionRepo.AddTransaction(tr);
@@ -54,6 +53,34 @@ namespace Bank.Services
                     transaction.Type = "Deposit";
                     transaction.Amount = request.MoneyToDeposit;
 
+                    
+                    return await transactionRepo.AddTransaction(transaction);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
+        public async Task<int> InitialDeposit(DepositRequestDTO request)
+        {
+            try
+            {
+                var u = await userRepo.GetUserById(request.UserId);
+                if (u == null)
+                {
+                    throw new Exception("No such user exists");
+                }
+                else
+                {
+                    await context.SaveChangesAsync();
+                    Transaction transaction = new();
+                    transaction.UserId = u.Id;
+                    transaction.Type = "Initial Deposit";
+                    transaction.Amount = request.MoneyToDeposit;
+
+                    
                     return await transactionRepo.AddTransaction(transaction);
                 }
             }
@@ -85,6 +112,7 @@ namespace Bank.Services
                     transaction.UserId = u.Id;
                     transaction.Type = "Withdraw";
                     transaction.Amount = request.MoneyToWithdraw;
+
 
                     return await transactionRepo.AddTransaction(transaction);
                 }
@@ -127,6 +155,7 @@ namespace Bank.Services
                     transaction.Amount = request.Amount;
                     transaction.UserId = debit_user.Id;
 
+                    
                     return await transactionRepo.AddTransaction(transaction);
                 }
             }
