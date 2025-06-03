@@ -9,6 +9,8 @@ namespace FirstAPI.Models
         public string Status { get; set; } = string.Empty;
         public float YearsOfExperience { get; set; }
         public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+
         public ICollection<DoctorSpeciality>? DoctorSpecialities { get; set; }
         public ICollection<Appointmnet>? Appointmnets { get; set; }
          
