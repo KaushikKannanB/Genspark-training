@@ -58,7 +58,5 @@ namespace FirstAPI.Controllers
 
             return Ok("Appointment deleted successfully");
         }
-
-
     }
 }

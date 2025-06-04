@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FirstAPI.Authorization
 {
-
-
     public class ExperienceHandler : AuthorizationHandler<ExperienceRequirement>
     {
         private readonly IDoctorService _doctorService;
