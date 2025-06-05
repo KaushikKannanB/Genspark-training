@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SignalR Notification Client</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        #notifications { margin-top: 20px; }
+        .notif { background-color: #e8f0fe; padding: 10px; margin-bottom: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Listening for Admin Upload Notifications</h2>
+    <div id="notifications"></div>
+
+    <script>
+        // 🧠 Connect to the SignalR Hub
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:5007/notificationHub") // 👈 Change port if needed
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        // 🔔 What to do when notification is received
+        connection.on("ReceiveNotification", function (message) {
+            const notifDiv = document.getElementById("notifications");
+            const p = document.createElement("div");
+            p.className = "notif";
+            p.textContent = message;
+            notifDiv.prepend(p);
+        });
+
+        // 🚀 Start the connection
+        connection.start().then(function () {
+            console.log("SignalR connected!");
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+    </script>
+</body>
+</html>
