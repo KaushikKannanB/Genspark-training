@@ -1,0 +1,150 @@
+using Inventory.Contexts;
+using Inventory.Interfaces;
+using Inventory.Misc;
+using Inventory.Models;
+using Inventory.Models.DTOs;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace Inventory.Services
+{
+    public class AdminService : IAdminService
+    {
+        ManagerMapper managerMapper;
+        private readonly InventoryContext context;
+        private readonly IManagerService managerService;
+        private readonly ICurrentUserService currentUserService;
+
+        private readonly IRepository<string, Admin> adminrepo;
+        private readonly IRepository<string, User> userrepo;
+        private readonly IRepository<string, Manager> managerrepo;
+        private readonly IRepository<string, Category> categoryrepo;
+        private readonly IRepository<string, CategoryAddRequest> categaddrepo;
+
+
+        private readonly IEncryptService encryptService;
+
+        public AdminService(IRepository<string, CategoryAddRequest> cat, IRepository<string, Category> ca, ICurrentUserService cu, IManagerService ma, InventoryContext c, IEncryptService e, IRepository<string, Admin> a, IRepository<string, User> u, IRepository<string, Manager> m)
+        {
+            adminrepo = a;
+            userrepo = u;
+            managerrepo = m;
+            encryptService = e;
+            context = c;
+            managerService = ma;
+            currentUserService = cu;
+            managerMapper = new();
+            categoryrepo = ca;
+            categaddrepo = cat;
+        }
+        public async Task<Admin> GetByMail(string mail)
+        {
+            var admin = await context.Admins.FirstOrDefaultAsync(a => a.Email == mail);
+            return admin;
+        }
+        public async Task<Admin> AddAdmin(AdminManagerAddRequestDTO request)
+        {
+            var admin = await GetByMail(request.Email);
+            if (admin == null)
+            {
+                var data = new EncryptModel();
+                data.Data = request.Password;
+                var encryptedData = await encryptService.EncryptData(data);
+                Admin a = new();
+                a.Id = await encryptService.GenerateId("ADM");
+                a.Name = request.Name;
+                a.Email = request.Email;
+                a.Password = encryptedData.EncryptedData;
+
+                User u = new();
+                u.Id = a.Id;
+                u.Email = a.Email;
+                u.Password = a.Password;
+                u.Role = "ADMIN";
+
+                var user = await userrepo.Add(u);
+
+                var ad = await adminrepo.Add(a);
+
+                return a;
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public async Task<Manager> AddManager(AdminManagerAddRequestDTO request)
+        {
+            var manager = await managerService.GetByMail(request.Email);
+            if (manager == null)
+            {
+                var creatorAdmin = await GetByMail(currentUserService.Email);
+
+                var data = new EncryptModel();
+                data.Data = request.Password;
+                var encryptedData = await encryptService.EncryptData(data);
+                Manager? m = managerMapper.MapManager(request);
+                m.Id = await encryptService.GenerateId("MAN");
+                m.Password = encryptedData.EncryptedData;
+                m.CreatedBy = creatorAdmin.Id;
+
+                User u = new();
+                u.Id = m.Id;
+                u.Email = m.Email;
+                u.Password = m.Password;
+                u.Role = "MANAGER";
+
+                var user = await userrepo.Add(u);
+
+                var ad = await managerrepo.Add(m);
+
+                return m;
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public async Task<Category> AddCategory(string category)
+        {
+            category = category.ToUpper();
+            var inrequests = await categaddrepo.GetByName(category);
+            var exists = await categoryrepo.GetByName(category);
+            if (exists == null)
+            {
+                var creatorAdmin = await GetByMail(currentUserService.Email);
+
+                var categoryId = await encryptService.GenerateId("CAT");
+                Category c = new();
+                c.Id = categoryId;
+                c.CategoryName = category.Trim();
+                c.CreatedBy = creatorAdmin.Id;
+                var cat = await categoryrepo.Add(c);
+
+                if (inrequests != null)
+                {
+                    inrequests.Status = "ADDED";
+                    await context.SaveChangesAsync();
+                }
+                return cat;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<Manager> DeleteManager(string ManagerId)
+        {
+            var manager = await managerrepo.GetById(ManagerId);
+            manager.Status = "INACTIVE";
+
+            await context.SaveChangesAsync();
+
+            return manager;
+        }
+
+    }
+}
