@@ -1,10 +1,10 @@
 using System.Text;
-
+using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.RateLimiting;
 using Inventory.Interfaces;
 using Inventory.Misc;
 using Inventory.Models;
-// using Inventory.Hubs;
-
+using Inventory.Hubs;
 using Inventory.Repositories;
 using Inventory.MiddleWare;
 // using FirstAPI.Authorization;
@@ -64,9 +64,24 @@ builder.Services.AddTransient<IProductService, ProductService>();
 
 
 #endregion
+builder.Services.AddRateLimiter(options =>
+{
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: "global", // can be per-user/IP if needed
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 100, // max 100 requests
+                Window = TimeSpan.FromSeconds(30), // per 30 seconds
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = 0 // requests over the limit are rejected immediately
+            }));
 
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+});
 // Register Swagger (optional but helpful during development)
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSignalR();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(opt =>
 {
@@ -106,7 +121,16 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.WriteIndented = true;
     });
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials()
+              .SetIsOriginAllowed(_ => true); // Allow any origin for now
+    });
+});
 #region AuthenticationFilter
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -122,19 +146,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 });
 #endregion
 var app = builder.Build();
-
+app.UseCors();
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseRateLimiter();
 app.UseHttpsRedirection();
 app.UseMiddleware<TokenBlacklistMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapHub<NotificationHub>("/notificationHub");
 app.MapControllers();
 
 app.Run();

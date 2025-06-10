@@ -9,6 +9,7 @@ namespace Inventory.Models
         public int OldStock { get; set; }
         public int NewStock { get; set; }
         public string UpdatedBy { get; set; } = string.Empty;
+        public DateTime UpdatedAt{ get; set; }
 
         [JsonIgnore]
         public Inventories? Inventory { get; set; }

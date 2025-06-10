@@ -143,7 +143,8 @@ namespace Inventory.Migrations
                     InventoryId = table.Column<string>(type: "text", nullable: false),
                     OldStock = table.Column<int>(type: "integer", nullable: false),
                     NewStock = table.Column<int>(type: "integer", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: false)
+                    UpdatedBy = table.Column<string>(type: "text", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -206,7 +207,8 @@ namespace Inventory.Migrations
                     FieldUpdated = table.Column<string>(type: "text", nullable: false),
                     OldValue = table.Column<string>(type: "text", nullable: false),
                     NewValue = table.Column<string>(type: "text", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: false)
+                    UpdatedBy = table.Column<string>(type: "text", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SignalR Notification Client</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        #notifications { margin-top: 20px; }
+        .notif { background-color: #f8c2be; padding: 10px; margin-bottom: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Emergency Stock Reload Notifications</h2>
+    <div id="notifications"></div>
+
+    <script>
+        //  Connect to the SignalR Hub
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:5077/notificationHub") 
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        // What to do when notification is received
+        connection.on("ReceiveNotification", function (message) {
+            const notifDiv = document.getElementById("notifications");
+            const p = document.createElement("div");
+            p.className = "notif";
+            p.textContent = message;
+            notifDiv.prepend(p);
+        });
+
+        // Start the connection
+        connection.start().then(function () {
+            console.log("SignalR connected!");
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+    </script>
+</body>
+</html>

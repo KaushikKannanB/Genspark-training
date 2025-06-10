@@ -129,6 +129,7 @@ namespace Inventory.Services
                     st.OldStock = oldstock;
                     st.NewStock = prod_exists.Stock;
                     st.UpdatedBy = cur_user.Id;
+                    st.UpdatedAt = DateTime.UtcNow;
 
                     var stock_upd = await stockupdlogrepo.Add(st);
 
@@ -179,6 +180,7 @@ namespace Inventory.Services
                 plog.OldValue = oldprice.ToString();
                 plog.NewValue = prod_exists.Price.ToString();
                 plog.UpdatedBy = cur_user.Id;
+                plog.UpdatedAt = DateTime.UtcNow;
 
                 var upd_log = await produpdlogrepo.Add(plog);
                 return prod_exists;
@@ -222,6 +224,7 @@ namespace Inventory.Services
                 plog.OldValue = olddesc;
                 plog.NewValue = prod_exists.Description;
                 plog.UpdatedBy = cur_user.Id;
+                plog.UpdatedAt = DateTime.UtcNow;
 
                 var upd_log = await produpdlogrepo.Add(plog);
                 return prod_exists;

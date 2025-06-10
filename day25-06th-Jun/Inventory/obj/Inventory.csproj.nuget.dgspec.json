@@ -60,6 +60,14 @@
               "target": "Package",
               "version": "[8.0.16, )"
             },
+            "Microsoft.AspNetCore.RateLimiting": {
+              "target": "Package",
+              "version": "[7.0.0-rc.2.22476.2, )"
+            },
+            "Microsoft.AspNetCore.SignalR": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.5, )"

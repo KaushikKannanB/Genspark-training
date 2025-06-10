@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Inventory.Models;
 using Inventory.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using Inventory.Hubs;
 
 namespace Inventory.Controllers
 {
@@ -12,6 +14,7 @@ namespace Inventory.Controllers
     {
         private readonly IAdminService adminService;
         private readonly IProductService prodService;
+        private readonly IHubContext<NotificationHub> hubContext;
 
         private readonly IRepository<string, Category> categrepo;
         private readonly IRepository<string, Product> prodrepo;
@@ -24,7 +27,7 @@ namespace Inventory.Controllers
 
 
 
-        public ProductController(IRepository<string, ProductUpdateLog> prod, IRepository<string, StockLogging> st, IRepository<string, Inventories> i, IRepository<string, Product> pro, IProductService pr, IAdminService ad, IRepository<string, Category> ca)
+        public ProductController(IHubContext<NotificationHub> hub, IRepository<string, ProductUpdateLog> prod, IRepository<string, StockLogging> st, IRepository<string, Inventories> i, IRepository<string, Product> pro, IProductService pr, IAdminService ad, IRepository<string, Category> ca)
         {
             adminService = ad;
             categrepo = ca;
@@ -33,6 +36,7 @@ namespace Inventory.Controllers
             invrepo = i;
             stockupdlogrepo = st;
             produpdlogrepo = prod;
+            hubContext = hub;
         }
         [HttpGet("Get-All-Categories")]
         public async Task<IActionResult> GetAllCategories()
@@ -113,6 +117,10 @@ namespace Inventory.Controllers
             }
             else
             {
+                if (result.Stock <= result.MinThreshold)
+                {
+                    await hubContext.Clients.All.SendAsync("ReceiveNotification",$"Stock Needs to be refilled for Product of Inventory Id  ${result.Id}  ASAP --> notified at {DateTime.UtcNow}");
+                }
                 return Ok(result);
             }
         }

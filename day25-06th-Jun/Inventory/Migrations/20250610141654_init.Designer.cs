@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Inventory.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    [Migration("20250609152155_init")]
+    [Migration("20250610141654_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -226,6 +226,9 @@ namespace Inventory.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
                         .HasColumnType("text");
@@ -253,6 +256,9 @@ namespace Inventory.Migrations
 
                     b.Property<int>("OldStock")
                         .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
