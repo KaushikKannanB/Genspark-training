@@ -1,0 +1,26 @@
+<h3>Customer Details</h3>
+
+<button (click)="ViewCustomerDetails()">View Customer Details</button>
+<div *ngIf="showdetails">
+    <p>Customer Id: {{customer.id}}</p>
+    <p>Customer Name: {{customer.name}}</p>
+    <p>Customer Email: {{customer.email}}</p>
+    <p>Customer Phone Number: {{customer.mobile}}</p>
+</div>
+
+<div>
+    🛒{{ cartcount }}
+</div>
+
+<div id="productlist">
+    <div *ngFor="let product of products" id="product">
+        <img [src]="product.image" alt="">
+        <p>{{product.name}}</p>
+        <p>{{product.price}}</p>
+        <button (click)="addToCart()">Add to cart</button>
+    </div>
+</div>
+
+
+
+
