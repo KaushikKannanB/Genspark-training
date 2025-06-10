@@ -11,10 +11,12 @@ namespace Inventory.Repositories
 
         }
 
-        public override async Task<Manager> GetById(string Id)
+        public override async Task<Manager> GetById(string id)
         {
-            var u = await context.Managers.FirstOrDefaultAsync(u => u.Id == Id);
-            return u ?? throw new Exception("No such Manager");
+            Console.WriteLine($"📦 GetById called with ID: {id}");
+            var manager = await context.Managers.FirstOrDefaultAsync(m => m.Id == id);
+            Console.WriteLine(manager == null ? "❌ Manager not found" : $"✅ Manager found: {manager.Id}");
+            return manager;
         }
 
         public override async Task<IEnumerable<Manager>> GetAll()

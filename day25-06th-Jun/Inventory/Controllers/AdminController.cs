@@ -62,6 +62,21 @@ namespace Inventory.Controllers
                 return BadRequest("Manager with such mail already exists");
             }
         }
+        [Authorize(Roles = "ADMIN")]
+        [HttpPost("Add-Category")]
+        public async Task<IActionResult> AddCategory(string Category)
+        {
+
+            var newcat = await adminService.AddCategory(Category);
+            if (newcat == null)
+            {
+                return BadRequest("Already exixts!");
+            }
+            else
+            {
+                return Ok(newcat);
+            }
+        }
 
         [Authorize(Roles = "ADMIN")]
         [HttpGet("Get-All-Admins")]
@@ -90,23 +105,7 @@ namespace Inventory.Controllers
         }
 
         [Authorize(Roles = "ADMIN")]
-        [HttpPost("Add-Category")]
-        public async Task<IActionResult> AddCategory(string Category)
-        {
-
-            var newcat = await adminService.AddCategory(Category);
-            if (newcat == null)
-            {
-                return BadRequest("Already exixts!");
-            }
-            else
-            {
-                return Ok(newcat);
-            }
-        }
-
-        [Authorize(Roles = "ADMIN")]
-        [HttpPost("Get-All-Category-Requests")]
+        [HttpGet("Get-All-Category-Requests")]
         public async Task<IActionResult> GetAllCategoryAddRequests()
         {
             var allreqs = await categaddrepo.GetAll();

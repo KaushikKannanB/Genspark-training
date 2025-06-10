@@ -38,19 +38,8 @@ namespace Inventory.Controllers
             produpdlogrepo = prod;
             hubContext = hub;
         }
-        [HttpGet("Get-All-Categories")]
-        public async Task<IActionResult> GetAllCategories()
-        {
-            var allcats = await categrepo.GetAll();
-            return Ok(allcats);
-        }
-        [HttpGet("Get-Category-By-Name")]
-        public async Task<IActionResult> GetCategoryName(string c)
-        {
-            var allcats = await categrepo.GetByName(c.ToUpper());
-            return Ok(allcats);
-        }
 
+        [Authorize]
         [HttpPost("Add-Product")]
         public async Task<IActionResult> AddProduct(ProductAddRequest request)
         {
@@ -64,6 +53,22 @@ namespace Inventory.Controllers
                 return Ok(result);
             }
         }
+        [Authorize]
+        [HttpGet("Get-All-Categories")]
+        public async Task<IActionResult> GetAllCategories()
+        {
+            var allcats = await categrepo.GetAll();
+            return Ok(allcats);
+        }
+        [Authorize]
+        [HttpGet("Get-Category-By-Name")]
+        public async Task<IActionResult> GetCategoryName(string c)
+        {
+            var allcats = await categrepo.GetByName(c.ToUpper());
+            return Ok(allcats);
+        }
+
+        [Authorize]
         [HttpGet("Get-All-Products")]
         public async Task<IActionResult> GetAllProducts()
         {
@@ -71,6 +76,7 @@ namespace Inventory.Controllers
             return Ok(allprod);
         }
 
+        [Authorize]
         [HttpGet("Get-All-Active-Products")]
         public async Task<IActionResult> GetAllActiveProducts()
         {
@@ -79,6 +85,7 @@ namespace Inventory.Controllers
             return Ok(ative);
         }
 
+        [Authorize]
         [HttpGet("Get-All-InActive-Products")]
         public async Task<IActionResult> GetAllInActiveProducts()
         {
@@ -86,19 +93,21 @@ namespace Inventory.Controllers
             var inactive = allprod.Where(p => p.Status == "INACTIVE");
             return Ok(inactive);
         }
+        [Authorize]
         [HttpGet("Get-Product-By-Name")]
         public async Task<IActionResult> GetProductByName(string product)
         {
             var allprod = await prodrepo.GetByName(product);
             return Ok(allprod);
         }
+        [Authorize]
         [HttpGet("Get-All-Inventory")]
         public async Task<IActionResult> GetAllInventories()
         {
             var allinv = await invrepo.GetAll();
             return Ok(allinv);
         }
-
+        [Authorize]
         [HttpGet("Get-Stock-By-ProductName")]
         public async Task<IActionResult> GetStockProductName(string product)
         {
@@ -107,24 +116,8 @@ namespace Inventory.Controllers
         }
 
 
-        [HttpPut("Stock-Update")]
-        public async Task<IActionResult> StockUpdate(StockUpdateDTO request)
-        {
-            var result = await prodService.StockUpdate(request);
-            if (result == null)
-            {
-                return BadRequest("Update Dismissed!");
-            }
-            else
-            {
-                if (result.Stock <= result.MinThreshold)
-                {
-                    await hubContext.Clients.All.SendAsync("ReceiveNotification",$"Stock Needs to be refilled for Product of Inventory Id  ${result.Id}  ASAP --> notified at {DateTime.UtcNow}");
-                }
-                return Ok(result);
-            }
-        }
-
+        
+        [Authorize]
         [HttpGet("Get-All-Stock-updates")]
 
         public async Task<IActionResult> GetAllStockUpdates()
@@ -132,7 +125,7 @@ namespace Inventory.Controllers
             var allupdates = await stockupdlogrepo.GetAll();
             return Ok(allupdates);
         }
-
+        [Authorize]
         [HttpGet("Get-All-Stock-updates-For-ProductName")]
         public async Task<IActionResult> GetAllStockUpdatesForProduct(string product)
         {
@@ -142,33 +135,17 @@ namespace Inventory.Controllers
             return Ok(updatesofProduct);
         }
 
-        [HttpPut("Update-Product-price")]
-        public async Task<IActionResult> UpdateProdByPrice(UpdateProductPriceDTO req)
-        {
-            var result = await prodService.UpdateProductByPrice(req);
-            if (result != null)
-                return Ok(result);
-            else
-                return BadRequest("Wrong Update request");
-        }
+        
 
-        [HttpPut("Update-Product-description")]
-        public async Task<IActionResult> UpdateProdByDesc(UpdateProductDescriptionDTO req)
-        {
-            var result = await prodService.UpdateProductByDescription(req);
-            if (result != null)
-                return Ok(result);
-            else
-                return BadRequest("Wrong Update request");
-        }
-
+        
+        [Authorize]
         [HttpGet("Get-All-Product-Updates")]
         public async Task<IActionResult> GetAllProductUpdates()
         {
             var allupdates = await produpdlogrepo.GetAll();
             return Ok(allupdates);
         }
-
+        [Authorize]
         [HttpGet("Get-All-Product-Updates-By-ProductName")]
         public async Task<IActionResult> GetAllProductUpdatesByName(string product)
         {
@@ -181,8 +158,49 @@ namespace Inventory.Controllers
             else
                 return BadRequest("No updates so far");
         }
-
-        [Authorize(Roles ="MANAGER, ADMIN")]
+        [Authorize]
+        [HttpPut("Stock-Update")]
+        public async Task<IActionResult> StockUpdate(StockUpdateDTO request)
+        {
+            var result = await prodService.StockUpdate(request);
+            if (request == null)
+            {
+                return BadRequest("Request body is NULL");
+            }
+            if (result == null)
+            {
+                return BadRequest("Update Dismissed!");
+            }
+            else
+            {
+                if (result.Stock <= result.MinThreshold)
+                {
+                    await hubContext.Clients.All.SendAsync("ReceiveNotification", $"Stock Needs to be refilled for Product of Inventory Id  ${result.Id}  ASAP --> notified at {DateTime.UtcNow}");
+                }
+                return Ok(result);
+            }
+        }
+        [Authorize]
+        [HttpPut("Update-Product-description")]
+        public async Task<IActionResult> UpdateProdByDesc(UpdateProductDescriptionDTO req)
+        {
+            var result = await prodService.UpdateProductByDescription(req);
+            if (result != null)
+                return Ok(result);
+            else
+                return BadRequest("Wrong Update request");
+        }
+        [Authorize]
+        [HttpPut("Update-Product-price")]
+        public async Task<IActionResult> UpdateProdByPrice(UpdateProductPriceDTO req)
+        {
+            var result = await prodService.UpdateProductByPrice(req);
+            if (result != null)
+                return Ok(result);
+            else
+                return BadRequest("Wrong Update request");
+        }
+        [Authorize(Roles = "MANAGER, ADMIN")]
         [HttpDelete("Delete-Product")]
         public async Task<IActionResult> Deleteproduct(string product)
         {

@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Inventory.Models
 {
     public class ProductUpdateLog
@@ -9,7 +11,10 @@ namespace Inventory.Models
         public string NewValue { get; set; } = string.Empty;
         public string UpdatedBy { get; set; } = string.Empty;
         public DateTime UpdatedAt{ get; set; }
+        [JsonIgnore]
         public Product? Product { get; set; }
-        public User?User { get; set; }
+        [JsonIgnore]
+        
+        public User? User { get; set; }
     }
 }

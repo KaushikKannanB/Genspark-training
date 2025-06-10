@@ -25,7 +25,7 @@ namespace Inventory.Services
 
 
 
-        public ProductService(IRepository<string, ProductUpdateLog> pro, IRepository<string, StockLogging> st, InventoryContext c, IUserService us, ICurrentUserService cu, IRepository<string, Inventories> i, IRepository<string, Product> pr, IRepository<string, Category> ca, IEncryptService en)
+        public ProductService(IRepository<string, Manager> man,IRepository<string, ProductUpdateLog> pro, IRepository<string, StockLogging> st, InventoryContext c, IUserService us, ICurrentUserService cu, IRepository<string, Inventories> i, IRepository<string, Product> pr, IRepository<string, Category> ca, IEncryptService en)
         {
             prodrepo = pr;
             categrepo = ca;
@@ -37,6 +37,7 @@ namespace Inventory.Services
             context = c;
             stockupdlogrepo = st;
             produpdlogrepo = pro;
+            managerrepo = man;
         }
         public async Task<Product> AddProduct(ProductAddRequest request)
         {
@@ -147,6 +148,7 @@ namespace Inventory.Services
                 return null;
             }
         }
+
 
         public async Task<Product> UpdateProductByPrice(UpdateProductPriceDTO request)
         {

@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Inventory.Models
 {
     public class Manager
@@ -8,6 +10,8 @@ namespace Inventory.Models
         public string Password { get; set; } = string.Empty;
         public string CreatedBy { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;
+        [JsonIgnore]
+
         public User? User { get; set; }
     }
 }

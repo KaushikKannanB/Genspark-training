@@ -21,6 +21,7 @@ namespace Inventory.Models
         public Inventories? Inventory { get; set; }
         [JsonIgnore]
         
+        
         public User? User { get; set; }
     }
 }
