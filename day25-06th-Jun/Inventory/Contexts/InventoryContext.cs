@@ -17,6 +17,7 @@ namespace Inventory.Contexts
         public DbSet<StockLogging> StockLogs { get; set; }
         public DbSet<ProductUpdateLog> ProductUpdateLogs { get; set; }
         public DbSet<CategoryAddRequest> CategoryAddRequests { get; set; }
+        public DbSet<BlacklistedToken> BlacklistedTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

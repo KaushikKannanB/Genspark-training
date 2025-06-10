@@ -1,6 +1,7 @@
 using Inventory.Interfaces;
 using Inventory.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Inventory.Controllers
 {
@@ -16,7 +17,7 @@ namespace Inventory.Controllers
             authService = au;
         }
 
-        
+
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserLoginRequest request)
         {
@@ -31,5 +32,15 @@ namespace Inventory.Controllers
             }
 
         }
+        
+        [Authorize]
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            await authService.Logout(token);
+            return Ok("Logout successful. Token invalidated.");
+        }
+
     }
 }

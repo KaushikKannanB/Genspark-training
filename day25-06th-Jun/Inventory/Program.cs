@@ -6,6 +6,7 @@ using Inventory.Models;
 // using Inventory.Hubs;
 
 using Inventory.Repositories;
+using Inventory.MiddleWare;
 // using FirstAPI.Authorization;
 using Inventory.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -39,6 +40,8 @@ builder.Services.AddTransient<IRepository<string, Inventories>, InventoryReposit
 builder.Services.AddTransient<IRepository<string, Product>, ProductRepository>();
 builder.Services.AddTransient<IRepository<string, StockLogging>, StockUpdateRepository>();
 builder.Services.AddTransient<IRepository<string, ProductUpdateLog>, ProductUpdateRepository>();
+builder.Services.AddTransient<IBlacklistedTokenRepository, BlacklistedTokenRepository>();
+
 
 
 
@@ -128,6 +131,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseMiddleware<TokenBlacklistMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
