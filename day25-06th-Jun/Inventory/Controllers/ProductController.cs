@@ -43,6 +43,8 @@ namespace Inventory.Controllers
         [HttpPost("Add-Product")]
         public async Task<IActionResult> AddProduct(ProductAddRequest request)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var result = await prodService.AddProduct(request);
             if (result == null)
             {
@@ -74,6 +76,26 @@ namespace Inventory.Controllers
         {
             var allprod = await prodrepo.GetAll();
             return Ok(allprod);
+        }
+
+        [Authorize]
+        [HttpGet("Get-Products-Orderedby-Price")]
+        public async Task<IActionResult> GetProductsOrdered(int pagenumber)
+        {
+            if (pagenumber <= 0)
+            {
+                return BadRequest("Meaningful page number required!");
+            }
+            var prods = await prodService.GetProductsPaginated(pagenumber);
+            if (prods == null || prods.Count()==0)
+            {
+                var allprod = await prodrepo.GetAll();
+                return BadRequest($"There are only {allprod.Count()} products.");
+            }
+            else
+            {
+                return Ok(prods);
+            }
         }
 
         [Authorize]
@@ -162,6 +184,8 @@ namespace Inventory.Controllers
         [HttpPut("Stock-Update")]
         public async Task<IActionResult> StockUpdate(StockUpdateDTO request)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var result = await prodService.StockUpdate(request);
             if (request == null)
             {
@@ -194,6 +218,8 @@ namespace Inventory.Controllers
         [HttpPut("Update-Product-price")]
         public async Task<IActionResult> UpdateProdByPrice(UpdateProductPriceDTO req)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var result = await prodService.UpdateProductByPrice(req);
             if (result != null)
                 return Ok(result);

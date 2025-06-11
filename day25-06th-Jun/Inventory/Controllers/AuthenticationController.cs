@@ -21,6 +21,8 @@ namespace Inventory.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserLoginRequest request)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             try
             {
                 var response = await authService.Login(request);

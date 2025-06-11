@@ -4,6 +4,8 @@ using Inventory.Misc;
 using Inventory.Models;
 using Inventory.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Services
@@ -20,11 +22,18 @@ namespace Inventory.Services
         private readonly IRepository<string, Manager> managerrepo;
         private readonly IRepository<string, Category> categoryrepo;
         private readonly IRepository<string, CategoryAddRequest> categaddrepo;
+        private readonly IRepository<string, Product> prodrepo;
+        private readonly IRepository<string, ProductUpdateLog> produpdrepo;
+        private readonly IRepository<string, StockLogging> stockupdrepo;
+
+
+
+        
 
 
         private readonly IEncryptService encryptService;
 
-        public AdminService(IRepository<string, CategoryAddRequest> cat, IRepository<string, Category> ca, ICurrentUserService cu, IManagerService ma, InventoryContext c, IEncryptService e, IRepository<string, Admin> a, IRepository<string, User> u, IRepository<string, Manager> m)
+        public AdminService(IRepository<string, StockLogging> st, IRepository<string, ProductUpdateLog> prod, IRepository<string, Product> p, IRepository<string, CategoryAddRequest> cat, IRepository<string, Category> ca, ICurrentUserService cu, IManagerService ma, InventoryContext c, IEncryptService e, IRepository<string, Admin> a, IRepository<string, User> u, IRepository<string, Manager> m)
         {
             adminrepo = a;
             userrepo = u;
@@ -36,6 +45,9 @@ namespace Inventory.Services
             managerMapper = new();
             categoryrepo = ca;
             categaddrepo = cat;
+            prodrepo = p;
+            produpdrepo = prod;
+            stockupdrepo = st;
         }
         public async Task<Admin> GetByMail(string mail)
         {
@@ -144,6 +156,67 @@ namespace Inventory.Services
             await context.SaveChangesAsync();
 
             return manager;
+        }
+        public async Task<string> CheckManagerActivity(string id)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"Manager Activity Report for ID: {id}");
+            sb.AppendLine("--------------------------------------------------");
+
+            var allprods = await prodrepo.GetAll();
+            var prods_by_manager = allprods.Where(p => p.AddedBy == id).ToList();
+
+            var allrequests = await categaddrepo.GetAll();
+            var categ_req_by_manager = allrequests.Where(r => r.RequestedBy == id).ToList();
+
+            var allstockupd = await stockupdrepo.GetAll();
+            var stock_upd_by_manager = allstockupd.Where(u => u.UpdatedBy == id).ToList();
+
+            var allprodupd = await produpdrepo.GetAll();
+            var prod_upd_by_manager = allprodupd.Where(u => u.UpdatedBy == id).ToList();
+
+            if (prods_by_manager.Any())
+            {
+                sb.AppendLine("\nProducts Created:");
+                foreach (var prod in prods_by_manager)
+                {
+                    sb.AppendLine($"   • Product ID: {prod.Id}, Name: {prod.Name}");
+                }
+            }
+
+            if (categ_req_by_manager.Any())
+            {
+                sb.AppendLine("\nCategory Addition Requests:");
+                foreach (var req in categ_req_by_manager)
+                {
+                    sb.AppendLine($"   • Request ID: {req.Id}, Category: {req.CategoryName}");
+                }
+            }
+
+            if (stock_upd_by_manager.Any())
+            {
+                sb.AppendLine("\nInventory Updates:");
+                foreach (var s in stock_upd_by_manager)
+                {
+                    sb.AppendLine($"   • Inventory ID: {s.InventoryId}, Stock changed from {s.OldStock} to {s.NewStock}");
+                }
+            }
+
+            if (prod_upd_by_manager.Any())
+            {
+                sb.AppendLine("\nProduct Updates:");
+                foreach (var p in prod_upd_by_manager)
+                {
+                    sb.AppendLine($"   • Product ID: {p.ProductId}, Field: {p.FieldUpdated}, New Value: {p.NewValue}");
+                }
+            }
+
+            if (sb.Length == 0)
+            {
+                sb.AppendLine("No activity found for this manager.");
+            }
+
+            return sb.ToString();
         }
 
     }

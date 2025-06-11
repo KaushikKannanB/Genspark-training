@@ -4,6 +4,7 @@ using Inventory.Services;
 using Inventory.Interfaces;
 using Inventory.Models;
 using Inventory.Contexts;
+using Inventory.Misc;
 
 namespace Inventory.Controllers
 {
@@ -17,6 +18,8 @@ namespace Inventory.Controllers
         private readonly IEncryptService encryptService;
         private readonly IManagerService managerService;
 
+        PasswordValidation passval;
+
 
         public ManagerController(InventoryContext co, IEncryptService en, ICurrentUserService cu, IManagerService ma, IUserService us)
         {
@@ -25,26 +28,31 @@ namespace Inventory.Controllers
             userService = us;
             encryptService = en;
             context = co;
+            passval = new();
         }
         [Authorize(Roles = "MANAGER")]
         [HttpPut("Change-Password")]
         public async Task<IActionResult> ChangePassword(string NewPassword)
         {
+            if (!passval.IsValid(NewPassword))
+            {
+                return BadRequest("Invalid Password, a password must contain an Uppercase letter, a digit, a special character, and more than 8 characters");
+            }
             try
-            {
-                var cur_user_manager = await managerService.GetByMail(currentUserService.Email);
-                var cur_user_user = await userService.GetByMail(currentUserService.Email);
-                var encryptedData = await encryptService.EncryptData(new EncryptModel { Data = NewPassword });
-                cur_user_manager.Password = encryptedData.EncryptedData;
-                cur_user_user.Password = encryptedData.EncryptedData;
+                {
+                    var cur_user_manager = await managerService.GetByMail(currentUserService.Email);
+                    var cur_user_user = await userService.GetByMail(currentUserService.Email);
+                    var encryptedData = await encryptService.EncryptData(new EncryptModel { Data = NewPassword });
+                    cur_user_manager.Password = encryptedData.EncryptedData;
+                    cur_user_user.Password = encryptedData.EncryptedData;
 
-                await context.SaveChangesAsync();
-                return Ok("Changed Password!");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+                    await context.SaveChangesAsync();
+                    return Ok("Changed Password!");
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
 
         }
 

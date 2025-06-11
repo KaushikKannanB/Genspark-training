@@ -145,3 +145,5 @@
 /Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/BCrypt.Net-Next.dll
 /Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Newtonsoft.Json.dll
 /Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/System.Net.WebSockets.WebSocketProtocol.dll
+/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Castle.Core.dll
+/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Moq.dll

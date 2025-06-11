@@ -37,6 +37,8 @@ namespace Inventory.Controllers
         [HttpPost("Add-Admin")]
         public async Task<IActionResult> AddAdmin(AdminManagerAddRequestDTO request)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var admin = await adminService.AddAdmin(request);
             if (admin != null)
             {
@@ -52,6 +54,8 @@ namespace Inventory.Controllers
         [HttpPost("Add-Manager")]
         public async Task<IActionResult> AddManager(AdminManagerAddRequestDTO request)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var manager = await adminService.AddManager(request);
             if (manager != null)
             {
@@ -111,8 +115,8 @@ namespace Inventory.Controllers
             var allreqs = await categaddrepo.GetAll();
             return Ok(allreqs);
         }
-        
-        [Authorize(Roles ="ADMIN")]
+
+        [Authorize(Roles = "ADMIN")]
         [HttpDelete("Delete-Manager")]
         public async Task<IActionResult> DeleteManager(string managerId)
         {
@@ -125,6 +129,14 @@ namespace Inventory.Controllers
             {
                 return Ok(result);
             }
+        }
+
+        [Authorize(Roles = "ADMIN")]
+        [HttpGet("Get-Manager-Report")]
+        public async Task<IActionResult> GetManagerReport(string id)
+        {
+            var result = await adminService.CheckManagerActivity(id);
+            return Ok(result);
         }
     }
 }

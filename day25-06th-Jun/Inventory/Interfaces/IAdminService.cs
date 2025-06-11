@@ -10,5 +10,6 @@ namespace Inventory.Interfaces
         Task<Category> AddCategory(string category);
 
         Task<Manager> DeleteManager(string ManagerId);
+        Task<string> CheckManagerActivity(string ManagerId);
     }
 }

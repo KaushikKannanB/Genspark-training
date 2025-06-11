@@ -12,5 +12,7 @@ namespace Inventory.Interfaces
 
         Task<Product> DeleteProduct(string product);
 
+        Task<IEnumerable<Product>> GetProductsPaginated(int pagenumber);
+
     }
 }

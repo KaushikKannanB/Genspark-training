@@ -3,7 +3,7 @@ using Inventory.Interfaces;
 using Inventory.Misc;
 using Inventory.Models;
 using Inventory.Models.DTOs;
-
+using Microsoft.EntityFrameworkCore;
 namespace Inventory.Services
 {
     public class ProductService : IProductService
@@ -25,7 +25,7 @@ namespace Inventory.Services
 
 
 
-        public ProductService(IRepository<string, Manager> man,IRepository<string, ProductUpdateLog> pro, IRepository<string, StockLogging> st, InventoryContext c, IUserService us, ICurrentUserService cu, IRepository<string, Inventories> i, IRepository<string, Product> pr, IRepository<string, Category> ca, IEncryptService en)
+        public ProductService(IRepository<string, Manager> man, IRepository<string, ProductUpdateLog> pro, IRepository<string, StockLogging> st, InventoryContext c, IUserService us, ICurrentUserService cu, IRepository<string, Inventories> i, IRepository<string, Product> pr, IRepository<string, Category> ca, IEncryptService en)
         {
             prodrepo = pr;
             categrepo = ca;
@@ -261,6 +261,16 @@ namespace Inventory.Services
             {
                 return null;
             }
+        }
+        public async Task<IEnumerable<Product>> GetProductsPaginated(int pagenumber)
+        {
+            var products = await context.Products
+                .OrderByDescending(p => p.Price)
+                .Skip((pagenumber - 1) * 5)
+                .Take(5)
+                .ToListAsync();
+
+            return products;
         }
     }
 }
