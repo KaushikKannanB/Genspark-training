@@ -147,3 +147,13 @@
 /Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/System.Net.WebSockets.WebSocketProtocol.dll
 /Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Castle.Core.dll
 /Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Moq.dll
+/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Serilog.dll
+/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Serilog.AspNetCore.dll
+/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Serilog.Extensions.Hosting.dll
+/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Serilog.Extensions.Logging.dll
+/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Serilog.Formatting.Compact.dll
+/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Serilog.Settings.Configuration.dll
+/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Serilog.Sinks.Console.dll
+/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Serilog.Sinks.Debug.dll
+/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Serilog.Sinks.File.dll
+/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/bin/Debug/net9.0/Serilog.Sinks.Seq.dll

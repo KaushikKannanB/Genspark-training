@@ -18,10 +18,17 @@ using Microsoft.AspNetCore.Authorization;
 using Npgsql.Replication.PgOutput.Messages;
 using Inventory.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
+builder.Host.UseSerilog(); 
 // Add services to the container
 builder.Services.AddControllers();
 
@@ -149,6 +156,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #endregion
 var app = builder.Build();
 app.UseCors();
+app.UseSerilogRequestLogging();
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {

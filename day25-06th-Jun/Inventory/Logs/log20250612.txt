@@ -1,0 +1,24 @@
+2025-06-12 21:29:13.462 +05:30 [INF] User profile is available. Using '/Users/kaushik/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-12 21:29:13.613 +05:30 [INF] Now listening on: http://localhost:5077
+2025-06-12 21:29:13.615 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 21:29:13.615 +05:30 [INF] Hosting environment: Development
+2025-06-12 21:29:13.615 +05:30 [INF] Content root path: /Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory
+2025-06-12 21:29:40.888 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/api/authentication/Login - application/json 74
+2025-06-12 21:29:40.958 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-12 21:29:41.165 +05:30 [INF] Executing endpoint 'Inventory.Controllers.AuthenticationController.Login (Inventory)'
+2025-06-12 21:29:41.188 +05:30 [INF] Route matched with {action = "Login", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Inventory.Models.DTOs.UserLoginRequest) on controller Inventory.Controllers.AuthenticationController (Inventory).
+2025-06-12 21:29:42.532 +05:30 [INF] Executed DbCommand (54ms) [Parameters=[@__mail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."Password", u."Role"
+FROM "Users" AS u
+WHERE u."Email" = @__mail_0
+LIMIT 1
+2025-06-12 21:29:43.113 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?' (DbType = Boolean), @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Email", "ExpiryDate", "IsRevoked", "IsUsed", "Token")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2025-06-12 21:29:43.142 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.DTOs.UserLoginResponse'.
+2025-06-12 21:29:43.155 +05:30 [INF] Executed action Inventory.Controllers.AuthenticationController.Login (Inventory) in 1962.8319ms
+2025-06-12 21:29:43.161 +05:30 [INF] Executed endpoint 'Inventory.Controllers.AuthenticationController.Login (Inventory)'
+2025-06-12 21:29:43.165 +05:30 [INF] HTTP POST /api/authentication/Login responded 200 in 2231.8011 ms
+2025-06-12 21:29:43.176 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/api/authentication/Login - 200 null application/json; charset=utf-8 2290.7265ms
+2025-06-12 21:30:19.053 +05:30 [INF] Application is shutting down...
