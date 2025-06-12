@@ -18,6 +18,8 @@ namespace Inventory.Contexts
         public DbSet<ProductUpdateLog> ProductUpdateLogs { get; set; }
         public DbSet<CategoryAddRequest> CategoryAddRequests { get; set; }
         public DbSet<BlacklistedToken> BlacklistedTokens { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

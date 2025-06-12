@@ -2,6 +2,7 @@ using Inventory.Interfaces;
 using Inventory.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Inventory.Models;
 
 namespace Inventory.Controllers
 {
@@ -10,17 +11,27 @@ namespace Inventory.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IAutheticationService authService;
+        private readonly IUserService _userService;
+        private readonly ITokenService _tokenService;
 
 
-        public AuthenticationController(IAdminService a, IAutheticationService au)
+        private readonly IRefreshTokenRepository _refreshTokenRepo;
+
+
+        public AuthenticationController(ITokenService _t, IUserService _u, IRefreshTokenRepository re, IAdminService a, IAutheticationService au)
         {
             authService = au;
+            // userrepo = u;
+            _refreshTokenRepo = re;
+            _userService = _u;
+            _tokenService = _t;
         }
 
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserLoginRequest request)
         {
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             try
@@ -34,7 +45,7 @@ namespace Inventory.Controllers
             }
 
         }
-        
+
         [Authorize]
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
@@ -43,6 +54,38 @@ namespace Inventory.Controllers
             await authService.Logout(token);
             return Ok("Logout successful. Token invalidated.");
         }
+        
+        [HttpPost("Refresh-Token")]
+        public async Task<IActionResult> Refresh(RefreshRequestDto request)
+        {
+            var storedToken = await _refreshTokenRepo.GetTokenAsync(request.RefreshToken);
+            if (storedToken == null || storedToken.IsUsed || storedToken.IsRevoked || storedToken.ExpiryDate < DateTime.UtcNow)
+            {
+                return Unauthorized("Invalid or expired refresh token");
+            }
+
+            storedToken.IsUsed = true;
+            await _refreshTokenRepo.InvalidateTokenAsync(storedToken);
+
+            var user = await _userService.GetByMail(storedToken.Email);
+            var newAccessToken = await _tokenService.TokenGenerator(user);
+            var newRefreshToken = await _tokenService.GenerateRefreshToken();
+
+            await _refreshTokenRepo.SaveRefreshTokenAsync(new RefreshToken
+            {
+                Token = newRefreshToken,
+                Email = user.Email,
+                ExpiryDate = DateTime.UtcNow.AddDays(7)
+            });
+
+            return Ok(new UserLoginResponse
+            {
+                Email = user.Email,
+                Token = newAccessToken,
+                RefreshToken = newRefreshToken
+            });
+        }
+
 
     }
 }

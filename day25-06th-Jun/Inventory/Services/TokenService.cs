@@ -4,6 +4,8 @@ using System.Text;
 using Inventory.Interfaces;
 using Inventory.Models;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Cryptography;
+
 
 namespace Inventory.Services
 {
@@ -14,7 +16,7 @@ namespace Inventory.Services
         {
             _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Keys:JwtTokenKey"]));
         }
-        public async  Task<string> TokenGenerator(User user)
+        public async Task<string> TokenGenerator(User user)
         {
             List<Claim> claims = new List<Claim>
             {
@@ -34,6 +36,13 @@ namespace Inventory.Services
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+        public async Task<string> GenerateRefreshToken()
+        {
+            var randomBytes = new byte[64];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomBytes);
+            return Convert.ToBase64String(randomBytes);
         }
     }
 }

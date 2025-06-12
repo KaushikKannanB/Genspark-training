@@ -12,12 +12,15 @@ namespace Inventory.Services
         private readonly ITokenService _tokenService;
         private readonly IEncryptService _encryptionService;
         private readonly IUserService userService;
+        private readonly IManagerService managerService;
+
         private readonly ILogger<AuthenticationService> _logger;
         private readonly IBlacklistedTokenRepository _tokenBlacklist;
+        private readonly IRefreshTokenRepository _refreshTokenRepo;
 
         public AuthenticationService(ITokenService tokenService,
                                     IEncryptService encryptionService,
-                                    IUserService u,
+                                    IUserService u, IManagerService ma, IRefreshTokenRepository _ref,
                                     ILogger<AuthenticationService> logger, IBlacklistedTokenRepository _to)
         {
             _tokenService = tokenService;
@@ -25,6 +28,8 @@ namespace Inventory.Services
             userService = u;
             _logger = logger;
             _tokenBlacklist = _to;
+            managerService = ma;
+            _refreshTokenRepo = _ref;
         }
         public async Task<UserLoginResponse> Login(UserLoginRequest user)
         {
@@ -34,23 +39,47 @@ namespace Inventory.Services
                 _logger.LogCritical("User not found");
                 throw new Exception("No such user");
             }
-            var encryptedData = await _encryptionService.EncryptData(new EncryptModel
+
+            if (dbUser.Role == "MANAGER")
             {
-                Data = user.Password,
-            });
+                var manager = await managerService.GetByMail(user.Email);
+                if (manager.Status == "INACTIVE")
+                {
+                    _logger.LogCritical("User inactive");
+                    throw new Exception("User is inactive i.e., deleted");
+                }
+            }
+
             bool isPasswordValid = BCrypt.Net.BCrypt.Verify(user.Password, dbUser.Password);
             if (!isPasswordValid)
             {
                 _logger.LogError("Invalid login attempt");
                 throw new Exception("Invalid password");
             }
-            var token = await _tokenService.TokenGenerator(dbUser);
+
+            var accessToken = await _tokenService.TokenGenerator(dbUser);
+
+            var refreshToken = await _tokenService.GenerateRefreshToken();
+
+            var refreshTokenEntity = new RefreshToken
+            {
+                Token = refreshToken,
+                Email = dbUser.Email,
+                ExpiryDate = DateTime.UtcNow.AddDays(7), 
+                IsUsed = false,
+                IsRevoked = false
+            };
+            await _refreshTokenRepo.SaveRefreshTokenAsync(refreshTokenEntity);
+
+            
             return new UserLoginResponse
             {
                 Email = user.Email,
-                Token = token,
+                Token = accessToken,
+                RefreshToken = refreshToken
             };
         }
+
         public async Task<bool> Logout(string token)
         {
             var jwtToken = new JwtSecurityTokenHandler().ReadJwtToken(token);

@@ -41,6 +41,8 @@ builder.Services.AddTransient<IRepository<string, Product>, ProductRepository>()
 builder.Services.AddTransient<IRepository<string, StockLogging>, StockUpdateRepository>();
 builder.Services.AddTransient<IRepository<string, ProductUpdateLog>, ProductUpdateRepository>();
 builder.Services.AddTransient<IBlacklistedTokenRepository, BlacklistedTokenRepository>();
+builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+
 
 
 
