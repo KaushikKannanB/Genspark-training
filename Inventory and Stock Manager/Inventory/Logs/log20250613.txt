@@ -1,0 +1,326 @@
+2025-06-13 00:31:44.990 +05:30 [INF] User profile is available. Using '/Users/kaushik/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-13 00:31:45.135 +05:30 [INF] Now listening on: http://localhost:5077
+2025-06-13 00:31:45.136 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-13 00:31:45.137 +05:30 [INF] Hosting environment: Development
+2025-06-13 00:31:45.137 +05:30 [INF] Content root path: /Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory
+2025-06-13 00:32:07.728 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/swagger/index.html - null null
+2025-06-13 00:32:07.845 +05:30 [INF] HTTP GET /swagger/index.html responded 200 in 78.0604 ms
+2025-06-13 00:32:07.860 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/swagger/index.html - 200 null text/html;charset=utf-8 134.2272ms
+2025-06-13 00:32:08.117 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/swagger/v1/swagger.json - null null
+2025-06-13 00:32:08.248 +05:30 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 128.8385 ms
+2025-06-13 00:32:08.249 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 131.6994ms
+2025-06-13 00:32:26.375 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/api/authentication/Login - application/json 74
+2025-06-13 00:32:26.382 +05:30 [INF] CORS policy execution successful.
+2025-06-13 00:32:26.392 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-13 00:32:26.597 +05:30 [INF] Executing endpoint 'Inventory.Controllers.AuthenticationController.Login (Inventory)'
+2025-06-13 00:32:26.619 +05:30 [INF] Route matched with {action = "Login", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Inventory.Models.DTOs.UserLoginRequest) on controller Inventory.Controllers.AuthenticationController (Inventory).
+2025-06-13 00:32:28.034 +05:30 [INF] Executed DbCommand (63ms) [Parameters=[@__mail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."Password", u."Role"
+FROM "Users" AS u
+WHERE u."Email" = @__mail_0
+LIMIT 1
+2025-06-13 00:32:28.623 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?' (DbType = Boolean), @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Email", "ExpiryDate", "IsRevoked", "IsUsed", "Token")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2025-06-13 00:32:28.654 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.DTOs.UserLoginResponse'.
+2025-06-13 00:32:28.667 +05:30 [INF] Executed action Inventory.Controllers.AuthenticationController.Login (Inventory) in 2042.7552ms
+2025-06-13 00:32:28.668 +05:30 [INF] Executed endpoint 'Inventory.Controllers.AuthenticationController.Login (Inventory)'
+2025-06-13 00:32:28.670 +05:30 [INF] HTTP POST /api/authentication/Login responded 200 in 2287.4534 ms
+2025-06-13 00:32:28.678 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/api/authentication/Login - 200 null application/json; charset=utf-8 2302.8347ms
+2025-06-13 00:33:16.992 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products?categoryname=dairy&minprice=100&maxprice=200 - null null
+2025-06-13 00:33:17.046 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 00:33:17.100 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:33:17.107 +05:30 [INF] Route matched with {action = "GetAllProductsFiltered", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductsFiltered(System.String, System.Nullable`1[System.Single], System.Nullable`1[System.Single], System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-13 00:33:17.134 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-13 00:33:17.167 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToUpper_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy"
+FROM "Categories" AS c
+WHERE c."CategoryName" = @__ToUpper_0
+LIMIT 1
+2025-06-13 00:33:17.188 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereIterator`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 00:33:17.200 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory) in 92.5545ms
+2025-06-13 00:33:17.200 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:33:17.200 +05:30 [INF] HTTP GET /api/product/Get-Filtered-Products responded 200 in 205.3213 ms
+2025-06-13 00:33:17.200 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products?categoryname=dairy&minprice=100&maxprice=200 - 200 null application/json; charset=utf-8 208.8026ms
+2025-06-13 00:33:24.611 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products?categoryname=dairy&maxprice=200 - null null
+2025-06-13 00:33:24.694 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 00:33:24.700 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:33:24.700 +05:30 [INF] Route matched with {action = "GetAllProductsFiltered", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductsFiltered(System.String, System.Nullable`1[System.Single], System.Nullable`1[System.Single], System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-13 00:33:24.716 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-13 00:33:24.717 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__ToUpper_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy"
+FROM "Categories" AS c
+WHERE c."CategoryName" = @__ToUpper_0
+LIMIT 1
+2025-06-13 00:33:24.718 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereIterator`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 00:33:24.718 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory) in 17.6521ms
+2025-06-13 00:33:24.718 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:33:24.718 +05:30 [INF] HTTP GET /api/product/Get-Filtered-Products responded 200 in 99.2958 ms
+2025-06-13 00:33:24.718 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products?categoryname=dairy&maxprice=200 - 200 null application/json; charset=utf-8 107.7405ms
+2025-06-13 00:33:33.409 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products?categoryname=dairy - null null
+2025-06-13 00:33:33.416 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 00:33:33.419 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:33:33.419 +05:30 [INF] Route matched with {action = "GetAllProductsFiltered", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductsFiltered(System.String, System.Nullable`1[System.Single], System.Nullable`1[System.Single], System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-13 00:33:33.421 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-13 00:33:33.423 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToUpper_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy"
+FROM "Categories" AS c
+WHERE c."CategoryName" = @__ToUpper_0
+LIMIT 1
+2025-06-13 00:33:33.424 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereIterator`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 00:33:33.424 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory) in 4.9752ms
+2025-06-13 00:33:33.424 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:33:33.424 +05:30 [INF] HTTP GET /api/product/Get-Filtered-Products responded 200 in 14.6782 ms
+2025-06-13 00:33:33.425 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products?categoryname=dairy - 200 null application/json; charset=utf-8 15.5291ms
+2025-06-13 00:33:37.889 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products - null null
+2025-06-13 00:33:37.892 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 00:33:37.893 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:33:37.894 +05:30 [INF] Route matched with {action = "GetAllProductsFiltered", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductsFiltered(System.String, System.Nullable`1[System.Single], System.Nullable`1[System.Single], System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-13 00:33:37.895 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-13 00:33:37.896 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 00:33:37.897 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory) in 3.1518ms
+2025-06-13 00:33:37.897 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:33:37.897 +05:30 [INF] HTTP GET /api/product/Get-Filtered-Products responded 200 in 7.5830 ms
+2025-06-13 00:33:37.898 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products - 200 null application/json; charset=utf-8 9.1732ms
+2025-06-13 00:34:45.254 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products - null null
+2025-06-13 00:34:45.257 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-06-13 00:34:45.260 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-13 00:34:45.260 +05:30 [INF] HTTP GET /api/product/Get-Filtered-Products responded 401 in 4.1047 ms
+2025-06-13 00:34:45.260 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products - 401 0 null 5.9851ms
+2025-06-13 00:34:51.122 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/api/authentication/Login - application/json 74
+2025-06-13 00:34:51.124 +05:30 [INF] Executing endpoint 'Inventory.Controllers.AuthenticationController.Login (Inventory)'
+2025-06-13 00:34:51.124 +05:30 [INF] Route matched with {action = "Login", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Inventory.Models.DTOs.UserLoginRequest) on controller Inventory.Controllers.AuthenticationController (Inventory).
+2025-06-13 00:34:51.127 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__mail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."Password", u."Role"
+FROM "Users" AS u
+WHERE u."Email" = @__mail_0
+LIMIT 1
+2025-06-13 00:34:51.417 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?' (DbType = Boolean), @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Email", "ExpiryDate", "IsRevoked", "IsUsed", "Token")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2025-06-13 00:34:51.418 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.DTOs.UserLoginResponse'.
+2025-06-13 00:34:51.418 +05:30 [INF] Executed action Inventory.Controllers.AuthenticationController.Login (Inventory) in 294.0436ms
+2025-06-13 00:34:51.418 +05:30 [INF] Executed endpoint 'Inventory.Controllers.AuthenticationController.Login (Inventory)'
+2025-06-13 00:34:51.418 +05:30 [INF] HTTP POST /api/authentication/Login responded 200 in 294.9936 ms
+2025-06-13 00:34:51.419 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/api/authentication/Login - 200 null application/json; charset=utf-8 296.2589ms
+2025-06-13 00:34:56.564 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products - null null
+2025-06-13 00:34:56.564 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-06-13 00:34:56.564 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-13 00:34:56.564 +05:30 [INF] HTTP GET /api/product/Get-Filtered-Products responded 401 in 0.6494 ms
+2025-06-13 00:34:56.565 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products - 401 0 null 1.0525ms
+2025-06-13 00:35:04.764 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/api/authentication/Login - application/json 74
+2025-06-13 00:35:04.764 +05:30 [INF] Executing endpoint 'Inventory.Controllers.AuthenticationController.Login (Inventory)'
+2025-06-13 00:35:04.765 +05:30 [INF] Route matched with {action = "Login", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Inventory.Models.DTOs.UserLoginRequest) on controller Inventory.Controllers.AuthenticationController (Inventory).
+2025-06-13 00:35:04.767 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__mail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."Password", u."Role"
+FROM "Users" AS u
+WHERE u."Email" = @__mail_0
+LIMIT 1
+2025-06-13 00:35:04.925 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?' (DbType = Boolean), @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Email", "ExpiryDate", "IsRevoked", "IsUsed", "Token")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2025-06-13 00:35:04.925 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.DTOs.UserLoginResponse'.
+2025-06-13 00:35:04.926 +05:30 [INF] Executed action Inventory.Controllers.AuthenticationController.Login (Inventory) in 161.1409ms
+2025-06-13 00:35:04.926 +05:30 [INF] Executed endpoint 'Inventory.Controllers.AuthenticationController.Login (Inventory)'
+2025-06-13 00:35:04.926 +05:30 [INF] HTTP POST /api/authentication/Login responded 200 in 161.9173 ms
+2025-06-13 00:35:04.926 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/api/authentication/Login - 200 null application/json; charset=utf-8 162.5549ms
+2025-06-13 00:35:21.553 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products - null null
+2025-06-13 00:35:21.555 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 00:35:21.555 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:35:21.555 +05:30 [INF] Route matched with {action = "GetAllProductsFiltered", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductsFiltered(System.String, System.Nullable`1[System.Single], System.Nullable`1[System.Single], System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-13 00:35:21.556 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-13 00:35:21.557 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 00:35:21.557 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory) in 1.4293ms
+2025-06-13 00:35:21.557 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:35:21.557 +05:30 [INF] HTTP GET /api/product/Get-Filtered-Products responded 200 in 4.1890 ms
+2025-06-13 00:35:21.557 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products - 200 null application/json; charset=utf-8 5.0016ms
+2025-06-13 00:36:22.774 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products?categoryname=dairy&minprice&maxprice&status=inactive - null null
+2025-06-13 00:36:22.776 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 00:36:22.777 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:36:22.777 +05:30 [INF] Route matched with {action = "GetAllProductsFiltered", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductsFiltered(System.String, System.Nullable`1[System.Single], System.Nullable`1[System.Single], System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-13 00:36:22.778 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-13 00:36:22.780 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToUpper_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy"
+FROM "Categories" AS c
+WHERE c."CategoryName" = @__ToUpper_0
+LIMIT 1
+2025-06-13 00:36:22.781 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereIterator`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 00:36:22.781 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory) in 4.5616ms
+2025-06-13 00:36:22.782 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:36:22.782 +05:30 [INF] HTTP GET /api/product/Get-Filtered-Products responded 200 in 7.0314 ms
+2025-06-13 00:36:22.782 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products?categoryname=dairy&minprice&maxprice&status=inactive - 200 null application/json; charset=utf-8 8.3001ms
+2025-06-13 00:36:31.370 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products?categoryname=dairy&minprice&maxprice - null null
+2025-06-13 00:36:31.372 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 00:36:31.373 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:36:31.373 +05:30 [INF] Route matched with {action = "GetAllProductsFiltered", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductsFiltered(System.String, System.Nullable`1[System.Single], System.Nullable`1[System.Single], System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-13 00:36:31.374 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-13 00:36:31.374 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__ToUpper_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy"
+FROM "Categories" AS c
+WHERE c."CategoryName" = @__ToUpper_0
+LIMIT 1
+2025-06-13 00:36:31.375 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereIterator`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 00:36:31.375 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory) in 2.4096ms
+2025-06-13 00:36:31.375 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:36:31.376 +05:30 [INF] HTTP GET /api/product/Get-Filtered-Products responded 200 in 4.8910 ms
+2025-06-13 00:36:31.376 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products?categoryname=dairy&minprice&maxprice - 200 null application/json; charset=utf-8 5.7482ms
+2025-06-13 00:36:37.996 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products?categoryname=dairy&minprice&maxprice&status=inactive - null null
+2025-06-13 00:36:37.997 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 00:36:37.998 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:36:37.998 +05:30 [INF] Route matched with {action = "GetAllProductsFiltered", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductsFiltered(System.String, System.Nullable`1[System.Single], System.Nullable`1[System.Single], System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-13 00:36:37.999 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-13 00:36:38.000 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__ToUpper_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy"
+FROM "Categories" AS c
+WHERE c."CategoryName" = @__ToUpper_0
+LIMIT 1
+2025-06-13 00:36:38.000 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereIterator`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 00:36:38.001 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory) in 2.4395ms
+2025-06-13 00:36:38.001 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductsFiltered (Inventory)'
+2025-06-13 00:36:38.001 +05:30 [INF] HTTP GET /api/product/Get-Filtered-Products responded 200 in 5.0607 ms
+2025-06-13 00:36:38.001 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Filtered-Products?categoryname=dairy&minprice&maxprice&status=inactive - 200 null application/json; charset=utf-8 5.588ms
+2025-06-13 00:57:53.821 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/admin/Get-All-Category-Requests - null null
+2025-06-13 00:57:53.834 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 00:57:53.836 +05:30 [INF] Executing endpoint 'Inventory.Controllers.AdminController.GetAllCategoryAddRequests (Inventory)'
+2025-06-13 00:57:53.839 +05:30 [INF] Route matched with {action = "GetAllCategoryAddRequests", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllCategoryAddRequests() on controller Inventory.Controllers.AdminController (Inventory).
+2025-06-13 00:57:53.848 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."RequestedAt", c."RequestedBy", c."Status"
+FROM "CategoryAddRequests" AS c
+2025-06-13 00:57:53.859 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.CategoryAddRequest, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 00:57:53.861 +05:30 [INF] Executed action Inventory.Controllers.AdminController.GetAllCategoryAddRequests (Inventory) in 21.889ms
+2025-06-13 00:57:53.861 +05:30 [INF] Executed endpoint 'Inventory.Controllers.AdminController.GetAllCategoryAddRequests (Inventory)'
+2025-06-13 00:57:53.861 +05:30 [INF] HTTP GET /api/admin/Get-All-Category-Requests responded 200 in 38.7514 ms
+2025-06-13 00:57:53.862 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/admin/Get-All-Category-Requests - 200 null application/json; charset=utf-8 40.2232ms
+2025-06-13 01:01:30.722 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/admin/Get-All-Managers - null null
+2025-06-13 01:01:30.727 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 01:01:30.727 +05:30 [INF] Executing endpoint 'Inventory.Controllers.AdminController.GetAllManagers (Inventory)'
+2025-06-13 01:01:30.731 +05:30 [INF] Route matched with {action = "GetAllManagers", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllManagers() on controller Inventory.Controllers.AdminController (Inventory).
+2025-06-13 01:01:30.738 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT m."Id", m."CreatedBy", m."Email", m."Name", m."Password", m."Status"
+FROM "Managers" AS m
+2025-06-13 01:01:30.749 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.Manager, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 01:01:30.750 +05:30 [INF] Executed action Inventory.Controllers.AdminController.GetAllManagers (Inventory) in 19.3438ms
+2025-06-13 01:01:30.751 +05:30 [INF] Executed endpoint 'Inventory.Controllers.AdminController.GetAllManagers (Inventory)'
+2025-06-13 01:01:30.751 +05:30 [INF] HTTP GET /api/admin/Get-All-Managers responded 200 in 26.0185 ms
+2025-06-13 01:01:30.751 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/admin/Get-All-Managers - 200 null application/json; charset=utf-8 28.6179ms
+2025-06-13 01:04:12.913 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Categories - null null
+2025-06-13 01:04:12.925 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 01:04:12.926 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllCategories (Inventory)'
+2025-06-13 01:04:12.929 +05:30 [INF] Route matched with {action = "GetAllCategories", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllCategories() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-13 01:04:13.021 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy", p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Categories" AS c
+LEFT JOIN "Products" AS p ON c."Id" = p."CategoryId"
+ORDER BY c."Id"
+2025-06-13 01:04:13.029 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.Category, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 01:04:13.032 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllCategories (Inventory) in 102.4605ms
+2025-06-13 01:04:13.032 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllCategories (Inventory)'
+2025-06-13 01:04:13.032 +05:30 [INF] HTTP GET /api/product/Get-All-Categories responded 200 in 118.3230 ms
+2025-06-13 01:04:13.032 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Categories - 200 null application/json; charset=utf-8 118.7287ms
+2025-06-13 01:05:02.459 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-InActive-Products - null null
+2025-06-13 01:05:02.461 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 01:05:02.461 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllInActiveProducts (Inventory)'
+2025-06-13 01:05:02.464 +05:30 [INF] Route matched with {action = "GetAllInActiveProducts", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllInActiveProducts() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-13 01:05:02.466 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-13 01:05:02.467 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereIterator`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 01:05:02.467 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllInActiveProducts (Inventory) in 2.764ms
+2025-06-13 01:05:02.467 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllInActiveProducts (Inventory)'
+2025-06-13 01:05:02.467 +05:30 [INF] HTTP GET /api/product/Get-All-InActive-Products responded 200 in 8.0193 ms
+2025-06-13 01:05:02.468 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-InActive-Products - 200 null application/json; charset=utf-8 8.7303ms
+2025-06-13 01:13:33.208 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Stock-Updates-For-ProductName?product=yogurt-100g - null null
+2025-06-13 01:13:33.220 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-13 01:13:33.220 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllStockUpdatesForProduct (Inventory)'
+2025-06-13 01:13:33.224 +05:30 [INF] Route matched with {action = "GetAllStockUpdatesForProduct", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllStockUpdatesForProduct(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-13 01:13:33.234 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Id", s."InventoryId", s."NewStock", s."OldStock", s."UpdatedAt", s."UpdatedBy"
+FROM "StockLogs" AS s
+2025-06-13 01:13:33.255 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-13 01:13:33.264 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-13 01:13:33.277 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereIterator`1[[Inventory.Models.StockLogging, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 01:13:33.281 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllStockUpdatesForProduct (Inventory) in 56.3969ms
+2025-06-13 01:13:33.281 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllStockUpdatesForProduct (Inventory)'
+2025-06-13 01:13:33.281 +05:30 [INF] HTTP GET /api/product/Get-All-Stock-Updates-For-ProductName responded 200 in 72.6734 ms
+2025-06-13 01:13:33.282 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Stock-Updates-For-ProductName?product=yogurt-100g - 200 null application/json; charset=utf-8 74.2636ms

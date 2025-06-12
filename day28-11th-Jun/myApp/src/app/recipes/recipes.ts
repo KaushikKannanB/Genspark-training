@@ -19,7 +19,7 @@ export class Recipes implements OnInit{
     this.recipeservice.getallRecipes().subscribe(
       {
         next:(data:any)=>{
-        //  this.recipes.set(data.recipes);
+         this.recipes.set(data.recipes);
         },
         error:(err)=>{},
         complete:()=>{}

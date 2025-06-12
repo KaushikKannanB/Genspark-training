@@ -181,6 +181,32 @@ namespace Inventory.Controllers
                 return BadRequest("No updates so far");
         }
         [Authorize]
+        [HttpGet("Get-Filtered-Products")]
+        public async Task<IActionResult> GetAllProductsFiltered(string? categoryname, float? minprice, float? maxprice, string? status)
+        {
+
+            var prods = await prodrepo.GetAll();
+            if (!string.IsNullOrEmpty(categoryname))
+            {
+                var catid = await categrepo.GetByName(categoryname);
+                prods = prods.Where(p => p.CategoryId == catid.Id);
+            }
+            if (minprice.HasValue)
+            {
+                prods = prods.Where(p => p.Price > minprice);
+            }
+            if (maxprice.HasValue)
+            {
+                prods = prods.Where(p => p.Price <= maxprice);
+            }
+            if (!string.IsNullOrEmpty(status))
+            {
+                prods = prods.Where(p => p.Status == status);
+            }
+
+            return Ok(prods);
+        }
+        [Authorize]
         [HttpPut("Stock-Update")]
         public async Task<IActionResult> StockUpdate(StockUpdateDTO request)
         {
