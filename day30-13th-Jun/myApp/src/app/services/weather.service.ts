@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { catchError, throwError } from "rxjs";
+import { BehaviorSubject, catchError, throwError } from "rxjs";
+import { WeatherResponse } from "../models/weathermodel";
 
 export class WeatherService
 {
@@ -9,10 +10,28 @@ export class WeatherService
 
     private http = inject(HttpClient);
 
+    private citysubject = new BehaviorSubject<string>('London');
+    city$ = this.citysubject.asObservable();
+
+    private weathersubject = new BehaviorSubject<WeatherResponse|null>(null);
+    weather$ = this.weathersubject.asObservable();
+
+    setcity(city:string)
+    {
+        this.citysubject.next(city);
+        this.getWeatherByCity(city).subscribe({
+            next:(data)=>{
+                this.weathersubject.next(data);
+            },
+            error:(err)=>{
+                this.weathersubject.error(err);
+            }
+        });
+    }
     getWeatherByCity(city:string)
     {
         const url = `${this.apiurl}?q=${city}&appid=${this.apikey}&units=metric`;
-        return this.http.get(url).pipe(catchError(this.handleerror));
+        return this.http.get<WeatherResponse>(url).pipe(catchError(this.handleerror));
     }
     handleerror(error:HttpErrorResponse)
     {

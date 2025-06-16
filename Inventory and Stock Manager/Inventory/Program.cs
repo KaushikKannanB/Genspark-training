@@ -77,13 +77,13 @@ builder.Services.AddRateLimiter(options =>
 {
     options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
         RateLimitPartition.GetFixedWindowLimiter(
-            partitionKey: "global", // can be per-user/IP if needed
+            partitionKey: "global", 
             factory: _ => new FixedWindowRateLimiterOptions
             {
-                PermitLimit = 100, // max 100 requests
-                Window = TimeSpan.FromSeconds(30), // per 30 seconds
+                PermitLimit = 100, 
+                Window = TimeSpan.FromSeconds(30), 
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0 // requests over the limit are rejected immediately
+                QueueLimit = 0 
             }));
 
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;

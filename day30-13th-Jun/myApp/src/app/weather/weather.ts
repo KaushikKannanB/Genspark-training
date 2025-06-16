@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { WeatherCard } from "../weather-card/weather-card";
 
 @Component({
   selector: 'app-weather',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule, WeatherCard],
   templateUrl: './weather.html',
   styleUrl: './weather.css'
 })
@@ -17,17 +18,11 @@ export class Weather {
   {
     
   }
-  fetchWeather()
+  search()
   {
-    this.weatherservice.getWeatherByCity(this.city).subscribe({
-      next:(data)=>{
-        this.weatherData=data;
-        this.error=null;
-      },
-      error:(err)=>{
-        this.error = err.message;
-        this.weatherData = null;
-      }
-    });
+    if(this.city.trim())
+    {
+      this.weatherservice.setcity(this.city);
+    }
   }
 }

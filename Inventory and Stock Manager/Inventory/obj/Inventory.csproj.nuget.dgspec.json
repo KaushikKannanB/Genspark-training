@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/Inventory.csproj": {}
+    "/Users/kaushik/Desktop/Genspark-training/Inventory and Stock Manager/Inventory/Inventory.csproj": {}
   },
   "projects": {
-    "/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/Inventory.csproj": {
+    "/Users/kaushik/Desktop/Genspark-training/Inventory and Stock Manager/Inventory/Inventory.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/Inventory.csproj",
+        "projectUniqueName": "/Users/kaushik/Desktop/Genspark-training/Inventory and Stock Manager/Inventory/Inventory.csproj",
         "projectName": "Inventory",
-        "projectPath": "/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/Inventory.csproj",
+        "projectPath": "/Users/kaushik/Desktop/Genspark-training/Inventory and Stock Manager/Inventory/Inventory.csproj",
         "packagesPath": "/Users/kaushik/.nuget/packages/",
-        "outputPath": "/Users/kaushik/Desktop/Genspark-training/day25-06th-Jun/Inventory/obj/",
+        "outputPath": "/Users/kaushik/Desktop/Genspark-training/Inventory and Stock Manager/Inventory/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/kaushik/.nuget/NuGet/NuGet.Config"
