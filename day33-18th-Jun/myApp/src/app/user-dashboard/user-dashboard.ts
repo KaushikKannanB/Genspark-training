@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 export class UserDashboard implements OnInit {
   private userservice = inject(UserService);
   Users:UserModel[]=[];
+  newUser:UserModel=new UserModel();
   filteredUsers:UserModel[]=[];
   searchGender:string="";
   searchRole:string="";
@@ -37,6 +38,17 @@ export class UserDashboard implements OnInit {
     
     console.log(this.filteredUsers)
   }
-
+  addUser(user:UserModel){
+    this.userservice.addUser(this.newUser).subscribe({
+      next:(data:any)=>{
+        var addedUser = data as UserModel;
+        addedUser = { ...data, role: this.newUser.role };
+        console.log(addedUser);
+        this.Users = [...this.Users,addedUser];
+        this.filteredUsers = [...this.filteredUsers, addedUser];
+        this.newUser = new UserModel();
+      }
+    })
+  }
 }
 

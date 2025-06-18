@@ -50,7 +50,7 @@ export class UserService
     getAllUsers():Observable<any[]>{
         return this.http.get<any[]>('https://dummyjson.com/users');
     }
-    // addUser(user:UserModel){
-    //     return this.http.post('https://dummyjson.com/users/add',user);
-    // }
+    addUser(user:UserModel){
+        return this.http.post('https://dummyjson.com/users/add',user);
+    }
 }
