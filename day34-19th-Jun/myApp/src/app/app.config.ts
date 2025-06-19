@@ -11,13 +11,14 @@ import { AuthGuard } from './auth-guard';
 import { provideCharts } from 'ng2-charts';
 import { provideState, provideStore } from '@ngrx/store';
 import { userReducer } from './ngrx/user.reducer';
+import { UserManageReducer } from './ngrx/usermanage.reducer';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideStore(),
-    provideState('user', userReducer),
+    provideState('usersss',UserManageReducer),
     provideHttpClient(),
     ProductService,
     RecipeService,
