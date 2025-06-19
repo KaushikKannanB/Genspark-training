@@ -8,7 +8,7 @@ import { RecipeService } from './services/recipe.service';
 import { WeatherService } from './services/weather.service';
 import { UserService } from './services/UserService';
 import { AuthGuard } from './auth-guard';
-
+import { provideCharts } from 'ng2-charts';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -19,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     RecipeService,
     WeatherService,
     UserService,
-    AuthGuard
+    AuthGuard,
+    provideCharts()
   ]
 };

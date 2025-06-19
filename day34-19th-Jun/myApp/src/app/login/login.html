@@ -1,0 +1,41 @@
+<!-- with template driven validation -->
+
+<!-- <div class="loginDiv">
+    <label class="form-control">Username</label>
+    <input class="form-control" type="text" required [(ngModel)]="user.username" #un="ngModel"/>
+    @if(un.control.touched && un.control.errors)
+    {
+        <span class="alert alert-danger">Cannot be empty!</span>
+    }
+     <label class="form-control">Password</label>
+    <input class="form-control" type="text" required [(ngModel)]="user.password" #pass="ngModel"/>
+    @if(pass.control.touched && pass.control.errors)
+    {
+        <span class="alert alert-danger">Cannot be empty!</span>
+    }
+    <button class="btn btn-success" (click)="handleLogin(un,pass)">LOgin</button>"
+</div> -->
+
+<!-- with reactive form validation -->
+
+<form [formGroup]="loginForm" (ngSubmit)="handleLogin()" class="loginDiv">
+    <label class="form-control">Username</label>
+    <input type="text" formControlName="un" class="form-control" [(ngModel)]="user.username"/>
+    @if(un.touched && un.errors)
+    {
+        <span class="alert alert-danger">Cannot be empty</span>
+    }
+    <label class="form-control">Password</label>
+    <input type="text" formControlName="pass" class="form-control" [(ngModel)]="user.password"/>
+    @if(pass.touched && pass.errors)
+    {
+        @if (pass.errors?.required) {
+            <span class="alert alert-danger">Psssword cannot be empty</span>
+        }
+        @if (pass.errors?.lenError) {
+            <span class="alert alert-danger">Psssword cannot be less than 5 chars</span>
+        }
+    }
+    <button class="btn btn-success" [disabled]="loginForm.invalid">login</button>
+
+</form>

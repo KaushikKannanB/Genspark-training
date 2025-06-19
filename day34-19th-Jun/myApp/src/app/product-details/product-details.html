@@ -1,0 +1,55 @@
+<div class="product-card" style="max-width: 700px; margin: auto; border: 1px solid #ccc; border-radius: 12px; padding: 20px; font-family: Arial;">
+  <h2>{{ product.title }}</h2>
+  <img src="{{ product.thumbnail }}" alt="Product Image" style="max-width: 150px; border-radius: 8px;" />
+
+  <p><strong>Description:</strong> {{ product.description }}</p>
+  <p><strong>Category:</strong> {{ product.category }}</p>
+  <p><strong>Brand:</strong> {{ product.brand }}</p>
+  <p><strong>SKU:</strong> {{ product.sku }}</p>
+
+  <hr>
+
+  <h3>💰 Pricing</h3>
+  <p><strong>Price:</strong> ${{ product.price }}</p>
+  <p><strong>Discount:</strong> {{ product.discountPercentage }}%</p>
+  <p><strong>Rating:</strong> {{ product.rating }}/5</p>
+
+  <hr>
+
+  <h3>📦 Inventory & Shipping</h3>
+  <p><strong>Stock:</strong> {{ product.stock }} units</p>
+  <p><strong>Minimum Order Quantity:</strong> {{ product.minimumOrderQuantity }}</p>
+  <p><strong>Availability:</strong> {{ product.availabilityStatus }}</p>
+  <p><strong>Shipping:</strong> {{ product.shippingInformation }}</p>
+  <p><strong>Warranty:</strong> {{ product.warrantyInformation }}</p>
+  <p><strong>Return Policy:</strong> {{ product.returnPolicy }}</p>
+
+  <hr>
+
+  <h3>📐 Physical Details</h3>
+  <p><strong>Weight:</strong> {{ product.weight }}g</p>
+  <p><strong>Dimensions:</strong> {{ product.dimensions.width }} x {{ product.dimensions.height }} x {{ product.dimensions.depth }} cm</p>
+
+  <hr>
+
+  <h3>🏷️ Tags & Metadata</h3>
+  <p><strong>Tags:</strong> <span *ngFor="let tag of product.tags">{{ tag }} </span></p>
+  <p><strong>Barcode:</strong> {{ product.meta.barcode }}</p>
+  <p><strong>QR Code:</strong><br>
+    <img src="{{ product.meta.qrCode }}" alt="QR Code" style="width: 120px;" />
+  </p>
+
+  <hr>
+
+  <h3>📝 Reviews</h3>
+  <div *ngFor="let review of product.reviews" style="border-bottom: 1px solid #eee; margin-bottom: 10px;">
+    <p><strong>{{ review.reviewerName }}</strong> ({{ review.reviewerEmail }})</p>
+    <p>⭐ Rating: {{ review.rating }}</p>
+    <p>"{{ review.comment }}"</p>
+  </div>
+
+  <hr>
+
+  <h3>🖼️ Full Image</h3>
+  <img src="{{ product.images[0] }}" alt="Full Image" style="width: 100%; border-radius: 8px;" />
+</div>
