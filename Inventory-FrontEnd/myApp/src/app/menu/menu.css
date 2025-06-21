@@ -1,0 +1,58 @@
+/* General Navbar Styling */
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 12px 24px;
+  transition: all 0.3s ease-in-out;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Navbar Brand */
+.navbar-brand {
+  font-weight: 600;
+  font-size: 22px;
+  color: #007bff !important;
+  letter-spacing: 0.5px;
+}
+
+/* Navbar Links */
+.navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-nav .nav-item {
+  margin: 0 12px;
+}
+
+.navbar-nav .nav-link {
+  color: #555 !important;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007bff !important;
+}
+
+.navbar-nav .nav-item.active .nav-link {
+  color: #007bff !important;
+  font-weight: 600;
+}
+
+/* Responsive Collapse Padding (optional if needed) */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
