@@ -14,7 +14,7 @@ namespace Inventory.Repositories
         public override async Task<Category> GetById(string Id)
         {
             var u = await context.Categories.FirstOrDefaultAsync(u => u.Id == Id);
-            return u ?? throw new Exception("No such user");
+            return u ?? throw new Exception("No such categroy");
         }
 
         public override async Task<IEnumerable<Category>> GetAll()

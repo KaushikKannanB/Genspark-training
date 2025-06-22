@@ -69,7 +69,13 @@ namespace Inventory.Controllers
             var allcats = await categrepo.GetByName(c.ToUpper());
             return Ok(allcats);
         }
-
+        [Authorize]
+        [HttpGet("Get-category-by-Id")]
+        public async Task<IActionResult> GetCategoryById(string id)
+        {
+            var allcats = await categrepo.GetById(id);
+            return Ok(allcats);
+        }
         [Authorize]
         [HttpGet("Get-All-Products")]
         public async Task<IActionResult> GetAllProducts()
