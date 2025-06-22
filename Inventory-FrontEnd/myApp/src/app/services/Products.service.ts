@@ -39,7 +39,25 @@ export class ProductService
     updatestock(update:StockUpdateModel)
     {
         this.authorization();
-        console.log(update);
         return this.http.put('http://localhost:5077/api/product/Stock-Update',update, {headers:this.headers});
     }
+    getallcategories(){
+        this.authorization();
+        return this.http.get('http://localhost:5077/api/product/Get-All-Categories', {headers:this.headers});
+    }
+    getcategorybyId(id:string){
+        this.authorization();
+        return this.http.get(`http://localhost:5077/api/product/Get-category-by-Id?id=${id}`, {headers:this.headers});
+    }
+    getallstocklogs()
+    {
+        this.authorization();
+        return this.http.get('http://localhost:5077/api/product/Get-All-Stock-updates',{headers:this.headers});
+    }
+    getprodbyinv(inv:string)
+    {
+        this.authorization();
+        return this.http.get(`http://localhost:5077/api/product/Get-product-by-inventory-id?id=${inv}`,{headers:this.headers});
+    }
+    
 }

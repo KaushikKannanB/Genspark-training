@@ -63,6 +63,15 @@ namespace Inventory.Controllers
             return Ok(allcats);
         }
         [Authorize]
+        [HttpGet("Get-product-by-inventory-id")]
+        public async Task<IActionResult> GetProdByInvId(string id)
+        {
+            var allprods = await prodrepo.GetAll();
+            var myprod = allprods.Where(p => p.InventoryId == id);
+            return Ok(myprod);
+            
+        }
+        [Authorize]
         [HttpGet("Get-Category-By-Name")]
         public async Task<IActionResult> GetCategoryName(string c)
         {

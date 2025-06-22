@@ -1,0 +1,68 @@
+<div class="add-product-page">
+  <!-- Left Side: The Form -->
+  <div class="form-container">
+    <form (ngSubmit)="addProduct()">
+      <input
+        type="text"
+        placeholder="Name"
+        name="name"
+        (input)="filterProducts()"
+        [(ngModel)]="addproduct.name"
+      />
+      <input
+        type="text"
+        placeholder="Description"
+        name="desc"
+        [(ngModel)]="addproduct.description"
+      />
+      <input
+        type="number"
+        placeholder="Price"
+        name="price"
+        [(ngModel)]="addproduct.price"
+      />
+      <input
+        type="number"
+        placeholder="stock"
+        name="stock"
+        [(ngModel)]="addproduct.stock"
+      />
+      <select name="categories">
+        <option value="">Select a category</option>
+        @for(c of categories; track c.Id) {
+            <option [value]="c.categoryName">{{c.categoryName}}</option>
+        }
+      </select>
+      <input
+        type="number"
+        placeholder="minThreshold"
+        name="minThreshold"
+        [(ngModel)]="addproduct.minThreshold"
+      />
+      <button class="btn btn-success">add product</button>
+    </form>
+  </div>
+
+  <!-- Right Side: Products List -->
+  <div class="results-container">
+    @if(filteredproducts!=null) {
+      <div class="product-cards">
+        <div
+          class="product-card"
+          *ngFor="let product of filteredproducts; trackBy: products.name"
+          [ngClass]="{'low-stock': product.stock < product.minThreshold}"
+        >
+          <h3>{{product.name}}</h3>
+          <p class="description">{{product.description}}</p>
+          <p><strong>category: </strong>{{product.category}}</p>
+          
+          <p><strong>Added By:</strong> {{product.addedBy}}</p>
+          <p><strong>Status:</strong> {{product.status}}</p>
+        </div>
+      </div>
+    }
+    @else {
+      <h1>No matching products</h1>
+    }
+  </div>
+</div>

@@ -1,0 +1,136 @@
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2c3e50;
+  padding: 12px 0;
+}
+
+.d-flex.align-items-center {
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.d-flex.align-items-center input {
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #bdc3c7;
+  transition: all 0.25s ease;
+}
+
+.d-flex.align-items-center input:focus {
+  border-color: #007BFF;
+  box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.25);
+  transform: scale(1.03);
+}
+
+.table-responsive
+{
+    margin:50px;
+}
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 14px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #ffffff;
+}
+
+.table-light th {
+  font-weight: 600;
+  font-size: 14px;
+  color: #34495e;
+  background: linear-gradient(90deg, #f8f9fa, #ecf0f1);
+}
+
+.table-hover tbody tr {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInRow 0.4s ease forwards;
+}
+
+.table-hover tbody tr:nth-child(1) { animation-delay: 0.1s; }
+.table-hover tbody tr:nth-child(2) { animation-delay: 0.2s; }
+.table-hover tbody tr:nth-child(3) { animation-delay: 0.3s; }
+.table-hover tbody tr:nth-child(4) { animation-delay: 0.4s; }
+.table-hover tbody tr:nth-child(5) { animation-delay: 0.5s; }
+
+
+@keyframes fadeInRow {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f9fafb;
+  transform: translateY(-3px) scale(1.01);
+}
+
+.table-hover td {
+  vertical-align: middle;
+}
+
+.table-bordered td,
+.table-bordered th {
+  border-color: #e3e3e3;
+}
+
+.table-sm td,
+.table-sm th {
+  padding: 10px 14px;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.badge.bg-success {
+  background-color: #28a745 !important;
+}
+
+.badge.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+.badge.bg-secondary {
+  background-color: #6c757d !important;
+}
+
+.badge:hover {
+  transform: scale(1.08);
+  box-shadow: 0px 2px 8px rgba(0,0,0,.15);
+}
+
+.btn-link {
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #007BFF;
+  transition: color 0.2s ease;
+}
+
+.btn-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+
+@media (max-width: 1024px) {
+  .d-flex.align-items-center {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .d-flex.align-items-center input {
+    max-width: 100% !important;
+    margin-bottom: 10px;
+  }
+}

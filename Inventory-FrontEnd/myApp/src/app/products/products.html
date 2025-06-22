@@ -5,6 +5,13 @@
         <option value="ACTIVE">Active</option>
         <option value="INACTIVE">Inactive</option>
     </select>
+    <select name="category" [(ngModel)]="searchByCategory" (change)="filterProducts()">
+        <option value="">All Categories</option>
+        @for(c of categories;track c.Id)
+        {
+            <option [value]="c.categoryName">{{c.categoryName}}</option>
+        }
+    </select>
     <input type="number" name="min" [(ngModel)]="searchByMinPrice" placeholder="Min price" (input)="filterProducts()">
     <input type="number" name="max" [(ngModel)]="searchByMaxPrice" placeholder="Max price" (input)="filterProducts()">
 </div>
@@ -18,6 +25,7 @@
     >
       <h3>{{product.name}}</h3>
       <p class="description">{{product.description}}</p>
+      <p><strong>category: </strong>{{product.category}}</p>
       <p><strong>Price:</strong> ${{product.price}}</p>
       <p><strong>Stock/Threshold:</strong> {{product.stock}} / {{product.minThreshold}}</p>
       <p><strong>Added At:</strong> {{product.addedAt}}</p>
@@ -26,22 +34,30 @@
       <div class="actions">
         <button>Update</button>
         <button (click)="handledelete(product.name)">Delete</button>
-        <button>Increase Stock</button>
+        <button (click)="enableUpdateStock(product.name)">Update Stock</button>
       </div>
     </div>
   </div>
 }
 
-<h1>add products</h1>
-<form (ngSubmit)="addProduct()">
-    <input type="text" placeholder="Name" name="name" [(ngModel)]="addproduct.name">
-    <input type="text" placeholder="Description" name="desc" [(ngModel)]="addproduct.description">
-    <input type="number" placeholder="Price" name="price" [(ngModel)]="addproduct.price">
-    <input type="number" placeholder="stock" name="stock" [(ngModel)]="addproduct.stock">
-    <input type="text" placeholder="category" name="cname" [(ngModel)]="addproduct.categoryName">
-    <input type="number" placeholder="minThreshold" name="minThreshold" [(ngModel)]="addproduct.minThreshold">
-<button class="btn btn-success">add product</button>
-</form>
+<div *ngIf="enableStockUpd" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Update Stock</h3>
+    <form (ngSubmit)="handlestockupdate()" class="modal-form">
+      <select name="status" [(ngModel)]="stockUpd.AddOrReduce">
+        <option value="ADD">Add</option>
+        <option value="REDUCE">Reduce</option>
+      </select>
+      <input type="number" placeholder="Stock Update" name="AddOrReduceBy" [(ngModel)]="stockUpd.AddOrReduceBy"/>
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-success">Update</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
 
 <!-- <h1>Delete</h1>
 <form (ngSubmit)="handledelete()" >
@@ -49,12 +65,12 @@
 <button class="btn btn-success">delete product</button>
 
 </form> -->
-<h1>Update Stock</h1>
+<!-- <h1>Update Stock</h1>
 <form (ngSubmit)="handlestockupdate()" >
   <input type="text" placeholder="Product" name="ProductName" [(ngModel)]="stockUpd.ProductName">
   <input type="text" placeholder="Add" name="AddOrReduce" [(ngModel)]="stockUpd.AddOrReduce">
   <input type="number" placeholder="Stock Update" name="AddOrReduceBy" [(ngModel)]="stockUpd.AddOrReduceBy">
 
   <button class="btn btn-success">Update Stock Product</button>
-</form>
+</form> -->
 
