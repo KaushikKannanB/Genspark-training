@@ -14,6 +14,7 @@ export class AddProduct implements OnInit {
   private productservice = inject(ProductService);
   addproduct:ProductAddModel=new ProductAddModel();
   products:any;
+  error:string="";
   categories:any;
   filteredproducts:any;
   ngOnInit(): void {
@@ -70,6 +71,15 @@ export class AddProduct implements OnInit {
       const matchName = product.name?.toUpperCase().includes(searchName);
      
       return matchName;
+    
     });
+    if(this.addproduct.name=='')
+    {
+      this.filteredproducts=null;
+    }
+    if(this.filteredproducts.length==0)
+    {
+      this.filteredproducts=null;
+    }
   }
 }

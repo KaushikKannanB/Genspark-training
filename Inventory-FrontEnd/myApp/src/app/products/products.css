@@ -41,13 +41,9 @@
   padding: 16px;
 }
 /* Low Stock Highlight */
-.low-stock {
-  background-color: #ffe5e5;
-}
-
-/* Individual Product Card */
 .product-card {
-  background-color: #fff;
+  /* REMOVE background-color here if you want low-stock to take over */
+  /* background-color: #fff; */
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0px 2px 12px rgba(0,0,0,.1);
@@ -59,6 +55,12 @@
 
 .product-card:hover {
   box-shadow: 0px 4px 20px rgba(0,0,0,.15);
+}
+
+/* ✅ Ensure low-stock takes precedence */
+.product-card.low-stock {
+    background-color: #ffe5e5;
+
 }
 
 .product-card h3 {

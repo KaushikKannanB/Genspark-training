@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
-// import { First } from "./first/first";
+import { Component, OnInit } from '@angular/core';
 import { Menu } from './menu/menu';
-
-
 import { RouterOutlet } from '@angular/router';
-// import { UserDashboard } from "./user-dashboard/user-dashboard";
+import { NotificationService } from './services/Notification.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +9,13 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css',
   imports: [Menu, RouterOutlet]
 })
-export class App {
+export class App implements OnInit {
   protected title = 'myApp';
+
+  constructor(private notifyService: NotificationService) {}
+
+  ngOnInit() {
+    this.notifyService.startConnection();
+    console.log('[App] Connection started. Messages length:', this.notifyService.messages.length);
+  }
 }

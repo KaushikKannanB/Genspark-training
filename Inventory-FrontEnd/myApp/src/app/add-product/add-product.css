@@ -84,9 +84,6 @@ form .btn:hover {
   box-shadow: 0px 4px 20px rgba(0,0,0,.15);
 }
 
-.low-stock {
-  background-color: #ffe5e5;
-}
 
 /* RESPONSIVE BEHAVIOR */
 @media (max-width: 1024px) {

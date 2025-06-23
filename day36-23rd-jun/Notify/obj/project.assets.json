@@ -5150,11 +5150,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/kaushik/Desktop/Genspark-training/day35-20th-jun/Notify/Notify.csproj",
+      "projectUniqueName": "/Users/kaushik/Desktop/Genspark-training/day36-23rd-jun/Notify/Notify.csproj",
       "projectName": "Notify",
-      "projectPath": "/Users/kaushik/Desktop/Genspark-training/day35-20th-jun/Notify/Notify.csproj",
+      "projectPath": "/Users/kaushik/Desktop/Genspark-training/day36-23rd-jun/Notify/Notify.csproj",
       "packagesPath": "/Users/kaushik/.nuget/packages/",
-      "outputPath": "/Users/kaushik/Desktop/Genspark-training/day35-20th-jun/Notify/obj/",
+      "outputPath": "/Users/kaushik/Desktop/Genspark-training/day36-23rd-jun/Notify/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/kaushik/.nuget/NuGet/NuGet.Config"
