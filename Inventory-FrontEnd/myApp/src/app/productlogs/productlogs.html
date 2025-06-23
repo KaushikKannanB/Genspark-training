@@ -1,1 +1,73 @@
-<p>productlogs works!</p>
+
+<div class="d-flex align-items-center mt-3 gap-2">
+  <input
+    type="text"
+    [(ngModel)]="searchByName"
+    (input)="filterLogs()"
+    placeholder="Search by Product Name..."
+    class="form-control"
+    style="max-width: 250px;"
+  />
+  <input
+    type="text"
+    [(ngModel)]="searchBywhoupdated"
+    (input)="filterLogs()"
+    placeholder="Search by Updated By..."
+    class="form-control"
+    style="max-width: 250px;"
+  />
+  <select name="field" [(ngModel)]="searchByFieldUpdated" (change)="filterLogs()">
+        <option value="">All Fields</option>
+        <option value="Price">Price</option>
+        <option value="Description">Description</option>
+    </select>
+  <input
+    type="date"
+    [(ngModel)]="searchByWhenMin"
+    (change)="filterLogs()" 
+    placeholder="Search by Date"
+    class="form-control"
+    style="max-width: 250px;"
+  />
+  <input
+    type="date"
+    [(ngModel)]="searchByWhenMax"
+    (change)="filterLogs()" 
+    placeholder="Search by Date"
+    class="form-control"
+    style="max-width: 250px;"
+  />
+</div>
+
+@if(filteredlogs!=null) {
+  <div class="table-responsive mt-3">
+    <table class="table table-dark table-hover table-bordered table-sm align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Product Name</th>
+          <th>Field Updated</th>
+          <th>Old Value</th>
+          <th>New Value</th>
+          <th>
+            Updated At
+            <button class="btn btn-link p-0" (click)="sortByDate()" title="Sort by Date">
+              {{ sortAsc ? '▲' : '▼' }}
+            </button>
+          </th>
+          <th>Updated By</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of filteredlogs; trackBy: trackById">
+          <td>{{log.prodName}}</td>
+          <td>{{log.fieldUpdated}}</td>
+          <td>{{log.oldValue}}</td>
+          <td>{{log.newValue}}</td>
+          <td>{{log.updatedAt | date:'medium'}}</td>
+          <td>{{log.updatedBy}}</td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+}

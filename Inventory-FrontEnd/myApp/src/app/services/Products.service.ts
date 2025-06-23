@@ -59,5 +59,14 @@ export class ProductService
         this.authorization();
         return this.http.get(`http://localhost:5077/api/product/Get-product-by-inventory-id?id=${inv}`,{headers:this.headers});
     }
-    
+    getprodnamebyid(id:string)
+    {
+        this.authorization();
+        return this.http.get('http://localhost:5077/api/product/Get-Productby-Id?id='+id,{headers:this.headers});
+    }
+    getallproductlogs()
+    {
+        this.authorization();
+        return this.http.get('http://localhost:5077/api/product/Get-All-Product-Updates',{headers:this.headers});
+    }
 }

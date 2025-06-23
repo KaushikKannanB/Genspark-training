@@ -92,7 +92,14 @@ namespace Inventory.Controllers
             var allprod = await prodrepo.GetAll();
             return Ok(allprod);
         }
-
+        [Authorize]
+        [HttpGet("Get-Productby-Id")]
+        public async Task<IActionResult> GetProductById(string id)
+        {
+            var prod = await prodrepo.GetById(id);
+            return Ok(prod);
+        }
+        
         [Authorize]
         [HttpGet("Get-Products-Orderedby-Price")]
         public async Task<IActionResult> GetProductsOrdered(int pagenumber)

@@ -1,0 +1,1430 @@
+2025-06-24 00:08:00.839 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-24 00:08:00.842 +05:30 [INF] HTTP GET /notificationHub responded 101 in 620027.3993 ms
+2025-06-24 00:08:00.842 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=7eK_ASUJCDi-E7FlhE1gfA - 101 null null 620028.0121ms
+2025-06-24 00:08:01.118 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-24 00:08:01.118 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:08:01.118 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 204 null null 0.3797ms
+2025-06-24 00:08:01.120 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-24 00:08:01.120 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:08:01.120 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-06-24 00:08:01.121 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-06-24 00:08:01.121 +05:30 [INF] HTTP POST /notificationHub/negotiate responded 200 in 0.6763 ms
+2025-06-24 00:08:01.121 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.1363ms
+2025-06-24 00:08:01.174 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/notificationHub?id=F0Yc_JxO6ddun1uCbVVC2A - null null
+2025-06-24 00:08:01.174 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:08:01.174 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-06-24 00:10:20.089 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - null 0
+2025-06-24 00:10:20.090 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:10:20.090 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - 204 null null 0.3938ms
+2025-06-24 00:10:20.091 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - null null
+2025-06-24 00:10:20.091 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:10:20.103 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:10:20.103 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:10:20.103 +05:30 [INF] Route matched with {action = "GetAllProductUpdates", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductUpdates() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:10:20.105 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."FieldUpdated", p."NewValue", p."OldValue", p."ProductId", p."UpdatedAt", p."UpdatedBy"
+FROM "ProductUpdateLogs" AS p
+2025-06-24 00:10:20.105 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.ProductUpdateLog, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:10:20.105 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory) in 1.9565ms
+2025-06-24 00:10:20.106 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:10:20.106 +05:30 [INF] HTTP GET /api/product/Get-All-Product-Updates responded 200 in 14.1182 ms
+2025-06-24 00:10:20.106 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - 200 null application/json; charset=utf-8 14.5093ms
+2025-06-24 00:10:20.109 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null 0
+2025-06-24 00:10:20.110 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:10:20.110 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 204 null null 0.3374ms
+2025-06-24 00:10:20.111 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null null
+2025-06-24 00:10:20.111 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:10:20.112 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:10:20.113 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:10:20.113 +05:30 [INF] Route matched with {action = "GetProductById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProductById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:10:20.114 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:10:20.114 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Product'.
+2025-06-24 00:10:20.115 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProductById (Inventory) in 1.5284ms
+2025-06-24 00:10:20.115 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:10:20.115 +05:30 [INF] HTTP GET /api/product/Get-Productby-Id responded 200 in 3.2176 ms
+2025-06-24 00:10:20.115 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 200 null application/json; charset=utf-8 3.638ms
+2025-06-24 00:11:08.917 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-24 00:11:08.917 +05:30 [INF] HTTP GET /notificationHub responded 101 in 187737.1303 ms
+2025-06-24 00:11:08.918 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=F0Yc_JxO6ddun1uCbVVC2A - 101 null null 187737.7307ms
+2025-06-24 00:11:09.164 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-24 00:11:09.164 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:11:09.164 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 204 null null 0.6394ms
+2025-06-24 00:11:09.166 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-24 00:11:09.167 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:11:09.167 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-06-24 00:11:09.167 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-06-24 00:11:09.167 +05:30 [INF] HTTP POST /notificationHub/negotiate responded 200 in 0.6093 ms
+2025-06-24 00:11:09.167 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.0837ms
+2025-06-24 00:11:09.352 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/notificationHub?id=o8LYi2KIn9V0lZDtpjlvyQ - null null
+2025-06-24 00:11:09.352 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:11:09.352 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-06-24 00:11:18.502 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-24 00:11:18.502 +05:30 [INF] HTTP GET /notificationHub responded 101 in 9150.1408 ms
+2025-06-24 00:11:18.503 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=o8LYi2KIn9V0lZDtpjlvyQ - 101 null null 9150.8286ms
+2025-06-24 00:11:18.739 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-24 00:11:18.740 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:11:18.740 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 204 null null 0.9427ms
+2025-06-24 00:11:18.742 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-24 00:11:18.743 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:11:18.743 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-06-24 00:11:18.743 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-06-24 00:11:18.743 +05:30 [INF] HTTP POST /notificationHub/negotiate responded 200 in 0.5516 ms
+2025-06-24 00:11:18.743 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.0133ms
+2025-06-24 00:11:18.885 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/notificationHub?id=hTyjbAmY1UUKUOQ9QqkbdQ - null null
+2025-06-24 00:11:18.886 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:11:18.886 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-06-24 00:11:20.571 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - null 0
+2025-06-24 00:11:20.571 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:11:20.571 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - 204 null null 0.4856ms
+2025-06-24 00:11:20.573 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - null null
+2025-06-24 00:11:20.573 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:11:20.574 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:11:20.575 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:11:20.575 +05:30 [INF] Route matched with {action = "GetAllProductUpdates", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductUpdates() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:11:20.575 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."FieldUpdated", p."NewValue", p."OldValue", p."ProductId", p."UpdatedAt", p."UpdatedBy"
+FROM "ProductUpdateLogs" AS p
+2025-06-24 00:11:20.575 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.ProductUpdateLog, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:11:20.576 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory) in 0.7469ms
+2025-06-24 00:11:20.576 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:11:20.576 +05:30 [INF] HTTP GET /api/product/Get-All-Product-Updates responded 200 in 2.5398 ms
+2025-06-24 00:11:20.576 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - 200 null application/json; charset=utf-8 3.0324ms
+2025-06-24 00:11:20.580 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null 0
+2025-06-24 00:11:20.580 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:11:20.580 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 204 null null 0.3377ms
+2025-06-24 00:11:20.581 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null null
+2025-06-24 00:11:20.581 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:11:20.583 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:11:20.583 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:11:20.583 +05:30 [INF] Route matched with {action = "GetProductById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProductById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:11:20.584 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:11:20.584 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Product'.
+2025-06-24 00:11:20.584 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProductById (Inventory) in 1.1467ms
+2025-06-24 00:11:20.584 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:11:20.584 +05:30 [INF] HTTP GET /api/product/Get-Productby-Id responded 200 in 2.8094 ms
+2025-06-24 00:11:20.585 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 200 null application/json; charset=utf-8 3.2222ms
+2025-06-24 00:12:37.210 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-24 00:12:37.211 +05:30 [INF] HTTP GET /notificationHub responded 101 in 78324.2009 ms
+2025-06-24 00:12:37.211 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=hTyjbAmY1UUKUOQ9QqkbdQ - 101 null null 78324.8598ms
+2025-06-24 00:12:37.527 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-24 00:12:37.527 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:12:37.528 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 204 null null 0.2965ms
+2025-06-24 00:12:37.529 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-24 00:12:37.529 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:12:37.529 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-06-24 00:12:37.530 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-06-24 00:12:37.530 +05:30 [INF] HTTP POST /notificationHub/negotiate responded 200 in 0.3900 ms
+2025-06-24 00:12:37.530 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.7723ms
+2025-06-24 00:12:37.681 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/notificationHub?id=hpiBPJPmOEeWhdvbB5LuIQ - null null
+2025-06-24 00:12:37.681 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:12:37.681 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-06-24 00:12:41.512 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - null 0
+2025-06-24 00:12:41.512 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:12:41.512 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - 204 null null 0.3851ms
+2025-06-24 00:12:41.514 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - null null
+2025-06-24 00:12:41.514 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:12:41.515 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:12:41.515 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:12:41.516 +05:30 [INF] Route matched with {action = "GetAllProductUpdates", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductUpdates() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:12:41.516 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."FieldUpdated", p."NewValue", p."OldValue", p."ProductId", p."UpdatedAt", p."UpdatedBy"
+FROM "ProductUpdateLogs" AS p
+2025-06-24 00:12:41.517 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.ProductUpdateLog, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:12:41.517 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory) in 1.0103ms
+2025-06-24 00:12:41.517 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:12:41.517 +05:30 [INF] HTTP GET /api/product/Get-All-Product-Updates responded 200 in 2.8331 ms
+2025-06-24 00:12:41.517 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - 200 null application/json; charset=utf-8 3.2251ms
+2025-06-24 00:12:41.521 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null 0
+2025-06-24 00:12:41.521 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:12:41.521 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 204 null null 0.3272ms
+2025-06-24 00:12:41.523 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null null
+2025-06-24 00:12:41.523 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:12:41.524 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:12:41.525 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:12:41.525 +05:30 [INF] Route matched with {action = "GetProductById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProductById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:12:41.525 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:12:41.526 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Product'.
+2025-06-24 00:12:41.526 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProductById (Inventory) in 1.0255ms
+2025-06-24 00:12:41.526 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:12:41.526 +05:30 [INF] HTTP GET /api/product/Get-Productby-Id responded 200 in 2.7996 ms
+2025-06-24 00:12:41.526 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 200 null application/json; charset=utf-8 3.2432ms
+2025-06-24 00:13:12.523 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - null 0
+2025-06-24 00:13:12.524 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:12.525 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - 204 null null 1.1272ms
+2025-06-24 00:13:12.526 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - null null
+2025-06-24 00:13:12.527 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:12.528 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:13:12.528 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:13:12.528 +05:30 [INF] Route matched with {action = "GetAllProductUpdates", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductUpdates() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:13:12.529 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."FieldUpdated", p."NewValue", p."OldValue", p."ProductId", p."UpdatedAt", p."UpdatedBy"
+FROM "ProductUpdateLogs" AS p
+2025-06-24 00:13:12.529 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.ProductUpdateLog, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:13:12.529 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory) in 0.7634ms
+2025-06-24 00:13:12.529 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:13:12.529 +05:30 [INF] HTTP GET /api/product/Get-All-Product-Updates responded 200 in 2.5889 ms
+2025-06-24 00:13:12.529 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - 200 null application/json; charset=utf-8 3.0849ms
+2025-06-24 00:13:12.533 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null 0
+2025-06-24 00:13:12.533 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:12.533 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 204 null null 0.3694ms
+2025-06-24 00:13:12.535 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null null
+2025-06-24 00:13:12.535 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:12.536 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:13:12.537 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:13:12.537 +05:30 [INF] Route matched with {action = "GetProductById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProductById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:13:12.538 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:13:12.538 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Product'.
+2025-06-24 00:13:12.538 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProductById (Inventory) in 1.1906ms
+2025-06-24 00:13:12.538 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:13:12.538 +05:30 [INF] HTTP GET /api/product/Get-Productby-Id responded 200 in 3.3463 ms
+2025-06-24 00:13:12.539 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 200 null application/json; charset=utf-8 3.7799ms
+2025-06-24 00:13:14.747 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - null null
+2025-06-24 00:13:14.747 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:14.749 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:13:14.749 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:13:14.749 +05:30 [INF] Route matched with {action = "GetAllProductUpdates", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductUpdates() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:13:14.750 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."FieldUpdated", p."NewValue", p."OldValue", p."ProductId", p."UpdatedAt", p."UpdatedBy"
+FROM "ProductUpdateLogs" AS p
+2025-06-24 00:13:14.750 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.ProductUpdateLog, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:13:14.750 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory) in 0.8711ms
+2025-06-24 00:13:14.751 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:13:14.751 +05:30 [INF] HTTP GET /api/product/Get-All-Product-Updates responded 200 in 3.1481 ms
+2025-06-24 00:13:14.751 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - 200 null application/json; charset=utf-8 3.7171ms
+2025-06-24 00:13:14.754 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null null
+2025-06-24 00:13:14.755 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:14.756 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:13:14.756 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:13:14.756 +05:30 [INF] Route matched with {action = "GetProductById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProductById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:13:14.757 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:13:14.757 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Product'.
+2025-06-24 00:13:14.757 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProductById (Inventory) in 0.9691ms
+2025-06-24 00:13:14.757 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:13:14.758 +05:30 [INF] HTTP GET /api/product/Get-Productby-Id responded 200 in 2.8037 ms
+2025-06-24 00:13:14.758 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 200 null application/json; charset=utf-8 3.3417ms
+2025-06-24 00:13:16.737 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - null null
+2025-06-24 00:13:16.737 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:16.738 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:13:16.739 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:13:16.739 +05:30 [INF] Route matched with {action = "GetAllProductUpdates", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductUpdates() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:13:16.739 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."FieldUpdated", p."NewValue", p."OldValue", p."ProductId", p."UpdatedAt", p."UpdatedBy"
+FROM "ProductUpdateLogs" AS p
+2025-06-24 00:13:16.740 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.ProductUpdateLog, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:13:16.740 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory) in 0.7749ms
+2025-06-24 00:13:16.740 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:13:16.740 +05:30 [INF] HTTP GET /api/product/Get-All-Product-Updates responded 200 in 2.6276 ms
+2025-06-24 00:13:16.740 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - 200 null application/json; charset=utf-8 3.1194ms
+2025-06-24 00:13:16.743 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null null
+2025-06-24 00:13:16.743 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:16.744 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:13:16.745 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:13:16.745 +05:30 [INF] Route matched with {action = "GetProductById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProductById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:13:16.745 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:13:16.746 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Product'.
+2025-06-24 00:13:16.746 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProductById (Inventory) in 0.9536ms
+2025-06-24 00:13:16.746 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:13:16.746 +05:30 [INF] HTTP GET /api/product/Get-Productby-Id responded 200 in 2.6377 ms
+2025-06-24 00:13:16.746 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 200 null application/json; charset=utf-8 3.0702ms
+2025-06-24 00:13:18.304 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-24 00:13:18.304 +05:30 [INF] HTTP GET /notificationHub responded 101 in 40622.4604 ms
+2025-06-24 00:13:18.304 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=hpiBPJPmOEeWhdvbB5LuIQ - 101 null null 40623.0712ms
+2025-06-24 00:13:18.516 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-24 00:13:18.517 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:18.517 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 204 null null 0.3084ms
+2025-06-24 00:13:18.518 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-24 00:13:18.518 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:18.518 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-06-24 00:13:18.519 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-06-24 00:13:18.519 +05:30 [INF] HTTP POST /notificationHub/negotiate responded 200 in 0.3780 ms
+2025-06-24 00:13:18.519 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.7614ms
+2025-06-24 00:13:18.568 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/notificationHub?id=GQ9v-Mpq4jeq2jzl-dWuzg - null null
+2025-06-24 00:13:18.569 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:18.569 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-06-24 00:13:19.669 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - null 0
+2025-06-24 00:13:19.669 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:19.670 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - 204 null null 0.4199ms
+2025-06-24 00:13:19.672 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - null null
+2025-06-24 00:13:19.672 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:19.673 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:13:19.674 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:13:19.674 +05:30 [INF] Route matched with {action = "GetAllProductUpdates", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductUpdates() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:13:19.674 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."FieldUpdated", p."NewValue", p."OldValue", p."ProductId", p."UpdatedAt", p."UpdatedBy"
+FROM "ProductUpdateLogs" AS p
+2025-06-24 00:13:19.674 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.ProductUpdateLog, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:13:19.675 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory) in 0.7728ms
+2025-06-24 00:13:19.675 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:13:19.675 +05:30 [INF] HTTP GET /api/product/Get-All-Product-Updates responded 200 in 2.7547 ms
+2025-06-24 00:13:19.675 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - 200 null application/json; charset=utf-8 3.2468ms
+2025-06-24 00:13:19.679 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null 0
+2025-06-24 00:13:19.679 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:19.679 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 204 null null 0.3351ms
+2025-06-24 00:13:19.681 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null null
+2025-06-24 00:13:19.681 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:13:19.682 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:13:19.682 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:13:19.682 +05:30 [INF] Route matched with {action = "GetProductById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProductById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:13:19.683 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:13:19.683 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Product'.
+2025-06-24 00:13:19.684 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProductById (Inventory) in 1.1524ms
+2025-06-24 00:13:19.684 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:13:19.684 +05:30 [INF] HTTP GET /api/product/Get-Productby-Id responded 200 in 2.9067 ms
+2025-06-24 00:13:19.684 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 200 null application/json; charset=utf-8 3.3115ms
+2025-06-24 00:15:20.564 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-24 00:15:20.565 +05:30 [INF] HTTP GET /notificationHub responded 101 in 121994.0668 ms
+2025-06-24 00:15:20.565 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=GQ9v-Mpq4jeq2jzl-dWuzg - 101 null null 121994.8168ms
+2025-06-24 00:15:20.896 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-24 00:15:20.896 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:20.896 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 204 null null 0.3008ms
+2025-06-24 00:15:20.898 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-24 00:15:20.898 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:20.898 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-06-24 00:15:20.899 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-06-24 00:15:20.899 +05:30 [INF] HTTP POST /notificationHub/negotiate responded 200 in 0.3994 ms
+2025-06-24 00:15:20.899 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.8616ms
+2025-06-24 00:15:20.922 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - null 0
+2025-06-24 00:15:20.922 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:20.922 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - 204 null null 0.3215ms
+2025-06-24 00:15:20.924 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - null null
+2025-06-24 00:15:20.924 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:21.028 +05:30 [INF] Executed DbCommand (37ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:15:21.028 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:15:21.028 +05:30 [INF] Route matched with {action = "GetAllProductUpdates", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductUpdates() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:15:21.048 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."FieldUpdated", p."NewValue", p."OldValue", p."ProductId", p."UpdatedAt", p."UpdatedBy"
+FROM "ProductUpdateLogs" AS p
+2025-06-24 00:15:21.049 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.ProductUpdateLog, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:15:21.049 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory) in 18.2351ms
+2025-06-24 00:15:21.049 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:15:21.049 +05:30 [INF] HTTP GET /api/product/Get-All-Product-Updates responded 200 in 124.9637 ms
+2025-06-24 00:15:21.049 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - 200 null application/json; charset=utf-8 125.5247ms
+2025-06-24 00:15:21.058 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null 0
+2025-06-24 00:15:21.058 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:21.058 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 204 null null 0.4548ms
+2025-06-24 00:15:21.060 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null null
+2025-06-24 00:15:21.060 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:21.062 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:15:21.063 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:15:21.063 +05:30 [INF] Route matched with {action = "GetProductById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProductById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:15:21.064 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/notificationHub?id=6oZ1kAVAcFTezlv5QI8ztQ - null null
+2025-06-24 00:15:21.064 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:21.065 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-06-24 00:15:21.066 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:15:21.066 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Product'.
+2025-06-24 00:15:21.066 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProductById (Inventory) in 3.0148ms
+2025-06-24 00:15:21.067 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:15:21.067 +05:30 [INF] HTTP GET /api/product/Get-Productby-Id responded 200 in 6.1824 ms
+2025-06-24 00:15:21.067 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 200 null application/json; charset=utf-8 6.7873ms
+2025-06-24 00:15:29.439 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Stock-updates - null 0
+2025-06-24 00:15:29.440 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:29.440 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Stock-updates - 204 null null 0.3777ms
+2025-06-24 00:15:29.441 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Stock-updates - null null
+2025-06-24 00:15:29.442 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:29.443 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:15:29.444 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllStockUpdates (Inventory)'
+2025-06-24 00:15:29.447 +05:30 [INF] Route matched with {action = "GetAllStockUpdates", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllStockUpdates() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:15:29.455 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Id", s."InventoryId", s."NewStock", s."OldStock", s."UpdatedAt", s."UpdatedBy"
+FROM "StockLogs" AS s
+2025-06-24 00:15:29.465 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.StockLogging, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:15:29.469 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllStockUpdates (Inventory) in 21.5252ms
+2025-06-24 00:15:29.469 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllStockUpdates (Inventory)'
+2025-06-24 00:15:29.469 +05:30 [INF] HTTP GET /api/product/Get-All-Stock-updates responded 200 in 27.0708 ms
+2025-06-24 00:15:29.469 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Stock-updates - 200 null application/json; charset=utf-8 27.559ms
+2025-06-24 00:15:29.473 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-product-by-inventory-id?id=INV173c0133 - null 0
+2025-06-24 00:15:29.473 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:29.474 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-product-by-inventory-id?id=INV173c0133 - 204 null null 0.4029ms
+2025-06-24 00:15:29.475 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-product-by-inventory-id?id=INV173c0133 - null null
+2025-06-24 00:15:29.475 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:29.476 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:15:29.477 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProdByInvId (Inventory)'
+2025-06-24 00:15:29.480 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-product-by-inventory-id?id=INV5559b883 - null 0
+2025-06-24 00:15:29.480 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:29.480 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-product-by-inventory-id?id=INV5559b883 - 204 null null 0.3016ms
+2025-06-24 00:15:29.482 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-product-by-inventory-id?id=INVee90ed16 - null 0
+2025-06-24 00:15:29.482 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-product-by-inventory-id?id=INV1bfd6a40 - null 0
+2025-06-24 00:15:29.482 +05:30 [INF] Route matched with {action = "GetProdByInvId", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProdByInvId(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:15:29.483 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:29.483 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:29.483 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-product-by-inventory-id?id=INVee90ed16 - 204 null null 0.6319ms
+2025-06-24 00:15:29.483 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-product-by-inventory-id?id=INV1bfd6a40 - 204 null null 0.673ms
+2025-06-24 00:15:29.485 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-product-by-inventory-id?id=INV5559b883 - null null
+2025-06-24 00:15:29.485 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:29.486 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-product-by-inventory-id?id=INVee90ed16 - null null
+2025-06-24 00:15:29.486 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:29.486 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-product-by-inventory-id?id=INV1bfd6a40 - null null
+2025-06-24 00:15:29.486 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:29.487 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:15:29.487 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProdByInvId (Inventory)'
+2025-06-24 00:15:29.488 +05:30 [INF] Route matched with {action = "GetProdByInvId", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProdByInvId(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:15:29.493 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-24 00:15:29.493 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereIterator`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:15:29.494 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProdByInvId (Inventory) in 6.568ms
+2025-06-24 00:15:29.494 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProdByInvId (Inventory)'
+2025-06-24 00:15:29.495 +05:30 [INF] HTTP GET /api/product/Get-product-by-inventory-id responded 200 in 8.9596 ms
+2025-06-24 00:15:29.495 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-product-by-inventory-id?id=INV5559b883 - 200 null application/json; charset=utf-8 9.7488ms
+2025-06-24 00:15:29.499 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:15:29.499 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:15:29.499 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProdByInvId (Inventory)'
+2025-06-24 00:15:29.499 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProdByInvId (Inventory)'
+2025-06-24 00:15:29.499 +05:30 [INF] Route matched with {action = "GetProdByInvId", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProdByInvId(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:15:29.499 +05:30 [INF] Route matched with {action = "GetProdByInvId", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProdByInvId(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:15:29.500 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-24 00:15:29.500 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereIterator`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:15:29.501 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProdByInvId (Inventory) in 1.1125ms
+2025-06-24 00:15:29.501 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProdByInvId (Inventory)'
+2025-06-24 00:15:29.501 +05:30 [INF] HTTP GET /api/product/Get-product-by-inventory-id responded 200 in 14.6982 ms
+2025-06-24 00:15:29.501 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-24 00:15:29.501 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-product-by-inventory-id?id=INVee90ed16 - 200 null application/json; charset=utf-8 15.2246ms
+2025-06-24 00:15:29.501 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereIterator`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:15:29.501 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProdByInvId (Inventory) in 1.8769ms
+2025-06-24 00:15:29.502 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProdByInvId (Inventory)'
+2025-06-24 00:15:29.502 +05:30 [INF] HTTP GET /api/product/Get-product-by-inventory-id responded 200 in 15.3046 ms
+2025-06-24 00:15:29.502 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-product-by-inventory-id?id=INV1bfd6a40 - 200 null application/json; charset=utf-8 15.7425ms
+2025-06-24 00:15:29.504 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-24 00:15:29.504 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereIterator`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:15:29.505 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProdByInvId (Inventory) in 21.6379ms
+2025-06-24 00:15:29.505 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProdByInvId (Inventory)'
+2025-06-24 00:15:29.505 +05:30 [INF] HTTP GET /api/product/Get-product-by-inventory-id responded 200 in 29.2722 ms
+2025-06-24 00:15:29.505 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-product-by-inventory-id?id=INV173c0133 - 200 null application/json; charset=utf-8 29.6783ms
+2025-06-24 00:15:35.291 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - null 0
+2025-06-24 00:15:35.292 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:35.292 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Product-Updates - 204 null null 1.1798ms
+2025-06-24 00:15:35.296 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - null null
+2025-06-24 00:15:35.296 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:35.308 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:15:35.309 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:15:35.309 +05:30 [INF] Route matched with {action = "GetAllProductUpdates", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProductUpdates() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:15:35.310 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."FieldUpdated", p."NewValue", p."OldValue", p."ProductId", p."UpdatedAt", p."UpdatedBy"
+FROM "ProductUpdateLogs" AS p
+2025-06-24 00:15:35.310 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.ProductUpdateLog, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:15:35.310 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory) in 1.0725ms
+2025-06-24 00:15:35.311 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProductUpdates (Inventory)'
+2025-06-24 00:15:35.311 +05:30 [INF] HTTP GET /api/product/Get-All-Product-Updates responded 200 in 14.2092 ms
+2025-06-24 00:15:35.311 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Product-Updates - 200 null application/json; charset=utf-8 15.1052ms
+2025-06-24 00:15:35.314 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null 0
+2025-06-24 00:15:35.315 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:35.315 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 204 null null 0.3098ms
+2025-06-24 00:15:35.316 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - null null
+2025-06-24 00:15:35.317 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:15:35.318 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:15:35.318 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:15:35.318 +05:30 [INF] Route matched with {action = "GetProductById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProductById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:15:35.320 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:15:35.320 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Product'.
+2025-06-24 00:15:35.320 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetProductById (Inventory) in 1.6066ms
+2025-06-24 00:15:35.320 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetProductById (Inventory)'
+2025-06-24 00:15:35.320 +05:30 [INF] HTTP GET /api/product/Get-Productby-Id responded 200 in 3.5718 ms
+2025-06-24 00:15:35.320 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Productby-Id?id=PRODe74f3f8c - 200 null application/json; charset=utf-8 4.0221ms
+2025-06-24 00:27:02.678 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Products - null 0
+2025-06-24 00:27:02.679 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Categories - null 0
+2025-06-24 00:27:02.679 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.679 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.679 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Products - 204 null null 1.0225ms
+2025-06-24 00:27:02.680 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Categories - 204 null null 0.9602ms
+2025-06-24 00:27:02.681 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Products - null null
+2025-06-24 00:27:02.681 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Categories - null null
+2025-06-24 00:27:02.681 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.681 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.693 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:02.693 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:02.694 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProducts (Inventory)'
+2025-06-24 00:27:02.694 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllCategories (Inventory)'
+2025-06-24 00:27:02.697 +05:30 [INF] Route matched with {action = "GetAllProducts", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProducts() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:02.697 +05:30 [INF] Route matched with {action = "GetAllCategories", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllCategories() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:02.700 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-24 00:27:02.700 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:27:02.701 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProducts (Inventory) in 3.5081ms
+2025-06-24 00:27:02.701 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProducts (Inventory)'
+2025-06-24 00:27:02.701 +05:30 [INF] HTTP GET /api/product/Get-All-Products responded 200 in 19.5094 ms
+2025-06-24 00:27:02.701 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Products - 200 null application/json; charset=utf-8 20.0453ms
+2025-06-24 00:27:02.705 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-100G - null 0
+2025-06-24 00:27:02.705 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.705 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-100G - 204 null null 0.4237ms
+2025-06-24 00:27:02.706 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-category-by-Id?id=CATd8d21dc4 - null 0
+2025-06-24 00:27:02.707 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.707 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-category-by-Id?id=CATd8d21dc4 - 204 null null 0.5285ms
+2025-06-24 00:27:02.710 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=BLUBERRY%20YOGURT-300G - null 0
+2025-06-24 00:27:02.710 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.710 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=BLUBERRY%20YOGURT-300G - 204 null null 0.5746ms
+2025-06-24 00:27:02.711 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-100G - null null
+2025-06-24 00:27:02.711 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.714 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:02.715 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.717 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=VANILLA%20YOGURT-300G - null 0
+2025-06-24 00:27:02.717 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-200G - null 0
+2025-06-24 00:27:02.717 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.717 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.717 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=VANILLA%20YOGURT-300G - 204 null null 0.6321ms
+2025-06-24 00:27:02.718 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-200G - 204 null null 1.1295ms
+2025-06-24 00:27:02.721 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=HONEY%20AND%20FIG%20YOGURT - null 0
+2025-06-24 00:27:02.721 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.722 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=HONEY%20AND%20FIG%20YOGURT - 204 null null 0.5093ms
+2025-06-24 00:27:02.722 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:02.722 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=BLUBERRY%20YOGURT-300G - null null
+2025-06-24 00:27:02.722 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.723 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-category-by-Id?id=CATd8d21dc4 - null null
+2025-06-24 00:27:02.723 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.723 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=PEACH%20YOGURT-300G - null 0
+2025-06-24 00:27:02.723 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.723 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=PEACH%20YOGURT-300G - 204 null null 0.289ms
+2025-06-24 00:27:02.723 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:02.724 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.724 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=COCOCOLA - null 0
+2025-06-24 00:27:02.724 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:02.724 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:02.724 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.725 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetCategoryById (Inventory)'
+2025-06-24 00:27:02.725 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=COCOCOLA - 204 null null 0.7239ms
+2025-06-24 00:27:02.727 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=STRAWBERRY%20YOGURT - null 0
+2025-06-24 00:27:02.727 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-200G - null null
+2025-06-24 00:27:02.727 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.727 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.727 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=STRAWBERRY%20YOGURT - 204 null null 0.5382ms
+2025-06-24 00:27:02.728 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-category-by-Id?id=CATed202425 - null 0
+2025-06-24 00:27:02.728 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.728 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-category-by-Id?id=CATed202425 - 204 null null 0.3869ms
+2025-06-24 00:27:02.728 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:02.729 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.729 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:02.729 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=VANILLA%20YOGURT-300G - null null
+2025-06-24 00:27:02.729 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.730 +05:30 [INF] Route matched with {action = "GetCategoryById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCategoryById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:02.730 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:02.731 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.731 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:02.735 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:02.736 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:02.738 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy"
+FROM "Categories" AS c
+WHERE c."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:27:02.743 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:02.745 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Category'.
+2025-06-24 00:27:02.746 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:02.746 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:02.747 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetCategoryById (Inventory) in 16.9057ms
+2025-06-24 00:27:02.747 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetCategoryById (Inventory)'
+2025-06-24 00:27:02.747 +05:30 [INF] HTTP GET /api/product/Get-category-by-Id responded 200 in 24.0915 ms
+2025-06-24 00:27:02.747 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:02.747 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:02.747 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-category-by-Id?id=CATd8d21dc4 - 200 null application/json; charset=utf-8 24.5458ms
+2025-06-24 00:27:02.748 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=HONEY%20AND%20FIG%20YOGURT - null null
+2025-06-24 00:27:02.748 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.750 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:02.750 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.751 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:02.752 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:02.753 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:02.754 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:02.759 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:02.759 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:02.759 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:02.759 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:02.759 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:02.760 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 35.7555ms
+2025-06-24 00:27:02.760 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 31.2785ms
+2025-06-24 00:27:02.760 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 9.6438ms
+2025-06-24 00:27:02.760 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 29.5759ms
+2025-06-24 00:27:02.760 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 38.3518ms
+2025-06-24 00:27:02.760 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.761 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.761 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.761 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.761 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 13.1254 ms
+2025-06-24 00:27:02.761 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.761 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=HONEY%20AND%20FIG%20YOGURT - 200 null application/json; charset=utf-8 13.6823ms
+2025-06-24 00:27:02.761 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 33.8554 ms
+2025-06-24 00:27:02.761 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 31.7894 ms
+2025-06-24 00:27:02.761 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 38.5876 ms
+2025-06-24 00:27:02.761 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 49.8716 ms
+2025-06-24 00:27:02.762 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-200G - 200 null application/json; charset=utf-8 34.8879ms
+2025-06-24 00:27:02.762 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=VANILLA%20YOGURT-300G - 200 null application/json; charset=utf-8 32.8032ms
+2025-06-24 00:27:02.762 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=PEACH%20YOGURT-300G - null null
+2025-06-24 00:27:02.762 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=BLUBERRY%20YOGURT-300G - 200 null application/json; charset=utf-8 40.1599ms
+2025-06-24 00:27:02.762 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-100G - 200 null application/json; charset=utf-8 51.0776ms
+2025-06-24 00:27:02.762 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=COCOCOLA - null null
+2025-06-24 00:27:02.763 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=STRAWBERRY%20YOGURT - null null
+2025-06-24 00:27:02.763 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.763 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-category-by-Id?id=CATed202425 - null null
+2025-06-24 00:27:02.763 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.763 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.764 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:02.765 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:02.765 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:02.765 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:02.765 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.765 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.765 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:02.765 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetCategoryById (Inventory)'
+2025-06-24 00:27:02.766 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.765 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:02.765 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:02.766 +05:30 [INF] Route matched with {action = "GetCategoryById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCategoryById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:02.766 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:02.766 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:02.766 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:02.767 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:02.767 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy"
+FROM "Categories" AS c
+WHERE c."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:27:02.767 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:02.767 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Category'.
+2025-06-24 00:27:02.767 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:02.767 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:02.767 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetCategoryById (Inventory) in 1.2654ms
+2025-06-24 00:27:02.767 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:02.768 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:02.768 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 1.8754ms
+2025-06-24 00:27:02.767 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:02.768 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetCategoryById (Inventory)'
+2025-06-24 00:27:02.768 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 1.6111ms
+2025-06-24 00:27:02.768 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.768 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 1.9826ms
+2025-06-24 00:27:02.768 +05:30 [INF] HTTP GET /api/product/Get-category-by-Id responded 200 in 3.8179 ms
+2025-06-24 00:27:02.768 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.768 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-category-by-Id?id=CATed202425 - 200 null application/json; charset=utf-8 5.4982ms
+2025-06-24 00:27:02.768 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:02.768 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 4.0907 ms
+2025-06-24 00:27:02.768 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 4.3560 ms
+2025-06-24 00:27:02.769 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 4.9655 ms
+2025-06-24 00:27:02.769 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=COCOCOLA - 200 null application/json; charset=utf-8 6.57ms
+2025-06-24 00:27:02.769 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=STRAWBERRY%20YOGURT - 200 null application/json; charset=utf-8 6.4695ms
+2025-06-24 00:27:02.769 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=PEACH%20YOGURT-300G - 200 null application/json; charset=utf-8 7.3768ms
+2025-06-24 00:27:02.803 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy", p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Categories" AS c
+LEFT JOIN "Products" AS p ON c."Id" = p."CategoryId"
+ORDER BY c."Id"
+2025-06-24 00:27:02.809 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.Category, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:27:02.810 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllCategories (Inventory) in 112.3145ms
+2025-06-24 00:27:02.810 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllCategories (Inventory)'
+2025-06-24 00:27:02.810 +05:30 [INF] HTTP GET /api/product/Get-All-Categories responded 200 in 128.2661 ms
+2025-06-24 00:27:02.810 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Categories - 200 null application/json; charset=utf-8 128.6863ms
+2025-06-24 00:27:05.285 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Products - null null
+2025-06-24 00:27:05.286 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:05.286 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Categories - null null
+2025-06-24 00:27:05.286 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:05.287 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:05.287 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:05.288 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProducts (Inventory)'
+2025-06-24 00:27:05.288 +05:30 [INF] Route matched with {action = "GetAllProducts", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProducts() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:05.289 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllCategories (Inventory)'
+2025-06-24 00:27:05.290 +05:30 [INF] Route matched with {action = "GetAllCategories", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllCategories() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:05.291 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-24 00:27:05.291 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:27:05.291 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProducts (Inventory) in 2.7905ms
+2025-06-24 00:27:05.291 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProducts (Inventory)'
+2025-06-24 00:27:05.292 +05:30 [INF] HTTP GET /api/product/Get-All-Products responded 200 in 5.8060 ms
+2025-06-24 00:27:05.292 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Products - 200 null application/json; charset=utf-8 6.413ms
+2025-06-24 00:27:05.293 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy", p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Categories" AS c
+LEFT JOIN "Products" AS p ON c."Id" = p."CategoryId"
+ORDER BY c."Id"
+2025-06-24 00:27:05.293 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.Category, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:27:05.293 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllCategories (Inventory) in 3.5685ms
+2025-06-24 00:27:05.294 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllCategories (Inventory)'
+2025-06-24 00:27:05.294 +05:30 [INF] HTTP GET /api/product/Get-All-Categories responded 200 in 7.4454 ms
+2025-06-24 00:27:05.294 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Categories - 200 null application/json; charset=utf-8 7.8501ms
+2025-06-24 00:27:05.300 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-100G - null null
+2025-06-24 00:27:05.300 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:05.301 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-category-by-Id?id=CATd8d21dc4 - null null
+2025-06-24 00:27:05.301 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:05.302 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-200G - null null
+2025-06-24 00:27:05.302 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:05.302 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:05.303 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:05.303 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.303 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetCategoryById (Inventory)'
+2025-06-24 00:27:05.303 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:05.303 +05:30 [INF] Route matched with {action = "GetCategoryById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCategoryById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:05.303 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:05.303 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=BLUBERRY%20YOGURT-300G - null null
+2025-06-24 00:27:05.304 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.304 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:05.304 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:05.304 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy"
+FROM "Categories" AS c
+WHERE c."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:27:05.304 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:05.305 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Category'.
+2025-06-24 00:27:05.305 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=PEACH%20YOGURT-300G - null null
+2025-06-24 00:27:05.305 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetCategoryById (Inventory) in 1.5783ms
+2025-06-24 00:27:05.305 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:05.305 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetCategoryById (Inventory)'
+2025-06-24 00:27:05.305 +05:30 [INF] HTTP GET /api/product/Get-category-by-Id responded 200 in 4.1503 ms
+2025-06-24 00:27:05.305 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:05.306 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:05.306 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:05.305 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-category-by-Id?id=CATd8d21dc4 - 200 null application/json; charset=utf-8 4.6731ms
+2025-06-24 00:27:05.306 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.307 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=VANILLA%20YOGURT-300G - null null
+2025-06-24 00:27:05.306 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:05.307 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:05.307 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:05.307 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:05.307 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:05.307 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.307 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 3.7237ms
+2025-06-24 00:27:05.308 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:05.308 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=HONEY%20AND%20FIG%20YOGURT - null null
+2025-06-24 00:27:05.308 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:05.309 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:05.309 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.309 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:05.309 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:05.310 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.310 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 9.0636 ms
+2025-06-24 00:27:05.309 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 4.5296ms
+2025-06-24 00:27:05.310 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:05.310 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-100G - 200 null application/json; charset=utf-8 10.2408ms
+2025-06-24 00:27:05.310 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.311 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:05.311 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 8.7871 ms
+2025-06-24 00:27:05.311 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:05.312 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-200G - 200 null application/json; charset=utf-8 9.9769ms
+2025-06-24 00:27:05.311 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:05.312 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:05.312 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 4.816ms
+2025-06-24 00:27:05.312 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=STRAWBERRY%20YOGURT - null null
+2025-06-24 00:27:05.312 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=COCOCOLA - null null
+2025-06-24 00:27:05.312 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.313 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:05.313 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:05.313 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 8.6837 ms
+2025-06-24 00:27:05.313 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:05.313 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:05.313 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:05.313 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=BLUBERRY%20YOGURT-300G - 200 null application/json; charset=utf-8 9.6428ms
+2025-06-24 00:27:05.314 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.314 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:05.314 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:05.314 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:05.314 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 3.7795ms
+2025-06-24 00:27:05.314 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:05.314 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:05.314 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-category-by-Id?id=CATed202425 - null null
+2025-06-24 00:27:05.314 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.314 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 4.9902ms
+2025-06-24 00:27:05.316 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:05.315 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.315 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:05.316 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:05.314 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.316 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.316 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:05.317 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 9.6004 ms
+2025-06-24 00:27:05.317 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:05.317 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 11.4978 ms
+2025-06-24 00:27:05.317 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=VANILLA%20YOGURT-300G - 200 null application/json; charset=utf-8 10.4869ms
+2025-06-24 00:27:05.317 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:05.317 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=PEACH%20YOGURT-300G - 200 null application/json; charset=utf-8 12.6212ms
+2025-06-24 00:27:05.318 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:05.318 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:05.318 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:05.317 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:05.318 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 3.4305ms
+2025-06-24 00:27:05.319 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:05.319 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.319 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 2.6662ms
+2025-06-24 00:27:05.319 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetCategoryById (Inventory)'
+2025-06-24 00:27:05.319 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 8.8326 ms
+2025-06-24 00:27:05.319 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:05.319 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.319 +05:30 [INF] Route matched with {action = "GetCategoryById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCategoryById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:05.319 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=HONEY%20AND%20FIG%20YOGURT - 200 null application/json; charset=utf-8 11.2619ms
+2025-06-24 00:27:05.319 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 6.4741 ms
+2025-06-24 00:27:05.319 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:05.320 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=STRAWBERRY%20YOGURT - 200 null application/json; charset=utf-8 8.2668ms
+2025-06-24 00:27:05.320 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 3.0731ms
+2025-06-24 00:27:05.320 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy"
+FROM "Categories" AS c
+WHERE c."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:27:05.320 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:05.320 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 7.4808 ms
+2025-06-24 00:27:05.320 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Category'.
+2025-06-24 00:27:05.321 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=COCOCOLA - 200 null application/json; charset=utf-8 8.3816ms
+2025-06-24 00:27:05.321 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetCategoryById (Inventory) in 1.227ms
+2025-06-24 00:27:05.321 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetCategoryById (Inventory)'
+2025-06-24 00:27:05.321 +05:30 [INF] HTTP GET /api/product/Get-category-by-Id responded 200 in 4.7383 ms
+2025-06-24 00:27:05.321 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-category-by-Id?id=CATed202425 - 200 null application/json; charset=utf-8 7.2492ms
+2025-06-24 00:27:11.749 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Products - null 0
+2025-06-24 00:27:11.749 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.749 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Products - 204 null null 0.6428ms
+2025-06-24 00:27:11.749 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Categories - null 0
+2025-06-24 00:27:11.750 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.750 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-All-Categories - 204 null null 0.3253ms
+2025-06-24 00:27:11.751 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Products - null null
+2025-06-24 00:27:11.751 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.752 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Categories - null null
+2025-06-24 00:27:11.752 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.753 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:11.753 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllProducts (Inventory)'
+2025-06-24 00:27:11.753 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:11.753 +05:30 [INF] Route matched with {action = "GetAllProducts", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProducts() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:11.754 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetAllCategories (Inventory)'
+2025-06-24 00:27:11.754 +05:30 [INF] Route matched with {action = "GetAllCategories", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllCategories() on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:11.754 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+2025-06-24 00:27:11.754 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.Product, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:27:11.754 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllProducts (Inventory) in 0.9882ms
+2025-06-24 00:27:11.755 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllProducts (Inventory)'
+2025-06-24 00:27:11.755 +05:30 [INF] HTTP GET /api/product/Get-All-Products responded 200 in 3.2207 ms
+2025-06-24 00:27:11.755 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Products - 200 null application/json; charset=utf-8 3.7482ms
+2025-06-24 00:27:11.755 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy", p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Categories" AS c
+LEFT JOIN "Products" AS p ON c."Id" = p."CategoryId"
+ORDER BY c."Id"
+2025-06-24 00:27:11.756 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Inventory.Models.Category, Inventory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-24 00:27:11.756 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetAllCategories (Inventory) in 2.4581ms
+2025-06-24 00:27:11.756 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetAllCategories (Inventory)'
+2025-06-24 00:27:11.756 +05:30 [INF] HTTP GET /api/product/Get-All-Categories responded 200 in 4.2963 ms
+2025-06-24 00:27:11.757 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-All-Categories - 200 null application/json; charset=utf-8 4.815ms
+2025-06-24 00:27:11.763 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-100G - null 0
+2025-06-24 00:27:11.763 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.763 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-100G - 204 null null 0.4932ms
+2025-06-24 00:27:11.764 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-category-by-Id?id=CATd8d21dc4 - null 0
+2025-06-24 00:27:11.764 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.764 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-category-by-Id?id=CATd8d21dc4 - 204 null null 0.4317ms
+2025-06-24 00:27:11.765 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-200G - null 0
+2025-06-24 00:27:11.766 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.766 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-200G - 204 null null 0.6073ms
+2025-06-24 00:27:11.766 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-100G - null null
+2025-06-24 00:27:11.767 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.768 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-category-by-Id?id=CATd8d21dc4 - null null
+2025-06-24 00:27:11.769 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.770 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=BLUBERRY%20YOGURT-300G - null 0
+2025-06-24 00:27:11.770 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.770 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=BLUBERRY%20YOGURT-300G - 204 null null 0.4409ms
+2025-06-24 00:27:11.771 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-200G - null null
+2025-06-24 00:27:11.771 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.771 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=PEACH%20YOGURT-300G - null 0
+2025-06-24 00:27:11.771 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:11.771 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.771 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=VANILLA%20YOGURT-300G - null 0
+2025-06-24 00:27:11.774 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=PEACH%20YOGURT-300G - 204 null null 2.7191ms
+2025-06-24 00:27:11.775 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=HONEY%20AND%20FIG%20YOGURT - null 0
+2025-06-24 00:27:11.774 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.775 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.774 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:11.774 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetCategoryById (Inventory)'
+2025-06-24 00:27:11.775 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=VANILLA%20YOGURT-300G - 204 null null 3.8624ms
+2025-06-24 00:27:11.775 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=HONEY%20AND%20FIG%20YOGURT - 204 null null 0.4102ms
+2025-06-24 00:27:11.775 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=STRAWBERRY%20YOGURT - null 0
+2025-06-24 00:27:11.776 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.775 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.775 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=BLUBERRY%20YOGURT-300G - null null
+2025-06-24 00:27:11.777 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.776 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=STRAWBERRY%20YOGURT - 204 null null 1.0719ms
+2025-06-24 00:27:11.776 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:11.775 +05:30 [INF] Route matched with {action = "GetCategoryById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCategoryById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:11.778 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=COCOCOLA - null 0
+2025-06-24 00:27:11.780 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:11.780 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.780 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy"
+FROM "Categories" AS c
+WHERE c."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:27:11.780 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-Stock-By-ProductName?product=COCOCOLA - 204 null null 2.2871ms
+2025-06-24 00:27:11.781 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Category'.
+2025-06-24 00:27:11.780 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-category-by-Id?id=CATed202425 - null 0
+2025-06-24 00:27:11.780 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:11.780 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.780 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:11.781 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetCategoryById (Inventory) in 3.1125ms
+2025-06-24 00:27:11.781 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=PEACH%20YOGURT-300G - null null
+2025-06-24 00:27:11.781 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.781 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:11.782 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetCategoryById (Inventory)'
+2025-06-24 00:27:11.782 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.782 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.782 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/api/product/Get-category-by-Id?id=CATed202425 - 204 null null 1.9976ms
+2025-06-24 00:27:11.782 +05:30 [INF] HTTP GET /api/product/Get-category-by-Id responded 200 in 13.7352 ms
+2025-06-24 00:27:11.783 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:11.783 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-category-by-Id?id=CATd8d21dc4 - 200 null application/json; charset=utf-8 15.0374ms
+2025-06-24 00:27:11.783 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:11.786 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=HONEY%20AND%20FIG%20YOGURT - null null
+2025-06-24 00:27:11.784 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:11.784 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=VANILLA%20YOGURT-300G - null null
+2025-06-24 00:27:11.784 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:11.784 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:11.786 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:11.786 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.786 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.786 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.787 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:11.787 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 8.8215ms
+2025-06-24 00:27:11.787 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:11.788 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:11.788 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:11.788 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:11.788 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.788 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:11.789 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:11.789 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:11.789 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.789 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 18.4293 ms
+2025-06-24 00:27:11.789 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.790 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 7.2121ms
+2025-06-24 00:27:11.790 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 7.1038ms
+2025-06-24 00:27:11.790 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:11.791 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-200G - 200 null application/json; charset=utf-8 20.028ms
+2025-06-24 00:27:11.791 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:11.791 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.791 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:11.791 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.791 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=STRAWBERRY%20YOGURT - null null
+2025-06-24 00:27:11.792 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 14.7170 ms
+2025-06-24 00:27:11.792 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 24.9442 ms
+2025-06-24 00:27:11.792 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:11.792 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:11.792 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:11.793 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.793 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=BLUBERRY%20YOGURT-300G - 200 null application/json; charset=utf-8 17.5037ms
+2025-06-24 00:27:11.793 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=YOGURT-100G - 200 null application/json; charset=utf-8 26.6701ms
+2025-06-24 00:27:11.793 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 5.5688ms
+2025-06-24 00:27:11.794 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=COCOCOLA - null null
+2025-06-24 00:27:11.794 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/api/product/Get-category-by-Id?id=CATed202425 - null null
+2025-06-24 00:27:11.795 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.795 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:11.795 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.795 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:11.796 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:11.795 +05:30 [INF] CORS policy execution successful.
+2025-06-24 00:27:11.796 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 5.3648ms
+2025-06-24 00:27:11.796 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 13.0697 ms
+2025-06-24 00:27:11.796 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:11.795 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:11.797 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.797 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=PEACH%20YOGURT-300G - 200 null application/json; charset=utf-8 15.7246ms
+2025-06-24 00:27:11.797 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 5.4846ms
+2025-06-24 00:27:11.798 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.798 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 11.0952 ms
+2025-06-24 00:27:11.798 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.798 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=VANILLA%20YOGURT-300G - 200 null application/json; charset=utf-8 14.7563ms
+2025-06-24 00:27:11.798 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:11.798 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:11.798 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 11.8878 ms
+2025-06-24 00:27:11.800 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.799 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "BlacklistedTokens" AS b
+    WHERE b."Token" = @__token_0 AND b."ExpiryDate" > now())
+2025-06-24 00:27:11.800 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=HONEY%20AND%20FIG%20YOGURT - 200 null application/json; charset=utf-8 14.1361ms
+2025-06-24 00:27:11.800 +05:30 [INF] Executing endpoint 'Inventory.Controllers.ProductController.GetCategoryById (Inventory)'
+2025-06-24 00:27:11.800 +05:30 [INF] Route matched with {action = "GetStockProductName", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStockProductName(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:11.800 +05:30 [INF] Route matched with {action = "GetCategoryById", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCategoryById(System.String) on controller Inventory.Controllers.ProductController (Inventory).
+2025-06-24 00:27:11.801 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:11.801 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CategoryName", c."CreatedBy"
+FROM "Categories" AS c
+WHERE c."Id" = @__Id_0
+LIMIT 1
+2025-06-24 00:27:11.801 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AddedAt", p."AddedBy", p."CategoryId", p."Description", p."InventoryId", p."Name", p."Price", p."Status"
+FROM "Products" AS p
+WHERE p."Name" = @__Trim_0
+LIMIT 1
+2025-06-24 00:27:11.802 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Category'.
+2025-06-24 00:27:11.802 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:11.802 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetCategoryById (Inventory) in 1.4315ms
+2025-06-24 00:27:11.802 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetCategoryById (Inventory)'
+2025-06-24 00:27:11.802 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:11.802 +05:30 [INF] HTTP GET /api/product/Get-category-by-Id responded 200 in 5.8668 ms
+2025-06-24 00:27:11.802 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 2.908ms
+2025-06-24 00:27:11.803 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-category-by-Id?id=CATed202425 - 200 null application/json; charset=utf-8 8.0897ms
+2025-06-24 00:27:11.803 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.803 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__c_InventoryId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."MinThreshold", i."Stock"
+FROM "Inventories" AS i
+WHERE i."Id" = @__c_InventoryId_0
+LIMIT 1
+2025-06-24 00:27:11.803 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 9.2164 ms
+2025-06-24 00:27:11.803 +05:30 [INF] Executing OkObjectResult, writing value of type 'Inventory.Models.Inventories'.
+2025-06-24 00:27:11.803 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=STRAWBERRY%20YOGURT - 200 null application/json; charset=utf-8 12.0298ms
+2025-06-24 00:27:11.804 +05:30 [INF] Executed action Inventory.Controllers.ProductController.GetStockProductName (Inventory) in 3.268ms
+2025-06-24 00:27:11.804 +05:30 [INF] Executed endpoint 'Inventory.Controllers.ProductController.GetStockProductName (Inventory)'
+2025-06-24 00:27:11.805 +05:30 [INF] HTTP GET /api/product/Get-Stock-By-ProductName responded 200 in 8.5576 ms
+2025-06-24 00:27:11.805 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/product/Get-Stock-By-ProductName?product=COCOCOLA - 200 null application/json; charset=utf-8 10.6733ms
+2025-06-24 00:27:22.157 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-24 00:27:22.158 +05:30 [INF] HTTP GET /notificationHub responded 101 in 601192.6747 ms
+2025-06-24 00:27:22.158 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=6oZ1kAVAcFTezlv5QI8ztQ - 101 null null 601193.2512ms
+2025-06-24 00:27:26.497 +05:30 [INF] Application is shutting down...
