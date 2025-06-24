@@ -1,3 +1,66 @@
-.loginDiv{
-    width: 40%;
+
+div {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+
+.left {
+  flex: 1;
+  background: linear-gradient(135deg, #007bff, #00c4ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.left h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+.right form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 25px rgba(0,0,0,0.1);
+  width: 300px;
+}
+
+.right input {
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.right button {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.right .btn-success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.right .btn-success:hover {
+  background-color: #218838;
 }

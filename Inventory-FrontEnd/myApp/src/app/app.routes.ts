@@ -10,7 +10,7 @@ import { Notifications } from './notifications/notifications';
 
 export const routes: Routes = [
     {path:'home',component:Mainpage},
-    {path:'login',component:Login},
+    // {path:'login',component:Login},
     {path:'products',component:Products},
     {path:'stock-logs',component:StockLogs},
     {path:'product-logs',component:Productlogs},

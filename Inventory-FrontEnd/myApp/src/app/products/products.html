@@ -30,12 +30,22 @@
       <p><strong>Stock/Threshold:</strong> {{product.stock}} / {{product.minThreshold}}</p>
       <p><strong>Added At:</strong> {{product.addedAt}}</p>
       <p><strong>Added By:</strong> {{product.addedBy}}</p>
+      @if(product.status=='INACTIVE')
+      {
+        <h4 style="margin-top: 10px; color: #dd4e4e;"><strong>Status: {{product.status}}</strong></h4>
+      }
+      @else {
       <p><strong>Status:</strong> {{product.status}}</p>
-      <div class="actions">
-        <button (click)="enableUpdateProduct(product.name)">Update</button>
-        <button (click)="handledelete(product.name)">Delete</button>
-        <button (click)="enableUpdateStock(product.name)">Update Stock</button>
-      </div>
+
+      }
+      @if(product.status=='ACTIVE')
+      {
+        <div class="actions">
+          <button (click)="enableUpdateProduct(product.name)">Update</button>
+          <button (click)="handledelete(product.name)">Delete</button>
+          <button (click)="enableUpdateStock(product.name)">Update Stock</button>
+        </div>
+      }
     </div>
   </div>
 }

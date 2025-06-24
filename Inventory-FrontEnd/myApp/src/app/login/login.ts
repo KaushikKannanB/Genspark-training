@@ -15,6 +15,7 @@ import { AUthService } from '../services/Authentication.service';
 })
 export class Login {
   private authservice = inject(AUthService);
+  private router = inject(Router);
   user:UserLoginModel=new UserLoginModel();
   useremail:string="";
   userrole:string="";
@@ -24,6 +25,8 @@ export class Login {
       next:(data:any)=>{
         this.useremail=data.email as string;
         localStorage.setItem("token", data.token);
+        this.authservice.setLoggedIn(true);
+        // this.router.navigate(['/home']);
         console.log(this.useremail);
         console.log(data);
         this.userrole=this.authservice.getrolefromtoken(data.token);
