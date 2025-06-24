@@ -69,4 +69,14 @@ export class ProductService
         this.authorization();
         return this.http.get('http://localhost:5077/api/product/Get-All-Product-Updates',{headers:this.headers});
     }
+    updateprodprice(payload:any)
+    {
+        this.authorization();
+        return this.http.put('http://localhost:5077/api/product/Update-Product-price',payload, {headers:this.headers})
+    }
+    updateproddescription(payload:any)
+    {
+        this.authorization();
+        return this.http.put('http://localhost:5077/api/product/Update-Product-description',payload,{headers:this.headers});
+    }
 }

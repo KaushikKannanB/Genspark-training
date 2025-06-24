@@ -24,6 +24,12 @@ export class Products implements OnInit{
   stockUpd:StockUpdateModel=new StockUpdateModel();
   delete_product:string="";
   enableStockUpd:boolean=false;
+
+  enableProdUpd:boolean=false;
+  selectedProdName:string="";
+  fieldUpdate:string="";
+  updateField:'description'|'price'|null=null;
+  newValue:string|number='';
   ngOnInit(): void 
   {
     this.loadProducts();
@@ -62,6 +68,57 @@ export class Products implements OnInit{
       }
     })
   }
+  
+  enableUpdateProduct(prodname:string)
+  {
+    this.enableProdUpd=true;
+    this.selectedProdName=prodname;
+  }
+  selectField(field:'description'|'price')
+  {
+    this.updateField=field;
+    this.newValue='';
+  }
+  submitUpdate()
+  {
+    if(!this.updateField)
+      return;
+
+    if(this.updateField=='description')
+    {
+      const payload = {
+        productName: this.selectedProdName.toUpperCase(),
+        newDescription: this.newValue
+      };
+
+      this.productservice.updateproddescription(payload).subscribe({
+        next:(data:any)=>{
+          console.log(data);
+        }
+      })
+    }
+    else
+    {
+      const payload = {
+        productName: this.selectedProdName.toUpperCase(),
+        newprice: this.newValue
+      };
+
+      this.productservice.updateprodprice(payload).subscribe({
+        next:(data:any)=>{
+          console.log(data);
+        }
+      })
+    }
+    this.closeUpdateModal();
+    
+  }
+  closeUpdateModal()
+  {
+    this.enableProdUpd=false;
+    this.updateField=null;
+    this.loadProducts();
+  }
   enableUpdateStock(prodname:string)
   {
     this.stockUpd.ProductName=prodname.toUpperCase();
@@ -79,11 +136,12 @@ export class Products implements OnInit{
     })
     this.closeModal();
     this.stockUpd=new StockUpdateModel();
-    this.loadProducts();
+    // this.loadProducts();
 
   }
   closeModal() {
     this.enableStockUpd = false;
+    this.loadProducts();
   }
   filterProducts() {
     const searchName = this.searchByname?.toUpperCase() || '';

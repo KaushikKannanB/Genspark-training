@@ -32,7 +32,7 @@
       <p><strong>Added By:</strong> {{product.addedBy}}</p>
       <p><strong>Status:</strong> {{product.status}}</p>
       <div class="actions">
-        <button>Update</button>
+        <button (click)="enableUpdateProduct(product.name)">Update</button>
         <button (click)="handledelete(product.name)">Delete</button>
         <button (click)="enableUpdateStock(product.name)">Update Stock</button>
       </div>
@@ -54,6 +54,25 @@
         <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
       </div>
     </form>
+  </div>
+</div>
+
+<div *ngIf="enableProdUpd" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Update Product Details</h3>
+    <div *ngIf="!updateField" class="modal-form">
+      <button (click)="selectField('description')">Description</button>
+      <button (click)="selectField('price')">Price</button>
+      <button (click)="closeUpdateModal()" class="btn btn-secondary">Cancel</button>
+    </div>
+    <div *ngIf="updateField" class="modal-form">
+      <h4>Enter new {{updateField}}</h4>
+      <input [type]="updateField==='price'?'number':'text'" [(ngModel)]="newValue" placeholder="enter new {{updateField}}" />
+      <div class="modal-actions">
+        <button type="submit" (click)="submitUpdate()" class="btn btn-success">Update</button>
+        <button type="button" class="btn btn-secondary" (click)="closeUpdateModal()">Cancel</button>
+      </div>
+    </div>
   </div>
 </div>
 
