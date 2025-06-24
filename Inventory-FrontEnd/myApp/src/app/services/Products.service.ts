@@ -29,6 +29,7 @@ export class ProductService
     addproduct(product:ProductAddModel)
     {
         this.authorization();
+        console.log(product);
         return this.http.post('http://localhost:5077/api/product/Add-Product',product,{headers:this.headers})
     }
     deleteproduct(productname:string)
@@ -79,4 +80,5 @@ export class ProductService
         this.authorization();
         return this.http.put('http://localhost:5077/api/product/Update-Product-description',payload,{headers:this.headers});
     }
+    
 }

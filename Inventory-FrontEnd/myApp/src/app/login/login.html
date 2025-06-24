@@ -3,11 +3,11 @@
         <h1>Welcome! Namaste</h1>
     </div>
     <div class="right">
-        <form (ngSubmit)="handlelogin()">
+        <form [formGroup]="loginform" (ngSubmit)="handlelogin()">
             <h2 style="text-align: center;">Login</h2>
-            <input type="text" placeholder="Email" name="email" [(ngModel)]="user.email">
-            <input type="text" placeholder="Password" name="password" [(ngModel)]="user.password">
-            <button class="btn btn-success">login</button>
+            <input type="text" placeholder="Email" name="email" formControlName="email" [(ngModel)]="user.email" required/>
+            <input type="text" placeholder="Password" name="password" formControlName="password" [(ngModel)]="user.password" required/>
+            <button class="btn btn-success" [disabled]="loginform.invalid">login</button>
         </form>
     </div>
 </div>

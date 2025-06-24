@@ -3,6 +3,8 @@ import { ProductService } from '../services/Products.service';
 import { ProductAddModel } from '../models/product';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { Menu } from '../menu/menu';
 
 @Component({
   selector: 'app-add-product',
@@ -12,6 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AddProduct implements OnInit {
   private productservice = inject(ProductService);
+  private router = inject(Router);
   addproduct:ProductAddModel=new ProductAddModel();
   products:any;
   error:string="";
@@ -48,11 +51,13 @@ export class AddProduct implements OnInit {
   {
     this.productservice.addproduct(this.addproduct).subscribe({
       next:(data:any)=>{
-        // console.log(data);
+        console.log(data);
+        alert("Product added Successfully");
+        this.router.navigate(["products"]);
       },
       error:(err)=>{
         console.log(err);
-        alert("Invalid Product Add Request: "+err)
+        alert("Invalid Product Add Request: "+err.error.text);
       }
     })
   }

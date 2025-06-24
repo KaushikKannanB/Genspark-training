@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductAddModel } from '../models/product';
 import { StockUpdateModel } from '../models/StockUpdateModel';
 import { CommonModule } from '@angular/common';
+import { Menu } from '../menu/menu';
 
 @Component({
   selector: 'app-products',
@@ -68,6 +69,7 @@ export class Products implements OnInit{
       }
     })
   }
+
   
   enableUpdateProduct(prodname:string)
   {

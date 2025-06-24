@@ -10,6 +10,7 @@ import { provideState, provideStore } from '@ngrx/store';
 import { AUthService } from './services/Authentication.service';
 import { ProductService } from './services/Products.service';
 import { NotificationService } from './services/Notification.service';
+import { AdminManagerService } from './services/AdminManager.service';
 // import { userReducer } from './ngrx/user.reducer';
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     AUthService,
     ProductService,
+    AdminManagerService,
     NotificationService,
     AuthGuard,
     provideCharts()

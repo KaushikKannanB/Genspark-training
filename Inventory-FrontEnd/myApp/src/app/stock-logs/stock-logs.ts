@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ProductService } from '../services/Products.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Menu } from '../menu/menu';
 
 @Component({
   selector: 'app-stock-logs',

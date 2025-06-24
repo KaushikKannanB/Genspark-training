@@ -19,6 +19,13 @@ export class Login {
   user:UserLoginModel=new UserLoginModel();
   useremail:string="";
   userrole:string="";
+  loginform:FormGroup;
+  constructor(){
+    this.loginform = new FormGroup({
+      email : new FormControl(null,[Validators.required]),
+      password: new FormControl(null, [Validators.required])
+    });
+  }
   handlelogin()
   {
     this.authservice.login(this.user).subscribe({
@@ -26,7 +33,8 @@ export class Login {
         this.useremail=data.email as string;
         localStorage.setItem("token", data.token);
         this.authservice.setLoggedIn(true);
-        // this.router.navigate(['/home']);
+        this.authservice.setRole(data.token);
+        this.router.navigate(['/home']);
         console.log(this.useremail);
         console.log(data);
         this.userrole=this.authservice.getrolefromtoken(data.token);

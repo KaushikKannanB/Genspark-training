@@ -1,3 +1,4 @@
+<!-- <app-menu></app-menu> -->
 <button [routerLink]="['/stock-logs']" class="btn btn-primary">
   Stock Logs
 </button>
@@ -7,4 +8,7 @@
 </button>
 <button [routerLink]="['/add-product']" class="btn btn-primary">
   Add Product
+</button>
+<button *ngIf="isadmin" [routerLink]="['/admin-dashboard']" class="btn btn-primary">
+  Admin Dashboard
 </button>

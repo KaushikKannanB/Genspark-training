@@ -11,7 +11,12 @@ export class AUthService
     headers:any;
     private isLoggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
     isLoggedIn$ = this.isLoggedInSubject.asObservable();
-
+    role$ = new BehaviorSubject<string>('');
+    setRole(token:string)
+    {
+        const role = this.getrolefromtoken(token);
+        this.role$.next(role);
+    }
     setLoggedIn(value: boolean) {
         this.isLoggedInSubject.next(value);
     }
@@ -34,7 +39,7 @@ export class AUthService
         localStorage.removeItem("token");
         return this.http.post('http://localhost:5077/api/authentication/logout',token,{headers:this.headers})
     }
-    getrolefromtoken(token:string)
+    getrolefromtoken(token:string|any)
     {
         const decoded: any = jwtDecode(token);
         return decoded.role;

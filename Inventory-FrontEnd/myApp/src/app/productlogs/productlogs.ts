@@ -3,10 +3,11 @@ import { ProductService } from '../services/Products.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Menu } from '../menu/menu';
 
 @Component({
   selector: 'app-productlogs',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,],
   templateUrl: './productlogs.html',
   styleUrl: './productlogs.css'
 })
