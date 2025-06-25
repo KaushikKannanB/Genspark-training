@@ -2,42 +2,49 @@
 .add-product-page {
   display: flex;
   justify-content: space-around;
-  align-items: flex-start;
+  /* align-items: stretch; */
   gap: 40px;
   padding: 40px;
+  min-height: 90vh;
 }
 
 /* FORM CONTAINER */
 .form-container {
   flex: 1;
   max-width: 500px;
+  display: flex;
 }
 
-form {
+.form {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 12px;
   padding: 30px;
   border-radius: 12px;
   background-color: #f9fafb;
   box-shadow: 0px 4px 16px rgba(0,0,0,.1);
+  justify-content: space-evenly;
 }
 
-form input,
-form select {
-  padding: 12px 14px;
-  font-size: 15px;
-  border-radius: 6px;
-  border: 1px solid #bdc3c7;
+.form input,
+.form select {
+  /* flex: 1; */
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  box-sizing: border-box;
+  /* Add this line 👇 */
+  height: 40px;
+}
+
+.form input:focus,
+.form select:focus {
   outline: none;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
-  width: 100%;
-}
-
-form input:focus,
-form select:focus {
-  border-color: #3498db;
-  box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.25);
+  border-color: #007bff;
+  box-shadow: 0px 0px 3px rgba(0,123,255,0.25);
 }
 
 form .btn {

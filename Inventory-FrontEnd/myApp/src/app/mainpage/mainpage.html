@@ -9,6 +9,10 @@
 <button [routerLink]="['/add-product']" class="btn btn-primary">
   Add Product
 </button>
-<button *ngIf="isadmin" [routerLink]="['/admin-dashboard']" class="btn btn-primary">
-  Admin Dashboard
-</button>
+<!-- <p>{{isadmin}} - {{role}} - {{token}}</p> -->
+@if(isadmin)
+{
+  <button [routerLink]="['/admin-dashboard']" class="btn btn-primary">
+    Admin Dashboard
+  </button>
+}

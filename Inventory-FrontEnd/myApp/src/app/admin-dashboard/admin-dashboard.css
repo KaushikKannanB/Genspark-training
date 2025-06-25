@@ -32,6 +32,7 @@
 .form input,
 .form select {
   flex: 1;
+  height: 40px;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;

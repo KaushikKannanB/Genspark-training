@@ -20,10 +20,13 @@ export class Mainpage implements OnInit{
   
     ngOnInit(): void {
       this.token = localStorage.getItem("token");
+      if (this.token) {
+        this.authservice.setRole(this.token);
+      }
       this.authservice.role$.subscribe(role=>{
         this.role=role;
+        this.isadmin = this.role=='ADMIN';
       })
-      this.isadmin = this.role=='ADMIN';
     }
     
       

@@ -12,7 +12,7 @@ export class AUthService
     private isLoggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
     isLoggedIn$ = this.isLoggedInSubject.asObservable();
     role$ = new BehaviorSubject<string>('');
-    setRole(token:string)
+    setRole(token:string|null)
     {
         const role = this.getrolefromtoken(token);
         this.role$.next(role);
@@ -41,6 +41,7 @@ export class AUthService
     }
     getrolefromtoken(token:string|any)
     {
+        // console.log(token);
         const decoded: any = jwtDecode(token);
         return decoded.role;
     }

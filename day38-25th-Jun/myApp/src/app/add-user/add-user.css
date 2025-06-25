@@ -1,0 +1,22 @@
+.loginDiv{
+    width: 40%;
+}
+form {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+    justify-content: center;
+    align-items: center;
+}
+button[type="submit"]:disabled
+{
+    background-color: aliceblue;
+    color: black;
+    border:2px solid blue;
+}
