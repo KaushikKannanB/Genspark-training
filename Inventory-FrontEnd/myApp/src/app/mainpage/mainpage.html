@@ -1,4 +1,8 @@
 <!-- <app-menu></app-menu> -->
+<html>
+
+
+<h1>Hey {{userid}}</h1>
 <button [routerLink]="['/stock-logs']" class="btn btn-primary">
   Stock Logs
 </button>
@@ -15,4 +19,26 @@
   <button [routerLink]="['/admin-dashboard']" class="btn btn-primary">
     Admin Dashboard
   </button>
+
+  <button [routerLink]="['/manageractivity']" class="btn btn-primary">
+    Manager Activity
+  </button>
 }
+@else {
+  <button class="btn btn-primary" (click)="setenablecategoryAdd()">Make Category Add Request</button>
+}
+
+<div *ngIf="enablecategoryAdd" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Make a Category add Request</h3>
+    <form (ngSubmit)="handlecategoryAddrequest()" class="modal-form">
+      <input type="text" placeholder="What Category do you request to be added" name="pass" [(ngModel)]="newcategory"/>
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-success">Request</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</html>

@@ -28,7 +28,7 @@ namespace Inventory.Services
 
 
 
-        
+
 
 
         private readonly IEncryptService encryptService;
@@ -214,6 +214,84 @@ namespace Inventory.Services
             if (sb.Length == 0)
             {
                 sb.AppendLine("No activity found for this manager.");
+            }
+
+            return sb.ToString();
+        }
+
+        public async Task<string> AdminActivity(string id)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"Admin Activity Report for ID: {id}");
+            sb.AppendLine("--------------------------------------------------");
+
+            var allprods = await prodrepo.GetAll();
+            var prods_by_admin = allprods.Where(p => p.AddedBy == id).ToList();
+
+            var allrequests = await categoryrepo.GetAll();
+            var categ_by_admin = allrequests.Where(r => r.CreatedBy == id).ToList();
+
+            var allstockupd = await stockupdrepo.GetAll();
+            var stock_upd_by_admin = allstockupd.Where(u => u.UpdatedBy == id).ToList();
+
+            var allprodupd = await produpdrepo.GetAll();
+            var prod_upd_by_admin = allprodupd.Where(u => u.UpdatedBy == id).ToList();
+
+            var managers = await managerrepo.GetAll();
+            var cur_user = await GetByMail(currentUserService.Email);
+
+            var by_me = managers.Where(m => m.CreatedBy == cur_user.Id);
+
+
+            if (prods_by_admin.Any())
+            {
+                sb.AppendLine("\nProducts Created:");
+                foreach (var prod in prods_by_admin)
+                {
+                    sb.AppendLine($"   • Product ID: {prod.Id}, Name: {prod.Name}");
+                }
+            }
+
+            if (categ_by_admin.Any())
+            {
+                sb.AppendLine("\nCategories Added");
+                foreach (var req in categ_by_admin)
+                {
+                    sb.AppendLine($"   • Request ID: {req.Id}, Category: {req.CategoryName}");
+                }
+            }
+
+            if (stock_upd_by_admin.Any())
+            {
+                sb.AppendLine("\nInventory Updates:");
+                foreach (var s in stock_upd_by_admin)
+                {
+                    sb.AppendLine($"   • Inventory ID: {s.InventoryId}, Stock changed from {s.OldStock} to {s.NewStock}");
+                }
+            }
+
+            if (prod_upd_by_admin.Any())
+            {
+                sb.AppendLine("\nProduct Updates:");
+                foreach (var p in prod_upd_by_admin)
+                {
+                    sb.AppendLine($"   • Product ID: {p.ProductId}, Field: {p.FieldUpdated}, New Value: {p.NewValue}");
+                }
+            }
+            if (by_me.Any())
+            {
+                sb.AppendLine("\nManagers created:");
+                foreach (var p in by_me)
+                {
+                    sb.AppendLine($"   • Manager ID: {p.Id}, Name: {p.Name}");
+                }
+            }
+
+            
+
+            if (sb.Length == 0)
+            {
+                sb.AppendLine("No activity found for this admin.");
             }
 
             return sb.ToString();

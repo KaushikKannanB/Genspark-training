@@ -18,6 +18,7 @@ export class Login {
   private router = inject(Router);
   user:UserLoginModel=new UserLoginModel();
   useremail:string="";
+  userid:string="";
   userrole:string="";
   loginform:FormGroup;
   constructor(){
@@ -31,10 +32,20 @@ export class Login {
     this.authservice.login(this.user).subscribe({
       next:(data:any)=>{
         this.useremail=data.email as string;
+        this.authservice.getuserfrommail(this.useremail).subscribe({
+          next:(data:any)=>{
+            this.userid=data.id;
+            // console.log(data.id);
+            this.authservice.getUserId(this.userid);
+            localStorage.setItem("userid",this.userid);
+          }
+        })
+
         localStorage.setItem("token", data.token);
         this.authservice.setLoggedIn(true);
         this.authservice.setRole(data.token);
         this.router.navigate(['/home']);
+
         console.log(this.useremail);
         console.log(data);
         this.userrole=this.authservice.getrolefromtoken(data.token);

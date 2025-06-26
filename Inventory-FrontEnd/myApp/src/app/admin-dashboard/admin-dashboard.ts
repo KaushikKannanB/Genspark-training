@@ -18,6 +18,7 @@ export class AdminDashboard implements OnInit {
   alladmins:any;
   allmanagers:any;
   categoryrequests:any;
+  newcategory:string='';
   newuser:UserCreate=new UserCreate();
   adminPage = 1;
   managerPage = 1;
@@ -123,9 +124,20 @@ export class AdminDashboard implements OnInit {
     if (this.categoryPage < this.totalCategoryPages) this.categoryPage++;
   }
 
+
   acceptRequest(req:string) {
     console.log(req);
     this.admmanservice.addCategory(req).subscribe({
+      next:(data:any)=>{
+        console.log(data);
+      }
+    })
+    alert("Catgeory added successfully");
+    this.router.navigate(["home"]);
+  }
+  addcategory() {
+    // console.log(req);
+    this.admmanservice.addCategory(this.newcategory).subscribe({
       next:(data:any)=>{
         console.log(data);
       }

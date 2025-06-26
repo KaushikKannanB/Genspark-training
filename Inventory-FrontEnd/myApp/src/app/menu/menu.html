@@ -9,6 +9,21 @@
         Notifications @if(notifyService.messages.length!=0) {<span class="notification-badge">{{notifyService.messages.length}}</span>}
       </a>
     </li>
-    <li class="nav-item"><button (click)="handlelogout()" class="btn btn-danger">LogOut</button></li>
+    <li class="nav-item"><a class="nav-link" routerLink="profile">Profile</a></li>
+
+    <li class="nav-item"><button (click)="setenablechangepass()" class="btn btn-success">Change Password</button></li>
+    <li class="nav-item"><button (click)="handlelogout()" class="btn btn-danger">Logout</button></li>
   </ul>
 </nav>
+<div *ngIf="enablechangepass" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Change Password</h3>
+    <form (ngSubmit)="handlechangepassword()" class="modal-form">
+      <input type="text" placeholder="Enter a valid new password" name="pass" [(ngModel)]="newpass"/>
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-success">Update</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

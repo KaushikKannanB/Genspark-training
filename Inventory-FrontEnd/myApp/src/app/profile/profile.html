@@ -1,0 +1,106 @@
+<!-- FIRST ROW -->
+<div class="head">
+  <h1>hi, {{userid}}</h1>
+</div>
+
+<div class="first-row">
+  <!-- Products Created -->
+  <div class="card" *ngIf="productsSection">
+    <h3>{{ productsSection.title }}</h3>
+    <input placeholder="Filter products..."
+           [(ngModel)]="searchQueries.products"
+           class="search-box" />
+    <table>
+      <tr><th>Product Info</th></tr>
+      <tr *ngFor="let item of getPageData(productsSection, 'products')">
+        <td>{{ item }}</td>
+      </tr>
+    </table>
+    <div class="pagination">
+      <button (click)="prevPage('products')" [disabled]="pagination.products === 0">Previous</button>
+      <span>Page {{ pagination.products + 1 }}</span>
+      <button (click)="nextPage('products', productsSection)">Next</button>
+    </div>
+  </div>
+
+  <!-- Categories Added / Requests -->
+  <div class="card" *ngIf="categoriesSection">
+    <h3>{{ role === 'ADMIN' ? categoriesSection.title : 'Category Add Requests' }}</h3>
+    <input placeholder="Filter categories..."
+           [(ngModel)]="searchQueries.categories"
+           class="search-box" />
+    <table>
+      <tr><th>Category Info</th></tr>
+      <tr *ngFor="let item of getPageData(categoriesSection, 'categories')">
+        <td>{{ item }}</td>
+      </tr>
+    </table>
+    <div class="pagination">
+      <button (click)="prevPage('categories')" [disabled]="pagination.categories === 0">Previous</button>
+      <span>Page {{ pagination.categories + 1 }}</span>
+      <button (click)="nextPage('categories', categoriesSection)">Next</button>
+    </div>
+  </div>
+
+  <!-- Managers Created (Admin Only) -->
+  <div class="card" *ngIf="managersSection && role === 'ADMIN'">
+    <h3>{{ managersSection.title }}</h3>
+    <input placeholder="Filter managers..."
+           [(ngModel)]="searchQueries.managers"
+           class="search-box" />
+    <table>
+      <tr><th>Manager Info</th></tr>
+      <tr *ngFor="let item of getPageData(managersSection, 'managers')">
+        <td>{{ item }}</td>
+      </tr>
+    </table>
+    <div class="pagination">
+      <button (click)="prevPage('managers')" [disabled]="pagination.managers === 0">Previous</button>
+      <span>Page {{ pagination.managers + 1 }}</span>
+      <button (click)="nextPage('managers', managersSection)">Next</button>
+    </div>
+  </div>
+</div>
+
+<!-- SECOND ROW -->
+<div class="second-row">
+  <!-- Inventory Updates -->
+  <div class="card" *ngIf="inventorySection">
+    <h3>{{ inventorySection.title }}</h3>
+    <input placeholder="Filter inventory..."
+           [(ngModel)]="searchQueries.inventory"
+           class="search-box" />
+    <table>
+      <tr><th>Inventory Info</th></tr>
+      <tr *ngFor="let item of getPageData(inventorySection, 'inventory')">
+        <td>{{ item }}</td>
+      </tr>
+    </table>
+    <div class="pagination">
+      <button (click)="prevPage('inventory')" [disabled]="pagination.inventory === 0">Previous</button>
+      <span>Page {{ pagination.inventory + 1 }}</span>
+      <button (click)="nextPage('inventory', inventorySection)">Next</button>
+    </div>
+  </div>
+
+  <!-- Product Updates -->
+  <div class="card" *ngIf="productUpdatesSection">
+    <h3>{{ productUpdatesSection.title }}</h3>
+    <input placeholder="Filter product updates..."
+           [(ngModel)]="searchQueries.productUpdates"
+           class="search-box" />
+    <table>
+      <tr><th>Product Info</th></tr>
+      <tr *ngFor="let item of getPageData(productUpdatesSection, 'productUpdates')">
+        <td>{{ item }}</td>
+      </tr>
+    </table>
+    <div class="pagination">
+      <button (click)="prevPage('productUpdates')" [disabled]="pagination.productUpdates === 0">Previous</button>
+      <span>Page {{ pagination.productUpdates + 1 }}</span>
+      <button (click)="nextPage('productUpdates', productUpdatesSection)">Next</button>
+    </div>
+  </div>
+</div>
+
+

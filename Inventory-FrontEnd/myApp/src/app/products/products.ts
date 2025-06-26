@@ -5,6 +5,7 @@ import { ProductAddModel } from '../models/product';
 import { StockUpdateModel } from '../models/StockUpdateModel';
 import { CommonModule } from '@angular/common';
 import { Menu } from '../menu/menu';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -14,6 +15,7 @@ import { Menu } from '../menu/menu';
 })
 export class Products implements OnInit{
   private productservice = inject(ProductService);
+  private router=inject(Router);
   products:any;
   categories:any;
   filteredproducts:any;
@@ -113,7 +115,8 @@ export class Products implements OnInit{
       })
     }
     this.closeUpdateModal();
-    
+    alert("Product updated successfully");
+    this.router.navigate(["home"]);
   }
   closeUpdateModal()
   {

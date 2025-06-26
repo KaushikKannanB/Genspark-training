@@ -46,4 +46,24 @@ export class AdminManagerService
         this.authorization();
         return this.http.post(`http://localhost:5077/api/admin/Add-Category?Category=${cat}`,null,{headers:this.headers});
     }
+    handleadminreport(id:string)
+    {
+        this.authorization();
+        return this.http.get(`http://localhost:5077/api/admin/Get-Admin-Report?id=${id}`,{headers:this.headers});
+    }
+    handlemanagerreport(id:string)
+    {
+        this.authorization();
+        return this.http.get(`http://localhost:5077/api/admin/Get-Manager-Report?id=${id}`,{headers:this.headers, responseType:'text'});
+    }
+    adminchangpassword(pwd:string)
+    {
+        this.authorization();
+        return this.http.put(`http://localhost:5077/api/admin/Change-Password-Admin?NewPassword=${pwd}`,null,{headers:this.headers, responseType:'text'});
+    }
+    managerchangpassword(pwd:string)
+    {
+        this.authorization();
+        return this.http.put(`http://localhost:5077/api/manager/Change-Password-Manager?NewPassword=${pwd}`,null,{headers:this.headers, responseType:'text'});
+    }
 }

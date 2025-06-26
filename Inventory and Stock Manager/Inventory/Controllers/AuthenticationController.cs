@@ -54,7 +54,7 @@ namespace Inventory.Controllers
             await authService.Logout(token);
             return Ok("Logout successful. Token invalidated.");
         }
-        
+
         [HttpPost("Refresh-Token")]
         public async Task<IActionResult> Refresh(RefreshRequestDto request)
         {
@@ -84,6 +84,14 @@ namespace Inventory.Controllers
                 Token = newAccessToken,
                 RefreshToken = newRefreshToken
             });
+        }
+
+        // [Authorize]
+        [HttpGet("Get-User-By-Email")]
+        public async Task<IActionResult> GetUserByMail(string email)
+        {
+            var user = await _userService.GetByMail(email);
+            return Ok(user);
         }
 
 

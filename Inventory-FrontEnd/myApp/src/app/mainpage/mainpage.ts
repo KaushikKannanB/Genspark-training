@@ -16,7 +16,10 @@ export class Mainpage implements OnInit{
     isadmin:boolean=false;
     token:string|null='';
     role:string='';
-    constructor( private authservice:AUthService) {}
+    userid:string='';
+    newcategory='';
+    enablecategoryAdd:boolean=false;
+    constructor( private authservice:AUthService, private prodservice: ProductService) {}
   
     ngOnInit(): void {
       this.token = localStorage.getItem("token");
@@ -27,8 +30,31 @@ export class Mainpage implements OnInit{
         this.role=role;
         this.isadmin = this.role=='ADMIN';
       })
+      this.authservice.userid$.subscribe(userid=>{
+        this.userid=userid;
+      })
+      const storedUserId = localStorage.getItem("userid");
+        if (storedUserId) {
+          this.userid = storedUserId;
+        }
     }
-    
-      
+    setenablecategoryAdd()
+    {
+      this.enablecategoryAdd=true;
+    }
+    handlecategoryAddrequest()
+    {
+      this.prodservice.makecategoryaddrequest(this.newcategory).subscribe({
+        next:(data:any)=>{
+          console.log(data);
+        }
+      })
+      this.closeModal();
+      alert("Request made successfully");
+    }
+    closeModal()
+    {
+      this.enablecategoryAdd=false;
+    } 
 }
 

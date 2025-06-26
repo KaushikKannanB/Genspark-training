@@ -1,6 +1,5 @@
 <app-menu *ngIf="isloggedin"></app-menu>
 <hr/>
-<!-- <app-mainpage></app-mainpage> -->
 <app-login *ngIf="!isloggedin"></app-login>
-<router-outlet></router-outlet>
+<router-outlet *ngIf="isloggedin"></router-outlet>
 

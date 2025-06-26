@@ -1,8 +1,12 @@
+using Inventory.Contexts;
+using Inventory.Hubs;
 using Inventory.Interfaces;
+using Inventory.Misc;
 using Inventory.Models;
 using Inventory.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Inventory.Controllers
 {
@@ -10,20 +14,24 @@ namespace Inventory.Controllers
     [Route("api/admin")]
     public class AdminController : ControllerBase
     {
+        private readonly InventoryContext context;
         private readonly IAdminService adminService;
         private readonly IEncryptService encryptService;
 
         private readonly ICurrentUserService currentUserService;
+
+        private readonly IUserService userService;
+        private readonly IHubContext<NotificationHub> hubContext;
 
 
         private readonly IRepository<string, Admin> adminrepo;
         private readonly IRepository<string, Manager> managerrepo;
         private readonly IRepository<string, CategoryAddRequest> categaddrepo;
 
+        PasswordValidation passval;
 
 
-
-        public AdminController(IRepository<string, CategoryAddRequest> cat, IEncryptService en, ICurrentUserService cu, IAdminService a, IRepository<string, Admin> ad, IRepository<string, Manager> ma)
+        public AdminController(IHubContext<NotificationHub> hu, InventoryContext co, IUserService u, IRepository<string, CategoryAddRequest> cat, IEncryptService en, ICurrentUserService cu, IAdminService a, IRepository<string, Admin> ad, IRepository<string, Manager> ma)
         {
             adminService = a;
             adminrepo = ad;
@@ -31,6 +39,10 @@ namespace Inventory.Controllers
             managerrepo = ma;
             encryptService = en;
             categaddrepo = cat;
+            passval = new();
+            userService = u;
+            context = co;
+            hubContext = hu;
 
         }
 
@@ -78,6 +90,9 @@ namespace Inventory.Controllers
             }
             else
             {
+                // var cur_user = await adminService.GetByMail(currentUserService.Email);
+                await hubContext.Clients.All.SendAsync("ReceiveNotification", $"Category: {Category.ToUpper()} added--> notified at {DateTime.UtcNow}");
+                
                 return Ok(newcat);
             }
         }
@@ -131,12 +146,48 @@ namespace Inventory.Controllers
             }
         }
 
-        [Authorize(Roles = "ADMIN")]
+        [Authorize]
         [HttpGet("Get-Manager-Report")]
         public async Task<IActionResult> GetManagerReport(string id)
         {
             var result = await adminService.CheckManagerActivity(id);
             return Ok(result);
+        }
+
+        [Authorize(Roles = "ADMIN")]
+        [HttpGet("Get-Admin-Report")]
+        public async Task<IActionResult> GetAdminReport(string id)
+        {
+            var result = await adminService.AdminActivity(id);
+            return Ok(result);
+
+        }
+
+
+        [Authorize(Roles = "ADMIN")]
+        [HttpPut("Change-Password-Admin")]
+        public async Task<IActionResult> ChangePassword(string NewPassword)
+        {
+            if (!passval.IsValid(NewPassword))
+            {
+                return BadRequest("Invalid Password, a password must contain an Uppercase letter, a digit, a special character, and more than 8 characters");
+            }
+            try
+                {
+                    var cur_user_admin = await adminService.GetByMail(currentUserService.Email);
+                    var cur_user_user = await userService.GetByMail(currentUserService.Email);
+                    var encryptedData = await encryptService.EncryptData(new EncryptModel { Data = NewPassword });
+                    cur_user_admin.Password = encryptedData.EncryptedData;
+                    cur_user_user.Password = encryptedData.EncryptedData;
+
+                    await context.SaveChangesAsync();
+                    return Ok("Changed Password!");
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
+
         }
     }
 }

@@ -80,5 +80,9 @@ export class ProductService
         this.authorization();
         return this.http.put('http://localhost:5077/api/product/Update-Product-description',payload,{headers:this.headers});
     }
-    
+    makecategoryaddrequest(cate:string)
+    {
+        this.authorization();
+        return this.http.post(`http://localhost:5077/api/manager/Category-Add-Requested?category=${cate}`,null,{headers:this.headers});
+    }
 }

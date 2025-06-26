@@ -106,6 +106,15 @@
     </div>
 
   </div>
+  <div class="row g-3 mt-3 shadow-sm">
+    <h2>Add a new category</h2>
+    <div class="form-row">
+      <form (ngSubmit)="addcategory()">
+        <input type="text" name="category" id="" [(ngModel)]="newcategory" placeholder="Enter new category">
+        <button type="submit" class="btn btn-success">Add Category</button>
+      </form>
+    </div>
+  </div>
   <div class="row g-3 mt-3">
     <div class="col-4 d-flex flex-column">
         <form class="form" action="">

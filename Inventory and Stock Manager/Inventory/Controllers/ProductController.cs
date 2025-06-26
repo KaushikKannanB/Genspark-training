@@ -13,6 +13,9 @@ namespace Inventory.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IAdminService adminService;
+        private readonly IManagerService managerService;
+        private readonly ICurrentUserService currentUserService;
+
         private readonly IProductService prodService;
         private readonly IHubContext<NotificationHub> hubContext;
 
@@ -27,7 +30,7 @@ namespace Inventory.Controllers
 
 
 
-        public ProductController(IHubContext<NotificationHub> hub, IRepository<string, ProductUpdateLog> prod, IRepository<string, StockLogging> st, IRepository<string, Inventories> i, IRepository<string, Product> pro, IProductService pr, IAdminService ad, IRepository<string, Category> ca)
+        public ProductController(IManagerService man, ICurrentUserService cu, IHubContext<NotificationHub> hub, IRepository<string, ProductUpdateLog> prod, IRepository<string, StockLogging> st, IRepository<string, Inventories> i, IRepository<string, Product> pro, IProductService pr, IAdminService ad, IRepository<string, Category> ca)
         {
             adminService = ad;
             categrepo = ca;
@@ -37,6 +40,8 @@ namespace Inventory.Controllers
             stockupdlogrepo = st;
             produpdlogrepo = prod;
             hubContext = hub;
+            currentUserService = cu;
+            managerService = man;
         }
 
         [Authorize]
@@ -52,6 +57,22 @@ namespace Inventory.Controllers
             }
             else
             {
+                var cur_user_admin = await adminService.GetByMail(currentUserService.Email);
+                var cur_user_manager = await managerService.GetByMail(currentUserService.Email);
+                if (cur_user_admin != null)
+                {
+                    await hubContext.Clients.All.SendAsync(
+                        "ReceiveNotification",
+                        $"Product: {request.Name.ToUpper()} added by Admin {cur_user_admin.Id}: {cur_user_admin.Name.ToUpper()} --> notified at {DateTime.UtcNow}"
+                    );
+                }
+                else if (cur_user_manager != null)
+                {
+                    await hubContext.Clients.All.SendAsync(
+                        "ReceiveNotification",
+                        $"Product: {request.Name.ToUpper()} added by Manager {cur_user_manager.Id}: {cur_user_manager.Name.ToUpper()} --> notified at {DateTime.UtcNow}"
+                    );
+                }
                 return Ok(result);
             }
         }
@@ -281,10 +302,24 @@ namespace Inventory.Controllers
             var result = await prodService.DeleteProduct(product);
             if (result == null)
             {
+
                 return BadRequest("Could not delete");
             }
             else
             {
+                var cur_user_admin = await adminService.GetByMail(currentUserService.Email);
+                var cur_user_manager = await managerService.GetByMail(currentUserService.Email);
+                if (cur_user_admin != null)
+                {
+                    await hubContext.Clients.All.SendAsync("ReceiveNotification", $"Product: {product.ToUpper()} deleted by ${cur_user_admin.Id}: ${cur_user_admin.Name.ToUpper()} --> notified at {DateTime.UtcNow}");
+
+                }
+                else if (cur_user_manager != null)
+                {
+                    await hubContext.Clients.All.SendAsync("ReceiveNotification", $"Product: {product.ToUpper()} deleted by ${cur_user_manager.Id}: ${cur_user_manager.Name.ToUpper()} --> notified at {DateTime.UtcNow}");
+
+                }
+                // var cur_user = await adminService.GetByMail(currentUserService.Email);
                 return Ok(result);
             }
         }

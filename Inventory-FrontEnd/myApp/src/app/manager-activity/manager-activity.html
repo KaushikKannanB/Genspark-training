@@ -1,0 +1,12 @@
+
+<form (ngSubmit)="handlemanageractivity()">
+  <select name="manager" [(ngModel)]="selectedmanager">
+    <option *ngFor="let item of allmanagers; trackBy: trackByName" [value]="item.id">
+      {{item.name}}
+    </option>
+  </select>
+  <button type="submit" class="btn btn-success">Request</button>
+
+</form>
+
+<pre>{{report}}</pre>
