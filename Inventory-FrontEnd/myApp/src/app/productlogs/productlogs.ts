@@ -22,6 +22,52 @@ export class Productlogs implements OnInit{
   searchByWhenMax: string = '';
   sortAsc: boolean = true;
   searchByFieldUpdated:string="";
+  currentPage = 1;
+itemsPerPage = 14;
+
+get pages() {
+  return Array(Math.ceil(this.filteredlogs.length / this.itemsPerPage)).fill(0);
+}
+
+get paginatedLogs() {
+  const start = (this.currentPage - 1) * this.itemsPerPage;
+  return this.filteredlogs.slice(start, start + this.itemsPerPage);
+}
+
+goToPage(page: number) {
+  this.currentPage = page;
+}
+
+prevPage() {
+  if (this.currentPage > 1) this.currentPage--;
+}
+
+nextPage() {
+  if (this.currentPage < this.pages.length) this.currentPage++;
+}
+
+downloadCSV() {
+  const headers = ['Product Name', 'Field Updated', 'Old Value', 'New Value', 'Updated At', 'Updated By'];
+  const rows = this.filteredlogs.map((log:any) => [
+    log.prodName,
+    log.fieldUpdated,
+    log.oldValue,
+    log.newValue,
+    log.updatedAt,
+    log.updatedBy
+  ]);
+  const csvContent = [headers, ...rows].map(row => row.join(",")).join("\n");
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.setAttribute("href", url);
+  link.setAttribute("download", "product_logs.csv");
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
   ngOnInit(): void {
     this.loadproductupdatelogs();
   }

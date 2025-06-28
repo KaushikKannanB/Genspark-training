@@ -1,12 +1,10 @@
-<!-- <app-menu></app-menu> -->
-<div class="d-flex align-items-center mt-3 gap-2">
+<div class="filter-bar align-items-center mt-3 gap-2">
   <input
     type="text"
     [(ngModel)]="searchByName"
     (input)="filterLogs()"
     placeholder="Search by Product Name..."
     class="form-control"
-    style="max-width: 250px;"
   />
   <input
     type="text"
@@ -14,29 +12,25 @@
     (input)="filterLogs()"
     placeholder="Search by Updated By..."
     class="form-control"
-    style="max-width: 250px;"
   />
-  <select name="field" [(ngModel)]="searchByFieldUpdated" (change)="filterLogs()">
-        <option value="">All Fields</option>
-        <option value="Price">Price</option>
-        <option value="Description">Description</option>
-    </select>
+  <select [(ngModel)]="searchByFieldUpdated" (change)="filterLogs()" class="form-control">
+    <option value="">All Fields</option>
+    <option value="Price">Price</option>
+    <option value="Description">Description</option>
+  </select>
   <input
     type="date"
     [(ngModel)]="searchByWhenMin"
-    (change)="filterLogs()" 
-    placeholder="Search by Date"
+    (change)="filterLogs()"
     class="form-control"
-    style="max-width: 250px;"
   />
   <input
     type="date"
     [(ngModel)]="searchByWhenMax"
-    (change)="filterLogs()" 
-    placeholder="Search by Date"
+    (change)="filterLogs()"
     class="form-control"
-    style="max-width: 250px;"
   />
+  <button class="btn-dark" (click)="downloadCSV()">⬇ Download CSV</button>
 </div>
 
 @if(filteredlogs!=null) {
@@ -58,16 +52,27 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let log of filteredlogs; trackBy: trackById">
+        <tr *ngFor="let log of paginatedLogs; trackBy: trackById">
           <td>{{log.prodName}}</td>
           <td>{{log.fieldUpdated}}</td>
           <td>{{log.oldValue}}</td>
           <td>{{log.newValue}}</td>
           <td>{{log.updatedAt | date:'medium'}}</td>
           <td>{{log.updatedBy}}</td>
-          
         </tr>
       </tbody>
     </table>
   </div>
 }
+
+<div class="table-actions">
+  <div class="pagination">
+    <button 
+      *ngFor="let page of pages; let i = index" 
+      (click)="goToPage(i + 1)" 
+      [class.active]="i + 1 === currentPage"
+    >
+      {{ i + 1 }}
+    </button>
+  </div>
+</div>

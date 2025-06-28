@@ -1,5 +1,5 @@
-<!-- <app-menu></app-menu> -->
-<div class="d-flex align-items-center mt-3 gap-2">
+
+<div class="filter-bar align-items-center mt-3 gap-2">
   <input
     type="text"
     [(ngModel)]="searchByName"
@@ -32,6 +32,7 @@
     class="form-control"
     style="max-width: 250px;"
   />
+  <button class="btn-dark" (click)="downloadCSV()">⬇ Download CSV</button>
 </div>
 
 @if(filteredlogs!=null) {
@@ -54,7 +55,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let log of filteredlogs; trackBy: trackByInventoryId">
+        <tr *ngFor="let log of paginatedLogs; trackBy: trackByInventoryId">
           <td>{{log.inventoryId}}</td>
           <td>{{log.prodName}}</td>
           <td>{{log.oldStock}}</td>
@@ -78,3 +79,14 @@
     </table>
   </div>
 }
+<div class="table-actions">
+  <div class="pagination">
+    <button 
+      *ngFor="let page of pages; let i = index" 
+      (click)="goToPage(i + 1)" 
+      [class.active]="i + 1 === currentPage"
+    >
+      {{ i + 1 }}
+    </button>
+  </div>
+</div>

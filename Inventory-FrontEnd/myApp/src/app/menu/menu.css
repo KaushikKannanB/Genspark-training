@@ -1,70 +1,67 @@
-/* General Navbar Styling */
-.navbar {
+.vertical-navbar {
   background-color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 12px 24px;
-  transition: all 0.3s ease-in-out;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  padding: 24px 12px;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  width: 220px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
 }
 
 /* Navbar Brand */
-.navbar-brand {
+.vertical-navbar .navbar-brand {
   font-weight: 600;
   font-size: 22px;
   color: #007bff !important;
-  letter-spacing: 0.5px;
+  margin-bottom: 32px;
+  text-decoration: none;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-/* Navbar Links */
-.navbar-nav {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center;
+/* Nav list vertical layout */
+.vertical-navbar .navbar-nav {
+  display: flex;
+  flex-direction: column;
   list-style: none;
-  margin: 0;
+  gap: 18px;
   padding: 0;
+  margin: 0;
 }
 
-.navbar-nav .nav-item {
-  margin: 0 12px;
+/* Nav item/link styling */
+.vertical-navbar .nav-item {
+  position: relative;
 }
 
-.navbar-nav .nav-link {
+.vertical-navbar .nav-link {
   color: #555 !important;
   font-weight: 500;
-  position: relative;
-  transition: color 0.2s ease-in-out;
+  padding: 8px 12px;
+  border-radius: 4px;
   text-decoration: none;
+  transition: background-color 0.2s;
 }
 
-.navbar-nav .nav-link:hover {
+.vertical-navbar .nav-link:hover {
+  background-color: #f0f0f0;
   color: #007bff !important;
 }
 
-.navbar-nav .nav-item.active .nav-link {
+.vertical-navbar .nav-item.active .nav-link {
   color: #007bff !important;
   font-weight: 600;
 }
 
-/* Responsive Collapse Padding (optional if needed) */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-/* Notification Badge Styling */
-.navbar-nav .nav-item {
-  position: relative;
-}
-
-.navbar-nav .nav-item .notification-badge {
+/* Notification Badge */
+.vertical-navbar .notification-badge {
   position: absolute;
-  top: -4px;
-  right: -8px;
+  top: 4px;
+  right: 10px;
   font-size: 0.65rem;
   font-weight: 600;
   padding: 3px 6px;
@@ -75,6 +72,24 @@
   min-width: 18px;
   text-align: center;
 }
+
+/* Responsive fallback */
+@media (max-width: 768px) {
+  .vertical-navbar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px;
+  }
+
+  .vertical-navbar .navbar-nav {
+    flex-direction: row;
+    gap: 12px;
+  }
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -125,4 +140,17 @@
   padding: 8px 16px;
   border-radius: 6px;
   border: none;
+}
+.nav-options
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90vh;
+}
+.buttons button
+{
+  margin: 10px;
+  width: 90%;
+  height: 40px;
 }

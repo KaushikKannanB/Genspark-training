@@ -1,27 +1,35 @@
-<nav class="navbar">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <ul class="navbar-nav">
-    <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
-    <!-- <li class="nav-item"><a class="nav-link" routerLink="login">Login</a></li> -->
-    <li class="nav-item"><a class="nav-link" routerLink="products">Products</a></li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="notifications">
-        Notifications @if(notifyService.messages.length!=0) {<span class="notification-badge">{{notifyService.messages.length}}</span>}
-      </a>
-    </li>
-    <li class="nav-item"><a class="nav-link" routerLink="profile">Profile</a></li>
-
-    <li class="nav-item"><button (click)="setenablechangepass()" class="btn btn-success">Change Password</button></li>
-    <li class="nav-item"><button (click)="handlelogout()" class="btn btn-danger">Logout</button></li>
-  </ul>
+<nav class="vertical-navbar">
+  <h2><a class="navbar-brand" href="#">Inven-tree</a></h2>
+  <div class="nav-options">
+    <div class="pages">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="products">Products</a></li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="notifications">
+            Notifications 
+            @if(notifyService.messages.length!=0) {
+              <span class="notification-badge">{{notifyService.messages.length}}</span>
+            }
+          </a>
+        </li>
+        <li class="nav-item"><a class="nav-link" routerLink="profile">Profile</a></li>
+      </ul>
+    </div>
+    <div class="buttons">
+      <button (click)="setenablechangepass()" class="btn btn-success">Change Password</button>
+      <button (click)="handlelogout()" class="btn btn-danger">Logout</button>
+    </div>
+  </div>  
 </nav>
+
 <div *ngIf="enablechangepass" class="modal-overlay">
   <div class="modal-content">
     <h3>Change Password</h3>
     <form (ngSubmit)="handlechangepassword()" class="modal-form">
       <input type="text" placeholder="Enter a valid new password" name="pass" [(ngModel)]="newpass"/>
       <div class="modal-actions">
-        <button type="submit" class="btn btn-success">Update</button>
+        <button type="submit" class="btn btn-success">Change</button>
         <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
       </div>
     </form>

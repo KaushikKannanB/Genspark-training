@@ -5,6 +5,7 @@ using Inventory.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Inventory.Hubs;
+using System.Text;
 
 namespace Inventory.Controllers
 {
@@ -90,7 +91,7 @@ namespace Inventory.Controllers
             var allprods = await prodrepo.GetAll();
             var myprod = allprods.Where(p => p.InventoryId == id);
             return Ok(myprod);
-            
+
         }
         [Authorize]
         [HttpGet("Get-Category-By-Name")]
@@ -120,7 +121,7 @@ namespace Inventory.Controllers
             var prod = await prodrepo.GetById(id);
             return Ok(prod);
         }
-        
+
         [Authorize]
         [HttpGet("Get-Products-Orderedby-Price")]
         public async Task<IActionResult> GetProductsOrdered(int pagenumber)
@@ -130,7 +131,7 @@ namespace Inventory.Controllers
                 return BadRequest("Meaningful page number required!");
             }
             var prods = await prodService.GetProductsPaginated(pagenumber);
-            if (prods == null || prods.Count()==0)
+            if (prods == null || prods.Count() == 0)
             {
                 var allprod = await prodrepo.GetAll();
                 return BadRequest($"There are only {allprod.Count()} products.");
@@ -181,7 +182,7 @@ namespace Inventory.Controllers
         }
 
 
-        
+
         [Authorize]
         [HttpGet("Get-All-Stock-updates")]
 
@@ -200,9 +201,9 @@ namespace Inventory.Controllers
             return Ok(updatesofProduct);
         }
 
-        
 
-        
+
+
         [Authorize]
         [HttpGet("Get-All-Product-Updates")]
         public async Task<IActionResult> GetAllProductUpdates()
@@ -268,7 +269,7 @@ namespace Inventory.Controllers
             {
                 if (result.Stock <= result.MinThreshold)
                 {
-                    await hubContext.Clients.All.SendAsync("ReceiveNotification", $"Stock Needs to be refilled for Product of Inventory Id  ${result.Id}  ASAP --> notified at {DateTime.UtcNow}");
+                    await hubContext.Clients.All.SendAsync("ReceiveNotification", $"Stock Needs to be refilled for Product {request.ProductName}  ASAP --> notified at {DateTime.UtcNow}");
                 }
                 return Ok(result);
             }
@@ -322,6 +323,29 @@ namespace Inventory.Controllers
                 // var cur_user = await adminService.GetByMail(currentUserService.Email);
                 return Ok(result);
             }
+        }
+        [Authorize]
+        [HttpGet("Get-product-summary")]
+        public async Task<IActionResult> GetProductSummary(string prod)
+        {
+            prod = prod.ToUpper();
+            var prodbasicdeets = await prodrepo.GetByName(prod);
+            var invid = prodbasicdeets.InventoryId;
+            var allstockupds = await stockupdlogrepo.GetAll();
+            var myupdsstock = allstockupds.Where(s => s.InventoryId == invid);
+            var allprodupds = await produpdlogrepo.GetAll();
+            var myupdsprod = allprodupds.Where(p => p.ProductId == prodbasicdeets.Id);
+            var currentstock = await invrepo.GetById(invid);
+
+            var prodsummary = new
+            {
+                ProdDetails = prodbasicdeets,
+                CurrentInv = currentstock,
+                StockLogs = myupdsstock,
+                ProdLogs = myupdsprod
+            };
+            return Ok(prodsummary);
+            
         }
     }
 }

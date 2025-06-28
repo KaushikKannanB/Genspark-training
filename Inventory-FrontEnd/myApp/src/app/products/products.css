@@ -1,82 +1,114 @@
+/* ✅ Set global light text color for the entire app */
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+/* ✅ Reinforce text color for common elements */
+h1, h2, h3, h4, h5, h6,
+p, span, label, input, select, option,
+button, strong, b, div {
+  color: var(--text-light);
+}
+
+/* 🔄 Optional: override inside product-card */
+.product-card p,
+.product-card strong {
+  color: var(--text-light);
+}
+
+/* 🔄 Ensure modal content inherits color */
+.modal-content * {
+  color: var(--text-light);
+}
+
+
+:root {
+  --primary: #4fc3f7;
+  --danger: #ff6b6b;
+  --success: #4caf50;
+  --text-light: #e0e0e0;
+  --bg-dark: #1e1e2f;
+  --bg-light: #2a2a3d;
+}
+
+/* 🔍 Filter Bar */
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  padding: 12px;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #f9fafb;
-  border-radius: 8px;
+  padding: 16px;
+  background: linear-gradient(135deg, #1e1e2f, #2a2a3d);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
 .filter-bar input,
 .filter-bar select {
   flex: 1;
-  height: 40px;
   min-width: 130px;
+  height: 40px;
   padding: 8px 12px;
   font-size: 14px;
-  border-radius: 6px;
-  border: 1px solid #ced4da;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 8px;
+  background-color: #303040;
+  color: var(--text-light);
+  border: 1px solid #555;
+  transition: all 0.3s ease;
 }
 
 .filter-bar input::placeholder,
 .filter-bar select::placeholder {
-  color: #888;
+  color: #aaa;
 }
 
 .filter-bar input:focus,
 .filter-bar select:focus {
-  border-color: #007BFF;
-  box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.25);
+  border-color: var(--primary);
+  box-shadow: 0px 0px 6px var(--primary);
+  outline: none;
 }
 
-/* Container for all cards */
+/* 📦 Product Cards */
 .product-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 16px;
+  gap: 20px;
+  padding: 24px;
 }
-/* Low Stock Highlight */
+
 .product-card {
-  /* REMOVE background-color here if you want low-stock to take over */
-  /* background-color: #fff; */
-  padding: 16px;
+  background: linear-gradient(145deg, #222232, #2c2c3c);
   border-radius: 12px;
-  box-shadow: 0px 2px 12px rgba(0,0,0,.1);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: box-shadow 0.2s ease;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: var(--text-light);
+  position: relative;
 }
 
 .product-card:hover {
-  box-shadow: 0px 4px 20px rgba(0,0,0,.15);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.4);
 }
 
-/* ✅ Ensure low-stock takes precedence */
 .product-card.low-stock {
-    background-color: #ffe5e5;
-
+  background: #3a1f1f;
+  border: 2px solid var(--danger);
 }
 
 .product-card h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #007BFF;
+  font-size: 1.3rem;
+  color: var(--primary);
 }
 
 .product-card p {
-  margin: 4px 0;
   font-size: 0.95rem;
+  margin: 10px 0;
 }
 
 .actions {
   display: flex;
-  /* justify-content: space-evenly; */
   gap: 12px;
   margin-top: 12px;
 }
@@ -87,79 +119,68 @@
   border-radius: 6px;
   border: none;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .actions button:hover {
-  opacity: 0.9;
+  transform: scale(1.05);
+  opacity: 0.95;
 }
 
 .actions button:nth-child(1) {
-  background-color: #007BFF;
+  background-color: var(--primary);
   color: #fff;
 }
 
 .actions button:nth-child(2) {
-  background-color: #dc3545;
+  background-color: var(--danger);
   color: #fff;
 }
 
 .actions button:nth-child(3) {
-  background-color: #28a745;
+  background-color: var(--success);
   color: #fff;
 }
 
-/* Responsive adjustment for smaller screens */
-@media (max-width: 1024px) {
-  .product-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 600px) {
-  .product-cards {
-    grid-template-columns: 1fr;
-  }
-}
-/* MODAL STYLES */
+/* 💬 Modal Styling */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0,0,0,.5);
+  background: rgba(0,0,0,0.6);
   z-index: 1000;
+  animation: fadeIn 0.3s ease;
 }
 
 .modal-content {
-  background: #fff;
+  background: var(--bg-light);
+  color: var(--text-light);
   padding: 24px;
   border-radius: 12px;
-  box-shadow: 0px 4px 24px rgba(0,0,0,.2);
-  /* min-width: 300px;
-  max-width: 90vw; */
   width: 400px;
-  height: 250px;
+  animation: slideUp 0.4s ease;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.5);
 }
 
 .modal-form {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  gap: 20px;
+  gap: 16px;
 }
-.modal-form select,
-.modal-form input {
-  padding: 8px 12px;
+
+.modal-form input,
+.modal-form select {
+  padding: 10px 12px;
   font-size: 14px;
+  height: 40px;
   border-radius: 6px;
-  border: 1px solid #ced4da;
-  outline: none;
-  flex: 1;
-  height: 40px; /* Ensures BOTH have the same height */
+  background-color: #2d2d3d;
+  color: var(--text-light);
+  border: 1px solid #444;
 }
+
 .modal-actions {
   display: flex;
   justify-content: space-between;
@@ -169,14 +190,41 @@
   padding: 8px 16px;
   border-radius: 6px;
   border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
 }
 
 .btn-success {
-  background-color: #28a745;
-  color: #fff;
+  background-color: var(--success);
+  color: white;
 }
 
 .btn-secondary {
   background-color: #6c757d;
-  color: #fff;
+  color: white;
+}
+
+/* 🌀 Animations */
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0 }
+  to { transform: translateY(0); opacity: 1 }
+}
+
+/* 📱 Responsive Grid */
+@media (max-width: 1024px) {
+  .product-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .product-cards {
+    grid-template-columns: 1fr;
+  }
 }

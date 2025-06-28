@@ -1,38 +1,101 @@
-<!-- <app-menu></app-menu> -->
+<!-- 
 <html>
+  <body>
+    <div class="container">
+      <h1 class="welcome-text">Welcome, {{ userid }}</h1>
 
+      <div class="button-group">
+        <button [routerLink]="['/stock-logs']" class="btn btn-primary">Stock Logs</button>
+        <button [routerLink]="['/product-logs']" class="btn btn-primary">Product Logs</button>
+        <button [routerLink]="['/add-product']" class="btn btn-primary">Add Product</button>
+      </div>
 
-<h1>Hey {{userid}}</h1>
-<button [routerLink]="['/stock-logs']" class="btn btn-primary">
-  Stock Logs
-</button>
+      @if (isadmin) {
+        <div class="button-group">
+          <button [routerLink]="['/admin-dashboard']" class="btn btn-primary">Admin Dashboard</button>
+          <button [routerLink]="['/manageractivity']" class="btn btn-primary">Manager Activity</button>
+        </div>
+      } @else {
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="setenablecategoryAdd()">
+            Make Category Add Request
+          </button>
+        </div>
+      }
 
-<button [routerLink]="['/product-logs']" class="btn btn-primary">
-  Product Logs
-</button>
-<button [routerLink]="['/add-product']" class="btn btn-primary">
-  Add Product
-</button>
-<!-- <p>{{isadmin}} - {{role}} - {{token}}</p> -->
-@if(isadmin)
-{
-  <button [routerLink]="['/admin-dashboard']" class="btn btn-primary">
-    Admin Dashboard
-  </button>
+      
+    </div>
+  </body>
+</html> -->
+<div class="container">
+  <div class="section welcome">
+    <div class="section-content">
+      @if(isadmin){
+      <h1>Welcome, Admin</h1>
+      }
+      @else {
+        <h1>Welcome, Manager</h1>
+      }
+    </div>
+</div>
 
-  <button [routerLink]="['/manageractivity']" class="btn btn-primary">
-    Manager Activity
-  </button>
-}
-@else {
-  <button class="btn btn-primary" (click)="setenablecategoryAdd()">Make Category Add Request</button>
-}
+  <div class="section row-left">
+    <div class="section-content">
+      <h3>Add Product</h3>
+      <button [routerLink]="['/add-product']" class="btn btn-primary">Add Product</button>
+    </div>
+    <div class="section-description">
+      <h4>Add new products into the inventory</h4>
+    </div>
+  </div>
 
+  <div class="section row-right">
+    <div class="section-description">
+      <h4>View every single activity/update made</h4>
+    </div>
+    <div class="section-content">
+      <h3>Logs</h3>
+      <button [routerLink]="['/stock-logs']" class="btn btn-primary">Stock Logs</button>
+      <button [routerLink]="['/product-logs']" class="btn btn-primary">Product Logs</button>
+    </div>
+  </div>
+
+  @if (isadmin) {
+    <div class="section row-left">
+      <div class="section-content">
+        <h3>Admin Options</h3>
+        <button [routerLink]="['/admin-dashboard']" class="btn btn-primary">Admin Dashboard</button>
+        <button [routerLink]="['/manageractivity']" class="btn btn-primary">Manager Activity</button>
+      </div>
+      <div class="section-description">
+      <h4>Being an Admin, view more</h4>
+    </div>
+    </div>
+  } @else {
+    <div class="section row-left">
+      <div class="section-content">
+        <h3>Manager Options</h3>
+        <button class="btn btn-primary" (click)="setenablecategoryAdd()">
+          Make Category Add Request
+        </button>
+      </div>
+      <div class="section-description">
+      <h5>Being a Manager, make a valid request</h5>
+    </div>
+    </div>
+  }
+</div>
 <div *ngIf="enablecategoryAdd" class="modal-overlay">
   <div class="modal-content">
-    <h3>Make a Category add Request</h3>
+    <h3>Make a Category Add Request</h3>
     <form (ngSubmit)="handlecategoryAddrequest()" class="modal-form">
-      <input type="text" placeholder="What Category do you request to be added" name="pass" [(ngModel)]="newcategory"/>
+      <input
+        type="text"
+        placeholder="What Category do you request to be added"
+        name="category"
+        [(ngModel)]="newcategory"
+        required
+      />
       <div class="modal-actions">
         <button type="submit" class="btn btn-success">Request</button>
         <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
@@ -40,5 +103,3 @@
     </form>
   </div>
 </div>
-
-</html>

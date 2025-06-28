@@ -10,6 +10,7 @@ namespace Inventory.Models
 
         [JsonIgnore]
         public User? User { get; set; }
-        public ICollection<Product>? Products{ get; set; }
+        [JsonIgnore]
+        public ICollection<Product>? Products { get; set; }
     }
 }

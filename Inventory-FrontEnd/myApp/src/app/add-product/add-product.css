@@ -2,10 +2,10 @@
 .add-product-page {
   display: flex;
   justify-content: space-around;
-  /* align-items: stretch; */
+  align-items: stretch;
   gap: 40px;
   padding: 40px;
-  min-height: 90vh;
+  min-height: 100vh;
 }
 
 /* FORM CONTAINER */

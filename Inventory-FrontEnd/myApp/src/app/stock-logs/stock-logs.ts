@@ -19,6 +19,45 @@ export class StockLogs {
   searchByWhenMin: string = '';
   searchByWhenMax: string = '';
   sortAsc: boolean = true;
+  currentPage = 1;
+itemsPerPage = 14;
+
+get pages() {
+  return Array(Math.ceil(this.filteredlogs.length / this.itemsPerPage)).fill(0);
+}
+
+get paginatedLogs() {
+  const start = (this.currentPage - 1) * this.itemsPerPage;
+  return this.filteredlogs.slice(start, start + this.itemsPerPage);
+}
+
+goToPage(page: number) {
+  this.currentPage = page;
+}
+
+downloadCSV() {
+  const headers = ['Inventory ID', 'Product Name', 'Old Stock', 'New Stock', 'Updated At', 'Updated By', 'Status'];
+  const rows = this.filteredlogs.map(log => [
+    log.inventoryId,
+    log.prodName,
+    log.oldStock,
+    log.newStock,
+    log.updatedAt,
+    log.updatedBy,
+    log.newStock > log.oldStock ? 'Add' : (log.newStock < log.oldStock ? 'Reduce' : 'No Change')
+  ]);
+
+  const csvContent = [headers, ...rows].map(e => e.join(",")).join("\n");
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.setAttribute("href", url);
+  link.setAttribute("download", "logs.csv");
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
   ngOnInit(): void {
     this.handlestocklogs();

@@ -54,7 +54,7 @@ export class AdminManagerService
     handlemanagerreport(id:string)
     {
         this.authorization();
-        return this.http.get(`http://localhost:5077/api/admin/Get-Manager-Report?id=${id}`,{headers:this.headers, responseType:'text'});
+        return this.http.get(`http://localhost:5077/api/admin/Get-Manager-Report?id=${id}`,{headers:this.headers});
     }
     adminchangpassword(pwd:string)
     {

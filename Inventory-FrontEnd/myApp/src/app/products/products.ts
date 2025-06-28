@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProductService } from '../services/Products.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductAddModel } from '../models/product';
@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
   selector: 'app-products',
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './products.html',
-  styleUrl: './products.css'
+  styleUrl: './products.css',
+  encapsulation: ViewEncapsulation.None 
 })
 export class Products implements OnInit{
   private productservice = inject(ProductService);
@@ -24,6 +25,7 @@ export class Products implements OnInit{
   searchByMinPrice?:number;
   searchByMaxPrice?:number;
   searchByCategory:string="";
+  searchByInventory:string='';
   stockUpd:StockUpdateModel=new StockUpdateModel();
   delete_product:string="";
   enableStockUpd:boolean=false;
@@ -152,9 +154,13 @@ export class Products implements OnInit{
     const searchName = this.searchByname?.toUpperCase() || '';
     const searchStatus = this.searchByStatus?.toUpperCase() || '';
     const searchcatgegory = this.searchByCategory?.toUpperCase() || '';
+    const searchinv = this.searchByInventory?.toUpperCase() || '';
+
 
     this.filteredproducts = this.products.filter((product: any) => {
       const matchName = product.name?.toUpperCase().includes(searchName);
+      const matchinv = product.inventoryId?.toUpperCase().includes(searchinv);
+
      const matchStatus = searchStatus
       ? product.status?.toUpperCase() === searchStatus
       : true;
@@ -162,7 +168,7 @@ export class Products implements OnInit{
       const matchMinPrice = this.searchByMinPrice != null ? product.price >= this.searchByMinPrice : true;
       const matchMaxPrice = this.searchByMaxPrice != null ? product.price <= this.searchByMaxPrice : true;
       
-      return matchName && matchStatus && matchMinPrice && matchMaxPrice && matchCategory;
+      return matchName && matchStatus && matchMinPrice && matchMaxPrice && matchCategory && matchinv;
     });
   }
   getallcategories()

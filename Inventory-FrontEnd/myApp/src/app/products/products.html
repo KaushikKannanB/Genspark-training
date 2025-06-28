@@ -1,6 +1,8 @@
 <!-- <app-menu></app-menu> -->
 <div class="filter-bar">
     <input type="text" name="name" [(ngModel)]="searchByname" placeholder="Product" (input)="filterProducts()">
+    <input type="text" name="invname" [(ngModel)]="searchByInventory" placeholder="Inventory" (input)="filterProducts()">
+
     <select name="status" [(ngModel)]="searchByStatus" (change)="filterProducts()">
         <option value="">All Status</option>
         <option value="ACTIVE">Active</option>
@@ -27,7 +29,9 @@
       <h3>{{product.name}}</h3>
       <p class="description">{{product.description}}</p>
       <p><strong>category: </strong>{{product.category}}</p>
-      <p><strong>Price:</strong> ${{product.price}}</p>
+      <p><strong>Inventory ID: </strong>{{product.inventoryId}}</p>
+
+      <h4><strong>Price:</strong> ${{product.price}}</h4>
       <p><strong>Stock/Threshold:</strong> {{product.stock}} / {{product.minThreshold}}</p>
       <p><strong>Added At:</strong> {{product.addedAt}}</p>
       <p><strong>Added By:</strong> {{product.addedBy}}</p>
@@ -50,7 +54,6 @@
     </div>
   </div>
 }
-
 <div *ngIf="enableStockUpd" class="modal-overlay">
   <div class="modal-content">
     <h3>Update Stock</h3>

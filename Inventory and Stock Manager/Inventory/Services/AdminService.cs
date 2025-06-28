@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.HttpResults;
+using System.Text.Json.Nodes;
 
 namespace Inventory.Services
 {
@@ -157,7 +159,7 @@ namespace Inventory.Services
 
             return manager;
         }
-        public async Task<string> CheckManagerActivity(string id)
+        public async Task<object> CheckManagerActivity(string id)
         {
             var sb = new StringBuilder();
             sb.AppendLine($"Manager Activity Report for ID: {id}");
@@ -175,51 +177,62 @@ namespace Inventory.Services
             var allprodupd = await produpdrepo.GetAll();
             var prod_upd_by_manager = allprodupd.Where(u => u.UpdatedBy == id).ToList();
 
-            if (prods_by_manager.Any())
-            {
-                sb.AppendLine("\nProducts Created:");
-                foreach (var prod in prods_by_manager)
-                {
-                    sb.AppendLine($"   • Product ID: {prod.Id}, Name: {prod.Name}");
-                }
-            }
+            // if (prods_by_manager.Any())
+            // {
+            //     sb.AppendLine("\nProducts Created:");
+            //     foreach (var prod in prods_by_manager)
+            //     {
+            //         sb.AppendLine($"   • Product ID: {prod.Id}, Name: {prod.Name}");
+            //     }
+            // }
 
-            if (categ_req_by_manager.Any())
-            {
-                sb.AppendLine("\nCategory Addition Requests:");
-                foreach (var req in categ_req_by_manager)
-                {
-                    sb.AppendLine($"   • Request ID: {req.Id}, Category: {req.CategoryName}");
-                }
-            }
+            // if (categ_req_by_manager.Any())
+            // {
+            //     sb.AppendLine("\nCategory Addition Requests:");
+            //     foreach (var req in categ_req_by_manager)
+            //     {
+            //         sb.AppendLine($"   • Request ID: {req.Id}, Category: {req.CategoryName}");
+            //     }
+            // }
 
-            if (stock_upd_by_manager.Any())
-            {
-                sb.AppendLine("\nInventory Updates:");
-                foreach (var s in stock_upd_by_manager)
-                {
-                    sb.AppendLine($"   • Inventory ID: {s.InventoryId}, Stock changed from {s.OldStock} to {s.NewStock}");
-                }
-            }
+            // if (stock_upd_by_manager.Any())
+            // {
+            //     sb.AppendLine("\nInventory Updates:");
+            //     foreach (var s in stock_upd_by_manager)
+            //     {
+            //         sb.AppendLine($"   • Inventory ID: {s.InventoryId}, Stock changed from {s.OldStock} to {s.NewStock}");
+            //     }
+            // }
 
-            if (prod_upd_by_manager.Any())
-            {
-                sb.AppendLine("\nProduct Updates:");
-                foreach (var p in prod_upd_by_manager)
-                {
-                    sb.AppendLine($"   • Product ID: {p.ProductId}, Field: {p.FieldUpdated}, New Value: {p.NewValue}");
-                }
-            }
+            // if (prod_upd_by_manager.Any())
+            // {
+            //     sb.AppendLine("\nProduct Updates:");
+            //     foreach (var p in prod_upd_by_manager)
+            //     {
+            //         sb.AppendLine($"   • Product ID: {p.ProductId}, Field: {p.FieldUpdated}, New Value: {p.NewValue}");
+            //     }
+            // }
 
-            if (sb.Length == 0)
-            {
-                sb.AppendLine("No activity found for this manager.");
-            }
+            // if (sb.Length == 0)
+            // {
+            //     sb.AppendLine("No activity found for this manager.");
+            // }
 
-            return sb.ToString();
+            // return sb.ToString();
+
+            var managersummary = new
+            {
+                ProductAdded = prods_by_manager.Select(p => new { p.Id, p.Name, p.Description, p.Price }),
+                AllRequest = categ_req_by_manager.Select(c => new {c.CategoryName }),
+                StockUpds = stock_upd_by_manager.Select(s => new { s.InventoryId, s.OldStock, s.NewStock }),
+                ProdUpds = prod_upd_by_manager.Select(p => new { p.ProductId, p.FieldUpdated, p.NewValue }),
+            };
+
+            return managersummary;
+
         }
 
-        public async Task<string> AdminActivity(string id)
+        public async Task<object> AdminActivity(string id)
         {
             var sb = new StringBuilder();
             sb.AppendLine($"Admin Activity Report for ID: {id}");
@@ -243,58 +256,70 @@ namespace Inventory.Services
             var by_me = managers.Where(m => m.CreatedBy == cur_user.Id);
 
 
-            if (prods_by_admin.Any())
-            {
-                sb.AppendLine("\nProducts Created:");
-                foreach (var prod in prods_by_admin)
-                {
-                    sb.AppendLine($"   • Product ID: {prod.Id}, Name: {prod.Name}");
-                }
-            }
+            // if (prods_by_admin.Any())
+            // {
+            //     sb.AppendLine("\nProducts Created:");
+            //     foreach (var prod in prods_by_admin)
+            //     {
+            //         sb.AppendLine($"   • Product ID: {prod.Id}, Name: {prod.Name}");
+            //     }
+            // }
 
-            if (categ_by_admin.Any())
-            {
-                sb.AppendLine("\nCategories Added");
-                foreach (var req in categ_by_admin)
-                {
-                    sb.AppendLine($"   • Request ID: {req.Id}, Category: {req.CategoryName}");
-                }
-            }
+            // if (categ_by_admin.Any())
+            // {
+            //     sb.AppendLine("\nCategories Added");
+            //     foreach (var req in categ_by_admin)
+            //     {
+            //         sb.AppendLine($"   • Request ID: {req.Id}, Category: {req.CategoryName}");
+            //     }
+            // }
 
-            if (stock_upd_by_admin.Any())
-            {
-                sb.AppendLine("\nInventory Updates:");
-                foreach (var s in stock_upd_by_admin)
-                {
-                    sb.AppendLine($"   • Inventory ID: {s.InventoryId}, Stock changed from {s.OldStock} to {s.NewStock}");
-                }
-            }
+            // if (stock_upd_by_admin.Any())
+            // {
+            //     sb.AppendLine("\nInventory Updates:");
+            //     foreach (var s in stock_upd_by_admin)
+            //     {
+            //         sb.AppendLine($"   • Inventory ID: {s.InventoryId}, Stock changed from {s.OldStock} to {s.NewStock}");
+            //     }
+            // }
 
-            if (prod_upd_by_admin.Any())
-            {
-                sb.AppendLine("\nProduct Updates:");
-                foreach (var p in prod_upd_by_admin)
-                {
-                    sb.AppendLine($"   • Product ID: {p.ProductId}, Field: {p.FieldUpdated}, New Value: {p.NewValue}");
-                }
-            }
-            if (by_me.Any())
-            {
-                sb.AppendLine("\nManagers created:");
-                foreach (var p in by_me)
-                {
-                    sb.AppendLine($"   • Manager ID: {p.Id}, Name: {p.Name}");
-                }
-            }
+            // if (prod_upd_by_admin.Any())
+            // {
+            //     sb.AppendLine("\nProduct Updates:");
+            //     foreach (var p in prod_upd_by_admin)
+            //     {
+            //         sb.AppendLine($"   • Product ID: {p.ProductId}, Field: {p.FieldUpdated}, New Value: {p.NewValue}");
+            //     }
+            // }
+            // if (by_me.Any())
+            // {
+            //     sb.AppendLine("\nManagers created:");
+            //     foreach (var p in by_me)
+            //     {
+            //         sb.AppendLine($"   • Manager ID: {p.Id}, Name: {p.Name}");
+            //     }
+            // }
 
-            
 
-            if (sb.Length == 0)
+
+            // if (sb.Length == 0)
+            // {
+            //     sb.AppendLine("No activity found for this admin.");
+            // }
+
+            // return sb.ToString();
+
+
+            var adminsummary = new
             {
-                sb.AppendLine("No activity found for this admin.");
-            }
+                ProdsAdded = prods_by_admin.Select(p => new { p.Id, p.Name, p.Description, p.Price }),
+                Categadds = categ_by_admin.Select(c => new { c.Id, c.CategoryName }),
+                StockUpds = stock_upd_by_admin.Select(s => new { s.InventoryId, s.OldStock, s.NewStock }),
+                ProdUpds = prod_upd_by_admin.Select(p => new { p.ProductId, p.FieldUpdated, p.NewValue }),
+                Managers = by_me.Select(m => new { m.Id, m.Name, m.Email })
+            };
 
-            return sb.ToString();
+            return adminsummary;
         }
 
     }
