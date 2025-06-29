@@ -7,7 +7,10 @@
   --bg-dark: #1e1e2f;
   --bg-light: #2a2a3d;
 }
-
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
 .table-responsive {
   margin: 40px 24px;
   background-color: var(--bg-dark);
@@ -126,6 +129,8 @@
   background: linear-gradient(135deg, #1e1e2f, #2a2a3d);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  margin-left: 20px;
+  margin-right: 20px;
 }
 .filter-bar input,
 .filter-bar select {

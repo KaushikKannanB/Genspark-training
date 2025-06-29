@@ -41,6 +41,8 @@ button, strong, b, div {
   background: linear-gradient(135deg, #1e1e2f, #2a2a3d);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  margin-left: 30px;
+
 }
 
 .filter-bar input,
@@ -75,6 +77,8 @@ button, strong, b, div {
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 24px;
+  margin-left: 20px;
+
 }
 
 .product-card {
@@ -227,4 +231,32 @@ button, strong, b, div {
   .product-cards {
     grid-template-columns: 1fr;
   }
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: transparent;
+  border: 2px solid var(--primary);
+  color: var(--text-light);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: var(--primary);
+  color: black;
+  transform: scale(1.05);
+}
+
+.pagination button.active {
+  background-color: var(--primary);
+  color: black;
 }

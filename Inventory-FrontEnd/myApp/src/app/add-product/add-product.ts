@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProductService } from '../services/Products.service';
 import { ProductAddModel } from '../models/product';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +10,9 @@ import { Menu } from '../menu/menu';
   selector: 'app-add-product',
   imports: [FormsModule,CommonModule],
   templateUrl: './add-product.html',
-  styleUrl: './add-product.css'
+  styleUrl: './add-product.css',
+  encapsulation: ViewEncapsulation.None 
+
 })
 export class AddProduct implements OnInit {
   private productservice = inject(ProductService);

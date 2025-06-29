@@ -1,121 +1,170 @@
-.head {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px;
+:root {
+  --primary: #4fc3f7;
+  --success: #4caf50;
+  --text-light: #e0e0e0;
+  --bg-dark: #1e1e2f;
+  --bg-light: #2a2a3d;
+  --input-bg: #303040;
+  --border-color: #888;
 }
 
-.container {
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Common Rows */
-.first-row,
-.second-row,
-.third-row,
-.manager-first-row,
-.manager-third-row {
-  display: grid;
-  gap: 16px;
-  margin: 20px 0;
-}
-
-.first-row,
-.manager-first-row,
-.third-row,
-.manager-third-row {
-  grid-template-columns: repeat(1, 1fr); /* Single wide card */
-}
-
-.second-row,
-.third-row {
-  grid-template-columns: repeat(2, 1fr); /* Two cards 50:50 */
-}
-
-/* Cards */
-.card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  min-height: 350px;
+html, body {
+  background: var(--bg-dark);
+  color: var(--text-light);
+  min-height: 100vh;
+  margin: 0;
   padding: 0;
 }
 
-.card-header {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 12px;
+.head h1 {
+  margin: 24px;
+  color: var(--text-light);
+}
+
+.container {
+  padding: 0 24px 24px;
+}
+
+/* === Card Layout === */
+.row.g-3 > [class*='col-'] {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background: var(--bg-light);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body {
+  flex: 1;
+  overflow: hidden;
+}
+
+.table-container {
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+/* === Card Header and Filter Bar === */
+.card-header {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--input-bg);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .card-header h5 {
   margin: 0;
-  font-size: 16px;
+  color: var(--text-light);
+  font-size: 1.1rem;
+  flex-shrink: 0;
 }
 
-.search-box {
-  font-size: 14px;
-  padding: 4px 8px;
-  width: 50%;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.card-body {
-  padding: 10px;
+/* New filter input spacing & style */
+.filter-input {
+  min-width: 160px;
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding: 6px 12px;
+  font-size: 0.95rem;
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-light);
+  margin-left: auto;
 }
 
-/* Table */
-table {
-  border-collapse: collapse;
+/* === Table === */
+.dark-table {
   width: 100%;
-  table-layout: fixed;
-  word-wrap: break-word;
+  border-collapse: collapse;
+  background: var(--bg-light);
 }
 
-th, td {
-  padding: 6px 8px;
-  border-bottom: 1px solid #ccc;
-  text-align: left;
-  word-break: break-word;
+.dark-table th,
+.dark-table td {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  color: var(--text-light);
 }
 
-th {
-  background-color: #f8f9fa;
-  font-weight: 600;
+.dark-table thead {
+  background: var(--input-bg);
 }
 
-/* Pagination */
-.pagination {
+.dark-table tbody tr:hover {
+  background: #2d2d3d;
+}
+
+/* === Pagination === */
+.pagination-sm {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 12px;
-  gap: 5px;
+  gap: 6px;
+  padding: 0;
+  margin: 12px 0 0;
+  list-style: none;
 }
 
-.pagination button {
-  background-color: #e7e7e7;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
+.page-item button {
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  color: var(--text-light);
+  padding: 4px 8px;
   border-radius: 4px;
+  cursor: pointer;
 }
 
-.pagination button.active {
-  background-color: #007bff;
+.page-item.disabled button {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.page-item.active button {
+  background: var(--primary);
+  border-color: var(--primary);
   color: white;
 }
 
-.pagination button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.page-link:hover:not(:disabled) {
+  background: var(--input-bg);
+}
+.welcome-heading {
+  font-size: 2.4rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 40px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--primary);
+  text-shadow: 0 0 8px rgba(79, 195, 247, 0.3);
+  animation: slideFade 1s ease-out;
+  letter-spacing: 1px;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* On hover (optional flair) */
+.welcome-heading:hover {
+  transform: scale(1.03);
+  text-shadow: 0 0 12px rgba(79, 195, 247, 0.5);
+}
+
+/* Keyframe for slide + fade */
+@keyframes slideFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

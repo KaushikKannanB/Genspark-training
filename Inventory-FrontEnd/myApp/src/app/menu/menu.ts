@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NotificationService } from '../services/Notification.service';
@@ -10,7 +10,9 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-menu',
   imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './menu.html',
-  styleUrl: './menu.css'
+  styleUrl: './menu.css',
+  encapsulation: ViewEncapsulation.None
+
 })
 export class Menu implements OnInit {
   logout:string=""

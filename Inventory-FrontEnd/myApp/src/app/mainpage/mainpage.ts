@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { Menu } from "../menu/menu";
 import { ProductService } from '../services/Products.service';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,9 @@ import { AUthService } from '../services/Authentication.service';
   selector: 'app-mainpage',
   imports: [FormsModule, CommonModule,RouterLink],
   templateUrl: './mainpage.html',
-  styleUrl: './mainpage.css'
+  styleUrl: './mainpage.css',
+  encapsulation: ViewEncapsulation.None
+
 })
 export class Mainpage implements OnInit{
     isadmin:boolean=false;

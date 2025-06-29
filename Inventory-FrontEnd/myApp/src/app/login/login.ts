@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { UserLoginModel } from '../models/UserLoginModel';
 // import { UserService } from '../services/UserService';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,7 +11,9 @@ import { AUthService } from '../services/Authentication.service';
   selector: 'app-login',
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrl: './login.css',
+  encapsulation: ViewEncapsulation.None
+
 })
 export class Login {
   private authservice = inject(AUthService);

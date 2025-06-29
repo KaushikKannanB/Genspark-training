@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ProductService } from '../services/Products.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -8,7 +8,9 @@ import { Menu } from '../menu/menu';
   selector: 'app-stock-logs',
   imports: [FormsModule, CommonModule],
   templateUrl: './stock-logs.html',
-  styleUrl: './stock-logs.css'
+  styleUrl: './stock-logs.css',
+  encapsulation: ViewEncapsulation.None 
+
 })
 export class StockLogs {
   private productservice = inject(ProductService);

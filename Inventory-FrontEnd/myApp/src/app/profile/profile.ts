@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { AdminManagerService } from '../services/AdminManager.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,12 +7,23 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-profile',
   imports: [CommonModule, FormsModule],
   templateUrl: './profile.html',
-  styleUrl: './profile.css'
+  styleUrl: './profile.css',
+  encapsulation: ViewEncapsulation.None 
+
 })
 export class Profile implements OnInit{
   paginationState: { [key: string]: number } = {};
   
   filterQueries: { [key: string]: string } = {};
+  pageSize: { [key: string]: number } = {
+  prodsAdded: 5,
+  stockUpds: 5,
+  prodUpds: 5,
+  categadds: 5,
+  managers: 5,
+  productAdded: 5,
+  allRequest: 5
+};
 
 getFilteredData(key: string, data: any[]): any[] {
   const query = this.filterQueries[key]?.toLowerCase() || '';
@@ -24,15 +35,16 @@ getFilteredData(key: string, data: any[]): any[] {
   );
 }
 
-getFilteredAndPaginatedData(key: string, data: any[], pageSize = 5): any[] {
+getFilteredAndPaginatedData(key: string, data: any[]): any[] {
   const filtered = this.getFilteredData(key, data);
   const page = this.getPage(key);
-  const start = (page - 1) * pageSize;
-  return filtered.slice(start, start + pageSize);
+  const size = this.pageSize[key] || 5;
+  const start = (page - 1) * size;
+  return filtered.slice(start, start + size);
 }
 
-getTotalPages(filteredData: any[], pageSize = 5): number {
-  return Math.ceil(filteredData.length / pageSize);
+getTotalPages(data: any[], size = 3): number {
+  return Math.ceil(data.length / size);
 }
 
 

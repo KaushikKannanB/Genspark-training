@@ -35,10 +35,20 @@ export class Products implements OnInit{
   fieldUpdate:string="";
   updateField:'description'|'price'|null=null;
   newValue:string|number='';
+  currentPage: number = 1;
+  itemsPerPage: number = 9; // Show 6 cards per page (or any number you want)
+  totalPages: number = 0;
+  paginatedProducts: any[] = [];
   ngOnInit(): void 
   {
     this.loadProducts();
     this.getallcategories();
+  }
+  updatePagination() {
+    this.totalPages = Math.ceil(this.filteredproducts.length / this.itemsPerPage);
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedProducts = this.filteredproducts.slice(start, end);
   }
   loadProducts() {
     this.productservice.getallproducts().subscribe({
@@ -60,6 +70,8 @@ export class Products implements OnInit{
           })
         });
         this.filteredproducts = this.products;
+        this.updatePagination();
+
       }
     });
   }
@@ -167,9 +179,10 @@ export class Products implements OnInit{
      const matchCategory = searchcatgegory?product.category?.toUpperCase()===searchcatgegory:true;
       const matchMinPrice = this.searchByMinPrice != null ? product.price >= this.searchByMinPrice : true;
       const matchMaxPrice = this.searchByMaxPrice != null ? product.price <= this.searchByMaxPrice : true;
-      
       return matchName && matchStatus && matchMinPrice && matchMaxPrice && matchCategory && matchinv;
     });
+    this.currentPage = 1; // Reset to first page when filter is applied
+    this.updatePagination();
   }
   getallcategories()
   {

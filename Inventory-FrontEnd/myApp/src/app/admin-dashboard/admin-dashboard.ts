@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { AdminManagerService } from '../services/AdminManager.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   selector: 'app-admin-dashboard',
   imports: [FormsModule, CommonModule],
   templateUrl: './admin-dashboard.html',
-  styleUrl: './admin-dashboard.css'
+  styleUrl: './admin-dashboard.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class AdminDashboard implements OnInit {
   private admmanservice = inject(AdminManagerService);

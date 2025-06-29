@@ -1,138 +1,139 @@
-<div class="head">
-  <h1>Welcome, {{ userid }}, here are your activity records</h1>
-</div>
-
 <div class="container mt-4" *ngIf="report">
+  <h1 class="welcome-heading">Welcome, {{ userid }}</h1>
   <ng-container *ngIf="role === 'ADMIN'; else managerView">
-    <!-- Admin View -->
-
-    <!-- ✅ FIRST ROW: Products Added -->
-    <div class="first-row">
-      <div class="card" *ngIf="report.prodsAdded?.length">
-        <ng-container *ngTemplateOutlet="cardTable; context: {
-          title: 'Products Added',
-          data: report.prodsAdded,
-          columns: ['id', 'name', 'description', 'price'],
-          key: 'prodsAdded'
-        }"></ng-container>
+    
+    <!-- ✅ First Row -->
+    <div class="row g-3 mb-3">
+      <div class="col-7">
+        <div class="card shadow-sm" *ngIf="report.prodsAdded?.length">
+          <ng-container *ngTemplateOutlet="cardTable; context: {
+            title: 'Products Added',
+            data: report.prodsAdded,
+            columns: ['id', 'name', 'description', 'price'],
+            key: 'prodsAdded'
+          }"></ng-container>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="card shadow-sm" *ngIf="report.stockUpds?.length">
+          <ng-container *ngTemplateOutlet="cardTable; context: {
+            title: 'Stock Updates',
+            data: report.stockUpds,
+            columns: ['inventoryId', 'oldStock', 'newStock'],
+            key: 'stockUpds'
+          }"></ng-container>
+        </div>
       </div>
     </div>
 
-    <!-- ✅ SECOND ROW: Stock + Product Updates -->
-    <div class="second-row">
-      <div class="card" *ngIf="report.stockUpds?.length">
-        <ng-container *ngTemplateOutlet="cardTable; context: {
-          title: 'Stock Updates',
-          data: report.stockUpds,
-          columns: ['inventoryId', 'oldStock', 'newStock'],
-          key: 'stockUpds'
-        }"></ng-container>
+    <!-- ✅ Second Row -->
+    <div class="row g-3 mb-3">
+      <div class="col-6">
+        <div class="card shadow-sm" *ngIf="report.prodUpds?.length">
+          <ng-container *ngTemplateOutlet="cardTable; context: {
+            title: 'Product Updates',
+            data: report.prodUpds,
+            columns: ['productId', 'fieldUpdated', 'newValue'],
+            key: 'prodUpds'
+          }"></ng-container>
+        </div>
       </div>
-
-      <div class="card" *ngIf="report.prodUpds?.length">
-        <ng-container *ngTemplateOutlet="cardTable; context: {
-          title: 'Product Updates',
-          data: report.prodUpds,
-          columns: ['productId', 'fieldUpdated', 'newValue'],
-          key: 'prodUpds'
-        }"></ng-container>
+      <div class="col-6">
+        <div class="card shadow-sm" *ngIf="report.categadds?.length">
+          <ng-container *ngTemplateOutlet="cardTable; context: {
+            title: 'Categories Added',
+            data: report.categadds,
+            columns: ['id', 'categoryName'],
+            key: 'categadds'
+          }"></ng-container>
+        </div>
       </div>
     </div>
 
-    <!-- ✅ THIRD ROW: Categories + Managers -->
-    <div class="third-row">
-      <div class="card" *ngIf="report.categadds?.length">
-        <ng-container *ngTemplateOutlet="cardTable; context: {
-          title: 'Categories Added',
-          data: report.categadds,
-          columns: ['id', 'categoryName'],
-          key: 'categadds'
-        }"></ng-container>
-      </div>
-
-      <div class="card" *ngIf="report.managers?.length">
-        <ng-container *ngTemplateOutlet="cardTable; context: {
-          title: 'Managers Created',
-          data: report.managers,
-          columns: ['id', 'name', 'email'],
-          key: 'managers'
-        }"></ng-container>
+    <!-- ✅ Third Row -->
+    <div class="row g-3 mb-3">
+      <div>
+        <div class="card shadow-sm" *ngIf="report.managers?.length">
+          <ng-container *ngTemplateOutlet="cardTable; context: {
+            title: 'Managers Created',
+            data: report.managers,
+            columns: ['id', 'name', 'email'],
+            key: 'managers'
+          }"></ng-container>
+        </div>
       </div>
     </div>
   </ng-container>
 
-  <!-- Manager View (Updated) -->
-<ng-template #managerView>
-  <!-- ✅ FIRST ROW: Products Added -->
-  <div class="manager-first-row">
-    <div class="card" *ngIf="report.productAdded?.length">
-      <ng-container *ngTemplateOutlet="cardTable; context: {
-        title: 'Products Added',
-        data: report.productAdded,
-        columns: ['id', 'name', 'description', 'price'],
-        key: 'productAdded',
-        pageSize: 3
-      }"></ng-container>
+  <!-- ✅ MANAGER VIEW -->
+  <ng-template #managerView>
+    <div class="row g-3 mb-3">
+      <div class="col-8">
+        <div class="card shadow-sm" *ngIf="report.productAdded?.length">
+          <ng-container *ngTemplateOutlet="cardTable; context: {
+            title: 'Products Added',
+            data: report.productAdded,
+            columns: ['id', 'name', 'description', 'price'],
+            key: 'productAdded'
+          }"></ng-container>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card shadow-sm" *ngIf="report.stockUpds?.length">
+          <ng-container *ngTemplateOutlet="cardTable; context: {
+            title: 'Stock Updates',
+            data: report.stockUpds,
+            columns: ['inventoryId', 'oldStock', 'newStock'],
+            key: 'stockUpds'
+          }"></ng-container>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- ✅ SECOND ROW: Stock + Product Updates -->
-  <div class="second-row">
-    <div class="card" *ngIf="report.stockUpds?.length">
-      <ng-container *ngTemplateOutlet="cardTable; context: {
-        title: 'Stock Updates',
-        data: report.stockUpds,
-        columns: ['inventoryId', 'oldStock', 'newStock'],
-        key: 'stockUpds'
-      }"></ng-container>
+    <div class="row g-3 mb-3">
+      <div class="col-6">
+        <div class="card shadow-sm" *ngIf="report.prodUpds?.length">
+          <ng-container *ngTemplateOutlet="cardTable; context: {
+            title: 'Product Updates',
+            data: report.prodUpds,
+            columns: ['productId', 'fieldUpdated', 'newValue'],
+            key: 'prodUpds'
+          }"></ng-container>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card shadow-sm" *ngIf="report.allRequest?.length">
+          <ng-container *ngTemplateOutlet="cardTable; context: {
+            title: 'Categories Requested',
+            data: report.allRequest,
+            columns: ['categoryName'],
+            key: 'allRequest'
+          }"></ng-container>
+        </div>
+      </div>
     </div>
-
-    <div class="card" *ngIf="report.prodUpds?.length">
-      <ng-container *ngTemplateOutlet="cardTable; context: {
-        title: 'Product Updates',
-        data: report.prodUpds,
-        columns: ['productId', 'fieldUpdated', 'newValue'],
-        key: 'prodUpds'
-      }"></ng-container>
-    </div>
-  </div>
-
-  <!-- ✅ THIRD ROW: Category Requests -->
-  <div class="manager-third-row">
-    <div class="card" *ngIf="report.allRequest?.length">
-      <ng-container *ngTemplateOutlet="cardTable; context: {
-        title: 'Categories Requested',
-        data: report.allRequest,
-        columns: ['categoryName'],
-        key: 'allRequest'
-      }"></ng-container>
-    </div>
-  </div>
-</ng-template>
-
+  </ng-template>
 </div>
-
-<!-- Reusable Card Table Template -->
-<ng-template #cardTable let-title="title" let-data="data" let-columns="columns" let-key="key" let-pageSize="pageSize">
-  <div class="card shadow-sm mb-4">
-    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-      <h5 class="mb-0">{{ title }}</h5>
+<ng-template #cardTable let-title="title" let-data="data" let-columns="columns" let-key="key">
+  <div class="card shadow-sm mb-4 h-100 d-flex flex-column">
+    <div class="card-header d-flex align-items-center">
+      <h5 class="mb-0 text-light">{{ title }}</h5>
       <input type="text"
              [(ngModel)]="filterQueries[key]"
              placeholder="Filter..."
-             class="form-control form-control-sm w-50 ms-2" />
+             class="filter-input ms-auto" />
     </div>
 
-    <div class="card-body p-2">
-      <div>
-        <table class="table table-sm table-bordered table-hover mb-0">
-          <thead class="table-light">
+    <div class="card-body p-2 flex-grow-1 d-flex flex-column">
+      <div class="table-container flex-grow-1 overflow-auto">
+        <table class="dark-table">
+          <thead>
             <tr>
-              <th *ngFor="let col of columns" class="text-capitalize">{{ col }}</th>
+              <th *ngFor="let col of columns">{{ col | titlecase }}</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let row of getFilteredAndPaginatedData(key, data, pageSize || 5)">
+            <tr *ngFor="let row of getFilteredAndPaginatedData(key, data)">
               <td *ngFor="let col of columns">{{ row[col] }}</td>
             </tr>
           </tbody>
@@ -140,21 +141,18 @@
       </div>
 
       <!-- Pagination -->
-      <nav *ngIf="getTotalPages(getFilteredData(key, data), pageSize || 5) > 1">
-        <ul class="pagination pagination-sm justify-content-center mt-2">
+      <nav *ngIf="getTotalPages(getFilteredData(key, data), pageSize[key] || 5) > 1">
+        <ul class="pagination-sm justify-content-center mt-2">
           <li class="page-item" [class.disabled]="getPage(key) === 1">
-            <button class="page-link" (click)="setPage(key, getPage(key) - 1)" [disabled]="getPage(key) === 1">&laquo;</button>
+            <button class="page-link" (click)="setPage(key, getPage(key) - 1)">&laquo;</button>
           </li>
-
           <li class="page-item"
-              *ngFor="let p of [].constructor(getTotalPages(getFilteredData(key, data), pageSize || 5)); let i = index"
+              *ngFor="let p of [].constructor(getTotalPages(getFilteredData(key, data), pageSize[key] || 5)); let i = index"
               [class.active]="getPage(key) === i + 1">
             <button class="page-link" (click)="setPage(key, i + 1)">{{ i + 1 }}</button>
           </li>
-
-          <li class="page-item" [class.disabled]="getPage(key) === getTotalPages(getFilteredData(key, data), pageSize || 5)">
-            <button class="page-link" (click)="setPage(key, getPage(key) + 1)"
-              [disabled]="getPage(key) === getTotalPages(getFilteredData(key, data), pageSize || 5)">&raquo;</button>
+          <li class="page-item" [class.disabled]="getPage(key) === getTotalPages(getFilteredData(key, data), pageSize[key] || 5)">
+            <button class="page-link" (click)="setPage(key, getPage(key) + 1)">&raquo;</button>
           </li>
         </ul>
       </nav>

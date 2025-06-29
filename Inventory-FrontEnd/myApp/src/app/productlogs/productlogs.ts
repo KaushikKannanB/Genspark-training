@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProductService } from '../services/Products.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -9,7 +9,9 @@ import { Menu } from '../menu/menu';
   selector: 'app-productlogs',
   imports: [CommonModule, FormsModule,],
   templateUrl: './productlogs.html',
-  styleUrl: './productlogs.css'
+  styleUrl: './productlogs.css',
+  encapsulation: ViewEncapsulation.None 
+
 })
 export class Productlogs implements OnInit{
   private prodservice = inject(ProductService);
