@@ -13,5 +13,7 @@ namespace Inventory.Interfaces
         Task<object> CheckManagerActivity(string ManagerId);
         Task<object> AdminActivity(string Id);
 
+        Task<CategoryAddRequest> CancelCategoryAddrequest(string categoryaddreq);
+
     }
 }

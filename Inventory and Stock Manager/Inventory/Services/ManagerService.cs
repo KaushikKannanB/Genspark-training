@@ -40,27 +40,40 @@ namespace Inventory.Services
             category = category.ToUpper().Trim();
 
             var catexists = await categrepo.GetByName(category);
-            if (catexists == null)
-            {
-                var ca_id = await encryptService.GenerateId("CATADD");
-                var cur_user = await userService.GetByMail(currentUserService.Email);
-                CategoryAddRequest ca = new();
-                ca.Id = ca_id;
-                ca.CategoryName = category;
-                ca.RequestedAt = DateTime.UtcNow;
-                ca.RequestedBy = cur_user.Id;
-                ca.Status = "REQUESTED";
-
-                var ca_added = await categaddrepo.Add(ca);
-
-                return ca_added;
-
-
-            }
-            else
+            var categaddexists = await categaddrepo.GetByName(category);
+            if (catexists != null)
             {
                 return null;
+
             }
+            if (categaddexists != null)
+            {
+                if (categaddexists.Status != "DENIED")
+                {
+                    return null;
+                }
+            }
+            if (catexists == null)
+                {
+                    var ca_id = await encryptService.GenerateId("CATADD");
+                    var cur_user = await userService.GetByMail(currentUserService.Email);
+                    CategoryAddRequest ca = new();
+                    ca.Id = ca_id;
+                    ca.CategoryName = category;
+                    ca.RequestedAt = DateTime.UtcNow;
+                    ca.RequestedBy = cur_user.Id;
+                    ca.Status = "REQUESTED";
+
+                    var ca_added = await categaddrepo.Add(ca);
+
+                    return ca_added;
+
+
+                }
+                else
+                {
+                    return null;
+                }
         }
     }
 }

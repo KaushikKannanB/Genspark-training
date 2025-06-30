@@ -1,4 +1,3 @@
-/* 🌑 Dark Theme Variables */
 :root {
   --primary: #4fc3f7;
   --danger: #ff6b6b;
@@ -8,214 +7,181 @@
   --bg-light: #2a2a3d;
   --input-bg: #303040;
   --border-color: #555;
+  --spacing: 16px;
 }
 
 html, body {
   background-color: var(--bg-dark);
   color: var(--text-light);
-  height: auto;
-  min-height: 100vh;
   margin: 0;
   padding: 0;
+  height: 90%;
+  font-family: 'Segoe UI', sans-serif;
+}
+body{
+  margin-left: 20px;
+}
+.container {
+  padding: var(--spacing);
 }
 
-h1, h2, h3, h4, h5, h6,
-p, span, label, input, select, option,
-button, strong, b, div {
-  color: var(--text-light);
+.row {
+  display: flex;
+  gap: var(--spacing);
+  align-items: flex-start;
+}
+
+.col-md-8, .col-md-4 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+}
+
+.col-md-8 {
+  flex: 2;
+}
+
+.col-md-4 {
+  flex: 1;
+  min-height: calc(100vh - 100px);
+  justify-content: space-between;
 }
 
 .card {
   background: var(--bg-light);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
   border-radius: 12px;
-  color: var(--text-light);
-  border: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-color);
+  flex-grow: 1;
 }
 
 .card-body {
+  padding: 1rem 1.2rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  min-height: 400px;
+  justify-content: space-between;
+}
+
+h3, h2 {
+  margin-bottom: 1rem;
+  color: var(--text-light);
 }
 
 .table-container {
-  max-height: 300px;
   overflow-y: auto;
+  max-height: 280px;
 }
 
 .table {
   width: 100%;
-  background: var(--bg-light);
-  color: var(--text-light);
   border-collapse: collapse;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border-color);
+  font-size: 0.875rem;
 }
-
-.table thead,
-.table thead th,
-.table tbody {
-  background-color: #2a2a3d !important;
-  color: var(--text-light) !important;
+.table-container table tbody td button
+{
+  margin-left: 10px;
 }
 .table th, .table td {
-  padding: 10px;
+  padding: 8px 10px;
   border: 1px solid var(--border-color);
-  vertical-align: middle;
-  text-align: left;
+  color: var(--text-light);
+  background-color: var(--bg-light);
+}
+
+.table thead {
+  background-color: #232336;
 }
 
 .table tbody tr:hover {
   background-color: #2d2d3d;
-  transition: background-color 0.3s;
-}
-
-.pagination-container button {
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  transition: transform 0.2s ease;
-}
-
-.pagination-container button:hover {
-  transform: scale(1.05);
-  background-color: #42b6eb;
-}
-
-.pagination-container span {
-  align-self: center;
-  color: var(--text-light);
+  transition: background-color 0.2s ease-in-out;
 }
 
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  padding: 16px;
-  background: linear-gradient(135deg, #1e1e2f, #2a2a3d);
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  gap: 10px;
+  margin-bottom: 12px;
+  background: #2c2c40;
+  padding: 12px;
+  border-radius: 10px;
 }
 
 .filter-bar input,
 .filter-bar select {
-  background-color: var(--input-bg);
-  color: var(--text-light);
+  background: var(--input-bg);
   border: 1px solid var(--border-color);
+  color: var(--text-light);
+  padding: 8px 12px;
   border-radius: 6px;
-  height: 40px;
-  padding: 0 12px;
   flex: 1;
-  min-width: 120px;
+  min-width: 130px;
 }
 
-.filter-bar input::placeholder,
-.filter-bar select::placeholder {
-  color: #aaa;
-}
-
-.filter-bar input:focus,
-.filter-bar select:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0px 0px 6px var(--primary);
-}
-
-.form-row {
-  padding: 10px;
-  width: 100%;
-  box-shadow: 0px 0px 3px rgba(0, 123, 255, 0.25);
-  margin-bottom: 20px;
-}
-
-.form-row form {
+.pagination-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
 }
 
-.form-row form input {
-  flex-grow: 1;
-  background-color: var(--input-bg);
-  color: var(--text-light);
-  border: 1px solid var(--border-color);
-  padding: 0 12px;
-  border-radius: 6px;
-  height: 40px;
-  min-width: 200px;
-}
-
-.form-row form button {
-  flex-shrink: 0;
-  background-color: var(--success);
-  color: white;
+.pagination-container button {
+  background-color: var(--primary);
   border: none;
+  padding: 6px 12px;
   border-radius: 6px;
-  height: 40px;
-  padding: 0 20px;
+  color: white;
+  transition: 0.2s;
+}
+
+.pagination-container button:hover {
+  background-color: #42b6eb;
 }
 
 .form {
-  background-color: var(--bg-light);
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: var(--bg-light);
   padding: 20px;
-  gap: 15px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  gap: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  flex-grow: 1;
 }
 
 .form input,
 .form select {
-  background-color: var(--input-bg);
-  color: var(--text-light);
+  background: var(--input-bg);
   border: 1px solid var(--border-color);
   border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--text-light);
   height: 40px;
-  padding: 0 12px;
-  width: 100%;
 }
 
 .form button {
   background-color: var(--success);
   color: white;
   border: none;
+  padding: 10px;
   border-radius: 6px;
-  padding: 10px 16px;
   cursor: pointer;
-  transition: background 0.3s;
   align-self: flex-start;
+  transition: background 0.3s;
 }
 
 .form button:hover {
   background-color: #3e8e41;
 }
-.table tbody tr {
-  background-color: var(--bg-light) !important;
-  color: var(--text-light) !important;
-}
 
-.table tbody tr:hover {
-  background-color: #2d2d3d !important;
-}
-.table td,
-.table th {
-  background-color: var(--bg-light) !important;
-  color: var(--text-light) !important;
-  border-color: var(--border-color) !important;
-}
+/* Responsive: Stack layout on small screens */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
 
-.table tbody tr:hover td {
-  background-color: #2d2d3d !important;
-}
-.table th,
-.table td {
-  border: 1px solid #888 !important; /* or #aaa or #999 depending on your taste */
+  .col-md-4, .col-md-8 {
+    width: 100%;
+    min-height: auto;
+  }
 }

@@ -149,7 +149,23 @@ namespace Inventory.Services
                 return null;
             }
         }
+        public async Task<CategoryAddRequest> CancelCategoryAddrequest(string categaddreq)
+        {
+            categaddreq = categaddreq.ToUpper();
+            var request = await categaddrepo.GetByName(categaddreq);
 
+            if (request == null)
+            {
+                return null;
+            }
+            else
+            {
+                request.Status = "DENIED";
+                await context.SaveChangesAsync();
+                return request;
+            }
+
+        }
         public async Task<Manager> DeleteManager(string ManagerId)
         {
             var manager = await managerrepo.GetById(ManagerId);
@@ -223,7 +239,7 @@ namespace Inventory.Services
             var managersummary = new
             {
                 ProductAdded = prods_by_manager.Select(p => new { p.Id, p.Name, p.Description, p.Price }),
-                AllRequest = categ_req_by_manager.Select(c => new {c.CategoryName }),
+                AllRequest = categ_req_by_manager.Select(c => new { c.CategoryName }),
                 StockUpds = stock_upd_by_manager.Select(s => new { s.InventoryId, s.OldStock, s.NewStock }),
                 ProdUpds = prod_upd_by_manager.Select(p => new { p.ProductId, p.FieldUpdated, p.NewValue }),
             };
@@ -323,4 +339,6 @@ namespace Inventory.Services
         }
 
     }
+    
+
 }

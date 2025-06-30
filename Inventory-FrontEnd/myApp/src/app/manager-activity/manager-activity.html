@@ -1,8 +1,10 @@
 <h1 class="animated-heading">
-  Check <span class="highlighted">every single</span> of a manager, right here
+  Check <span class="highlighted">every single </span>Activity of a manager, right here
 </h1>
 <form (ngSubmit)="handlemanageractivity()" class="manager-form d-flex align-items-center flex-wrap gap-3 mb-4">
-  <label for="manager" class="form-label mb-0 text-light">👤 Manager:</label>
+  <label for="manager" class="form-label mb-0 text-light d-flex align-items-center gap-1"><span class="material-icons">
+psychology
+</span> Manager:</label>
 
   <select name="manager" id="manager"
           class="form-select form-dark"
@@ -13,8 +15,12 @@
     </option>
   </select>
 
-  <button type="submit" class="btn btn-primary">📊 Generate</button>
-  <button type="button" class="btn btn-secondary" (click)="downloadPDF()">⬇️ PDF</button>
+  <button type="submit" class="btn btn-primary d-flex align-items-center gap-1"><span class="material-icons">
+auto_fix_normal
+</span> Generate</button>
+  <button type="button" class="btn btn-secondary d-flex align-items-center gap-1" (click)="downloadPDF()"><span class="material-icons">
+download
+</span> PDF</button>
 </form>
 <div *ngIf="report" class="report-wrapper" id="report-wrapper">
   <div class="report-header">

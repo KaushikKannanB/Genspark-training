@@ -3,22 +3,37 @@
   <div class="nav-options">
     <div class="pages">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" routerLink="home">🏠 Home</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="products">📦 Products</a></li>
+        <li class="nav-item"><a class="nav-link d-flex align-items-center gap-1" routerLink="home"><span class="material-icons">
+cottage 
+</span>Home</a></li>
+        <li class="nav-item"><a class="nav-link d-flex align-items-center gap-1" routerLink="products"><span class="material-icons">
+shopping_basket
+</span> Products</a></li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="notifications">
-            🔔 Notifications
+          <a class="nav-link d-flex align-items-center gap-1" routerLink="notifications">
+            <span class="material-icons">
+add_alert
+</span> Notifications
             @if(notifyService.messages.length != 0) {
               <span class="notification-badge">{{ notifyService.messages.length }}</span>
             }
           </a>
         </li>
-        <li class="nav-item"><a class="nav-link" routerLink="profile">👤 Profile</a></li>
+        <li class="nav-item"><a class="nav-link d-flex align-items-center gap-1" routerLink="profile"><span class="material-icons">
+manage_accounts
+</span> Profile</a></li>
+      <li class="nav-item"><a class="nav-link d-flex align-items-center gap-1" routerLink="dashboard"><span class="material-icons">
+dashboard
+</span> Dashboard</a></li>
       </ul>
     </div>
     <div class="buttons">
-      <button (click)="setenablechangepass()" class="btn btn-outline-light">🔑 Change Password</button>
-      <button (click)="handlelogout()" class="btn btn-danger">🚪 Logout</button>
+      <button (click)="setenablechangepass()" class="btn btn-outline-light d-flex align-items-center gap-1"><span class="material-icons">
+key
+</span> Change Password</button>
+      <button (click)="handlelogout()" class="btn btn-danger d-flex align-items-center gap-1"><span class="material-icons">
+logout
+</span> Logout</button>
     </div>
   </div>
 </nav>

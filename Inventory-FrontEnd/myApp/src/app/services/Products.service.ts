@@ -85,4 +85,14 @@ export class ProductService
         this.authorization();
         return this.http.post(`http://localhost:5077/api/manager/Category-Add-Requested?category=${cate}`,null,{headers:this.headers});
     }
+    getstocklogsbyproductname(prodname:string)
+    {
+        this.authorization();
+        return this.http.get(`http://localhost:5077/api/product/Get-All-Stock-updates-For-ProductName?product=${prodname}`,{headers:this.headers});
+    }
+    getproducsummary(prod:string)
+    {
+        this.authorization();
+        return this.http.get(`http://localhost:5077/api/product/Get-product-summary?prod=${prod}`,{headers:this.headers});
+    }
 }

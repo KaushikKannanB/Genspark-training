@@ -1,161 +1,201 @@
 <div class="container mt-4" *ngIf="report">
-  <h1 class="welcome-heading">Welcome, {{ userid }}</h1>
+  <h1 class="animated-heading">Welcome, <span class="highlighted">{{ userid }}</span></h1>
+  <div class="summary-row mb-4">
+  <div class="summary-item">
+    <div class="summary-card bg-products text-white">
+      <i class="fas fa-box fa-lg me-2"></i>Products Added
+      <div class="count">{{ report.prodsAdded?.length || report.productAdded?.length || 0 }}</div>
+    </div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-card bg-stock text-white">
+      <i class="fas fa-warehouse fa-lg me-2"></i> Stock Updates
+      <div class="count">{{ report.stockUpds?.length || 0 }}</div>
+    </div>
+  </div>
+  <div class="summary-item" *ngIf="role === 'ADMIN'">
+    <div class="summary-card bg-categories text-white">
+      <i class="fas fa-layer-group fa-lg me-2"></i> Categories Added
+      <div class="count">{{ report.categadds?.length || 0 }}</div>
+    </div>
+  </div>
+  <div class="summary-item" *ngIf="role === 'ADMIN'">
+    <div class="summary-card bg-managers text-white">
+      <i class="fas fa-user-tie fa-lg me-2"></i> Managers Created
+      <div class="count">{{ report.managers?.length || 0 }}</div>
+    </div>
+  </div>
+  <div class="summary-item" *ngIf="role !== 'ADMIN'">
+    <div class="summary-card bg-categoryreq text-white">
+      <i class="fas fa-folder-plus fa-lg me-2"></i> Category Requests
+      <div class="count">{{ report.allRequest?.length || 0 }}</div>
+    </div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-card bg-updates text-white">
+      <i class="fas fa-edit fa-lg me-2"></i> Product Updates
+      <div class="count">{{ report.prodUpds?.length || 0 }}</div>
+    </div>
+  </div>
+</div>
+
+
   <ng-container *ngIf="role === 'ADMIN'; else managerView">
-    
-    <!-- ✅ First Row -->
+    <div class="filter-bar mb-3">
+      <input type="text" placeholder="Filter all sections..." [(ngModel)]="filterQueries['global']" class="filter-input" />
+    </div>
+    <!-- Row1: Products, Stock, Managers -->
     <div class="row g-3 mb-3">
-      <div class="col-7">
-        <div class="card shadow-sm" *ngIf="report.prodsAdded?.length">
-          <ng-container *ngTemplateOutlet="cardTable; context: {
-            title: 'Products Added',
-            data: report.prodsAdded,
-            columns: ['id', 'name', 'description', 'price'],
-            key: 'prodsAdded'
-          }"></ng-container>
+      <div class="col-4" *ngIf="report.prodsAdded?.length">
+        <h3 class="section-title">Products Added</h3>
+        <div class="report-card" *ngFor="let p of getFilteredAndPaginatedData('prodsAdded', report.prodsAdded)">
+          {{ p.id }} – {{ p.name }} – ₹{{ p.price }}
         </div>
+        <div class="no-matches" *ngIf="getFilteredAndPaginatedData('prodsAdded', report.prodsAdded).length === 0">
+            No matches found.
+          </div>
+        <nav *ngIf="getTotalPages(getFilteredData('prodsAdded', report.prodsAdded), pageSize['prodsAdded']) > 1" class="pagination-sm">
+          <button (click)="setPage('prodsAdded', getPage('prodsAdded')-1)" [disabled]="getPage('prodsAdded')===1">&laquo;</button>
+          <span>Page {{ getPage('prodsAdded') }}</span>
+          <button (click)="setPage('prodsAdded', getPage('prodsAdded')+1)" [disabled]="getPage('prodsAdded')===getTotalPages(getFilteredData('prodsAdded', report.prodsAdded), pageSize['prodsAdded'])">&raquo;</button>
+        </nav>
       </div>
-      <div class="col-5">
-        <div class="card shadow-sm" *ngIf="report.stockUpds?.length">
-          <ng-container *ngTemplateOutlet="cardTable; context: {
-            title: 'Stock Updates',
-            data: report.stockUpds,
-            columns: ['inventoryId', 'oldStock', 'newStock'],
-            key: 'stockUpds'
-          }"></ng-container>
+      <div class="col-4" *ngIf="report.stockUpds?.length">
+        <h3 class="section-title">Stock Updates</h3>
+        <div class="report-card" *ngFor="let s of getFilteredAndPaginatedData('stockUpds', report.stockUpds)">
+          {{ s.inventoryId }}: {{ s.oldStock }} → {{ s.newStock }}
         </div>
+        <div class="no-matches" *ngIf="getFilteredAndPaginatedData('stockUpds', report.stockUpds).length === 0">
+            No matches found.
+          </div>
+        <nav *ngIf="getTotalPages(getFilteredData('stockUpds', report.stockUpds), pageSize['stockUpds']) > 1" class="pagination-sm">
+          <button (click)="setPage('stockUpds', getPage('stockUpds')-1)" [disabled]="getPage('stockUpds')===1">&laquo;</button>
+          <span>Page {{ getPage('stockUpds') }}</span>
+          <button (click)="setPage('stockUpds', getPage('stockUpds')+1)" [disabled]="getPage('stockUpds')===getTotalPages(getFilteredData('stockUpds', report.stockUpds), pageSize['stockUpds'])">&raquo;</button>
+        </nav>
       </div>
+      <div class="col-4" *ngIf="report.categadds?.length">
+        <h3 class="section-title">Categories Added</h3>
+        <div class="report-card" *ngFor="let c of getFilteredAndPaginatedData('categadds', report.categadds)">
+          {{ c.id }} – {{ c.categoryName }}
+        </div>
+        <div class="no-matches" *ngIf="getFilteredAndPaginatedData('categadds', report.categadds).length === 0">
+            No matches found.
+        </div>
+        <nav *ngIf="getTotalPages(getFilteredData('categadds', report.categadds), pageSize['categadds']) > 1" class="pagination-sm">
+          <button (click)="setPage('categadds', getPage('categadds')-1)" [disabled]="getPage('categadds')===1">&laquo;</button>
+          <span>Page {{ getPage('categadds') }}</span>
+          <button (click)="setPage('categadds', getPage('categadds')+1)" [disabled]="getPage('categadds')===getTotalPages(getFilteredData('categadds', report.categadds), pageSize['categadds'])">&raquo;</button>
+        </nav>
+      </div>
+      
     </div>
 
-    <!-- ✅ Second Row -->
-    <div class="row g-3 mb-3">
-      <div class="col-6">
-        <div class="card shadow-sm" *ngIf="report.prodUpds?.length">
-          <ng-container *ngTemplateOutlet="cardTable; context: {
-            title: 'Product Updates',
-            data: report.prodUpds,
-            columns: ['productId', 'fieldUpdated', 'newValue'],
-            key: 'prodUpds'
-          }"></ng-container>
+    <!-- Row2: Product Updates, Categories -->
+    <div class="row g-3">
+      <div class="col-6" *ngIf="report.prodUpds?.length">
+        <h3 class="section-title">Product Updates</h3>
+        <div class="report-card" *ngFor="let u of getFilteredAndPaginatedData('prodUpds', report.prodUpds)">
+          {{ u.productId }} – {{ u.fieldUpdated }} → {{ u.newValue }}
         </div>
-      </div>
-      <div class="col-6">
-        <div class="card shadow-sm" *ngIf="report.categadds?.length">
-          <ng-container *ngTemplateOutlet="cardTable; context: {
-            title: 'Categories Added',
-            data: report.categadds,
-            columns: ['id', 'categoryName'],
-            key: 'categadds'
-          }"></ng-container>
+        <div class="no-matches" *ngIf="getFilteredAndPaginatedData('prodUpds', report.prodUpds).length === 0">
+            No matches found.
         </div>
+        <nav *ngIf="getTotalPages(getFilteredData('prodUpds', report.prodUpds), pageSize['prodUpds']) > 1" class="pagination-sm">
+          <button (click)="setPage('prodUpds', getPage('prodUpds')-1)" [disabled]="getPage('prodUpds')===1">&laquo;</button>
+          <span>Page {{ getPage('prodUpds') }}</span>
+          <button (click)="setPage('prodUpds', getPage('prodUpds')+1)" [disabled]="getPage('prodUpds')===getTotalPages(getFilteredData('prodUpds', report.prodUpds), pageSize['prodUpds'])">&raquo;</button>
+        </nav>
       </div>
-    </div>
-
-    <!-- ✅ Third Row -->
-    <div class="row g-3 mb-3">
-      <div>
-        <div class="card shadow-sm" *ngIf="report.managers?.length">
-          <ng-container *ngTemplateOutlet="cardTable; context: {
-            title: 'Managers Created',
-            data: report.managers,
-            columns: ['id', 'name', 'email'],
-            key: 'managers'
-          }"></ng-container>
+      <div class="col-6" *ngIf="report.managers?.length">
+        <h3 class="section-title">Managers Created</h3>
+        <div class="report-card" *ngFor="let m of getFilteredAndPaginatedData('managers', report.managers)">
+          {{ m.id }} – {{ m.name }} – {{ m.email }}
         </div>
+        <div class="no-matches" *ngIf="getFilteredAndPaginatedData('managers', report.managers).length === 0">
+            No matches found.
+        </div>
+        <nav *ngIf="getTotalPages(getFilteredData('managers', report.managers), pageSize['managers']) > 1" class="pagination-sm">
+          <button (click)="setPage('managers', getPage('managers')-1)" [disabled]="getPage('managers')===1">&laquo;</button>
+          <span>Page {{ getPage('managers') }}</span>
+          <button (click)="setPage('managers', getPage('managers')+1)" [disabled]="getPage('managers')===getTotalPages(getFilteredData('managers', report.managers), pageSize['managers'])">&raquo;</button>
+        </nav>
       </div>
+      
     </div>
   </ng-container>
 
-  <!-- ✅ MANAGER VIEW -->
+  <!-- MANAGER VIEW -->
   <ng-template #managerView>
-    <div class="row g-3 mb-3">
-      <div class="col-8">
-        <div class="card shadow-sm" *ngIf="report.productAdded?.length">
-          <ng-container *ngTemplateOutlet="cardTable; context: {
-            title: 'Products Added',
-            data: report.productAdded,
-            columns: ['id', 'name', 'description', 'price'],
-            key: 'productAdded'
-          }"></ng-container>
-        </div>
+  <div class="filter-bar mb-3">
+    <input type="text" placeholder="Filter activities..." [(ngModel)]="filterQueries['global']" class="filter-input" />
+  </div>
+
+  <div class="row g-3 mb-3">
+    <!-- Row 1: Products Added, Product Updates -->
+    <div class="col-6" *ngIf="report.productAdded?.length">
+      <h3 class="section-title">Products Added</h3>
+      <div class="report-card" *ngFor="let it of getFilteredAndPaginatedData('productAdded', report.productAdded)">
+        {{ renderLine(it, 'productAdded') }}
       </div>
-      <div class="col-4">
-        <div class="card shadow-sm" *ngIf="report.stockUpds?.length">
-          <ng-container *ngTemplateOutlet="cardTable; context: {
-            title: 'Stock Updates',
-            data: report.stockUpds,
-            columns: ['inventoryId', 'oldStock', 'newStock'],
-            key: 'stockUpds'
-          }"></ng-container>
-        </div>
+      <div class="no-matches" *ngIf="getFilteredAndPaginatedData('productAdded', report.productAdded).length === 0">
+        No matches found.
       </div>
+      <nav *ngIf="getTotalPages(getFilteredData('productAdded', report.productAdded), pageSize['productAdded']) > 1" class="pagination-sm">
+        <button (click)="setPage('productAdded', getPage('productAdded') - 1)" [disabled]="getPage('productAdded') === 1">&laquo;</button>
+        <span>Page {{ getPage('productAdded') }}</span>
+        <button (click)="setPage('productAdded', getPage('productAdded') + 1)" [disabled]="getPage('productAdded') === getTotalPages(getFilteredData('productAdded', report.productAdded), pageSize['productAdded'])">&raquo;</button>
+      </nav>
     </div>
 
-    <div class="row g-3 mb-3">
-      <div class="col-6">
-        <div class="card shadow-sm" *ngIf="report.prodUpds?.length">
-          <ng-container *ngTemplateOutlet="cardTable; context: {
-            title: 'Product Updates',
-            data: report.prodUpds,
-            columns: ['productId', 'fieldUpdated', 'newValue'],
-            key: 'prodUpds'
-          }"></ng-container>
-        </div>
+    <div class="col-6" *ngIf="report.prodUpds?.length">
+      <h3 class="section-title">Product Updates</h3>
+      <div class="report-card" *ngFor="let it of getFilteredAndPaginatedData('prodUpds', report.prodUpds)">
+        {{ renderLine(it, 'prodUpds') }}
       </div>
-      <div class="col-6">
-        <div class="card shadow-sm" *ngIf="report.allRequest?.length">
-          <ng-container *ngTemplateOutlet="cardTable; context: {
-            title: 'Categories Requested',
-            data: report.allRequest,
-            columns: ['categoryName'],
-            key: 'allRequest'
-          }"></ng-container>
-        </div>
+      <div class="no-matches" *ngIf="getFilteredAndPaginatedData('prodUpds', report.prodUpds).length === 0">
+        No matches found.
       </div>
+      <nav *ngIf="getTotalPages(getFilteredData('prodUpds', report.prodUpds), pageSize['prodUpds']) > 1" class="pagination-sm">
+        <button (click)="setPage('prodUpds', getPage('prodUpds') - 1)" [disabled]="getPage('prodUpds') === 1">&laquo;</button>
+        <span>Page {{ getPage('prodUpds') }}</span>
+        <button (click)="setPage('prodUpds', getPage('prodUpds') + 1)" [disabled]="getPage('prodUpds') === getTotalPages(getFilteredData('prodUpds', report.prodUpds), pageSize['prodUpds'])">&raquo;</button>
+      </nav>
     </div>
-  </ng-template>
-</div>
-<ng-template #cardTable let-title="title" let-data="data" let-columns="columns" let-key="key">
-  <div class="card shadow-sm mb-4 h-100 d-flex flex-column">
-    <div class="card-header d-flex align-items-center">
-      <h5 class="mb-0 text-light">{{ title }}</h5>
-      <input type="text"
-             [(ngModel)]="filterQueries[key]"
-             placeholder="Filter..."
-             class="filter-input ms-auto" />
+  </div>
+
+  <div class="row g-3">
+    <!-- Row 2: Category Requests, Stock Updates -->
+    <div class="col-6" *ngIf="report.allRequest?.length">
+      <h3 class="section-title">Category Requests</h3>
+      <div class="report-card" *ngFor="let it of getFilteredAndPaginatedData('allRequest', report.allRequest)">
+        {{ renderLine(it, 'allRequest') }}
+      </div>
+      <div class="no-matches" *ngIf="getFilteredAndPaginatedData('allRequest', report.allRequest).length === 0">
+        No matches found.
+      </div>
+      <nav *ngIf="getTotalPages(getFilteredData('allRequest', report.allRequest), pageSize['allRequest']) > 1" class="pagination-sm">
+        <button (click)="setPage('allRequest', getPage('allRequest') - 1)" [disabled]="getPage('allRequest') === 1">&laquo;</button>
+        <span>Page {{ getPage('allRequest') }}</span>
+        <button (click)="setPage('allRequest', getPage('allRequest') + 1)" [disabled]="getPage('allRequest') === getTotalPages(getFilteredData('allRequest', report.allRequest), pageSize['allRequest'])">&raquo;</button>
+      </nav>
     </div>
 
-    <div class="card-body p-2 flex-grow-1 d-flex flex-column">
-      <div class="table-container flex-grow-1 overflow-auto">
-        <table class="dark-table">
-          <thead>
-            <tr>
-              <th *ngFor="let col of columns">{{ col | titlecase }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let row of getFilteredAndPaginatedData(key, data)">
-              <td *ngFor="let col of columns">{{ row[col] }}</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="col-6" *ngIf="report.stockUpds?.length">
+      <h3 class="section-title">Stock Updates</h3>
+      <div class="report-card" *ngFor="let it of getFilteredAndPaginatedData('stockUpds', report.stockUpds)">
+        {{ renderLine(it, 'stockUpds') }}
       </div>
-
-      <!-- Pagination -->
-      <nav *ngIf="getTotalPages(getFilteredData(key, data), pageSize[key] || 5) > 1">
-        <ul class="pagination-sm justify-content-center mt-2">
-          <li class="page-item" [class.disabled]="getPage(key) === 1">
-            <button class="page-link" (click)="setPage(key, getPage(key) - 1)">&laquo;</button>
-          </li>
-          <li class="page-item"
-              *ngFor="let p of [].constructor(getTotalPages(getFilteredData(key, data), pageSize[key] || 5)); let i = index"
-              [class.active]="getPage(key) === i + 1">
-            <button class="page-link" (click)="setPage(key, i + 1)">{{ i + 1 }}</button>
-          </li>
-          <li class="page-item" [class.disabled]="getPage(key) === getTotalPages(getFilteredData(key, data), pageSize[key] || 5)">
-            <button class="page-link" (click)="setPage(key, getPage(key) + 1)">&raquo;</button>
-          </li>
-        </ul>
+      <div class="no-matches" *ngIf="getFilteredAndPaginatedData('stockUpds', report.stockUpds).length === 0">
+        No matches found.
+      </div>
+      <nav *ngIf="getTotalPages(getFilteredData('stockUpds', report.stockUpds), pageSize['stockUpds']) > 1" class="pagination-sm">
+        <button (click)="setPage('stockUpds', getPage('stockUpds') - 1)" [disabled]="getPage('stockUpds') === 1">&laquo;</button>
+        <span>Page {{ getPage('stockUpds') }}</span>
+        <button (click)="setPage('stockUpds', getPage('stockUpds') + 1)" [disabled]="getPage('stockUpds') === getTotalPages(getFilteredData('stockUpds', report.stockUpds), pageSize['stockUpds'])">&raquo;</button>
       </nav>
     </div>
   </div>
 </ng-template>
+
+</div>

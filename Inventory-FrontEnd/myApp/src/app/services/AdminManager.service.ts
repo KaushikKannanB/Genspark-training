@@ -66,4 +66,9 @@ export class AdminManagerService
         this.authorization();
         return this.http.put(`http://localhost:5077/api/manager/Change-Password-Manager?NewPassword=${pwd}`,null,{headers:this.headers, responseType:'text'});
     }
+    cancelcategoryaddrequest(req:string)
+    {
+        this.authorization();
+        return this.http.put(`http://localhost:5077/api/admin/Cancel-category-add-request?categoryaddrequest=${req}`,null,{headers:this.headers});
+    }
 }

@@ -46,9 +46,15 @@
       @if(product.status=='ACTIVE')
       {
         <div class="actions">
-          <button (click)="enableUpdateProduct(product.name)">Update</button>
-          <button (click)="handledelete(product.name)">Delete</button>
-          <button (click)="enableUpdateStock(product.name)">Update Stock</button>
+          <button class="d-flex align-items-center gap-1" (click)="enableUpdateProduct(product.name)"><span class="material-icons">
+edit
+</span>Update</button>
+          <button class="d-flex align-items-center gap-1" (click)="handledelete(product.name)"><span class="material-icons">
+delete_forever
+</span>Delete</button>
+          <button class="d-flex align-items-center gap-1" (click)="enableUpdateStock(product.name)"><span class="material-icons">
+sync_alt
+</span>Update Stock</button>
         </div>
       }
     </div>

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { UserCreate } from '../models/UserCreateModel';
 import { User } from '../models/User';
 import { Router } from '@angular/router';
+import { NotificationService } from '../services/Notification.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class AdminDashboard implements OnInit {
   private admmanservice = inject(AdminManagerService);
+  private notify = inject(NotificationService);
   private router = inject(Router);
   alladmins:any;
   allmanagers:any;
@@ -43,7 +45,12 @@ export class AdminDashboard implements OnInit {
   }
 
   get paginatedManagers() {
-  return this.allmanagers
+  const statusOrder: Record<'ACTIVE' | 'INACTIVE', number> = {
+    ACTIVE: 0,
+    INACTIVE: 1
+  };
+
+  const filtered = this.allmanagers
     ?.filter((m: any) => {
       const matchesName = m.name.toLowerCase().includes(this.managerSearch.toLowerCase());
       const matchesStatus = this.managersearchstatus
@@ -52,8 +59,16 @@ export class AdminDashboard implements OnInit {
 
       return matchesName && matchesStatus;
     })
-    .slice((this.managerPage - 1) * this.itemsPerPage, this.managerPage * this.itemsPerPage);
+    .sort((a: any, b: any) => {
+      return statusOrder[a.status as keyof typeof statusOrder] - statusOrder[b.status as keyof typeof statusOrder];
+    });
+
+  return filtered.slice(
+    (this.managerPage - 1) * this.itemsPerPage,
+    this.managerPage * this.itemsPerPage
+  );
 }
+
 
 
   get totalAdminPages() {
@@ -86,21 +101,35 @@ export class AdminDashboard implements OnInit {
     if (this.managerPage < this.totalManagerPages) this.managerPage++;
   }
   get paginatedCategoryRequests() {
-    return this.categoryrequests
-      ?.filter((req: any) => {
-        const matchesName = req.categoryName
-          .toLowerCase()
-          .includes(this.categorySearch.toLowerCase());
+  const order: Record<'REQUESTED' | 'ADDED' | 'DENIED', number> = {
+    REQUESTED: 0,
+    ADDED: 1,
+    DENIED: 2
+  };
 
-        const matchesStatus = this.categoryStatus
-          ? req.status === this.categoryStatus
-          : true;
+  const filtered = this.categoryrequests
+    ?.filter((req: any) => {
+      const matchesName = req.categoryName
+        .toLowerCase()
+        .includes(this.categorySearch.toLowerCase());
 
-        return matchesName && matchesStatus;
-      })
-      .slice((this.categoryPage - 1) * this.itemsPerPage,
-            this.categoryPage * this.itemsPerPage);
-  }
+      const matchesStatus = this.categoryStatus
+        ? req.status === this.categoryStatus
+        : true;
+
+      return matchesName && matchesStatus;
+    })
+    .sort((a: any, b: any) => {
+      return order[a.status as keyof typeof order] - order[b.status as keyof typeof order];
+    });
+
+  return filtered.slice(
+    (this.categoryPage - 1) * this.itemsPerPage,
+    this.categoryPage * this.itemsPerPage
+  );
+}
+
+
 
   get totalCategoryPages() {
     return Math.ceil(
@@ -134,6 +163,17 @@ export class AdminDashboard implements OnInit {
       }
     })
     alert("Catgeory added successfully");
+    this.router.navigate(["home"]);
+  }
+  denyRequest(req:string, by:string)
+  {
+    this.admmanservice.cancelcategoryaddrequest(req).subscribe({
+      next:(data:any)=>{
+        console.log(data);
+      }
+    })
+    // this.notify.messages.push(`Category request by ${by} for ${req} DENIED`);
+    alert("Request rejected successfully");
     this.router.navigate(["home"]);
   }
   addcategory() {

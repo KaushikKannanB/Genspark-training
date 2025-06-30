@@ -92,7 +92,7 @@ namespace Inventory.Controllers
             {
                 // var cur_user = await adminService.GetByMail(currentUserService.Email);
                 await hubContext.Clients.All.SendAsync("ReceiveNotification", $"Category: {Category.ToUpper()} added--> notified at {DateTime.UtcNow}");
-                
+
                 return Ok(newcat);
             }
         }
@@ -173,21 +173,39 @@ namespace Inventory.Controllers
                 return BadRequest("Invalid Password, a password must contain an Uppercase letter, a digit, a special character, and more than 8 characters");
             }
             try
-                {
-                    var cur_user_admin = await adminService.GetByMail(currentUserService.Email);
-                    var cur_user_user = await userService.GetByMail(currentUserService.Email);
-                    var encryptedData = await encryptService.EncryptData(new EncryptModel { Data = NewPassword });
-                    cur_user_admin.Password = encryptedData.EncryptedData;
-                    cur_user_user.Password = encryptedData.EncryptedData;
+            {
+                var cur_user_admin = await adminService.GetByMail(currentUserService.Email);
+                var cur_user_user = await userService.GetByMail(currentUserService.Email);
+                var encryptedData = await encryptService.EncryptData(new EncryptModel { Data = NewPassword });
+                cur_user_admin.Password = encryptedData.EncryptedData;
+                cur_user_user.Password = encryptedData.EncryptedData;
 
-                    await context.SaveChangesAsync();
-                    return Ok("Changed Password!");
-                }
-                catch (Exception e)
-                {
-                    return BadRequest(e.Message);
-                }
+                await context.SaveChangesAsync();
+                return Ok("Changed Password!");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
 
+        }
+        [Authorize]
+        [HttpPut("Cancel-category-add-request")]
+        public async Task<IActionResult> CancelRequest(string categoryaddrequest)
+        {
+            var result = await adminService.CancelCategoryAddrequest(categoryaddrequest);
+            var cur_user_admin = await adminService.GetByMail(currentUserService.Email);
+
+
+            if (result == null)
+            {
+                return BadRequest("Invalid");
+            }
+            else
+            {
+                await hubContext.Clients.All.SendAsync("ReceiveNotification", $"Category: {categoryaddrequest.ToUpper()} request by {cur_user_admin.Name} --> notified at {DateTime.UtcNow}");
+                return Ok(result);
+            }
         }
     }
 }

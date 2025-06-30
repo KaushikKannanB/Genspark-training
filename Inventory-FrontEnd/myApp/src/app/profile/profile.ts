@@ -5,202 +5,107 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
-  encapsulation: ViewEncapsulation.None 
-
+  encapsulation: ViewEncapsulation.None
 })
-export class Profile implements OnInit{
-  paginationState: { [key: string]: number } = {};
-  
-  filterQueries: { [key: string]: string } = {};
-  pageSize: { [key: string]: number } = {
-  prodsAdded: 5,
-  stockUpds: 5,
-  prodUpds: 5,
-  categadds: 5,
-  managers: 5,
-  productAdded: 5,
-  allRequest: 5
-};
+export class Profile implements OnInit {
+  userid: string = '';
+  role: string = '';
+  report: any = null;
 
-getFilteredData(key: string, data: any[]): any[] {
-  const query = this.filterQueries[key]?.toLowerCase() || '';
-  if (!query) return data;
-  return data.filter(item =>
-    Object.values(item).some(val =>
-      String(val).toLowerCase().includes(query)
-    )
-  );
-}
+  private admmanservice = inject(AdminManagerService);
 
-getFilteredAndPaginatedData(key: string, data: any[]): any[] {
-  const filtered = this.getFilteredData(key, data);
-  const page = this.getPage(key);
-  const size = this.pageSize[key] || 5;
-  const start = (page - 1) * size;
-  return filtered.slice(start, start + size);
-}
+  // Tracks current page per section
+  paginationState: Record<string, number> = {};
 
-getTotalPages(data: any[], size = 3): number {
-  return Math.ceil(data.length / size);
-}
+  // Items per page per section
+  pageSize: Record<string, number> = {
+    prodsAdded: 5,
+    stockUpds: 5,
+    managers: 5,
+    prodUpds: 5,
+    categadds: 5,
+    productAdded: 5,
+    allRequest: 5
+  };
 
+  // Global filter used for all sections
+  filterQueries: Record<string, string> = {
+    global: ''
+  };
 
+  ngOnInit(): void {
+    const storedUserId = localStorage.getItem("userid");
+    if (storedUserId) {
+      this.userid = storedUserId;
+      this.role = this.userid.includes('ADM') ? 'ADMIN' : 'MANAGER';
+      this.handlereport();
+    }
+  }
 
+  handlereport(): void {
+    if (this.role === 'ADMIN') {
+      this.admmanservice.handleadminreport(this.userid).subscribe({
+        next: (data: any) => {
+          this.report = data;
+        },
+        error: (err) => {
+          console.error('Admin report fetch error:', err);
+        }
+      });
+    } else {
+      this.admmanservice.handlemanagerreport(this.userid).subscribe({
+        next: (data: any) => {
+          this.report = data;
+        },
+        error: (err) => {
+          console.error('Manager report fetch error:', err);
+        }
+      });
+    }
+  }
+
+  // Pagination helpers
   getPage(key: string): number {
     return this.paginationState[key] || 1;
   }
 
   setPage(key: string, value: number): void {
-    this.paginationState[key] = value;
+    const totalPages = this.getTotalPages(this.getFilteredData(key, this.report?.[key] || []), this.pageSize[key]);
+    this.paginationState[key] = Math.max(1, Math.min(value, totalPages));
   }
 
-  getPaginatedData(key: string, items: any[], itemsPerPage: number = 5): any[] {
+  getTotalPages(data: any[], size: number = 5): number {
+    return Math.ceil(data.length / size);
+  }
+
+  // Filtering
+  getFilteredData(key: string, data: any[]): any[] {
+    const query = this.filterQueries['global'].toLowerCase() || '';
+    if (!query) return data;
+    return data.filter(item =>
+      Object.values(item).some(val =>
+        String(val).toLowerCase().includes(query)
+      )
+    );
+  }
+
+  getFilteredAndPaginatedData(key: string, data: any[]): any[] {
+    const filtered = this.getFilteredData(key, data);
     const page = this.getPage(key);
-    const start = (page - 1) * itemsPerPage;
-    return items.slice(start, start + itemsPerPage);
+    const size = this.pageSize[key] || 5;
+    const start = (page - 1) * size;
+    return filtered.slice(start, start + size);
   }
 
-  
-//   pageSize = 5;
-
-//   pagination:any = {
-//     products: 0,
-//     categories: 0,
-//     managers: 0,
-//     inventory: 0,
-//     productUpdates: 0
-//   };
-
-//   searchQueries:any = {
-//     products: '',
-//     categories: '',
-//     managers: '',
-//     inventory: '',
-//     productUpdates: ''
-//   };
-  userid:string='';
-  role:string='';
-  report:any='';
-
-//   productsSection: any = null;
-//   categoriesSection: any = null;
-//   managersSection: any = null;
-//   inventorySection: any = null;
-//   productUpdatesSection: any = null;
-  private admmanservice = inject(AdminManagerService);
-  ngOnInit(): void {
-  const storedUserId = localStorage.getItem("userid");
-  if (storedUserId) {
-    this.userid = storedUserId;
-    if (this.userid.includes('ADM')) {
-      this.role = 'ADMIN';
-    } else {
-      this.role = 'MANAGER';
-    }
-
-    // ✅ Moved here so role is available
-    this.handlereport();
+  // For single-line display in manager card layout
+  renderLine(item: any, section?: string): string {
+  if (section === 'productAdded') {
+    return `${item.id} – ${item.name}`;
   }
+  return Object.values(item).join(' – ');
 }
-  sections: { title: string, items: string[] }[] = [];
-
-handlereport() {
-  if (this.role === 'ADMIN') {
-    this.admmanservice.handleadminreport(this.userid).subscribe({
-      next: (data: any) => {
-        this.report = data;
-        console.log(data);
-
-      },
-      error: (err) => {
-       
-      },
-    });
-  }
-  else
-  {
-    this.admmanservice.handlemanagerreport(this.userid).subscribe({
-      next: (data: any) => {
-        this.report = data;
-        console.log(data);
-        console.log(Object.keys(data))
-      },
-      error: (err) => {
-
-      },
-    })
-  }
-}
-// parseReport(data: string) {
-//   this.sections = [];
-//   const lines = data.split('\n');
-//   let currentSection: { title: string, items: string[] } | null = null;
-
-//   lines.forEach(line => {
-//     line = line.trim();
-//     if (!line || /^-+$/.test(line)) {
-//       return;
-//     }
-//     if (line.startsWith('•')) {
-//       currentSection?.items.push(line.replace('•', '').trim());
-//     } else {
-//       if (currentSection) {
-//         this.sections.push(currentSection);
-//       }
-//       currentSection = {
-//         title: line.replace(':', '').trim(),
-//         items: []
-//       };
-//     }
-//   });
-//   if (currentSection) {
-//     this.sections.push(currentSection);
-//   }
-
-//   // Now categorize sections
-//   this.productsSection = this.sections.find(s =>
-//     s.title.toLowerCase().includes('product') && s.title.toLowerCase().includes('created')
-//   );
-//   this.categoriesSection = this.sections.find(s =>
-//     s.title.toLowerCase().includes('category') || s.title.toLowerCase().includes('categories')
-//   );
-//   this.managersSection = this.sections.find(s =>
-//     s.title.toLowerCase().includes('manager')
-//   );
-//   this.inventorySection = this.sections.find(s =>
-//     s.title.toLowerCase().includes('inventory')
-//   );
-//   this.productUpdatesSection = this.sections.find(s =>
-//     s.title.toLowerCase().includes('product') && s.title.toLowerCase().includes('update')
-//   );
-// }
-// filterItems(data: any, section: string): any[] {
-//     const query = this.searchQueries[section]?.toLowerCase();
-//     if (!query) return data.items;
-
-//     return data.items.filter((item: string) =>
-//       item.toLowerCase().includes(query)
-//     );
-//   }
-// nextPage(section: string, data: any) {
-//     if ((this.pagination[section] + 1) * this.pageSize < data.items.length) {
-//       this.pagination[section]++;
-//     }
-//   }
-
-//   prevPage(section: string) {
-//     if (this.pagination[section] > 0) {
-//       this.pagination[section]--;
-//     }
-//   }
-
-//   getPageData(data: any, section: string): any[] {
-//     const filtered = this.filterItems(data, section);
-//     const start = this.pagination[section] * this.pageSize;
-//     return filtered.slice(start, start + this.pageSize);
-//   }
-  
 }

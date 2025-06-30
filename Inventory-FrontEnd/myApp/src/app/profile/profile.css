@@ -1,170 +1,157 @@
 :root {
   --primary: #4fc3f7;
-  --success: #4caf50;
-  --text-light: #e0e0e0;
+  --highlight: #5ec4ff;
   --bg-dark: #1e1e2f;
   --bg-light: #2a2a3d;
   --input-bg: #303040;
-  --border-color: #888;
+  --text-light: #e0e0e0;
+  --border-color: #555;
 }
-
-html, body {
-  background: var(--bg-dark);
-  color: var(--text-light);
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
-.head h1 {
-  margin: 24px;
-  color: var(--text-light);
-}
-
-.container {
-  padding: 0 24px 24px;
-}
-
-/* === Card Layout === */
-.row.g-3 > [class*='col-'] {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.card {
-  background: var(--bg-light);
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-  overflow: hidden;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.card-body {
-  flex: 1;
-  overflow: hidden;
-}
-
-.table-container {
-  max-height: 260px;
-  overflow-y: auto;
-}
-
-/* === Card Header and Filter Bar === */
-.card-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  background: var(--input-bg);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.card-header h5 {
-  margin: 0;
-  color: var(--text-light);
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-/* New filter input spacing & style */
-.filter-input {
-  min-width: 160px;
-  flex-grow: 1;
-  padding: 6px 12px;
-  font-size: 0.95rem;
-  background: var(--bg-light);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  color: var(--text-light);
-  margin-left: auto;
-}
-
-/* === Table === */
-.dark-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--bg-light);
-}
-
-.dark-table th,
-.dark-table td {
-  padding: 8px 12px;
-  border: 1px solid var(--border-color);
-  color: var(--text-light);
-}
-
-.dark-table thead {
-  background: var(--input-bg);
-}
-
-.dark-table tbody tr:hover {
-  background: #2d2d3d;
-}
-
-/* === Pagination === */
-.pagination-sm {
-  display: flex;
-  gap: 6px;
-  padding: 0;
-  margin: 12px 0 0;
-  list-style: none;
-}
-
-.page-item button {
-  background: var(--bg-light);
-  border: 1px solid var(--border-color);
-  color: var(--text-light);
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.page-item.disabled button {
-  opacity: 0.4;
-  cursor: default;
-}
-
-.page-item.active button {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: white;
-}
-
-.page-link:hover:not(:disabled) {
-  background: var(--input-bg);
-}
-.welcome-heading {
-  font-size: 2.4rem;
-  font-weight: 600;
-  text-align: center;
-  color: var(--primary);
-  margin-bottom: 40px;
-  padding-bottom: 12px;
+body { background: var(--bg-dark); color: var(--text-light); }
+.container { padding: 24px 40px; }
+.animated-heading {
+  font-size: 2.4rem; font-weight:600; text-align:center;
+  color: var(--primary); margin-bottom: 30px;
   border-bottom: 2px solid var(--primary);
-  text-shadow: 0 0 8px rgba(79, 195, 247, 0.3);
   animation: slideFade 1s ease-out;
-  letter-spacing: 1px;
-  transition: transform 0.3s ease-in-out;
+}
+.highlighted { color: var(--highlight); animation: pulseColor 3s infinite alternate; }
+
+.filter-bar {
+  display: flex; justify-content: flex-end;
+}
+.filter-input {
+  background: var(--bg-light); color: var(--text-light);
+  border:1px solid var(--border-color); border-radius:6px;
+  padding:6px 12px; width:250px;
+  transition: box-shadow 0.3s;
+}
+.filter-input:focus {
+  outline:none; box-shadow:0 0 6px var(--primary);
 }
 
-/* On hover (optional flair) */
-.welcome-heading:hover {
-  transform: scale(1.03);
-  text-shadow: 0 0 12px rgba(79, 195, 247, 0.5);
+.row.g-3 > .col-4, .row.g-3 > .col-6 { display:flex; flex-direction:column; }
+.section-title {
+  font-size:1.3rem; font-weight:600; color: var(--primary);
+  margin-bottom:8px; border-left:4px solid var(--primary);
+  padding-left:10px;
+}
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 16px;
 }
 
-/* Keyframe for slide + fade */
+
+
+
+.report-card {
+  background: var(--input-bg);
+  padding: 14px 16px;
+  border-left: 4px solid var(--primary);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+}
+.report-card:hover {
+  transform: translateY(-2px);
+}
+.report-card {
+  font-size: 0.95rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.pagination-sm {
+  display:flex; align-items:center; gap:10px; margin-top:6px;
+}
+.pagination-sm button {
+  background:var(--bg-light); color:var(--text-light);
+  border:1px solid var(--border-color); border-radius:4px;
+  padding:4px 8px; cursor:pointer;
+}
+.pagination-sm span {
+  color:var(--primary);
+}
+.pagination-sm button:disabled { opacity:0.4; cursor:not-allowed; }
+
 @keyframes slideFade {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from {opacity:0; transform:translateY(-20px);} to {opacity:1; transform:translateY(0);}
+}
+@keyframes pulseColor {
+  0% { color:var(--primary);} 100% { color:var(--highlight);}
+}
+
+@media(max-width:768px){
+  .row.g-3 > .col-4, .row.g-3 > .col-6 { flex:1 1 100%; }
+}
+.no-matches {
+  font-style: italic;
+  color: #aaa;
+  padding: 8px 12px;
+  background-color: var(--bg-dark);
+  border-radius: 6px;
+  margin-top: 6px;
+}
+.summary-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+  justify-content: center;
+}
+
+.summary-item {
+  flex: 0 0 auto;
+  
+  width: 220px;
+  scroll-snap-align: start;
+}
+
+.summary-card {
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  min-height: 100px;
+}
+
+
+.summary-card i {
+  margin-bottom: 0.5rem;
+}
+
+.summary-card .count {
+  font-size: 1.4rem;
+  margin-top: 0.25rem;
+}
+
+.bg-products {
+  background-color: #6c5ce7;
+}
+
+.bg-stock {
+  background-color: #00b894;
+}
+
+.bg-categories {
+  background-color: #0984e3;
+}
+
+.bg-managers {
+  background-color: #fd79a8;
+}
+
+.bg-updates {
+  background-color: #fab005;
+}
+
+.bg-categoryreq {
+  background-color: #2d3436;
 }
