@@ -23,7 +23,7 @@ export class Dashboard implements OnInit {
   allstocklogs:any;
   report:any;
   barChartType: ChartType = 'line';
-
+  private usedHues: number[] = [];
   topProductsChartData: ChartConfiguration<'bar'>['data'] = {
     labels: [],
     datasets: []
@@ -108,9 +108,17 @@ categoryChartType: ChartType = 'pie';
     });
   }
   getRandomColor(): string {
-    const hue = Math.floor(Math.random() * 360);
-    return `hsl(${hue}, 70%, 60%)`;
-  }
+  let hue: number;
+  let attempts = 0;
+
+  do {
+    hue = Math.floor(Math.random() * 360);
+    attempts++;
+  } while (this.usedHues.some(h => Math.abs(h - hue) < 25) && attempts < 100); // avoid close hues
+
+  this.usedHues.push(hue);
+  return `hsl(${hue}, 70%, 60%)`;
+}
 
   generateLineChartFromLogs() {
     if (!this.selectedproductstocklogs.length) return;
@@ -142,7 +150,7 @@ categoryChartType: ChartType = 'pie';
   }
   generateProductCategoryChart() {
     if (!this.allcategories.length || !this.allproducts.length) return;
-
+    this.usedHues = [];
     const labels: string[] = [];
     const counts: number[] = [];
     const colors: string[] = [];
@@ -184,14 +192,14 @@ categoryChartType: ChartType = 'pie';
   }
   generateTopProductsSoldChart() {
   if (!this.allstocklogs?.length || !this.allproducts?.length) return;
-
+  this.usedHues = [];
   const stockOutCounts: { [prodName: string]: number } = {};
 
   for (let log of this.allstocklogs) {
     if (log.oldStock > log.newStock) {
       const prod = this.allproducts.find(p => p.inventoryId === log.inventoryId);
       if (prod) {
-        stockOutCounts[prod.name] = (stockOutCounts[prod.name] || 0) + 1;
+        stockOutCounts[prod.name] = (stockOutCounts[prod.name] || 0) + log.oldStock-log.newStock;
       }
     }
   }

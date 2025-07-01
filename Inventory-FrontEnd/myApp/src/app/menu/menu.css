@@ -157,6 +157,8 @@ body {
   border-radius: 6px;
   border: 1px solid var(--border-color);
   font-size: 0.95rem;
+  width: 90%;
+  margin-left: 10px;
 }
 
 .modal-actions {
@@ -196,4 +198,11 @@ body {
   .buttons .btn {
     width: auto;
   }
+}
+.error {
+  color: #ff6b6b;
+  font-size: 0.875rem;
+  margin-top: -8px;
+  margin-bottom: 10px;
+  display: block;
 }

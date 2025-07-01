@@ -17,6 +17,9 @@
     </select>
     <input type="number" name="min" [(ngModel)]="searchByMinPrice" placeholder="Min price" (input)="filterProducts()">
     <input type="number" name="max" [(ngModel)]="searchByMaxPrice" placeholder="Max price" (input)="filterProducts()">
+    <button class="btn btn-toggle" (click)="toggleLowStock()">
+  {{ showLowStockOnly ? 'Show All' : 'Show Low Stock Only' }}
+</button>
 </div>
 <!-- <button (click)="handleproducts()">Click to view all products</button> -->
 @if(filteredproducts!=null) {
@@ -93,7 +96,7 @@ sync_alt
     <div *ngIf="!updateField" class="modal-form">
       <button (click)="selectField('description')">Description</button>
       <button (click)="selectField('price')">Price</button>
-      <button (click)="closeUpdateModal()" class="btn btn-secondary">Cancel</button>
+      <button (click)="closeUpdateModal()" style="background-color: #d6b3b3;" class="cancel">Cancel</button>
     </div>
     <div *ngIf="updateField" class="modal-form">
       <h4>Enter new {{updateField}}</h4>

@@ -39,6 +39,7 @@ export class Products implements OnInit{
   itemsPerPage: number = 9; // Show 6 cards per page (or any number you want)
   totalPages: number = 0;
   paginatedProducts: any[] = [];
+  showLowStockOnly: boolean = false;
   ngOnInit(): void 
   {
     this.loadProducts();
@@ -69,6 +70,11 @@ export class Products implements OnInit{
             }
           })
         });
+        this.products.sort((a: any, b: any) => {
+          if (a.status === 'INACTIVE' && b.status !== 'INACTIVE') return 1;
+          if (a.status !== 'INACTIVE' && b.status === 'INACTIVE') return -1;
+          return 0; // maintain relative order otherwise
+        });
         this.filteredproducts = this.products;
         this.updatePagination();
 
@@ -77,13 +83,19 @@ export class Products implements OnInit{
   }
 
   
-  handledelete(prodName:string)
-  {
+  handledelete(prodName: string) {
+    const confirmDelete = confirm(`Are you sure you want to delete the product "${prodName}"?`);
+    if (!confirmDelete) return;
+
     this.productservice.deleteproduct(prodName).subscribe({
-      next:(data:any)=>{
-        // console.log(data);
+      next: (data: any) => {
+        alert(`Product "${prodName}" deleted successfully.`);
+        this.loadProducts(); // Refresh product list
+      },
+      error: (err) => {
+        alert("Error deleting product. Please try again.");
       }
-    })
+    });
   }
 
   
@@ -143,6 +155,10 @@ export class Products implements OnInit{
     this.stockUpd.ProductName=prodname.toUpperCase();
     this.enableStockUpd=true;
   }
+  toggleLowStock() {
+  this.showLowStockOnly = !this.showLowStockOnly;
+  this.filterProducts(); // trigger filter update
+}
   handlestockupdate()
   {
     this.productservice.updatestock(this.stockUpd).subscribe({
@@ -179,7 +195,8 @@ export class Products implements OnInit{
      const matchCategory = searchcatgegory?product.category?.toUpperCase()===searchcatgegory:true;
       const matchMinPrice = this.searchByMinPrice != null ? product.price >= this.searchByMinPrice : true;
       const matchMaxPrice = this.searchByMaxPrice != null ? product.price <= this.searchByMaxPrice : true;
-      return matchName && matchStatus && matchMinPrice && matchMaxPrice && matchCategory && matchinv;
+      const matchesStock = !this.showLowStockOnly || product.stock < product.minThreshold;
+      return matchName && matchStatus && matchMinPrice && matchMaxPrice && matchCategory && matchinv && matchesStock;
     });
     this.currentPage = 1; // Reset to first page when filter is applied
     this.updatePagination();

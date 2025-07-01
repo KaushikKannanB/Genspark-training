@@ -1,7 +1,7 @@
 <h1 class="animated-heading">
   Check <span class="highlighted">every single </span>Activity of a manager, right here
 </h1>
-<form (ngSubmit)="handlemanageractivity()" class="manager-form d-flex align-items-center flex-wrap gap-3 mb-4">
+<form (ngSubmit)="setselectedmanager()" class="manager-form d-flex align-items-center flex-wrap gap-3 mb-4">
   <label for="manager" class="form-label mb-0 text-light d-flex align-items-center gap-1"><span class="material-icons">
 psychology
 </span> Manager:</label>
@@ -58,3 +58,9 @@ download
     </div>
   </div>
 </div>
+@if(!report)
+{
+  <div class="nomanager">
+    <h4>Select a manager.</h4>
+  </div>
+}

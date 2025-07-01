@@ -1,15 +1,17 @@
 import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { AdminManagerService } from '../services/AdminManager.service';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserCreate } from '../models/UserCreateModel';
 import { User } from '../models/User';
 import { Router } from '@angular/router';
 import { NotificationService } from '../services/Notification.service';
+import { EmailValidator } from '../misc/EmailValidator';
+import { passwordStrengthValidator } from '../misc/PasswordValidator';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './admin-dashboard.html',
   styleUrl: './admin-dashboard.css',
   encapsulation: ViewEncapsulation.None
@@ -35,6 +37,35 @@ export class AdminDashboard implements OnInit {
   categorySearch:string='';
   categoryStatus:string='';
   managersearchstatus:string='';
+
+  userForm = new FormGroup({
+    name: new FormControl(null, Validators.required),
+    email: new FormControl(null, [Validators.required, EmailValidator()]),
+    password: new FormControl(null, [Validators.required, passwordStrengthValidator()]),
+    role: new FormControl('Manager', Validators.required)
+  });
+
+  categoryForm = new FormGroup({
+    category: new FormControl(null, Validators.required)
+  });
+
+  get name() {
+  return this.userForm.get('name')!;
+}
+
+get email() {
+  return this.userForm.get('email')!;
+}
+
+get password() {
+  return this.userForm.get('password')! ;
+}
+
+get category() {
+  return this.categoryForm.get('category')! ;
+}
+
+
 
   get paginatedAdmins() {
     return this.alladmins

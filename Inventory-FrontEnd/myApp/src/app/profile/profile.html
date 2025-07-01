@@ -63,7 +63,7 @@
       <div class="col-4" *ngIf="report.stockUpds?.length">
         <h3 class="section-title">Stock Updates</h3>
         <div class="report-card" *ngFor="let s of getFilteredAndPaginatedData('stockUpds', report.stockUpds)">
-          {{ s.inventoryId }}: {{ s.oldStock }} → {{ s.newStock }}
+          {{ getProductNameByInventoryId(s.inventoryId) }}: {{ s.oldStock }} → {{ s.newStock }}
         </div>
         <div class="no-matches" *ngIf="getFilteredAndPaginatedData('stockUpds', report.stockUpds).length === 0">
             No matches found.
@@ -184,7 +184,7 @@
     <div class="col-6" *ngIf="report.stockUpds?.length">
       <h3 class="section-title">Stock Updates</h3>
       <div class="report-card" *ngFor="let it of getFilteredAndPaginatedData('stockUpds', report.stockUpds)">
-        {{ renderLine(it, 'stockUpds') }}
+        {{ getProductNameByInventoryId(it.inventoryId) }}: {{ it.oldStock }} → {{ it.newStock }}
       </div>
       <div class="no-matches" *ngIf="getFilteredAndPaginatedData('stockUpds', report.stockUpds).length === 0">
         No matches found.

@@ -1,14 +1,15 @@
 import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProductService } from '../services/Products.service';
 import { ProductAddModel } from '../models/product';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Menu } from '../menu/menu';
+import { numberValidator } from '../misc/NumberValidator';
 
 @Component({
   selector: 'app-add-product',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule, ReactiveFormsModule],
   templateUrl: './add-product.html',
   styleUrl: './add-product.css',
   encapsulation: ViewEncapsulation.None 
@@ -22,6 +23,22 @@ export class AddProduct implements OnInit {
   error:string="";
   categories:any;
   filteredproducts:any;
+  productForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
+    price: new FormControl('', [Validators.required, numberValidator()]),
+    categoryName: new FormControl('', [Validators.required]),
+    stock: new FormControl('', [Validators.required, numberValidator()]),
+    minThreshold: new FormControl('', [Validators.required, numberValidator()])
+  });
+
+  get name() { return this.productForm.get('name')!; }
+  get description() { return this.productForm.get('description')!; }
+  get price() { return this.productForm.get('price')!; }
+  get categoryName() { return this.productForm.get('categoryName')!; }
+  get stock() { return this.productForm.get('stock')!; }
+  get minThreshold() { return this.productForm.get('minThreshold')!; }
+  
   ngOnInit(): void {
     this.loadProducts();
     this.getallcategories();

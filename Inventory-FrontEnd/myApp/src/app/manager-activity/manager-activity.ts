@@ -21,7 +21,10 @@ export class ManagerActivity implements OnInit {
   ngOnInit(): void {
     this.handleallmanagers();
   }
-
+  setselectedmanager()
+  {
+    this.handlemanageractivity();
+  }
   handleallmanagers() {
     this.admmanservice.getallmanagers().subscribe({
       next: (data: any) => {

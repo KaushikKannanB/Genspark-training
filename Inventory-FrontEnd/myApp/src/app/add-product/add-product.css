@@ -161,3 +161,10 @@ button, strong, b, div {
     max-width: 100%;
   }
 }
+.error {
+  color: #ff6b6b;
+  font-size: 0.875rem;
+  margin-top: -8px;
+  margin-bottom: 10px;
+  display: block;
+}

@@ -4,11 +4,11 @@
     <div class="container-fluid mt-3">
       <div class="row g-3">
         <!-- LEFT: Tables -->
-        <div class="col-md-8 d-flex flex-column" style="gap: 1.5rem;">
+        <div class="col-md-8 d-flex flex-column" style="gap: 1.5rem; min-height: 90vh;">
           <!-- Category Add Requests -->
           <div class="card flex-fill shadow-sm">
             <div class="card-body">
-              <h3>Category Add Requests</h3>
+              <h3><strong>Category Add Requests</strong></h3>
               <div class="filter-bar">
                 <input type="text" class="form-control" placeholder="Search Category Name" [(ngModel)]="categorySearch">
                 <select name="categoryStatus" [(ngModel)]="categoryStatus">
@@ -49,7 +49,7 @@
           <!-- Managers Table -->
           <div class="card flex-fill shadow-sm">
             <div class="card-body">
-              <h3>Managers</h3>
+              <h3><strong>Managers</strong></h3>
               <div class="filter-bar">
                 <input type="text" class="form-control" placeholder="Search Manager" [(ngModel)]="managerSearch" />
                 <select name="status" [(ngModel)]="managersearchstatus">
@@ -83,26 +83,68 @@
         </div>
 
         <!-- RIGHT: Forms -->
-        <div class="col-md-4 d-flex flex-column justify-content-between" style="min-height: 100vh; gap: 1.5rem;">
+        <div class="col-md-4 d-flex flex-column justify-content-between" style="min-height: 90vh; gap: 1.5rem;">
           <!-- Create User Form -->
-          <form class="form">
-            <h2>Create User</h2>
-            <input type="text" placeholder="Username" name="name" [(ngModel)]="newuser.name">
-            <input type="text" placeholder="Email" name="email" [(ngModel)]="newuser.email">
-            <input type="text" placeholder="Password" name="password" [(ngModel)]="newuser.password">
-            <select name="role" [(ngModel)]="newuser.role">
-              <option value="Manager">Manager</option>
-              <option value="Admin">Admin</option>
-            </select>
-            <button class="btn btn-success" (click)="handlecreateuser()">Create User</button>
-          </form>
+          <!-- Create User Form -->
+<form class="form" [formGroup]="userForm" (ngSubmit)="handlecreateuser()">
+  <h1><strong>Create User</strong></h1>
+  <h4>Create a user, either an admin or a manager</h4>
 
-          <!-- Add Category Form -->
-          <form class="form" (ngSubmit)="addcategory()">
-            <h2>Add a New Category</h2>
-            <input type="text" name="category" [(ngModel)]="newcategory" placeholder="Enter new category">
-            <button type="submit" class="btn btn-success">Add Category</button>
-          </form>
+  <input type="text" placeholder="Username" name="name" formControlName="name" [(ngModel)]="newuser.name" />
+<span class="error" *ngIf="name?.touched && name?.errors">
+  @if(name.errors!=null)
+  {
+  <ng-container *ngIf="name.errors['required']">Username is required.</ng-container>
+  }
+</span>
+
+<input type="text" placeholder="Email" name="email" formControlName="email" [(ngModel)]="newuser.email" />
+<span class="error" *ngIf="email?.touched && email?.errors">
+  @if(email.errors!=null)
+  {
+    <ng-container *ngIf="email.errors['required']">Email is required.</ng-container>
+    <ng-container *ngIf="email.errors['invalidEmail']">Invalid email format.</ng-container>
+  }
+  
+</span>
+
+<input type="text" placeholder="Password" name="password" formControlName="password" [(ngModel)]="newuser.password" />
+<span class="error" *ngIf="password?.touched && password?.errors">
+  @if(password.errors!=null)
+  {
+    <ng-container *ngIf="password.errors['required']">Password is required.</ng-container>
+    <ng-container *ngIf="password.errors['passwordError']">
+      Password must be at least 8 characters, include uppercase, number, and symbol.
+    </ng-container>
+  }
+  
+</span>
+
+  <select name="role" formControlName="role" [(ngModel)]="newuser.role">
+    <option value="Manager">Manager</option>
+    <option value="Admin">Admin</option>
+  </select>
+
+  <button type="submit" class="btn btn-success" [disabled]="userForm.invalid">Create User</button>
+</form>
+
+<!-- Add Category Form -->
+<form class="form" [formGroup]="categoryForm" (ngSubmit)="addcategory()">
+  <h1><strong>Add a New Category</strong></h1>
+  <h4>Create a new category or accept a request made by managers</h4>
+
+  <input type="text" name="category" formControlName="category" [(ngModel)]="newcategory" placeholder="Enter new category" />
+  <span class="error" *ngIf="category?.touched && category?.errors">
+    @if(category.errors)
+    {
+    <ng-container *ngIf="category.errors['required']">Category name is required.</ng-container>
+
+    }
+  </span>
+
+  <button type="submit" class="btn btn-success" [disabled]="categoryForm.invalid">Add Category</button>
+</form>
+
         </div>
       </div>
     </div>

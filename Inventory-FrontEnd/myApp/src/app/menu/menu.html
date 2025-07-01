@@ -1,5 +1,7 @@
 <nav class="vertical-navbar">
-  <h2><a class="navbar-brand" routerLink="/">Inven<span>-tree</span></a></h2>
+  <h2><a class="navbar-brand d-flex align-items-center gap-1" routerLink="/"><span class="material-symbols-outlined">
+local_shipping
+</span>Inven<span>-tree</span></a></h2>
   <div class="nav-options">
     <div class="pages">
       <ul class="navbar-nav">
@@ -42,12 +44,28 @@ logout
 <div *ngIf="enablechangepass" class="modal-overlay">
   <div class="modal-content">
     <h3>Change Password</h3>
-    <form (ngSubmit)="handlechangepassword()" class="modal-form">
-      <input type="password" placeholder="Enter a new password" name="pass" [(ngModel)]="newpass" />
+    <form [formGroup]="loginform" (ngSubmit)="setenablechangepass()" class="modal-form">
+      <!-- Password -->
+      <div class="input-wrapper">
+        <i class="fas fa-lock"></i>
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          [(ngModel)]="newpass"
+        />
+      </div>
+      <span class="error" *ngIf="password.touched && password.errors">
+        <ng-container *ngIf="password.errors['required']">Password is required.</ng-container>
+        <ng-container *ngIf="password.errors['passwordError']">Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.</ng-container>
+      </span>
       <div class="modal-actions">
         <button type="submit" class="btn btn-primary">✅ Change</button>
         <button type="button" class="btn btn-secondary" (click)="closeModal()">❌ Cancel</button>
       </div>
     </form>
+  
+
+
   </div>
 </div>

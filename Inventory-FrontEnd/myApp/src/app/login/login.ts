@@ -4,12 +4,15 @@ import { UserLoginModel } from '../models/UserLoginModel';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AUthService } from '../services/Authentication.service';
+import { EmailValidator } from '../misc/EmailValidator';
+import { passwordStrengthValidator } from '../misc/PasswordValidator';
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
   encapsulation: ViewEncapsulation.None
@@ -25,10 +28,18 @@ export class Login {
   loginform:FormGroup;
   constructor(){
     this.loginform = new FormGroup({
-      email : new FormControl(null,[Validators.required]),
-      password: new FormControl(null, [Validators.required])
+      email : new FormControl(null,[Validators.required,EmailValidator()]),
+      password: new FormControl(null, [Validators.required, passwordStrengthValidator()])
     });
   }
+  get email() {
+    return this.loginform.get('email')!;
+  }
+
+  get password() {
+    return this.loginform.get('password')!;
+  }
+
   handlelogin()
   {
     this.authservice.login(this.user).subscribe({
@@ -52,6 +63,9 @@ export class Login {
         console.log(data);
         this.userrole=this.authservice.getrolefromtoken(data.token);
         console.log(this.userrole);
+      },
+      error:(err)=>{
+        alert("Invalid credentials")
       }
     })
   }

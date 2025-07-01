@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { NotificationService } from '../services/Notification.service';
 import { AUthService } from '../services/Authentication.service';
 import { AdminManagerService } from '../services/AdminManager.service';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { passwordStrengthValidator } from '../misc/PasswordValidator';
 
 @Component({
   selector: 'app-menu',
-  imports: [RouterLink, CommonModule, FormsModule],
+  imports: [RouterLink, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './menu.html',
   styleUrl: './menu.css',
   encapsulation: ViewEncapsulation.None
@@ -19,13 +20,24 @@ export class Menu implements OnInit {
   role:string='';
   newpass:string='';
   enablechangepass:boolean=false;
-  constructor(public notifyService: NotificationService, public authservice:AUthService, private router :Router, private admmanservice:AdminManagerService) {
+  loginform:FormGroup;
+
+
+  constructor(private fb: FormBuilder, public notifyService: NotificationService, public authservice:AUthService, private router :Router, private admmanservice:AdminManagerService) {
+    this.loginform = new FormGroup({
+      password: new FormControl(null, [Validators.required, passwordStrengthValidator()])
+    });
   }
   ngOnInit(): void {
     this.authservice.role$.subscribe(role=>{
       this.role=role;
-    })
+    });
+    
   }
+  get password() {
+    return this.loginform.get('password')!;
+  }
+  
   handlelogout()
   {
     this.authservice.logout().subscribe({
