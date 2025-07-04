@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 
-import { AuthGuard } from './auth-guard';
+import { authGuard } from './auth-guard';
 import { provideCharts } from 'ng2-charts';
 import { provideState, provideStore } from '@ngrx/store';
 import { AUthService } from './services/Authentication.service';
@@ -24,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     ProductService,
     AdminManagerService,
     NotificationService,
-    AuthGuard,
+    authGuard,
     provideCharts()
   ]
 };

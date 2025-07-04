@@ -49,6 +49,9 @@ export class Mainpage implements OnInit{
       this.prodservice.makecategoryaddrequest(this.newcategory).subscribe({
         next:(data:any)=>{
           console.log(data);
+        },
+        error:(err)=>{
+          alert("Invalid Request, maybe the category already exists, or there exist a similar request");
         }
       })
       this.closeModal();

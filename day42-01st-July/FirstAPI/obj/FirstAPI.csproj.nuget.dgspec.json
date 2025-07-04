@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/kaushik/Desktop/Genspark-training/day24-05th-Jun/FirstAPI/FirstAPI.csproj": {}
+    "/Users/kaushik/Desktop/Genspark-training/day42-01st-July/FirstAPI/FirstAPI.csproj": {}
   },
   "projects": {
-    "/Users/kaushik/Desktop/Genspark-training/day24-05th-Jun/FirstAPI/FirstAPI.csproj": {
+    "/Users/kaushik/Desktop/Genspark-training/day42-01st-July/FirstAPI/FirstAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/kaushik/Desktop/Genspark-training/day24-05th-Jun/FirstAPI/FirstAPI.csproj",
+        "projectUniqueName": "/Users/kaushik/Desktop/Genspark-training/day42-01st-July/FirstAPI/FirstAPI.csproj",
         "projectName": "FirstAPI",
-        "projectPath": "/Users/kaushik/Desktop/Genspark-training/day24-05th-Jun/FirstAPI/FirstAPI.csproj",
+        "projectPath": "/Users/kaushik/Desktop/Genspark-training/day42-01st-July/FirstAPI/FirstAPI.csproj",
         "packagesPath": "/Users/kaushik/.nuget/packages/",
-        "outputPath": "/Users/kaushik/Desktop/Genspark-training/day24-05th-Jun/FirstAPI/obj/",
+        "outputPath": "/Users/kaushik/Desktop/Genspark-training/day42-01st-July/FirstAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/kaushik/.nuget/NuGet/NuGet.Config"

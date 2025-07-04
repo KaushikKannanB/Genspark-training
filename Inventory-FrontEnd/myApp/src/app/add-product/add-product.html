@@ -8,7 +8,7 @@
   <h1>Add product</h1>
 
   <!-- Name -->
-  <input type="text" placeholder="Name" name="name" [(ngModel)]="addproduct.name" formControlName="name" />
+  <input type="text" placeholder="Name" name="name" (input)="filterProducts()" [(ngModel)]="addproduct.name" formControlName="name" />
   <span class="error" *ngIf="name.touched && name.errors">
     <ng-container *ngIf="name.errors['required']">Name is required.</ng-container>
   </span>

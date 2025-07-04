@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Jl9MCSRrdXk=",
+  "dgSpecHash": "PP6nL8MnWNs=",
   "success": true,
-  "projectFilePath": "/Users/kaushik/Desktop/Genspark-training/day24-05th-Jun/FirstAPI/FirstAPI.csproj",
+  "projectFilePath": "/Users/kaushik/Desktop/Genspark-training/day42-01st-July/FirstAPI/FirstAPI.csproj",
   "expectedPackageFiles": [
     "/Users/kaushik/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
     "/Users/kaushik/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",

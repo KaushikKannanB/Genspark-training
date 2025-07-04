@@ -124,6 +124,9 @@ export class Products implements OnInit{
       this.productservice.updateproddescription(payload).subscribe({
         next:(data:any)=>{
           console.log(data);
+        },
+        error:(err)=>{
+          alert("Invalid Update Request");
         }
       })
     }
@@ -137,6 +140,9 @@ export class Products implements OnInit{
       this.productservice.updateprodprice(payload).subscribe({
         next:(data:any)=>{
           console.log(data);
+        },
+        error:(err)=>{
+          alert("Invalid Update Request");
         }
       })
     }

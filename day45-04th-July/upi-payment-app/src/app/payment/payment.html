@@ -1,0 +1,39 @@
+<h1 style="text-align: center;">Razorpay Test Demo</h1>
+<div *ngIf="loading" class="spinner-container">
+  <div class="spinner"></div>
+</div>
+<form [formGroup]="paymentForm" (ngSubmit)="submitForm()">
+  <div>
+    <label>Amount:</label>
+    <input type="number" formControlName="amount">
+    <div *ngIf="paymentForm.get('amount')?.invalid && paymentForm.get('amount')?.touched">
+      Amount is required and must be greater than 0.
+    </div>
+  </div>
+
+  <div>
+    <label>Customer Name:</label>
+    <input type="text" formControlName="name">
+    <div *ngIf="paymentForm.get('name')?.invalid && paymentForm.get('name')?.touched">
+      Name is required.
+    </div>
+  </div>
+
+  <div>
+    <label>Email:</label>
+    <input type="email" formControlName="email">
+    <div *ngIf="paymentForm.get('email')?.invalid && paymentForm.get('email')?.touched">
+      Valid email is required.
+    </div>
+  </div>
+
+  <div>
+    <label>Contact Number:</label>
+    <input type="text" formControlName="contact">
+    <div *ngIf="paymentForm.get('contact')?.invalid && paymentForm.get('contact')?.touched">
+      Contact number must be 10 digits.
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="loading">Pay Now</button>
+</form>
