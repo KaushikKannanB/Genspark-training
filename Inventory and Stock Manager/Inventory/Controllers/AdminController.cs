@@ -203,7 +203,7 @@ namespace Inventory.Controllers
             }
             else
             {
-                await hubContext.Clients.All.SendAsync("ReceiveNotification", $"Category: {categoryaddrequest.ToUpper()} request by {cur_user_admin.Name} --> notified at {DateTime.UtcNow}");
+                await hubContext.Clients.All.SendAsync("ReceiveNotification", $"Category: {categoryaddrequest.ToUpper()} request denied by {cur_user_admin.Name} --> notified at {DateTime.UtcNow}");
                 return Ok(result);
             }
         }

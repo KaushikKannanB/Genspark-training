@@ -152,17 +152,18 @@ namespace Inventory.Services
         public async Task<CategoryAddRequest> CancelCategoryAddrequest(string categaddreq)
         {
             categaddreq = categaddreq.ToUpper();
-            var request = await categaddrepo.GetByName(categaddreq);
+            var request = await categaddrepo.GetAll();
+            var reqs_ = request.FirstOrDefault(r => r.CategoryName == categaddreq && r.Status == "REQUESTED");
 
-            if (request == null)
+            if (reqs_ == null)
             {
                 return null;
             }
             else
             {
-                request.Status = "DENIED";
+                reqs_.Status = "DENIED";
                 await context.SaveChangesAsync();
-                return request;
+                return reqs_;
             }
 
         }
