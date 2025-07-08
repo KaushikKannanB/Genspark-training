@@ -65,6 +65,7 @@ export class Menu implements OnInit {
       this.admmanservice.adminchangpassword(this.newpass).subscribe({
         next:(data:any)=>{
           console.log(data);
+          this.closeModal();
         }
       })
     }
@@ -74,10 +75,10 @@ export class Menu implements OnInit {
         next:(data:any)=>{
           console.log(data);
           alert("Password Successfully changed!");
+          this.closeModal();
         }
       })
     }
-    this.closeModal();
   }
   closeModal()
   {

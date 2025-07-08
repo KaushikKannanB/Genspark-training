@@ -60,7 +60,7 @@ logout
         <ng-container *ngIf="password.errors['passwordError']">Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.</ng-container>
       </span>
       <div class="modal-actions">
-        <button type="submit" class="btn btn-primary">✅ Change</button>
+        <button type="submit" class="btn btn-primary" (click)="handlechangepassword()">✅ Change</button>
         <button type="button" class="btn btn-secondary" (click)="closeModal()">❌ Cancel</button>
       </div>
     </form>
