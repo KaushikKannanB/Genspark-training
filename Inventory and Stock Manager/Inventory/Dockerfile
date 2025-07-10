@@ -1,3 +1,19 @@
+# # Build Stage
+# FROM mcr.microsoft.com/dotnet/sdk:9.0-preview AS build
+# WORKDIR /src
+# COPY . .
+# RUN dotnet restore "Inventory.csproj"
+# RUN dotnet publish "Inventory.csproj" -c Release -r linux-x64 --self-contained true \
+#     /p:PublishSingleFile=true /p:PublishTrimmed=false -o /app/publish
+
+# # Runtime Stage (just to run the binary)
+# FROM debian:bullseye-slim
+# WORKDIR /app
+# COPY --from=build /app/publish .
+
+# EXPOSE 8080
+# ENV ASPNETCORE_URLS="http://+:8080"
+# ENTRYPOINT ["./Inventory"]
 # ========= Base image for runtime =========
 FROM mcr.microsoft.com/dotnet/aspnet:9.0-preview AS base
 WORKDIR /app
