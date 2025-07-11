@@ -69,6 +69,8 @@ builder.Services.AddTransient<IProductService, ProductService>();
 
 
 
+builder.Services.AddTransient<IBlobService, BlobStorageService>();
+builder.Services.AddHostedService<LogUploadService>();
 
 
 
