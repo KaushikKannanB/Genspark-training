@@ -322,3 +322,7 @@
 /Users/kaushik/Desktop/Genspark-training/Inventory and Stock Manager/Inventory/bin/Debug/net9.0/System.ClientModel.dll
 /Users/kaushik/Desktop/Genspark-training/Inventory and Stock Manager/Inventory/bin/Debug/net9.0/System.IO.Hashing.dll
 /Users/kaushik/Desktop/Genspark-training/Inventory and Stock Manager/Inventory/bin/Debug/net9.0/System.Memory.Data.dll
+/Users/kaushik/Desktop/Genspark-training/Inventory and Stock Manager/Inventory/bin/Debug/net9.0/Azure.Identity.dll
+/Users/kaushik/Desktop/Genspark-training/Inventory and Stock Manager/Inventory/bin/Debug/net9.0/Azure.Security.KeyVault.Secrets.dll
+/Users/kaushik/Desktop/Genspark-training/Inventory and Stock Manager/Inventory/bin/Debug/net9.0/Microsoft.Identity.Client.dll
+/Users/kaushik/Desktop/Genspark-training/Inventory and Stock Manager/Inventory/bin/Debug/net9.0/Microsoft.Identity.Client.Extensions.Msal.dll

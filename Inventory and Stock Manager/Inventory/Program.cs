@@ -19,8 +19,20 @@ using Npgsql.Replication.PgOutput.Messages;
 using Inventory.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-
+using Azure.Security.KeyVault.Secrets;
+using Azure.Identity;
 var builder = WebApplication.CreateBuilder(args);
+
+#region Azure key vault - pgsql connection string
+var keyVaultUri = builder.Configuration["AzureKeyVault:VaultUri"];
+
+var client = new SecretClient(new Uri(keyVaultUri), new DefaultAzureCredential());
+
+KeyVaultSecret secret = client.GetSecret("SQLConnection");
+var connectionString = secret.Value;
+
+#endregion
+
 builder.Services.AddHttpContextAccessor();
 Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
@@ -34,7 +46,10 @@ builder.Services.AddControllers();
 
 // Register DbContext
 builder.Services.AddDbContext<InventoryContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
+
+// options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    
 #region  Repositories
 builder.Services.AddTransient<IRepository<string, Manager>, ManagerRepository>();
 builder.Services.AddTransient<IRepository<string, Admin>, AdminRepository>();
