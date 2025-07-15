@@ -23,15 +23,15 @@ using Azure.Security.KeyVault.Secrets;
 using Azure.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
-#region Azure key vault - pgsql connection string
-var keyVaultUri = builder.Configuration["AzureKeyVault:VaultUri"];
+// #region Azure key vault - pgsql connection string
+// var keyVaultUri = builder.Configuration["AzureKeyVault:VaultUri"];
 
-var client = new SecretClient(new Uri(keyVaultUri), new DefaultAzureCredential());
+// var client = new SecretClient(new Uri(keyVaultUri), new DefaultAzureCredential());
 
-KeyVaultSecret secret = client.GetSecret("SQLConnection");
-var connectionString = secret.Value;
+// KeyVaultSecret secret = client.GetSecret("SQLConnection");
+// var connectionString = secret.Value;
 
-#endregion
+// #endregion
 
 builder.Services.AddHttpContextAccessor();
 Log.Logger = new LoggerConfiguration()
@@ -46,9 +46,9 @@ builder.Services.AddControllers();
 
 // Register DbContext
 builder.Services.AddDbContext<InventoryContext>(options =>
-    options.UseNpgsql(connectionString));
+    // options.UseNpgsql(connectionString));
 
-// options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
     
 #region  Repositories
 builder.Services.AddTransient<IRepository<string, Manager>, ManagerRepository>();
@@ -81,11 +81,6 @@ builder.Services.AddTransient<IManagerService, ManagerService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 
-
-
-
-builder.Services.AddTransient<IBlobService, BlobStorageService>();
-builder.Services.AddHostedService<LogUploadService>();
 
 
 
