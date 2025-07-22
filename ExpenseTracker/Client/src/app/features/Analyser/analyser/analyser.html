@@ -1,0 +1,163 @@
+<div class="p-6 text-white bg-[var(--bg,#1e1e2f)] min-h-screen">
+  <h2 class="text-2xl font-bold mb-6 tracking-tight">Analyser Dashboard</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div class="bg-[var(--card,#252535)] p-6 rounded-2xl shadow-md transition hover:shadow-lg">
+      <h3 class="text-lg font-semibold mb-4">Top Users</h3>
+      <app-top-user-chart [users]="topUsers"></app-top-user-chart>
+    </div>
+
+    <div class="bg-[var(--card,#252535)] p-6 rounded-2xl shadow-md transition hover:shadow-lg">
+      <h3 class="text-lg font-semibold mb-4">Top Categories</h3>
+      <app-top-category-chart [categories]="topCategories"></app-top-category-chart>
+    </div>
+  </div>
+
+  <!-- User Specific Insights -->
+  <div class="bg-[var(--card,#252535)] p-6 rounded-2xl shadow text-[var(--text-primary,#e0e0e0)]">
+    <h3 class="text-lg font-semibold mb-4">User Specific Insights</h3>
+
+    <div class="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6">
+      <select
+        [(ngModel)]="selectedUser"
+        class="bg-transparent border border-gray-600 px-4 py-2 rounded w-full md:w-auto text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        style="height: 40px;">
+        <option value="" disabled>Select a user</option>
+        <option *ngFor="let user of allUsers" [value]="user.id">{{ user.userName }}</option>
+      </select>
+
+      <button
+        (click)="getexpensesbyid()"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-all duration-200 ease-in-out transform hover:scale-105 shadow hover:shadow-lg"
+      >
+        Generate
+      </button>
+
+      <button
+        (click)="openAddModal()"
+        class="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded transition-all duration-200 ease-in-out transform hover:scale-105 shadow hover:shadow-lg"
+      >
+        Suggestion
+      </button>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-4 mb-6">
+      <select [(ngModel)]="filters.categoryId" class="bg-transparent border border-gray-600 px-3 py-2 rounded text-sm transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        <option value="">All Categories</option>
+        <option *ngFor="let cat of allCategories" [value]="cat.id">{{ cat.name }}</option>
+      </select>
+
+      <input type="date" [(ngModel)]="filters.fromDate" class="bg-transparent border border-gray-600 px-3 py-2 rounded text-sm transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+      <input type="date" [(ngModel)]="filters.toDate" class="bg-transparent border border-gray-600 px-3 py-2 rounded text-sm transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+
+      <button (click)="getexpensesbyid()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm transition-all duration-200 ease-in-out transform hover:scale-105 shadow hover:shadow-lg">
+        Apply Filters
+      </button>
+    </div>
+
+    <div *ngIf="userExpenses.length > 0" class="w-full h-full rounded-2xl overflow-hidden">
+      <app-user-spending-trends [expenses]="userExpenses" [filters]="filters"></app-user-spending-trends>
+    </div>
+
+    <div *ngIf="userExpenses?.length === 0" class="text-sm text-gray-400">No data to display.</div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div *ngIf="isAddModalOpen()" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-2">
+  <div class="bg-[var(--bg,#1e1e2f)] text-[var(--text-primary,#e0e0e0)] rounded-xl shadow-2xl w-full max-w-6xl h-[85vh] flex flex-col p-6">
+
+    <!-- Header -->
+    <div class="flex justify-between items-start mb-4">
+      <div>
+        <h2 class="text-xl font-bold">Insights Summary</h2>
+        <p class="text-sm text-gray-400">For user: {{ selectedUser }}</p>
+      </div>
+      <button (click)="closeAddModal()" class="text-gray-400 hover:text-white text-xl">&times;</button>
+    </div>
+
+    <!-- Scrollable Body -->
+    <div class="flex-1 overflow-y-auto pr-1">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- Last Expenses Chart -->
+        <div class="bg-[#2c2c3a] p-3 rounded-xl shadow h-full transform transition-transform duration-300 hover:scale-[1.02]">
+          <app-last-expenses-chart
+            [expenses]="latest5expensesuser"
+            class="w-full h-full"
+          ></app-last-expenses-chart>
+        </div>
+
+        <!-- Top Dates Chart -->
+        <div class="bg-[#2c2c3a] p-3 rounded-xl shadow h-full transform transition-transform duration-300 hover:scale-[1.02]">
+          <app-top-dates-chart
+            [dates]="top5expensesuser"
+            class="w-full h-full"
+          ></app-top-dates-chart>
+        </div>
+
+        <!-- Top Category Frequency Chart -->
+        <div class="bg-[#252535] p-3 rounded-xl shadow h-full transform transition-transform duration-300 hover:scale-[1.02]">
+          <app-top-category-freq-chart
+            [categories]="top5categoriesuserfreq"
+            class="w-full h-full"
+          ></app-top-category-freq-chart>
+        </div>
+
+        <!-- Top Category Amount Chart -->
+        <div class="bg-[#252535] p-3 rounded-xl shadow h-full transform transition-transform duration-300 hover:scale-[1.02]">
+          <app-top-category-amount-chart
+            [categories]="top5categoriesuser"
+            class="w-full h-full"
+          ></app-top-category-amount-chart>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Suggestion Form -->
+    <form #suggestionForm="ngForm" (ngSubmit)="onSubmitNewSuggestion(suggestionForm)" class="pt-2 border-t border-gray-700 mt-4">
+      <div class="mb-3">
+        <label class="block mb-2 text-sm font-medium">Suggestion for the user</label>
+        <textarea
+          name="name"
+          required
+          [(ngModel)]="suggestion"
+          class="w-full bg-transparent border border-gray-600 p-3 rounded text-sm resize-none min-h-[90px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Write your suggestion based on the charts above..."
+          rows="5"
+        ></textarea>
+      </div>
+
+      <div class="flex justify-end gap-3">
+        <button type="button" (click)="closeAddModal()" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded transition-all duration-200 ease-in-out transform hover:scale-105 shadow hover:shadow-lg">
+          Cancel
+        </button>
+        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-all duration-200 ease-in-out transform hover:scale-105 shadow hover:shadow-lg">
+          Send Suggestion
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  :root {
+    --bg: #1e1e2f;
+    --text-primary: #e0e0e0;
+    --card: #2a2a3d;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease forwards;
+  }
+</style>

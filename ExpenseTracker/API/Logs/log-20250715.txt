@@ -1,0 +1,608 @@
+2025-07-15 17:10:13.532 +05:30 [ERR] An error occurred using the connection to database 'ExpenseTrackerDB' on server 'tcp://localhost:5432'.
+2025-07-15 17:10:14.053 +05:30 [INF] Executed DbCommand (227ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "ExpenseTrackerDB";
+2025-07-15 17:10:14.193 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-07-15 17:10:14.207 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-07-15 17:10:14.211 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-07-15 17:10:14.226 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-15 17:10:14.247 +05:30 [INF] Applying migration '20250715113957_initial'.
+2025-07-15 17:10:14.296 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Categories" (
+    "Id" uuid NOT NULL,
+    "Name" character varying(100) NOT NULL,
+    "IsDeleted" boolean NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone,
+    CONSTRAINT "PK_Categories" PRIMARY KEY ("Id")
+);
+2025-07-15 17:10:14.298 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "TourProgress" (
+    "Id" uuid NOT NULL,
+    "UserId" uuid NOT NULL,
+    "HomeTourCompleted" boolean NOT NULL,
+    "BudgetTourCompleted" boolean NOT NULL,
+    "ExpenseTourCompleted" boolean NOT NULL,
+    "ReportTourCompleted" boolean NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_TourProgress" PRIMARY KEY ("Id")
+);
+2025-07-15 17:10:14.314 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Users" (
+    "Id" uuid NOT NULL,
+    "UserName" character varying(100) NOT NULL,
+    "Email" character varying(254) NOT NULL,
+    "PasswordHash" text NOT NULL,
+    "Role" text NOT NULL,
+    "IsActive" boolean NOT NULL,
+    "IsDeleted" boolean NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone,
+    CONSTRAINT "PK_Users" PRIMARY KEY ("Id")
+);
+2025-07-15 17:10:14.320 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Budgets" (
+    "Id" uuid NOT NULL,
+    "Name" text NOT NULL,
+    "UserId" uuid NOT NULL,
+    "CategoryId" uuid NOT NULL,
+    "LimitAmount" numeric(18,2) NOT NULL,
+    "BalanceAmount" numeric(18,2) NOT NULL,
+    "StartDate" timestamp with time zone NOT NULL,
+    "EndDate" timestamp with time zone NOT NULL,
+    "IsDeleted" boolean NOT NULL,
+    "Notified50Percent" boolean NOT NULL,
+    "Notified90Percent" boolean NOT NULL,
+    "NotifiedLimitExceeded" boolean NOT NULL,
+    CONSTRAINT "PK_Budgets" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Budgets_Categories_CategoryId" FOREIGN KEY ("CategoryId") REFERENCES "Categories" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Budgets_Users_UserId" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id")
+);
+2025-07-15 17:10:14.324 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Expenses" (
+    "Id" uuid NOT NULL,
+    "UserId" uuid NOT NULL,
+    "CategoryId" uuid NOT NULL,
+    "Amount" numeric(18,2) NOT NULL,
+    "Description" character varying(250),
+    "ExpenseDate" timestamp with time zone NOT NULL,
+    "IsDeleted" boolean NOT NULL,
+    CONSTRAINT "PK_Expenses" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Expenses_Categories_CategoryId" FOREIGN KEY ("CategoryId") REFERENCES "Categories" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Expenses_Users_UserId" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id")
+);
+2025-07-15 17:10:14.328 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "RefreshTokens" (
+    "Id" uuid NOT NULL,
+    "UserId" uuid NOT NULL,
+    "Token" text NOT NULL,
+    "ExpiresAt" timestamp with time zone NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "CreatedByIp" text NOT NULL,
+    "RevokedAt" timestamp with time zone,
+    "RevokedByIp" text,
+    "ReplacedByToken" text,
+    CONSTRAINT "PK_RefreshTokens" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_RefreshTokens_Users_UserId" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id")
+);
+2025-07-15 17:10:14.331 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Receipts" (
+    "Id" uuid NOT NULL,
+    "ExpenseId" uuid NOT NULL,
+    "FileName" character varying(255) NOT NULL,
+    "FilePath" character varying(500),
+    "ContentType" character varying(100),
+    "UploadedAt" timestamp with time zone NOT NULL,
+    "IsDeleted" boolean NOT NULL,
+    CONSTRAINT "PK_Receipts" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Receipts_Expenses_ExpenseId" FOREIGN KEY ("ExpenseId") REFERENCES "Expenses" ("Id") ON DELETE CASCADE
+);
+2025-07-15 17:10:14.335 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Budgets_CategoryId" ON "Budgets" ("CategoryId");
+2025-07-15 17:10:14.338 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Budgets_UserId" ON "Budgets" ("UserId");
+2025-07-15 17:10:14.340 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Expenses_CategoryId" ON "Expenses" ("CategoryId");
+2025-07-15 17:10:14.342 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Expenses_UserId" ON "Expenses" ("UserId");
+2025-07-15 17:10:14.344 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Receipts_ExpenseId" ON "Receipts" ("ExpenseId");
+2025-07-15 17:10:14.346 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_RefreshTokens_UserId" ON "RefreshTokens" ("UserId");
+2025-07-15 17:10:14.349 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_Users_Email" ON "Users" ("Email");
+2025-07-15 17:10:14.350 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250715113957_initial', '9.0.5');
+2025-07-15 17:11:29.350 +05:30 [INF] User profile is available. Using '/Users/kaushik/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-07-15 17:11:29.473 +05:30 [INF] Now listening on: http://localhost:5169
+2025-07-15 17:11:29.475 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-15 17:11:29.475 +05:30 [INF] Hosting environment: Development
+2025-07-15 17:11:29.475 +05:30 [INF] Content root path: /Users/kaushik/Desktop/arul/ExpenseTracker/API
+2025-07-15 17:11:43.126 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/swagger - null null
+2025-07-15 17:11:43.179 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-15 17:11:43.214 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/swagger - 404 0 null 89.6703ms
+2025-07-15 17:11:43.234 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5169/swagger, Response status code: 404
+2025-07-15 17:11:43.237 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/favicon.ico - null null
+2025-07-15 17:11:43.251 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/favicon.ico - 404 0 null 15.409ms
+2025-07-15 17:11:43.252 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5169/favicon.ico, Response status code: 404
+2025-07-15 17:11:55.686 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/swagger/index.html - null null
+2025-07-15 17:11:55.690 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/swagger/index.html - 404 0 null 4.289ms
+2025-07-15 17:11:55.691 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5169/swagger/index.html, Response status code: 404
+2025-07-15 17:14:12.170 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/ - null null
+2025-07-15 17:14:12.172 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/ - 301 0 null 2.0892ms
+2025-07-15 17:14:12.182 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/index.html - null null
+2025-07-15 17:14:12.246 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/index.html - 200 null text/html;charset=utf-8 63.762ms
+2025-07-15 17:14:12.268 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/swagger-ui.css - null null
+2025-07-15 17:14:12.272 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/index.css - null null
+2025-07-15 17:14:12.273 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/swagger-ui-bundle.js - null null
+2025-07-15 17:14:12.274 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/swagger-ui-standalone-preset.js - null null
+2025-07-15 17:14:12.275 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/index.js - null null
+2025-07-15 17:14:12.277 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/index.js - 200 null application/javascript;charset=utf-8 1.6305ms
+2025-07-15 17:14:12.289 +05:30 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-07-15 17:14:12.290 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/index.css - 200 202 text/css 17.6148ms
+2025-07-15 17:14:12.297 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-07-15 17:14:12.297 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-07-15 17:14:12.299 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/swagger-ui.css - 200 154949 text/css 31.1703ms
+2025-07-15 17:14:12.299 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/swagger-ui-standalone-preset.js - 200 229223 text/javascript 25.3568ms
+2025-07-15 17:14:12.304 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-07-15 17:14:12.304 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/swagger-ui-bundle.js - 200 1484234 text/javascript 30.9969ms
+2025-07-15 17:14:12.537 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/favicon-16x16.png - null null
+2025-07-15 17:14:12.537 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/favicon-32x32.png - null null
+2025-07-15 17:14:12.538 +05:30 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2025-07-15 17:14:12.538 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-07-15 17:14:12.539 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/favicon-16x16.png - 200 665 image/png 1.1014ms
+2025-07-15 17:14:12.539 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/favicon-32x32.png - 200 628 image/png 1.4513ms
+2025-07-15 17:14:12.570 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/swagger/v1/swagger.json - null null
+2025-07-15 17:14:12.742 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 171.9966ms
+2025-07-15 17:16:10.928 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/register-admin - application/json; ver=1.0 83
+2025-07-15 17:16:10.938 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:16:10.952 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.RegisterAdmin (API)'
+2025-07-15 17:16:10.973 +05:30 [INF] Route matched with {action = "RegisterAdmin", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterAdmin(ExpenseTrackerAPI.DTOs.RegisterUserRequest) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-15 17:16:12.396 +05:30 [INF] Executed DbCommand (48ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-15 17:16:12.418 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-15 17:16:12.902 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = DateTime), @p8='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "CreatedAt", "Email", "IsActive", "IsDeleted", "PasswordHash", "Role", "UpdatedAt", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-15 17:16:12.916 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 17:16:12.926 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.RegisterAdmin (API) in 1950.0108ms
+2025-07-15 17:16:12.927 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.RegisterAdmin (API)'
+2025-07-15 17:16:12.934 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/register-admin - 200 null application/json; charset=utf-8; ver=1 2005.8055ms
+2025-07-15 17:16:40.702 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/User/email/admin1@example.com - null null
+2025-07-15 17:16:40.712 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-07-15 17:16:40.715 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-07-15 17:16:40.716 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/User/email/admin1@example.com - 401 0 null 13.593ms
+2025-07-15 17:17:04.280 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/Auth/login - application/json; ver=1.0 59
+2025-07-15 17:17:04.281 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:17:04.281 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Login (API)'
+2025-07-15 17:17:04.285 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ExpenseTrackerAPI.DTOs.LoginRequest) on controller ExpenseTrackerAPI.Controllers.AuthController (API).
+2025-07-15 17:17:04.311 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-15 17:17:04.667 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?', @p7='?', @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "CreatedAt", "CreatedByIp", "ExpiresAt", "ReplacedByToken", "RevokedAt", "RevokedByIp", "Token", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-15 17:17:04.669 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[ExpenseTrackerAPI.DTOs.AuthResponse, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-15 17:17:04.678 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.AuthController.Login (API) in 392.1411ms
+2025-07-15 17:17:04.678 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Login (API)'
+2025-07-15 17:17:04.678 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/Auth/login - 200 null application/json; charset=utf-8; ver=1 398.1348ms
+2025-07-15 17:19:06.662 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/Category - application/json; ver=1.0 20
+2025-07-15 17:19:06.664 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:19:06.715 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.Create (API)'
+2025-07-15 17:19:06.718 +05:30 [INF] Route matched with {action = "Create", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(ExpenseTrackerAPI.DTOs.CategoryCreateDto) on controller ExpenseTrackerAPI.Controllers.CategoryController (API).
+2025-07-15 17:19:06.848 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Categories" AS c
+    WHERE NOT (c."IsDeleted") AND lower(c."Name") = @__ToLower_0)
+2025-07-15 17:19:06.867 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Categories" ("Id", "CreatedAt", "IsDeleted", "Name", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-07-15 17:19:06.869 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[ExpenseTrackerAPI.DTOs.CategoryReadDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-15 17:19:06.885 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.CategoryController.Create (API) in 167.1176ms
+2025-07-15 17:19:06.885 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.Create (API)'
+2025-07-15 17:19:06.886 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/Category - 201 null application/json; charset=utf-8; ver=1 223.1544ms
+2025-07-15 17:19:46.948 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/index.html - null null
+2025-07-15 17:19:46.949 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/index.html - 200 null text/html;charset=utf-8 1.2388ms
+2025-07-15 17:19:47.159 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/swagger/v1/swagger.json - null null
+2025-07-15 17:19:47.178 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 19.539ms
+2025-07-15 17:20:38.069 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/register - application/json; ver=1.0 81
+2025-07-15 17:20:38.070 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:20:38.070 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-15 17:20:38.073 +05:30 [INF] Route matched with {action = "Register", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ExpenseTrackerAPI.DTOs.RegisterUserRequest) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-15 17:20:38.079 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-15 17:20:38.080 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-15 17:20:38.231 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = DateTime), @p8='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "CreatedAt", "Email", "IsActive", "IsDeleted", "PasswordHash", "Role", "UpdatedAt", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-15 17:20:38.231 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 17:20:38.231 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.Register (API) in 157.3231ms
+2025-07-15 17:20:38.231 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-15 17:20:38.231 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/register - 200 null application/json; charset=utf-8; ver=1 162.2675ms
+2025-07-15 17:20:52.448 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/Category - null null
+2025-07-15 17:20:52.449 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API)'
+2025-07-15 17:20:52.452 +05:30 [INF] Route matched with {action = "GetAll", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller ExpenseTrackerAPI.Controllers.CategoryController (API).
+2025-07-15 17:20:52.466 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."IsDeleted", c."Name", c."UpdatedAt"
+FROM "Categories" AS c
+WHERE NOT (c."IsDeleted")
+2025-07-15 17:20:52.467 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Collections.Generic.IEnumerable`1[[ExpenseTrackerAPI.DTOs.CategoryReadDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 17:20:52.472 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API) in 19.6537ms
+2025-07-15 17:20:52.472 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API)'
+2025-07-15 17:20:52.472 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/Category - 200 null application/json; charset=utf-8; ver=1 23.7206ms
+2025-07-15 17:36:19.345 +05:30 [INF] Application is shutting down...
+2025-07-15 17:36:28.177 +05:30 [INF] User profile is available. Using '/Users/kaushik/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-07-15 17:36:28.307 +05:30 [INF] Now listening on: http://localhost:5169
+2025-07-15 17:36:28.308 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-15 17:36:28.309 +05:30 [INF] Hosting environment: Development
+2025-07-15 17:36:28.309 +05:30 [INF] Content root path: /Users/kaushik/Desktop/arul/ExpenseTracker/API
+2025-07-15 17:36:33.390 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/index.html - null null
+2025-07-15 17:36:33.477 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/index.html - 200 null text/html;charset=utf-8 88.5233ms
+2025-07-15 17:36:33.547 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/swagger/v1/swagger.json - null null
+2025-07-15 17:36:33.714 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 167.0713ms
+2025-07-15 17:36:44.175 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/create-analyser - application/json; ver=1.0 81
+2025-07-15 17:36:44.181 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-15 17:36:44.183 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:36:44.220 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2025-07-15 17:36:44.224 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-07-15 17:36:44.225 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/create-analyser - 401 0 null 50.2387ms
+2025-07-15 17:37:02.920 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/Auth/login - application/json; ver=1.0 59
+2025-07-15 17:37:02.922 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:37:02.933 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Login (API)'
+2025-07-15 17:37:02.949 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ExpenseTrackerAPI.DTOs.LoginRequest) on controller ExpenseTrackerAPI.Controllers.AuthController (API).
+2025-07-15 17:37:04.193 +05:30 [INF] Executed DbCommand (44ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-15 17:37:04.706 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?', @p7='?', @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "CreatedAt", "CreatedByIp", "ExpiresAt", "ReplacedByToken", "RevokedAt", "RevokedByIp", "Token", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-15 17:37:04.721 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[ExpenseTrackerAPI.DTOs.AuthResponse, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-15 17:37:04.734 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.AuthController.Login (API) in 1781.36ms
+2025-07-15 17:37:04.734 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Login (API)'
+2025-07-15 17:37:04.741 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/Auth/login - 200 null application/json; charset=utf-8; ver=1 1821.5997ms
+2025-07-15 17:37:34.773 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/create-analyser - application/json; ver=1.0 89
+2025-07-15 17:37:34.775 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:37:34.823 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.CreateAnalyser (API)'
+2025-07-15 17:37:34.827 +05:30 [INF] Route matched with {action = "CreateAnalyser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateAnalyser(ExpenseTrackerAPI.DTOs.RegisterUserRequest) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-15 17:37:34.855 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-15 17:37:34.858 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-15 17:37:35.134 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = DateTime), @p8='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "CreatedAt", "Email", "IsActive", "IsDeleted", "PasswordHash", "Role", "UpdatedAt", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-15 17:37:35.135 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 17:37:35.137 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.CreateAnalyser (API) in 309.6456ms
+2025-07-15 17:37:35.137 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.CreateAnalyser (API)'
+2025-07-15 17:37:35.137 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/create-analyser - 200 null application/json; charset=utf-8; ver=1 363.7321ms
+2025-07-15 17:56:18.583 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/Auth/login - application/json 50
+2025-07-15 17:56:18.590 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:56:18.593 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Login (API)'
+2025-07-15 17:56:18.595 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ExpenseTrackerAPI.DTOs.LoginRequest) on controller ExpenseTrackerAPI.Controllers.AuthController (API).
+2025-07-15 17:56:18.708 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-15 17:56:18.867 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?', @p7='?', @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "CreatedAt", "CreatedByIp", "ExpiresAt", "ReplacedByToken", "RevokedAt", "RevokedByIp", "Token", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-15 17:56:18.868 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[ExpenseTrackerAPI.DTOs.AuthResponse, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-15 17:56:18.870 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.AuthController.Login (API) in 274.0535ms
+2025-07-15 17:56:18.870 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Login (API)'
+2025-07-15 17:56:18.870 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/Auth/login - 200 null application/json; charset=utf-8; ver=1 287.2352ms
+2025-07-15 17:56:18.880 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/TourProgress - application/json null
+2025-07-15 17:56:18.885 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User)
+2025-07-15 17:56:18.887 +05:30 [INF] AuthenticationScheme: Bearer was forbidden.
+2025-07-15 17:56:18.887 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/TourProgress - 403 0 null 6.6203ms
+2025-07-15 17:56:18.942 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/Category - application/json null
+2025-07-15 17:56:18.943 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API)'
+2025-07-15 17:56:18.949 +05:30 [INF] Route matched with {action = "GetAll", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller ExpenseTrackerAPI.Controllers.CategoryController (API).
+2025-07-15 17:56:18.982 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."IsDeleted", c."Name", c."UpdatedAt"
+FROM "Categories" AS c
+WHERE NOT (c."IsDeleted")
+2025-07-15 17:56:18.999 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Collections.Generic.IEnumerable`1[[ExpenseTrackerAPI.DTOs.CategoryReadDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 17:56:19.007 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API) in 57.7373ms
+2025-07-15 17:56:19.007 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API)'
+2025-07-15 17:56:19.007 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/Category - 200 null application/json; charset=utf-8; ver=1 65.2511ms
+2025-07-15 21:29:03.699 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5169/api/v1/Category/1590446b-b4f7-46b8-9e58-5c2c6fb8aab0 - application/json 59
+2025-07-15 21:29:03.701 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:29:03.701 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.Update (API)'
+2025-07-15 21:29:03.706 +05:30 [INF] Route matched with {action = "Update", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Update(System.Guid, ExpenseTrackerAPI.DTOs.CategoryUpdateDto) on controller ExpenseTrackerAPI.Controllers.CategoryController (API).
+2025-07-15 21:29:03.732 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."IsDeleted", c."Name", c."UpdatedAt"
+FROM "Categories" AS c
+WHERE c."Id" = @__id_0 AND NOT (c."IsDeleted")
+LIMIT 1
+2025-07-15 21:29:03.807 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__ToLower_0='?', @__excludeId_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Categories" AS c
+    WHERE NOT (c."IsDeleted") AND lower(c."Name") = @__ToLower_0 AND c."Id" <> @__excludeId_1)
+2025-07-15 21:29:03.822 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p4='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Categories" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "Name" = @p2, "UpdatedAt" = @p3
+WHERE "Id" = @p4;
+2025-07-15 21:29:03.823 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 21:29:03.824 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.CategoryController.Update (API) in 117.2669ms
+2025-07-15 21:29:03.824 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.Update (API)'
+2025-07-15 21:29:03.824 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5169/api/v1/Category/1590446b-b4f7-46b8-9e58-5c2c6fb8aab0 - 200 null application/json; charset=utf-8; ver=1 125.0675ms
+2025-07-15 21:30:02.769 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/Auth/logout - application/json 667
+2025-07-15 21:30:02.770 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:30:02.770 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Logout (API)'
+2025-07-15 21:30:02.774 +05:30 [INF] Route matched with {action = "Logout", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Logout(ExpenseTrackerAPI.DTOs.RefreshTokenRequest) on controller ExpenseTrackerAPI.Controllers.AuthController (API).
+2025-07-15 21:30:02.811 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__now_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT r."Id", r."CreatedAt", r."CreatedByIp", r."ExpiresAt", r."ReplacedByToken", r."RevokedAt", r."RevokedByIp", r."Token", r."UserId"
+FROM "RefreshTokens" AS r
+WHERE r."UserId" = @__userId_0 AND r."RevokedAt" IS NULL AND r."ExpiresAt" > @__now_1
+LIMIT 1
+2025-07-15 21:30:02.812 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 21:30:02.812 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.AuthController.Logout (API) in 38.4989ms
+2025-07-15 21:30:02.812 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Logout (API)'
+2025-07-15 21:30:02.813 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/Auth/logout - 200 null application/json; charset=utf-8; ver=1 43.7452ms
+2025-07-15 21:30:19.680 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/Auth/login - application/json 53
+2025-07-15 21:30:19.680 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:30:19.680 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Login (API)'
+2025-07-15 21:30:19.680 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ExpenseTrackerAPI.DTOs.LoginRequest) on controller ExpenseTrackerAPI.Controllers.AuthController (API).
+2025-07-15 21:30:19.683 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-15 21:30:19.825 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?', @p7='?', @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "CreatedAt", "CreatedByIp", "ExpiresAt", "ReplacedByToken", "RevokedAt", "RevokedByIp", "Token", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-15 21:30:19.825 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[ExpenseTrackerAPI.DTOs.AuthResponse, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-15 21:30:19.826 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.AuthController.Login (API) in 145.3185ms
+2025-07-15 21:30:19.826 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Login (API)'
+2025-07-15 21:30:19.826 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/Auth/login - 200 null application/json; charset=utf-8; ver=1 146.7241ms
+2025-07-15 21:30:19.831 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/TourProgress - application/json null
+2025-07-15 21:30:19.832 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User)
+2025-07-15 21:30:19.832 +05:30 [INF] AuthenticationScheme: Bearer was forbidden.
+2025-07-15 21:30:19.832 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/TourProgress - 403 0 null 0.9239ms
+2025-07-15 21:30:59.237 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5169/budgetHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 21:30:59.238 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:30:59.239 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5169/budgetHub/negotiate?negotiateVersion=1 - 204 null null 1.6644ms
+2025-07-15 21:30:59.241 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/budgetHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 21:30:59.241 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:30:59.241 +05:30 [INF] Executing endpoint '/budgetHub/negotiate'
+2025-07-15 21:30:59.247 +05:30 [INF] Executed endpoint '/budgetHub/negotiate'
+2025-07-15 21:30:59.248 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/budgetHub/negotiate?negotiateVersion=1 - 200 316 application/json 6.74ms
+2025-07-15 21:30:59.311 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/budgetHub?id=qpIXnJ4UdIan0wITXrnl3A&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTgwZGZiLWFmZDYtNzBmNC1hNjI2LTI4OWFlNDMyMThjYSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFuYWx5c2VyMUBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFuYWx5c2VyIiwiZXhwIjoxNzUyNjgxNjE5LCJpc3MiOiJleHBlbnNlX3RyYWNrZXJfc2VydmVyIiwiYXVkIjoiZXhwZW5zZV90cmFja2VyX2NsaWVudCJ9.NI-_q2ecPWQbinsrs0bs4WKbqRsF6Cxa1T-TW6GXDaI - null null
+2025-07-15 21:30:59.311 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:30:59.312 +05:30 [INF] Executing endpoint '/budgetHub'
+2025-07-15 21:31:10.335 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/Auth/login - application/json 49
+2025-07-15 21:31:10.336 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:31:10.336 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Login (API)'
+2025-07-15 21:31:10.337 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ExpenseTrackerAPI.DTOs.LoginRequest) on controller ExpenseTrackerAPI.Controllers.AuthController (API).
+2025-07-15 21:31:10.354 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-15 21:31:10.506 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?', @p7='?', @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "CreatedAt", "CreatedByIp", "ExpiresAt", "ReplacedByToken", "RevokedAt", "RevokedByIp", "Token", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-15 21:31:10.507 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[ExpenseTrackerAPI.DTOs.AuthResponse, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-15 21:31:10.507 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.AuthController.Login (API) in 170.2536ms
+2025-07-15 21:31:10.507 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Login (API)'
+2025-07-15 21:31:10.507 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/Auth/login - 200 null application/json; charset=utf-8; ver=1 171.8774ms
+2025-07-15 21:31:10.514 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/TourProgress - application/json null
+2025-07-15 21:31:10.514 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.TourProgressController.GetProgress (API)'
+2025-07-15 21:31:10.517 +05:30 [INF] Route matched with {action = "GetProgress", controller = "TourProgress"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[ExpenseTrackerAPI.Models.TourProgress]] GetProgress() on controller ExpenseTrackerAPI.Controllers.TourProgressController (API).
+2025-07-15 21:31:10.527 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."BudgetTourCompleted", t."CreatedAt", t."ExpenseTourCompleted", t."HomeTourCompleted", t."ReportTourCompleted", t."UpdatedAt", t."UserId"
+FROM "TourProgress" AS t
+WHERE t."UserId" = @__userId_0
+LIMIT 1
+2025-07-15 21:31:10.555 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Boolean), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTime), @p7='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "TourProgress" ("Id", "BudgetTourCompleted", "CreatedAt", "ExpenseTourCompleted", "HomeTourCompleted", "ReportTourCompleted", "UpdatedAt", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2025-07-15 21:31:10.557 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 21:31:10.563 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.TourProgressController.GetProgress (API) in 45.4471ms
+2025-07-15 21:31:10.563 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.TourProgressController.GetProgress (API)'
+2025-07-15 21:31:10.563 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/TourProgress - 200 null application/json; charset=utf-8; ver=1 49.1962ms
+2025-07-15 21:31:10.595 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/Budget?page=1&pageSize=10&type=%5BBudget%5D%20Get%20Budgets - application/json null
+2025-07-15 21:31:10.596 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.BudgetController.GetFiltered (API)'
+2025-07-15 21:31:10.596 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/Expense/filtered?page=1&pageSize=5&fromDate=2025-06-30T18:30:00.000Z&toDate=2025-07-31T18:29:59.999Z&type=%5BExpense%5D%20Get%20Expenses - application/json null
+2025-07-15 21:31:10.597 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/Expense/summary?fromDate=2025-06-30T18:30:00.000Z&toDate=2025-07-31T18:29:59.999Z - application/json null
+2025-07-15 21:31:10.598 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.ExpenseController.GetSummary (API)'
+2025-07-15 21:31:10.598 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.ExpenseController.GetFiltered (API)'
+2025-07-15 21:31:10.607 +05:30 [INF] Route matched with {action = "GetFiltered", controller = "Budget"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFiltered(ExpenseTrackerAPI.DTOs.BudgetQueryParameters) on controller ExpenseTrackerAPI.Controllers.BudgetController (API).
+2025-07-15 21:31:10.609 +05:30 [INF] Route matched with {action = "GetFiltered", controller = "Expense"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFiltered(ExpenseTrackerAPI.DTOs.ExpenseQueryParameters) on controller ExpenseTrackerAPI.Controllers.ExpenseController (API).
+2025-07-15 21:31:10.609 +05:30 [INF] Route matched with {action = "GetSummary", controller = "Expense"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSummary(ExpenseTrackerAPI.DTOs.ExpenseQueryParameters) on controller ExpenseTrackerAPI.Controllers.ExpenseController (API).
+2025-07-15 21:31:10.654 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id"
+FROM "Categories" AS c
+WHERE lower(c."Name") = 'all'
+LIMIT 1
+2025-07-15 21:31:10.665 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Budgets" AS b
+WHERE b."UserId" = @__userId_0 AND NOT (b."IsDeleted")
+2025-07-15 21:31:10.675 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-15 21:31:10.677 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-15 21:31:10.685 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__parameters_FromDate_1='?' (DbType = DateTime), @__parameters_ToDate_2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Expenses" AS e
+WHERE e."UserId" = @__userId_0 AND NOT (e."IsDeleted") AND e."ExpenseDate" >= @__parameters_FromDate_1 AND e."ExpenseDate" <= @__parameters_ToDate_2
+2025-07-15 21:31:10.707 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__parameters_FromDate_1='?' (DbType = DateTime), @__parameters_ToDate_2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Name" AS "CategoryName", COALESCE(sum(e."Amount"), 0.0) AS "TotalAmount"
+FROM "Expenses" AS e
+INNER JOIN "Categories" AS c ON e."CategoryId" = c."Id"
+WHERE e."UserId" = @__userId_0 AND NOT (e."IsDeleted") AND e."ExpenseDate" >= @__parameters_FromDate_1 AND e."ExpenseDate" <= @__parameters_ToDate_2
+GROUP BY c."Name"
+2025-07-15 21:31:10.708 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT b0."Id", b0."BalanceAmount", b0."CategoryId", b0."EndDate", b0."IsDeleted", b0."LimitAmount", b0."Name", b0."Notified50Percent", b0."Notified90Percent", b0."NotifiedLimitExceeded", b0."StartDate", b0."UserId", c."Id", c."CreatedAt", c."IsDeleted", c."Name", c."UpdatedAt"
+FROM (
+    SELECT b."Id", b."BalanceAmount", b."CategoryId", b."EndDate", b."IsDeleted", b."LimitAmount", b."Name", b."Notified50Percent", b."Notified90Percent", b."NotifiedLimitExceeded", b."StartDate", b."UserId"
+    FROM "Budgets" AS b
+    WHERE b."UserId" = @__userId_0 AND NOT (b."IsDeleted")
+    LIMIT @__p_2 OFFSET @__p_1
+) AS b0
+INNER JOIN "Categories" AS c ON b0."CategoryId" = c."Id"
+2025-07-15 21:31:10.708 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 21:31:10.710 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 21:31:10.715 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.BudgetController.GetFiltered (API) in 108.2931ms
+2025-07-15 21:31:10.716 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.BudgetController.GetFiltered (API)'
+2025-07-15 21:31:10.716 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/Budget?page=1&pageSize=10&type=%5BBudget%5D%20Get%20Budgets - 200 null application/json; charset=utf-8; ver=1 121.3618ms
+2025-07-15 21:31:10.716 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.ExpenseController.GetSummary (API) in 107.0055ms
+2025-07-15 21:31:10.716 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.ExpenseController.GetSummary (API)'
+2025-07-15 21:31:10.717 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/Expense/summary?fromDate=2025-06-30T18:30:00.000Z&toDate=2025-07-31T18:29:59.999Z - 200 null application/json; charset=utf-8; ver=1 120.037ms
+2025-07-15 21:31:10.725 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__parameters_FromDate_1='?' (DbType = DateTime), @__parameters_ToDate_2='?' (DbType = DateTime), @__p_4='?' (DbType = Int32), @__p_3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT e0."Id", e0."Amount", e0."CategoryId", e0."Description", e0."ExpenseDate", e0."IsDeleted", e0."UserId", c."Id", c."CreatedAt", c."IsDeleted", c."Name", c."UpdatedAt"
+FROM (
+    SELECT e."Id", e."Amount", e."CategoryId", e."Description", e."ExpenseDate", e."IsDeleted", e."UserId"
+    FROM "Expenses" AS e
+    WHERE e."UserId" = @__userId_0 AND NOT (e."IsDeleted") AND e."ExpenseDate" >= @__parameters_FromDate_1 AND e."ExpenseDate" <= @__parameters_ToDate_2
+    ORDER BY e."ExpenseDate" DESC
+    LIMIT @__p_4 OFFSET @__p_3
+) AS e0
+INNER JOIN "Categories" AS c ON e0."CategoryId" = c."Id"
+ORDER BY e0."ExpenseDate" DESC
+2025-07-15 21:31:10.726 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 21:31:10.732 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.ExpenseController.GetFiltered (API) in 123.1023ms
+2025-07-15 21:31:10.732 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.ExpenseController.GetFiltered (API)'
+2025-07-15 21:31:10.732 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/Expense/filtered?page=1&pageSize=5&fromDate=2025-06-30T18:30:00.000Z&toDate=2025-07-31T18:29:59.999Z&type=%5BExpense%5D%20Get%20Expenses - 200 null application/json; charset=utf-8; ver=1 136.0086ms
+2025-07-15 21:31:14.614 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/TourProgress/complete/homeTourCompleted - application/json 2
+2025-07-15 21:31:14.615 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:31:14.616 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.TourProgressController.MarkTourAsCompleted (API)'
+2025-07-15 21:31:14.620 +05:30 [INF] Route matched with {action = "MarkTourAsCompleted", controller = "TourProgress"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[ExpenseTrackerAPI.Models.TourProgress]] MarkTourAsCompleted(System.String) on controller ExpenseTrackerAPI.Controllers.TourProgressController (API).
+2025-07-15 21:31:14.624 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."BudgetTourCompleted", t."CreatedAt", t."ExpenseTourCompleted", t."HomeTourCompleted", t."ReportTourCompleted", t."UpdatedAt", t."UserId"
+FROM "TourProgress" AS t
+WHERE t."UserId" = @__userId_0
+LIMIT 1
+2025-07-15 21:31:14.628 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p7='?' (DbType = Guid), @p0='?' (DbType = Boolean), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = DateTime), @p6='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "TourProgress" SET "BudgetTourCompleted" = @p0, "CreatedAt" = @p1, "ExpenseTourCompleted" = @p2, "HomeTourCompleted" = @p3, "ReportTourCompleted" = @p4, "UpdatedAt" = @p5, "UserId" = @p6
+WHERE "Id" = @p7;
+2025-07-15 21:31:14.629 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 21:31:14.629 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.TourProgressController.MarkTourAsCompleted (API) in 9.2362ms
+2025-07-15 21:31:14.629 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.TourProgressController.MarkTourAsCompleted (API)'
+2025-07-15 21:31:14.630 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/TourProgress/complete/homeTourCompleted - 200 null application/json; charset=utf-8; ver=1 15.2491ms
+2025-07-15 21:31:17.571 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/Category - application/json null
+2025-07-15 21:31:17.571 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/Budget?page=1&pageSize=10&search=&type=%5BBudget%5D%20Get%20Budgets - application/json null
+2025-07-15 21:31:17.572 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API)'
+2025-07-15 21:31:17.573 +05:30 [INF] Route matched with {action = "GetAll", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller ExpenseTrackerAPI.Controllers.CategoryController (API).
+2025-07-15 21:31:17.573 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.BudgetController.GetFiltered (API)'
+2025-07-15 21:31:17.574 +05:30 [INF] Route matched with {action = "GetFiltered", controller = "Budget"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFiltered(ExpenseTrackerAPI.DTOs.BudgetQueryParameters) on controller ExpenseTrackerAPI.Controllers.BudgetController (API).
+2025-07-15 21:31:17.581 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."IsDeleted", c."Name", c."UpdatedAt"
+FROM "Categories" AS c
+WHERE NOT (c."IsDeleted")
+2025-07-15 21:31:17.581 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Budgets" AS b
+WHERE b."UserId" = @__userId_0 AND NOT (b."IsDeleted")
+2025-07-15 21:31:17.581 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Collections.Generic.IEnumerable`1[[ExpenseTrackerAPI.DTOs.CategoryReadDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 21:31:17.582 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API) in 8.4885ms
+2025-07-15 21:31:17.582 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API)'
+2025-07-15 21:31:17.582 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/Category - 200 null application/json; charset=utf-8; ver=1 11.3566ms
+2025-07-15 21:31:17.584 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT b0."Id", b0."BalanceAmount", b0."CategoryId", b0."EndDate", b0."IsDeleted", b0."LimitAmount", b0."Name", b0."Notified50Percent", b0."Notified90Percent", b0."NotifiedLimitExceeded", b0."StartDate", b0."UserId", c."Id", c."CreatedAt", c."IsDeleted", c."Name", c."UpdatedAt"
+FROM (
+    SELECT b."Id", b."BalanceAmount", b."CategoryId", b."EndDate", b."IsDeleted", b."LimitAmount", b."Name", b."Notified50Percent", b."Notified90Percent", b."NotifiedLimitExceeded", b."StartDate", b."UserId"
+    FROM "Budgets" AS b
+    WHERE b."UserId" = @__userId_0 AND NOT (b."IsDeleted")
+    LIMIT @__p_2 OFFSET @__p_1
+) AS b0
+INNER JOIN "Categories" AS c ON b0."CategoryId" = c."Id"
+2025-07-15 21:31:17.584 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 21:31:17.585 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.BudgetController.GetFiltered (API) in 10.7165ms
+2025-07-15 21:31:17.585 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.BudgetController.GetFiltered (API)'
+2025-07-15 21:31:17.585 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/Budget?page=1&pageSize=10&search=&type=%5BBudget%5D%20Get%20Budgets - 200 null application/json; charset=utf-8; ver=1 13.5623ms
+2025-07-15 21:32:33.442 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/Category - application/json null
+2025-07-15 21:32:33.443 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API)'
+2025-07-15 21:32:33.443 +05:30 [INF] Route matched with {action = "GetAll", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller ExpenseTrackerAPI.Controllers.CategoryController (API).
+2025-07-15 21:32:33.453 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."IsDeleted", c."Name", c."UpdatedAt"
+FROM "Categories" AS c
+WHERE NOT (c."IsDeleted")
+2025-07-15 21:32:33.454 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Collections.Generic.IEnumerable`1[[ExpenseTrackerAPI.DTOs.CategoryReadDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 21:32:33.454 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API) in 10.6955ms
+2025-07-15 21:32:33.454 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API)'
+2025-07-15 21:32:33.454 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/Category - 200 null application/json; charset=utf-8; ver=1 11.896ms
+2025-07-15 21:32:49.251 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/Category - application/json null
+2025-07-15 21:32:49.253 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/FeatureFlags - application/json null
+2025-07-15 21:32:49.253 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API)'
+2025-07-15 21:32:49.253 +05:30 [INF] Route matched with {action = "GetAll", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller ExpenseTrackerAPI.Controllers.CategoryController (API).
+2025-07-15 21:32:49.255 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.FeatureFlagsController.GetFlags (API)'
+2025-07-15 21:32:49.255 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."IsDeleted", c."Name", c."UpdatedAt"
+FROM "Categories" AS c
+WHERE NOT (c."IsDeleted")
+2025-07-15 21:32:49.255 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Collections.Generic.IEnumerable`1[[ExpenseTrackerAPI.DTOs.CategoryReadDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 21:32:49.256 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API) in 2.0923ms
+2025-07-15 21:32:49.256 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API)'
+2025-07-15 21:32:49.256 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/Category - 200 null application/json; charset=utf-8; ver=1 4.7805ms
+2025-07-15 21:32:49.260 +05:30 [INF] Route matched with {action = "GetFlags", controller = "FeatureFlags"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetFlags() on controller ExpenseTrackerAPI.Controllers.FeatureFlagsController (API).
+2025-07-15 21:32:49.261 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType6`1[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-15 21:32:49.266 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.FeatureFlagsController.GetFlags (API) in 5.9755ms
+2025-07-15 21:32:49.266 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.FeatureFlagsController.GetFlags (API)'
+2025-07-15 21:32:49.266 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/FeatureFlags - 200 null application/json; charset=utf-8; ver=1 13.4525ms
+2025-07-15 21:32:52.394 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/Expense/export/csv?fromDate=2025-06-29T18:30:00.000Z&toDate=2025-07-06T18:29:59.000Z - application/json null
+2025-07-15 21:32:52.396 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.ExpenseController.ExportToCsv (API)'
+2025-07-15 21:32:52.399 +05:30 [INF] Route matched with {action = "ExportToCsv", controller = "Expense"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ExportToCsv(ExpenseTrackerAPI.DTOs.ExpenseQueryParameters) on controller ExpenseTrackerAPI.Controllers.ExpenseController (API).
+2025-07-15 21:32:52.407 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id"
+FROM "Categories" AS c
+WHERE lower(c."Name") = 'all'
+LIMIT 1
+2025-07-15 21:32:52.408 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__parameters_FromDate_1='?' (DbType = DateTime), @__parameters_ToDate_2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Expenses" AS e
+WHERE e."UserId" = @__userId_0 AND NOT (e."IsDeleted") AND e."ExpenseDate" >= @__parameters_FromDate_1 AND e."ExpenseDate" <= @__parameters_ToDate_2
+2025-07-15 21:32:52.409 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__parameters_FromDate_1='?' (DbType = DateTime), @__parameters_ToDate_2='?' (DbType = DateTime), @__p_4='?' (DbType = Int32), @__p_3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT e0."Id", e0."Amount", e0."CategoryId", e0."Description", e0."ExpenseDate", e0."IsDeleted", e0."UserId", c."Id", c."CreatedAt", c."IsDeleted", c."Name", c."UpdatedAt"
+FROM (
+    SELECT e."Id", e."Amount", e."CategoryId", e."Description", e."ExpenseDate", e."IsDeleted", e."UserId"
+    FROM "Expenses" AS e
+    WHERE e."UserId" = @__userId_0 AND NOT (e."IsDeleted") AND e."ExpenseDate" >= @__parameters_FromDate_1 AND e."ExpenseDate" <= @__parameters_ToDate_2
+    ORDER BY e."ExpenseDate" DESC
+    LIMIT @__p_4 OFFSET @__p_3
+) AS e0
+INNER JOIN "Categories" AS c ON e0."CategoryId" = c."Id"
+ORDER BY e0."ExpenseDate" DESC
+2025-07-15 21:32:52.413 +05:30 [INF] Executing FileContentResult, sending file with download name 'expenses_20250715.csv' ...
+2025-07-15 21:32:52.415 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.ExpenseController.ExportToCsv (API) in 16.3857ms
+2025-07-15 21:32:52.416 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.ExpenseController.ExportToCsv (API)'
+2025-07-15 21:32:52.416 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/Expense/export/csv?fromDate=2025-06-29T18:30:00.000Z&toDate=2025-07-06T18:29:59.000Z - 200 33 text/csv; ver=1 21.4077ms
