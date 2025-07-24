@@ -8,6 +8,7 @@ import { AsyncPipe } from '@angular/common';
 import { register } from '@store/auth/auth.actions';
 import { selectAuthError, selectAuthLoading } from '@store/auth/auth.selectors';
 import { RegisterRequest } from '@shared/models/auth.model';
+import { AuthApiService } from '@features/auth/services/auth-api.service';
 
 @Component({
   standalone: true,
@@ -18,6 +19,7 @@ import { RegisterRequest } from '@shared/models/auth.model';
 export class RegisterPage {
   private fb = inject(FormBuilder);
   private store = inject(Store);
+  private service = inject(AuthApiService)
    private passwordMatchValidator: ValidatorFn = (
     group: AbstractControl
   ): ValidationErrors | null => {
@@ -63,7 +65,12 @@ export class RegisterPage {
       email,
       password,
     };
-
-    this.store.dispatch(register({ payload }));
+    this.service.welcomemail(payload).subscribe({
+      next:(data:any)=>{
+        console.log(data);
+        this.store.dispatch(register({ payload }));
+      }
+    })
+    
   }
 }

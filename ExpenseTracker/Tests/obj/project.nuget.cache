@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "y2SJD64EkTA=",
+  "dgSpecHash": "BX47vWHdFNY=",
   "success": false,
-  "projectFilePath": "/Users/kaushik/Desktop/arul/ExpenseTracker/Tests/Tests.csproj",
+  "projectFilePath": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/Tests/Tests.csproj",
   "expectedPackageFiles": [
     "/Users/kaushik/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",
     "/Users/kaushik/.nuget/packages/coverlet.collector/6.0.0/coverlet.collector.6.0.0.nupkg.sha512",
@@ -119,8 +119,8 @@
       "code": "NU1201",
       "level": "Error",
       "message": "Project API is not compatible with net8.0 (.NETCoreApp,Version=v8.0). Project API supports: net9.0 (.NETCoreApp,Version=v9.0)",
-      "projectPath": "/Users/kaushik/Desktop/arul/ExpenseTracker/Tests/Tests.csproj",
-      "filePath": "/Users/kaushik/Desktop/arul/ExpenseTracker/Tests/Tests.csproj",
+      "projectPath": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/Tests/Tests.csproj",
+      "filePath": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/Tests/Tests.csproj",
       "libraryId": "API",
       "targetGraphs": [
         "net8.0"

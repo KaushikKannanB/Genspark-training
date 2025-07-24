@@ -1,0 +1,280 @@
+2025-07-25 01:03:05.219 +05:30 [INF] User profile is available. Using '/Users/kaushik/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-07-25 01:03:05.371 +05:30 [INF] Now listening on: http://localhost:5169
+2025-07-25 01:03:05.373 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-25 01:03:05.374 +05:30 [INF] Hosting environment: Development
+2025-07-25 01:03:05.374 +05:30 [INF] Content root path: /Users/kaushik/Desktop/Genspark-training/ExpenseTracker/API
+2025-07-25 01:03:25.392 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/swagger/v1/swagger.json - null null
+2025-07-25 01:03:25.575 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 183.9356ms
+2025-07-25 01:03:47.370 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=kaushikkannan02%40gmail.com&username=Kaushik - null 0
+2025-07-25 01:03:47.381 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-25 01:03:47.382 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:03:47.443 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:03:47.458 +05:30 [INF] Route matched with {action = "SendWelcomeMail", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SendWelcomeMail(System.String, System.String) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:03:52.000 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType9`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:03:52.018 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API) in 4556.0157ms
+2025-07-25 01:03:52.018 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:03:52.022 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=kaushikkannan02%40gmail.com&username=Kaushik - 200 null application/json; charset=utf-8; ver=1 4652.4955ms
+2025-07-25 01:09:26.830 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5169/budgetHub/negotiate?negotiateVersion=1 - null 0
+2025-07-25 01:09:26.831 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:09:26.833 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5169/budgetHub/negotiate?negotiateVersion=1 - 204 null null 3.3809ms
+2025-07-25 01:09:26.835 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/budgetHub/negotiate?negotiateVersion=1 - null 0
+2025-07-25 01:09:26.836 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:09:26.888 +05:30 [INF] Executing endpoint '/budgetHub/negotiate'
+2025-07-25 01:09:26.891 +05:30 [INF] Executed endpoint '/budgetHub/negotiate'
+2025-07-25 01:09:26.891 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/budgetHub/negotiate?negotiateVersion=1 - 200 316 application/json 55.8069ms
+2025-07-25 01:09:26.983 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/api/v1/Category - application/json null
+2025-07-25 01:09:26.995 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API)'
+2025-07-25 01:09:27.000 +05:30 [INF] Route matched with {action = "GetAll", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller ExpenseTrackerAPI.Controllers.CategoryController (API).
+2025-07-25 01:09:27.010 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/budgetHub?id=mBZ1TqBeXsCZLLnIMg3dUA&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTgzNTg5LTgzOTYtNzBlNi1iNjg4LTU2OTdlMTRiNTQzZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFkbWluMUBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzUzNDM4Mjc1LCJpc3MiOiJleHBlbnNlX3RyYWNrZXJfc2VydmVyIiwiYXVkIjoiZXhwZW5zZV90cmFja2VyX2NsaWVudCJ9.XytHcOA8OVd6l7G37T7lBWAKn5cw_UP-_ZBRMDT2gk0 - null null
+2025-07-25 01:09:27.011 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:09:27.011 +05:30 [INF] Executing endpoint '/budgetHub'
+2025-07-25 01:09:28.024 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."IsDeleted", c."Name", c."UpdatedAt"
+FROM "Categories" AS c
+WHERE NOT (c."IsDeleted")
+2025-07-25 01:09:28.122 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Collections.Generic.IEnumerable`1[[ExpenseTrackerAPI.DTOs.CategoryReadDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:09:28.132 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API) in 1131.7058ms
+2025-07-25 01:09:28.132 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.CategoryController.GetAll (API)'
+2025-07-25 01:09:28.138 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/api/v1/Category - 200 null application/json; charset=utf-8; ver=1 1154.4263ms
+2025-07-25 01:09:29.922 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/Auth/logout - application/json 667
+2025-07-25 01:09:29.922 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:09:29.923 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Logout (API)'
+2025-07-25 01:09:29.926 +05:30 [INF] Route matched with {action = "Logout", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Logout(ExpenseTrackerAPI.DTOs.RefreshTokenRequest) on controller ExpenseTrackerAPI.Controllers.AuthController (API).
+2025-07-25 01:09:30.023 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__now_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT r."Id", r."CreatedAt", r."CreatedByIp", r."ExpiresAt", r."ReplacedByToken", r."RevokedAt", r."RevokedByIp", r."Token", r."UserId"
+FROM "RefreshTokens" AS r
+WHERE r."UserId" = @__userId_0 AND r."RevokedAt" IS NULL AND r."ExpiresAt" > @__now_1
+LIMIT 1
+2025-07-25 01:09:30.117 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?', @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = DateTime), @p5='?', @p6='?', @p7='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "RefreshTokens" SET "CreatedAt" = @p0, "CreatedByIp" = @p1, "ExpiresAt" = @p2, "ReplacedByToken" = @p3, "RevokedAt" = @p4, "RevokedByIp" = @p5, "Token" = @p6, "UserId" = @p7
+WHERE "Id" = @p8;
+2025-07-25 01:09:30.124 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:09:30.126 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.AuthController.Logout (API) in 199.0621ms
+2025-07-25 01:09:30.126 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.AuthController.Logout (API)'
+2025-07-25 01:09:30.126 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/Auth/logout - 200 null application/json; charset=utf-8; ver=1 204.1889ms
+2025-07-25 01:10:41.821 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=kaushik.21aid@kongu.edu&username=Kushal - application/json 0
+2025-07-25 01:10:41.823 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:10:41.823 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:10:41.823 +05:30 [INF] Route matched with {action = "SendWelcomeMail", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SendWelcomeMail(System.String, System.String) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:10:44.657 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType9`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:10:44.658 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API) in 2834.0707ms
+2025-07-25 01:10:44.658 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:10:44.658 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=kaushik.21aid@kongu.edu&username=Kushal - 200 null application/json; charset=utf-8; ver=1 2837.5009ms
+2025-07-25 01:10:44.666 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/register - application/json 79
+2025-07-25 01:10:44.667 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:10:44.667 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:10:44.670 +05:30 [INF] Route matched with {action = "Register", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ExpenseTrackerAPI.DTOs.RegisterUserRequest) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:10:44.754 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:10:44.758 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:10:45.081 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = DateTime), @p8='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "CreatedAt", "Email", "IsActive", "IsDeleted", "PasswordHash", "Role", "UpdatedAt", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-25 01:10:45.082 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:10:45.083 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.Register (API) in 412.3955ms
+2025-07-25 01:10:45.083 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:10:45.083 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/register - 200 null application/json; charset=utf-8; ver=1 416.7906ms
+2025-07-25 01:12:14.120 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=kelly@example.com&username=Kelly - application/json 0
+2025-07-25 01:12:14.122 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:12:14.122 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:12:14.122 +05:30 [INF] Route matched with {action = "SendWelcomeMail", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SendWelcomeMail(System.String, System.String) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:12:16.819 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType9`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:12:16.820 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API) in 2697.5338ms
+2025-07-25 01:12:16.820 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:12:16.820 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=kelly@example.com&username=Kelly - 200 null application/json; charset=utf-8; ver=1 2699.817ms
+2025-07-25 01:12:16.829 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/register - application/json 70
+2025-07-25 01:12:16.829 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:12:16.829 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:12:16.829 +05:30 [INF] Route matched with {action = "Register", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ExpenseTrackerAPI.DTOs.RegisterUserRequest) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:12:16.832 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:12:16.833 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:12:16.975 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = DateTime), @p8='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "CreatedAt", "Email", "IsActive", "IsDeleted", "PasswordHash", "Role", "UpdatedAt", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-25 01:12:16.976 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:12:16.976 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.Register (API) in 146.6286ms
+2025-07-25 01:12:16.976 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:12:16.977 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/register - 200 null application/json; charset=utf-8; ver=1 147.9173ms
+2025-07-25 01:14:24.688 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=kelly@examle.com&username=Kelly - application/json 0
+2025-07-25 01:14:24.689 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:14:24.689 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:14:24.689 +05:30 [INF] Route matched with {action = "SendWelcomeMail", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SendWelcomeMail(System.String, System.String) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:14:27.382 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType9`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:14:27.383 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API) in 2693.0259ms
+2025-07-25 01:14:27.383 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:14:27.383 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=kelly@examle.com&username=Kelly - 200 null application/json; charset=utf-8; ver=1 2695.0779ms
+2025-07-25 01:14:27.392 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/register - application/json 69
+2025-07-25 01:14:27.392 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:14:27.392 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:14:27.392 +05:30 [INF] Route matched with {action = "Register", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ExpenseTrackerAPI.DTOs.RegisterUserRequest) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:14:27.394 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:14:27.395 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:14:27.537 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = DateTime), @p8='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "CreatedAt", "Email", "IsActive", "IsDeleted", "PasswordHash", "Role", "UpdatedAt", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-25 01:14:27.538 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:14:27.538 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.Register (API) in 145.3313ms
+2025-07-25 01:14:27.538 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:14:27.538 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/register - 200 null application/json; charset=utf-8; ver=1 146.4309ms
+2025-07-25 01:15:35.745 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=nobody@invalid.test&username=No-one - application/json 0
+2025-07-25 01:15:35.746 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:15:35.746 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:15:35.746 +05:30 [INF] Route matched with {action = "SendWelcomeMail", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SendWelcomeMail(System.String, System.String) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:15:38.590 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType9`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:15:38.590 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API) in 2843.8131ms
+2025-07-25 01:15:38.590 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:15:38.591 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=nobody@invalid.test&username=No-one - 200 null application/json; charset=utf-8; ver=1 2845.5935ms
+2025-07-25 01:15:38.598 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/register - application/json 73
+2025-07-25 01:15:38.599 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:15:38.599 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:15:38.599 +05:30 [INF] Route matched with {action = "Register", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ExpenseTrackerAPI.DTOs.RegisterUserRequest) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:15:38.613 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:15:38.614 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:15:38.754 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = DateTime), @p8='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "CreatedAt", "Email", "IsActive", "IsDeleted", "PasswordHash", "Role", "UpdatedAt", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-25 01:15:38.754 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:15:38.755 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.Register (API) in 155.4488ms
+2025-07-25 01:15:38.755 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:15:38.755 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/register - 200 null application/json; charset=utf-8; ver=1 156.5916ms
+2025-07-25 01:17:15.404 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=nonna@gmailcom&username=None - application/json 0
+2025-07-25 01:17:15.405 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:17:15.405 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:17:15.405 +05:30 [INF] Route matched with {action = "SendWelcomeMail", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SendWelcomeMail(System.String, System.String) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:17:18.588 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType9`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:17:18.589 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API) in 3183.1251ms
+2025-07-25 01:17:18.589 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:17:18.589 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=nonna@gmailcom&username=None - 200 null application/json; charset=utf-8; ver=1 3185.4091ms
+2025-07-25 01:17:18.597 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/register - application/json 68
+2025-07-25 01:17:18.597 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:17:18.597 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:17:18.597 +05:30 [INF] Route matched with {action = "Register", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ExpenseTrackerAPI.DTOs.RegisterUserRequest) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:17:18.599 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:17:18.600 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:17:18.743 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = DateTime), @p8='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "CreatedAt", "Email", "IsActive", "IsDeleted", "PasswordHash", "Role", "UpdatedAt", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-25 01:17:18.743 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:17:18.743 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.Register (API) in 145.8625ms
+2025-07-25 01:17:18.743 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:17:18.744 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/register - 200 null application/json; charset=utf-8; ver=1 146.9297ms
+2025-07-25 01:18:28.345 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=nobody@definitelydoesnotexist99912345.com&username=N - application/json 0
+2025-07-25 01:18:28.346 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:18:28.347 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:18:28.347 +05:30 [INF] Route matched with {action = "SendWelcomeMail", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SendWelcomeMail(System.String, System.String) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:18:30.996 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType9`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:18:30.996 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API) in 2649.5799ms
+2025-07-25 01:18:30.997 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:18:30.997 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=nobody@definitelydoesnotexist99912345.com&username=N - 200 null application/json; charset=utf-8; ver=1 2651.7377ms
+2025-07-25 01:18:31.005 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/register - application/json 90
+2025-07-25 01:18:31.005 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:18:31.005 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:18:31.005 +05:30 [INF] Route matched with {action = "Register", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ExpenseTrackerAPI.DTOs.RegisterUserRequest) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:18:31.007 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:18:31.008 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:18:31.150 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = DateTime), @p8='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "CreatedAt", "Email", "IsActive", "IsDeleted", "PasswordHash", "Role", "UpdatedAt", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-25 01:18:31.150 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:18:31.150 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.Register (API) in 144.3967ms
+2025-07-25 01:18:31.150 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:18:31.150 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/register - 200 null application/json; charset=utf-8; ver=1 145.4782ms
+2025-07-25 01:22:26.235 +05:30 [INF] Application is shutting down...
+2025-07-25 01:22:26.237 +05:30 [INF] Connection id "0HNEAT3QJ9PHM", Request id "0HNEAT3QJ9PHM:00000001": the application aborted the connection.
+2025-07-25 01:22:26.246 +05:30 [INF] Executed endpoint '/budgetHub'
+2025-07-25 01:22:26.247 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/budgetHub?id=mBZ1TqBeXsCZLLnIMg3dUA&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTgzNTg5LTgzOTYtNzBlNi1iNjg4LTU2OTdlMTRiNTQzZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFkbWluMUBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzUzNDM4Mjc1LCJpc3MiOiJleHBlbnNlX3RyYWNrZXJfc2VydmVyIiwiYXVkIjoiZXhwZW5zZV90cmFja2VyX2NsaWVudCJ9.XytHcOA8OVd6l7G37T7lBWAKn5cw_UP-_ZBRMDT2gk0 - 101 null null 779234.5019ms
+2025-07-25 01:22:35.620 +05:30 [INF] User profile is available. Using '/Users/kaushik/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-07-25 01:22:35.768 +05:30 [INF] Now listening on: http://localhost:5169
+2025-07-25 01:22:35.770 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-25 01:22:35.771 +05:30 [INF] Hosting environment: Development
+2025-07-25 01:22:35.771 +05:30 [INF] Content root path: /Users/kaushik/Desktop/Genspark-training/ExpenseTracker/API
+2025-07-25 01:22:37.512 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5169/budgetHub/negotiate?negotiateVersion=1 - null 0
+2025-07-25 01:22:37.578 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-25 01:22:37.579 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:22:37.587 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5169/budgetHub/negotiate?negotiateVersion=1 - 204 null null 77.3692ms
+2025-07-25 01:22:37.604 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/budgetHub/negotiate?negotiateVersion=1 - null 0
+2025-07-25 01:22:37.606 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:22:37.690 +05:30 [INF] Executing endpoint '/budgetHub/negotiate'
+2025-07-25 01:22:37.697 +05:30 [INF] Executed endpoint '/budgetHub/negotiate'
+2025-07-25 01:22:37.697 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/budgetHub/negotiate?negotiateVersion=1 - 200 316 application/json 93.732ms
+2025-07-25 01:22:37.701 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5169/budgetHub?id=cUQz3Z5CAuZH0J3fS01mtQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTgzNTg5LTgzOTYtNzBlNi1iNjg4LTU2OTdlMTRiNTQzZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFkbWluMUBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzUzNDM4Mjc1LCJpc3MiOiJleHBlbnNlX3RyYWNrZXJfc2VydmVyIiwiYXVkIjoiZXhwZW5zZV90cmFja2VyX2NsaWVudCJ9.XytHcOA8OVd6l7G37T7lBWAKn5cw_UP-_ZBRMDT2gk0 - null null
+2025-07-25 01:22:37.703 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:22:37.704 +05:30 [INF] Executing endpoint '/budgetHub'
+2025-07-25 01:23:24.532 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=Kaushik.21aid@kongu.edu&username=Kaushik - application/json 0
+2025-07-25 01:23:24.536 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:23:24.544 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:23:24.561 +05:30 [INF] Route matched with {action = "SendWelcomeMail", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SendWelcomeMail(System.String, System.String) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:23:27.718 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType9`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:23:27.741 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API) in 3176.6267ms
+2025-07-25 01:23:27.742 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.SendWelcomeMail (API)'
+2025-07-25 01:23:27.745 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/send-welcome-mail?email=Kaushik.21aid@kongu.edu&username=Kaushik - 200 null application/json; charset=utf-8; ver=1 3213.4113ms
+2025-07-25 01:23:27.750 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5169/api/v1/User/register - application/json 80
+2025-07-25 01:23:27.753 +05:30 [INF] CORS policy execution successful.
+2025-07-25 01:23:27.754 +05:30 [INF] Executing endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:23:27.758 +05:30 [INF] Route matched with {action = "Register", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ExpenseTrackerAPI.DTOs.RegisterUserRequest) on controller ExpenseTrackerAPI.Controllers.UserController (API).
+2025-07-25 01:23:28.767 +05:30 [INF] Executed DbCommand (45ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:23:28.790 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."Email", u."IsActive", u."IsDeleted", u."PasswordHash", u."Role", u."UpdatedAt", u."UserName"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted") AND u."Email" = @__email_0
+LIMIT 1
+2025-07-25 01:23:29.244 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = DateTime), @p8='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "CreatedAt", "Email", "IsActive", "IsDeleted", "PasswordHash", "Role", "UpdatedAt", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2025-07-25 01:23:29.255 +05:30 [INF] Executing OkObjectResult, writing value of type 'ExpenseTrackerAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 01:23:29.260 +05:30 [INF] Executed action ExpenseTrackerAPI.Controllers.UserController.Register (API) in 1501.8561ms
+2025-07-25 01:23:29.260 +05:30 [INF] Executed endpoint 'ExpenseTrackerAPI.Controllers.UserController.Register (API)'
+2025-07-25 01:23:29.266 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5169/api/v1/User/register - 200 null application/json; charset=utf-8; ver=1 1515.2486ms
+2025-07-25 01:24:30.837 +05:30 [INF] Executed endpoint '/budgetHub'
+2025-07-25 01:24:30.838 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5169/budgetHub?id=cUQz3Z5CAuZH0J3fS01mtQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTgzNTg5LTgzOTYtNzBlNi1iNjg4LTU2OTdlMTRiNTQzZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFkbWluMUBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzUzNDM4Mjc1LCJpc3MiOiJleHBlbnNlX3RyYWNrZXJfc2VydmVyIiwiYXVkIjoiZXhwZW5zZV90cmFja2VyX2NsaWVudCJ9.XytHcOA8OVd6l7G37T7lBWAKn5cw_UP-_ZBRMDT2gk0 - 101 null null 113134.7515ms

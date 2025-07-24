@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/kaushik/Desktop/arul/ExpenseTracker/Console/Console.csproj": {}
+    "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/Console/Console.csproj": {}
   },
   "projects": {
-    "/Users/kaushik/Desktop/arul/ExpenseTracker/Console/Console.csproj": {
+    "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/Console/Console.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/kaushik/Desktop/arul/ExpenseTracker/Console/Console.csproj",
+        "projectUniqueName": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/Console/Console.csproj",
         "projectName": "Console",
-        "projectPath": "/Users/kaushik/Desktop/arul/ExpenseTracker/Console/Console.csproj",
+        "projectPath": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/Console/Console.csproj",
         "packagesPath": "/Users/kaushik/.nuget/packages/",
-        "outputPath": "/Users/kaushik/Desktop/arul/ExpenseTracker/Console/obj/",
+        "outputPath": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/Console/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/kaushik/.nuget/NuGet/NuGet.Config"

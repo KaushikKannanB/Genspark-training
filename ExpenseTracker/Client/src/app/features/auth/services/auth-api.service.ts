@@ -22,4 +22,9 @@ export class AuthApiService {
   logout(payload: { token: string; refreshToken: string }): Observable<any> {
     return this.http.post('/Auth/logout', payload);
   }
+
+  welcomemail(reg:RegisterRequest)
+  {
+    return this.http.post(`/User/send-welcome-mail?email=${reg.email}&username=${reg.userName}`,null);
+  }
 }

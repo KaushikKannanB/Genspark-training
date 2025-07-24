@@ -6340,11 +6340,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/kaushik/Desktop/arul/ExpenseTracker/Tests/Tests.csproj",
+      "projectUniqueName": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/Tests/Tests.csproj",
       "projectName": "Tests",
-      "projectPath": "/Users/kaushik/Desktop/arul/ExpenseTracker/Tests/Tests.csproj",
+      "projectPath": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/Tests/Tests.csproj",
       "packagesPath": "/Users/kaushik/.nuget/packages/",
-      "outputPath": "/Users/kaushik/Desktop/arul/ExpenseTracker/Tests/obj/",
+      "outputPath": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/Tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/kaushik/.nuget/NuGet/NuGet.Config"
@@ -6359,8 +6359,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/kaushik/Desktop/arul/ExpenseTracker/API/API.csproj": {
-              "projectPath": "/Users/kaushik/Desktop/arul/ExpenseTracker/API/API.csproj"
+            "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/API/API.csproj": {
+              "projectPath": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/API/API.csproj"
             }
           }
         }

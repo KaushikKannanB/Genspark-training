@@ -237,8 +237,15 @@ namespace ExpenseTrackerAPI.Controllers
                 var builder = new BodyBuilder
                 {
                     HtmlBody = $@"
-                        <p>{content}</p>
-                        <p style='margin-top: 30px;'>Best Regards,<br/><strong>Expense Tracker Team</strong></p>"
+                        <div style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 30px;'>
+                            <div style='max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'>
+                                <h2 style='color: #4CAF50; margin-bottom: 20px;'>💡 Suggestion from Analyser</h2>
+                                <p style='font-size: 16px; color: #333;'>{content}</p>
+                                <hr style='margin: 30px 0; border: none; border-top: 1px solid #ddd;'/>
+                                <p style='font-size: 14px; color: #888;'>If you have any questions, feel free to reply to this email.</p>
+                                <p style='margin-top: 30px; font-size: 16px; color: #444;'>Best Regards,<br/><strong style='color: #4CAF50;'>Expense Tracker Team</strong></p>
+                            </div>
+                        </div>"
                 };
 
                 message.Body = builder.ToMessageBody();

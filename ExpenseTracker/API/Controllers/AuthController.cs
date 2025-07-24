@@ -42,7 +42,7 @@ namespace ExpenseTrackerAPI.Controllers
                     Credentials = new[] { "Invalid email or password." }
                 }));
             }
-
+            
             return Ok(ApiResponse<AuthResponse>.SuccessResponse(response, "Login successful"));
         }
 

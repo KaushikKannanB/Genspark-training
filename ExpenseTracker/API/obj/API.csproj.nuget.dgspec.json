@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/kaushik/Desktop/arul/ExpenseTracker/API/API.csproj": {}
+    "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/API/API.csproj": {}
   },
   "projects": {
-    "/Users/kaushik/Desktop/arul/ExpenseTracker/API/API.csproj": {
+    "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/API/API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/kaushik/Desktop/arul/ExpenseTracker/API/API.csproj",
+        "projectUniqueName": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/API/API.csproj",
         "projectName": "API",
-        "projectPath": "/Users/kaushik/Desktop/arul/ExpenseTracker/API/API.csproj",
+        "projectPath": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/API/API.csproj",
         "packagesPath": "/Users/kaushik/.nuget/packages/",
-        "outputPath": "/Users/kaushik/Desktop/arul/ExpenseTracker/API/obj/",
+        "outputPath": "/Users/kaushik/Desktop/Genspark-training/ExpenseTracker/API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/kaushik/.nuget/NuGet/NuGet.Config"

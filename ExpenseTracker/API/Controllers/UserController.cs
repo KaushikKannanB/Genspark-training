@@ -49,7 +49,7 @@ namespace ExpenseTrackerAPI.Controllers
                     Email = new[] { "Email is already taken." }
                 }));
             }
-
+            
             var user = new User
             {
                 UserName = request.UserName,
@@ -306,7 +306,7 @@ namespace ExpenseTrackerAPI.Controllers
                                     <td style='padding: 8px; color: #D9534F;'>{content}</td>
                                 </tr>
                             </table>
-                            <p style='margin-top: 20px;'>You can now <a href='http://localhost:4200/login'>log in here</a> and start using the system.</p>
+                            <p style='margin-top: 20px;'>You can now <a href='http://localhost:4200/auth/login'>log in here</a> and start using the system.</p>
                             <p style='margin-top: 30px;'>Best Regards,<br/><strong>Expense Tracker Team</strong></p>
                         </div>"
                 };
@@ -331,6 +331,71 @@ namespace ExpenseTrackerAPI.Controllers
             }
         }
 
+
+        [HttpPost("send-welcome-mail")]
+        public async Task<IActionResult> SendWelcomeMail(string email, string username)
+        {
+            try
+            {
+                var message = new MimeMessage();
+                message.From.Add(MailboxAddress.Parse("kaushikkannan02@gmail.com"));
+                message.To.Add(MailboxAddress.Parse(email));
+                message.Subject = "Expense Tracker - Welcome Aboard";
+
+                var builder = new BodyBuilder
+                {
+                    HtmlBody = $@"
+                    <div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #f9fafb; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);'>
+                        <h2 style='color: #2d3748;'>👋 Welcome, {username}!</h2>
+                        <p style='color: #4a5568; font-size: 16px;'>
+                        We're thrilled to have you on board at <strong>Expense Tracker</strong>! 🎉
+                        </p>
+
+                        <p style='color: #4a5568; font-size: 16px;'>
+                        With your new account, you can now:
+                        </p>
+                        <ul style='color: #4a5568; font-size: 16px; padding-left: 20px;'>
+                        <li>💰 Track your daily expenses</li>
+                        <li>📊 Analyze spending patterns</li>
+                        <li>🔒 Keep your data secure and private</li>
+                        </ul>
+
+                        <p style='color: #4a5568; font-size: 16px;'>
+                        You can get started by logging in and exploring your dashboard.
+                        </p>
+
+                        <div style='text-align: center; margin: 30px 0;'>
+                        <a href='http://localhost:4200/auth/login' style='background-color: #38b2ac; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;'>Login Now</a>
+                        </div>
+
+                        <p style='color: #a0aec0; font-size: 14px; text-align: center;'>
+                        If you have any questions, feel free to reply to this email.<br />
+                        Welcome aboard! 🚀
+                        </p>
+                    </div>
+                    "
+
+                };
+
+                message.Body = builder.ToMessageBody();
+
+                using var smtp = new SmtpClient();
+                await smtp.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+                await smtp.AuthenticateAsync("kaushikkannan02@gmail.com", "nbepnpvbimmimtoa"); // App password
+                await smtp.SendAsync(message);
+                await smtp.DisconnectAsync(true);
+
+                return Ok(new { message = "Email sent successfully" });
+            }
+            catch (SmtpCommandException ex) when (ex.ErrorCode == SmtpErrorCode.RecipientNotAccepted)
+            {
+                return BadRequest("Email address does not exist or was rejected by the server.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Failed to send email: " + ex.Message);
+            }
+        }
         private Guid GetUserId()
         {
             return Guid.Parse(User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value!);
