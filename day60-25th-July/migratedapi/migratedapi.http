@@ -1,0 +1,6 @@
+@migratedapi_HostAddress = http://localhost:5011
+
+GET {{migratedapi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
