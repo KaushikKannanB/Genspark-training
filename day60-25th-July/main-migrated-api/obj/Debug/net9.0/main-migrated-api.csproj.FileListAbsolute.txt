@@ -128,3 +128,11 @@
 /Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/obj/Debug/net9.0/main-migrated-api.pdb
 /Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/obj/Debug/net9.0/main-migrated-api.genruntimeconfig.cache
 /Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/obj/Debug/net9.0/ref/main-migrated-api.dll
+/Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/bin/Debug/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/bin/Debug/net9.0/Microsoft.IdentityModel.Logging.dll
+/Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.dll
+/Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
+/Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll

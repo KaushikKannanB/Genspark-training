@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MainMigration.Models
 {
@@ -8,6 +10,7 @@ namespace MainMigration.Models
     {
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductId { get; set; }
 
         [Required]
@@ -21,18 +24,19 @@ namespace MainMigration.Models
         public int? CategoryId { get; set; }
         public int? ColorId { get; set; }
         public int? ModelId { get; set; }
-        public int? StorageId { get; set; }
 
-        public DateTime? SellStartDate { get; set; }
-        public DateTime? SellEndDate { get; set; }
+        public int YearsUsed { get; set; }
 
-        public int? IsNew { get; set; }
+        public string? isSold{ get; set; }
+        public DateTime? dateAdded = DateTime.Now;
 
         // Navigation properties
         public Category? Category { get; set; }
         public Color? Color { get; set; }
         public Model? Model { get; set; }
         public User? User { get; set; }
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+
+        [JsonIgnore]
+        public ICollection<OrderDetail>? OrderDetails { get; set; }
     }
 }

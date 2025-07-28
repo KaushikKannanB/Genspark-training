@@ -5,15 +5,14 @@ namespace MainMigration.Models
 {
     public class OrderDetail
     {
-        [Key, Column(Order = 0)]
-        public int OrderID { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int OrderDetailID { get; set; }
 
-        [Key, Column(Order = 1)]
+        public int OrderID { get; set; }
         public int ProductID { get; set; }
 
         public double? Price { get; set; }
-
-        public int? Quantity { get; set; }
 
         // Navigation properties
         public Order? Order { get; set; }

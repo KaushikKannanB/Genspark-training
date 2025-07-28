@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace main_migrated_api.Migrations
 {
     [DbContext(typeof(MainMigrationContext))]
-    [Migration("20250726201757_Initial")]
-    partial class Initial
+    [Migration("20250728195726_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,29 @@ namespace main_migrated_api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("MainMigration.Models.Cart", b =>
+                {
+                    b.Property<int>("CartId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CartId"));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Carts");
+                });
 
             modelBuilder.Entity("MainMigration.Models.Category", b =>
                 {
@@ -59,35 +82,6 @@ namespace main_migrated_api.Migrations
                     b.ToTable("Colors");
                 });
 
-            modelBuilder.Entity("MainMigration.Models.ContactUs", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ContactUs");
-                });
-
             modelBuilder.Entity("MainMigration.Models.Model", b =>
                 {
                     b.Property<int>("ModelId")
@@ -96,51 +90,13 @@ namespace main_migrated_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ModelId"));
 
-                    b.Property<string>("Model1")
+                    b.Property<string>("ModelName")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("ModelId");
 
                     b.ToTable("Models");
-                });
-
-            modelBuilder.Entity("MainMigration.Models.News", b =>
-                {
-                    b.Property<int>("NewsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("NewsId"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ShortDescription")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("Status")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("NewsId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("MainMigration.Models.Order", b =>
@@ -151,36 +107,15 @@ namespace main_migrated_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OrderID"));
 
-                    b.Property<string>("CustomerAddress")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("CustomerEmail")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("CustomerPhone")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("OrderName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PaymentType")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<double>("TotalAmount")
+                        .HasColumnType("double precision");
 
                     b.HasKey("OrderID");
 
@@ -189,21 +124,24 @@ namespace main_migrated_api.Migrations
 
             modelBuilder.Entity("MainMigration.Models.OrderDetail", b =>
                 {
-                    b.Property<int>("OrderID")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
+                    b.Property<int>("OrderDetailID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
 
-                    b.Property<int>("ProductID")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OrderDetailID"));
+
+                    b.Property<int>("OrderID")
+                        .HasColumnType("integer");
 
                     b.Property<double?>("Price")
                         .HasColumnType("double precision");
 
-                    b.Property<int?>("Quantity")
+                    b.Property<int>("ProductID")
                         .HasColumnType("integer");
 
-                    b.HasKey("OrderID", "ProductID");
+                    b.HasKey("OrderDetailID");
+
+                    b.HasIndex("OrderID");
 
                     b.HasIndex("ProductID");
 
@@ -227,9 +165,6 @@ namespace main_migrated_api.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("text");
 
-                    b.Property<int?>("IsNew")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("ModelId")
                         .HasColumnType("integer");
 
@@ -240,17 +175,14 @@ namespace main_migrated_api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("SellEndDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("SellStartDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int?>("StorageId")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
+
+                    b.Property<int>("YearsUsed")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("isSold")
+                        .HasColumnType("text");
 
                     b.HasKey("ProductId");
 
@@ -273,6 +205,18 @@ namespace main_migrated_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
+                    b.Property<string>("CustomerAddress")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CustomerEmail")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CustomerPhone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
@@ -286,11 +230,21 @@ namespace main_migrated_api.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MainMigration.Models.News", b =>
+            modelBuilder.Entity("MainMigration.Models.Cart", b =>
                 {
+                    b.HasOne("MainMigration.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MainMigration.Models.User", "User")
-                        .WithMany("News")
-                        .HasForeignKey("UserId");
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
 
                     b.Navigation("User");
                 });
@@ -368,8 +322,6 @@ namespace main_migrated_api.Migrations
 
             modelBuilder.Entity("MainMigration.Models.User", b =>
                 {
-                    b.Navigation("News");
-
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
