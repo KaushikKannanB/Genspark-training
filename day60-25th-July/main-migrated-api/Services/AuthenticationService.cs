@@ -23,7 +23,7 @@ namespace MainMigration.Services
             userrepo = us;
         }
 
-        public async Task<User> SignUp(UserLoginRequest request)
+        public async Task<User> SignUp(UserSignUpRequest request)
         {
             var exist_user = await userService.GetByUserName(request.UserName);
 
@@ -34,8 +34,11 @@ namespace MainMigration.Services
             else
             {
                 User u = new();
-                u.Username = request.UserName;
+                u.Username = request.UserName.ToLower();
                 u.Password = request.Password;
+                u.CustomerAddress = request.CustomerAddress;
+                u.CustomerEmail = request.CustomerEmail;
+                u.CustomerPhone = request.CustomerPhone;
                 var user = await userrepo.Add(u);
                 return user;
             }

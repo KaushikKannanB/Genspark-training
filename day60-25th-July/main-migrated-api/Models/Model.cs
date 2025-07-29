@@ -14,7 +14,7 @@ namespace MainMigration.Models
 
         [Required]
         public string ModelName{ get; set; } = string.Empty;
-
+        [JsonIgnore]
         public ICollection<Product>? Products { get; set; }
     }
 }

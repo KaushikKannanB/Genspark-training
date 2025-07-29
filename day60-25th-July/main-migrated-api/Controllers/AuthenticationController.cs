@@ -16,7 +16,7 @@ namespace MainMigration.Controllers
         }
 
         [HttpPost("signup")]
-        public async Task<IActionResult> SignUp(UserLoginRequest req)
+        public async Task<IActionResult> SignUp(UserSignUpRequest req)
         {
             var user = await authService.SignUp(req);
             if (user == null)

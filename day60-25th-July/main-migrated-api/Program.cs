@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddHttpContextAccessor();
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddControllers();
@@ -21,10 +21,10 @@ builder.Services.AddSwaggerGen(opt =>
     {
         Name = "Authorization",
         In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer",
+        Type = SecuritySchemeType.Http, // ← changed from ApiKey
+        Scheme = "bearer",               // ← lowercase 'bearer' required
         BearerFormat = "JWT",
-        Description = "Enter 'Bearer {token}'"
+        Description = "Enter JWT token only (no need to type 'Bearer')"
     });
 
     opt.AddSecurityRequirement(new OpenApiSecurityRequirement {
@@ -39,6 +39,7 @@ builder.Services.AddSwaggerGen(opt =>
         }
     });
 });
+
 
 
 #region DBConnection
@@ -66,8 +67,10 @@ builder.Services.AddTransient<IRepository<int, Cart>, CartRepository>();
 
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<ICurrentUserService, CurrentUserService>();
 builder.Services.AddTransient<IAuthService, AuthenticationService>();
 builder.Services.AddTransient<IOtherServices, OtherServices>();
+builder.Services.AddTransient<IProductService, ProductService>();
 #endregion
 
 #region AuthenticationFilter
