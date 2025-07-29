@@ -19,10 +19,18 @@ namespace MainMigration.Services
             userService = us;
         }
 
-        public async Task<Product> GetByproductname(string name)
+        public async Task<IEnumerable<Object>> GetByproductname(string name)
         {
             var all = await prodrepo.GetAll();
-            var res = all.FirstOrDefault(p => p.ProductName.ToLower() == name.ToLower());
+            var res = all.Where(p => p.ProductName.ToLower() == name.ToLower() && p.isSold == "NO").
+            Select(pr => new
+            {
+                id = pr.ProductId,
+                name = pr.ProductName,
+               price = pr.Price,
+                color = pr.ColorId,
+               years = pr.YearsUsed
+            });
 
             return res;
         }
@@ -87,7 +95,7 @@ namespace MainMigration.Services
             {
                 all = all.Where(p => p.ProductName.Contains(prodname.ToLower()));
             }
-
+            all = all.Where(p => p.isSold == "NO");
             return all;
         }
     }

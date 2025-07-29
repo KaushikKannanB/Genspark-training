@@ -31,7 +31,7 @@ namespace MainMigration.Controllers
             return Ok("Product added");
         }
 
-        [HttpGet("get-by-product-name")]
+        [HttpGet("get-by-product-name-unsold_only")]
         public async Task<IActionResult> GetProduct(string name)
         {
             var res = await productService.GetByproductname(name);
@@ -51,7 +51,7 @@ namespace MainMigration.Controllers
             return Ok(all);
         }
 
-        [HttpGet("get-filtered-products")]
+        [HttpGet("get-filtered-products_unsold_only")]
         public async Task<IActionResult> GetFilteredProducts(string? cat, string? col, string? mod, string? prodname)
         {
             var res = await productService.GetFilteredProducts(cat?.ToLower(), col?.ToLower(), mod?.ToLower(), prodname?.ToLower());

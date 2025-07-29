@@ -14,11 +14,12 @@ namespace MainMigration.Models
         public int ProductId { get; set; }
 
         [Required]
+        
         public string ProductName { get; set; } = string.Empty;
 
         public string? Image { get; set; }
 
-        public double? Price { get; set; }
+        public double Price { get; set; }
 
         public int? UserId { get; set; }
         public int? CategoryId { get; set; }
@@ -34,6 +35,7 @@ namespace MainMigration.Models
         public Category? Category { get; set; }
         public Color? Color { get; set; }
         public Model? Model { get; set; }
+        [JsonIgnore]
         public User? User { get; set; }
 
         [JsonIgnore]

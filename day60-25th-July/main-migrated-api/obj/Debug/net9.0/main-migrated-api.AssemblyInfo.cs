@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("main-migrated-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48d5b74d6f594b7c10b105b25c0854cad62e02df")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25cb3c2a10fbaa3daeed3139eee4b85d9547a102")]
 [assembly: System.Reflection.AssemblyProductAttribute("main-migrated-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("main-migrated-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

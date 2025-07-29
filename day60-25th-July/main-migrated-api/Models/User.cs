@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MainMigration.Models
 {
@@ -27,7 +28,7 @@ namespace MainMigration.Models
 
         [Required]
         public string CustomerAddress { get; set; } = string.Empty;
-
+        [JsonIgnore]
         public ICollection<Product>? Products { get; set; }
     }
 }

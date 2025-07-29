@@ -71,6 +71,8 @@ builder.Services.AddTransient<ICurrentUserService, CurrentUserService>();
 builder.Services.AddTransient<IAuthService, AuthenticationService>();
 builder.Services.AddTransient<IOtherServices, OtherServices>();
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<ICartService, CartService>();
 #endregion
 
 #region AuthenticationFilter

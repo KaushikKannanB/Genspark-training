@@ -114,7 +114,12 @@ namespace main_migrated_api.Migrations
                     b.Property<double>("TotalAmount")
                         .HasColumnType("double precision");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("OrderID");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -165,7 +170,7 @@ namespace main_migrated_api.Migrations
                     b.Property<int?>("ModelId")
                         .HasColumnType("integer");
 
-                    b.Property<double?>("Price")
+                    b.Property<double>("Price")
                         .HasColumnType("double precision");
 
                     b.Property<string>("ProductName")
@@ -242,6 +247,17 @@ namespace main_migrated_api.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MainMigration.Models.Order", b =>
+                {
+                    b.HasOne("MainMigration.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
