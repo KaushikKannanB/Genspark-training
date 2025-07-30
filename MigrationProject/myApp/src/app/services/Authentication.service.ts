@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { inject } from "@angular/core"
-import { UserLoginModel } from "../models/UserLoginModel";
-import { jwtDecode } from "jwt-decode";
 import { BehaviorSubject } from "rxjs";
+import { UserLoginModel } from "../models/UserLoginModel";
+import { UserCreate } from "../models/UserCreateModel";
 
 export class AUthService
 {
@@ -11,17 +11,11 @@ export class AUthService
     headers:any;
     private isLoggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
     isLoggedIn$ = this.isLoggedInSubject.asObservable();
-    role$ = new BehaviorSubject<string>('');
 
     userid$ = new BehaviorSubject<string>('');
     getUserId(id:string)
     {
         this.userid$.next(id);
-    }
-    setRole(token:string|null)
-    {
-        const role = this.getrolefromtoken(token);
-        this.role$.next(role);
     }
     setLoggedIn(value: boolean) {
         this.isLoggedInSubject.next(value);
@@ -36,7 +30,7 @@ export class AUthService
     }
     login(user:UserLoginModel)
     {
-        return this.http.post('http://localhost:5077/api/authentication/Login',user);
+        return this.http.post('http://localhost:5048/api/authentication/login',user);
     }
     logout()
     {
@@ -44,17 +38,12 @@ export class AUthService
         const token = localStorage.getItem("token") as string;
         localStorage.removeItem("token");
         localStorage.removeItem("userid");
-        return this.http.post('http://localhost:5077/api/authentication/logout',token,{headers:this.headers})
     }
-    getrolefromtoken(token:string|any)
+    signup(user:UserCreate)
     {
-        // console.log(token);
-        const decoded: any = jwtDecode(token);
-        return decoded.role;
+        return this.http.post('http://localhost:5048/api/authentication/signup',user)
     }
-    getuserfrommail(email:string)
-    {
-        this.authorization();
-        return this.http.get(`http://localhost:5077/api/authentication/Get-User-By-Email?email=${email}`,{headers:this.headers});
+    isLoggedIn(): boolean {
+        return !!localStorage.getItem('token'); // or your login check logic
     }
 }

@@ -25,7 +25,8 @@ namespace MainMigration.Controllers
             }
             else
             {
-                return Ok("Signed Up!");
+                return Ok(new { message = "Signed Up!" });
+
             }
         }
 

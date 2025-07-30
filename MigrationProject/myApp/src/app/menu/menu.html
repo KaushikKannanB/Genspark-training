@@ -1,71 +1,8 @@
-<nav class="vertical-navbar">
-  <h2><a class="navbar-brand d-flex align-items-center gap-1" routerLink="/"><span class="material-symbols-outlined">
-local_shipping
-</span>Inven<span>-tree</span></a></h2>
-  <div class="nav-options">
-    <div class="pages">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link d-flex align-items-center gap-1" routerLink="home"><span class="material-icons">
-cottage 
-</span>Home</a></li>
-        <li class="nav-item"><a class="nav-link d-flex align-items-center gap-1" routerLink="products"><span class="material-icons">
-shopping_basket
-</span> Products</a></li>
-        <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-1" routerLink="notifications">
-            <span class="material-icons">
-add_alert
-</span> Notifications
-            @if(notifyService.messages.length != 0) {
-              <span class="notification-badge">{{ notifyService.messages.length }}</span>
-            }
-          </a>
-        </li>
-        <li class="nav-item"><a class="nav-link d-flex align-items-center gap-1" routerLink="profile"><span class="material-icons">
-manage_accounts
-</span> Profile</a></li>
-      <li class="nav-item"><a class="nav-link d-flex align-items-center gap-1" routerLink="dashboard"><span class="material-icons">
-dashboard
-</span> Dashboard</a></li>
-      </ul>
-    </div>
-    <div class="buttons">
-      <button (click)="setenablechangepass()" class="btn btn-outline-light d-flex align-items-center gap-1"><span class="material-icons">
-key
-</span> Change Password</button>
-      <button (click)="handlelogout()" class="btn btn-danger d-flex align-items-center gap-1"><span class="material-icons">
-logout
-</span> Logout</button>
-    </div>
-  </div>
+<nav class="sidebar">
+  <ul class="menu">
+    <li><a routerLink="/home" routerLinkActive="active">🏠 Home</a></li>
+    <li><a routerLink="/my-orders" routerLinkActive="active">📦 My Orders</a></li>
+    <li><a routerLink="/cart" routerLinkActive="active">🛒 Cart</a></li>
+    <li><a routerLink="/order-now" routerLinkActive="active">🧾 Order Now</a></li>
+  </ul>
 </nav>
-
-<!-- Modal -->
-<div *ngIf="enablechangepass" class="modal-overlay">
-  <div class="modal-content">
-    <h3>Change Password</h3>
-    <form [formGroup]="loginform" (ngSubmit)="setenablechangepass()" class="modal-form">
-      <!-- Password -->
-      <div class="input-wrapper">
-        <i class="fas fa-lock"></i>
-        <input
-          type="password"
-          placeholder="Password"
-          formControlName="password"
-          [(ngModel)]="newpass"
-        />
-      </div>
-      <span class="error" *ngIf="password.touched && password.errors">
-        <ng-container *ngIf="password.errors['required']">Password is required.</ng-container>
-        <ng-container *ngIf="password.errors['passwordError']">Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.</ng-container>
-      </span>
-      <div class="modal-actions">
-        <button type="submit" class="btn btn-primary" (click)="handlechangepassword()">✅ Change</button>
-        <button type="button" class="btn btn-secondary" (click)="closeModal()">❌ Cancel</button>
-      </div>
-    </form>
-  
-
-
-  </div>
-</div>

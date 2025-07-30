@@ -1,128 +1,29 @@
-<!-- <app-menu></app-menu> -->
-<div class="filter-bar">
-    <input type="text" name="name" [(ngModel)]="searchByname" placeholder="Product" (input)="filterProducts()">
-    <input type="text" name="invname" [(ngModel)]="searchByInventory" placeholder="Inventory" (input)="filterProducts()">
-
-    <select name="status" [(ngModel)]="searchByStatus" (change)="filterProducts()">
-        <option value="">All Status</option>
-        <option value="ACTIVE">Active</option>
-        <option value="INACTIVE">Inactive</option>
-    </select>
-    <select name="category" [(ngModel)]="searchByCategory" (change)="filterProducts()">
-        <option value="">All Categories</option>
-        @for(c of categories;track c.Id)
-        {
-            <option [value]="c.categoryName">{{c.categoryName}}</option>
-        }
-    </select>
-    <input type="number" name="min" [(ngModel)]="searchByMinPrice" placeholder="Min price" (input)="filterProducts()">
-    <input type="number" name="max" [(ngModel)]="searchByMaxPrice" placeholder="Max price" (input)="filterProducts()">
-    <button class="btn btn-toggle" (click)="toggleLowStock()">
-  {{ showLowStockOnly ? 'Show All' : 'Show Low Stock Only' }}
-</button>
-</div>
-<!-- <button (click)="handleproducts()">Click to view all products</button> -->
-@if(filteredproducts!=null) {
-  <div class="product-cards">
-    <div 
-      class="product-card" 
-      *ngFor="let product of paginatedProducts; trackBy: products.name"
-      [ngClass]="{'low-stock': product.stock < product.minThreshold}"
-    >
-      <h3>{{product.name}}</h3>
-      <p class="description">{{product.description}}</p>
-      <p><strong>category: </strong>{{product.category}}</p>
-      <p><strong>Inventory ID: </strong>{{product.inventoryId}}</p>
-
-      <h4><strong>Price:</strong> ${{product.price}}</h4>
-      <p><strong>Stock/Threshold:</strong> {{product.stock}} / {{product.minThreshold}}</p>
-      <p><strong>Added At:</strong> {{product.addedAt}}</p>
-      <p><strong>Added By:</strong> {{product.addedBy}}</p>
-      @if(product.status=='INACTIVE')
-      {
-        <h4 style="margin-top: 10px; color: #dd4e4e;"><strong>Status: {{product.status}}</strong></h4>
-      }
-      @else {
-      <p><strong>Status:</strong> {{product.status}}</p>
-
-      }
-      @if(product.status=='ACTIVE')
-      {
-        <div class="actions">
-          <button class="d-flex align-items-center gap-1" (click)="enableUpdateProduct(product.name)"><span class="material-icons">
-edit
-</span>Update</button>
-          <button class="d-flex align-items-center gap-1" (click)="handledelete(product.name)"><span class="material-icons">
-delete_forever
-</span>Delete</button>
-          <button class="d-flex align-items-center gap-1" (click)="enableUpdateStock(product.name)"><span class="material-icons">
-sync_alt
-</span>Update Stock</button>
+<h2 class="text-center text-white">Product List</h2>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4 mb-4" *ngFor="let product of products">
+      <div class="card h-100 shadow">
+        <img
+          [src]="product.image"
+          class="card-img-top"
+          alt="{{ product.productName }}"
+          style="height: 200px; object-fit: cover"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.productName }}</h5>
+          <p class="card-text mb-1"><strong>Price:</strong> ₹{{ product.price }}</p>
+          <p class="card-text mb-1" *ngIf="product.yearsUsed !== null">
+            <strong>Used:</strong> {{ product.yearsUsed }} year(s)
+          </p>
+          <p class="card-text mb-1" *ngIf="product.model">
+            <strong>Model:</strong> {{ product.model }}
+          </p>
+          <p class="card-text text-muted">
+            <small *ngIf="product.isSold === 'YES'">[SOLD]</small>
+            <small *ngIf="product.isSold !== 'YES'">Available</small>
+          </p>
         </div>
-      }
-    </div>
-  </div>
-}
-@if(totalPages > 1) {
-  <div class="pagination">
-    <button 
-      *ngFor="let page of [].constructor(totalPages); let i = index" 
-      (click)="currentPage = i + 1; updatePagination()" 
-      [class.active]="currentPage === i + 1">
-      {{i + 1}}
-    </button>
-  </div>
-}
-<div *ngIf="enableStockUpd" class="modal-overlay">
-  <div class="modal-content">
-    <h3>Update Stock</h3>
-    <form (ngSubmit)="handlestockupdate()" class="modal-form">
-      <select name="status" [(ngModel)]="stockUpd.AddOrReduce">
-        <option value="ADD">Add</option>
-        <option value="REDUCE">Reduce</option>
-      </select>
-      <input type="number" placeholder="Stock Update" name="AddOrReduceBy" [(ngModel)]="stockUpd.AddOrReduceBy"/>
-      <div class="modal-actions">
-        <button type="submit" class="btn btn-success">Update</button>
-        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div *ngIf="enableProdUpd" class="modal-overlay">
-  <div class="modal-content">
-    <h3>Update Product Details</h3>
-    <div *ngIf="!updateField" class="modal-form">
-      <button (click)="selectField('description')">Description</button>
-      <button (click)="selectField('price')">Price</button>
-      <button (click)="closeUpdateModal()" style="background-color: #d6b3b3;" class="cancel">Cancel</button>
-    </div>
-    <div *ngIf="updateField" class="modal-form">
-      <h4>Enter new {{updateField}}</h4>
-      <input [type]="updateField==='price'?'number':'text'" [(ngModel)]="newValue" placeholder="enter new {{updateField}}" />
-      <div class="modal-actions">
-        <button type="submit" (click)="submitUpdate()" class="btn btn-success">Update</button>
-        <button type="button" class="btn btn-secondary" (click)="closeUpdateModal()">Cancel</button>
       </div>
     </div>
   </div>
 </div>
-
-
-
-<!-- <h1>Delete</h1>
-<form (ngSubmit)="handledelete()" >
-    <input type="text" placeholder="Product" name="name" [(ngModel)]="delete_product">
-<button class="btn btn-success">delete product</button>
-
-</form> -->
-<!-- <h1>Update Stock</h1>
-<form (ngSubmit)="handlestockupdate()" >
-  <input type="text" placeholder="Product" name="ProductName" [(ngModel)]="stockUpd.ProductName">
-  <input type="text" placeholder="Add" name="AddOrReduce" [(ngModel)]="stockUpd.AddOrReduce">
-  <input type="number" placeholder="Stock Update" name="AddOrReduceBy" [(ngModel)]="stockUpd.AddOrReduceBy">
-
-  <button class="btn btn-success">Update Stock Product</button>
-</form> -->
-

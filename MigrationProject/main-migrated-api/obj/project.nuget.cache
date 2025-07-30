@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LHLq3LLxBDY=",
+  "dgSpecHash": "kG/Pi6OVSKs=",
   "success": true,
-  "projectFilePath": "/Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/main-migrated-api.csproj",
+  "projectFilePath": "/Users/kaushik/Desktop/Genspark-training/MigrationProject/main-migrated-api/main-migrated-api.csproj",
   "expectedPackageFiles": [
     "/Users/kaushik/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/kaushik/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/9.0.7/microsoft.aspnetcore.authentication.jwtbearer.9.0.7.nupkg.sha512",

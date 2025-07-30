@@ -1,53 +1,60 @@
-<div class="container">
-  <div class="left">
-    <div class="welcome-text ">
-      <div class="well d-flex align-items-center gap-1">
-        <h1><span class="material-symbols-outlined">
-local_shipping
-</span> Inven<span>Tree</span></h1><br>
+<div class="login-page d-flex align-items-center justify-content-center">
+  <div class="card login-card p-4 shadow">
+    <h4 class="text-center mb-3">Login</h4>
+    <form>
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" [(ngModel)]="user.username" name="username" required />
       </div>
-      <p><i class="fas fa-boxes-stacked"></i> Manage your <strong>inventory</strong> better.</p>
-      <p><i class="fas fa-chart-line"></i> Track updates & streamline <strong>efficiency</strong>.</p>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" [(ngModel)]="user.password" name="password" required />
+      </div>
+      <button type="submit" class="btn btn-primary w-100" (click)="login()">Login</button>
+    </form>
+    <div class="text-center mt-3">
+      <button class="btn btn-outline-light btn-sm" (click)="showSignup = true">Sign up</button>
     </div>
   </div>
 
-  <div class="right">
-    <form [formGroup]="loginform" (ngSubmit)="handlelogin()" class="login-form">
-      <h2>Login to Inven<span>Tree</span></h2>
-
-      <!-- Email -->
-      <div class="input-wrapper">
-        <i class="fas fa-envelope"></i>
-        <input
-          type="text"
-          placeholder="Email"
-          formControlName="email"
-          [(ngModel)]="user.email"
-        />
+  <!-- Sign Up Modal -->
+  <div
+    class="modal fade show d-block"
+    *ngIf="showSignup"
+    tabindex="-1"
+    role="dialog"
+    style="background-color: rgba(0, 0, 0, 0.5);"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content p-4 signup-modal">
+        <h5 class="modal-title mb-3">Sign Up</h5>
+        <form>
+          <div class="mb-2">
+            <label class="form-label">Username</label>
+            <input type="text" class="form-control" [(ngModel)]="newUser.userName" name="signupUsername" />
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" [(ngModel)]="newUser.customerEmail" name="signupEmail" />
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" [(ngModel)]="newUser.password" name="signupPassword" />
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Phone</label>
+            <input type="text" class="form-control" [(ngModel)]="newUser.customerPhone" name="signupPhone" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Address</label>
+            <textarea class="form-control" rows="2" [(ngModel)]="newUser.customerAddress" name="signupAddress"></textarea>
+          </div>
+          <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success" (click)="signup()">Sign Up</button>
+            <button type="button" class="btn btn-secondary" (click)="showSignup = false">Cancel</button>
+          </div>
+        </form>
       </div>
-      <span class="error" *ngIf="email.touched && email.errors">
-        <ng-container *ngIf="email.errors['required']">Email is required.</ng-container>
-        <ng-container *ngIf="email.errors['invalidEmail']">Invalid email format.</ng-container>
-      </span>
-
-      <!-- Password -->
-      <div class="input-wrapper">
-        <i class="fas fa-lock"></i>
-        <input
-          type="password"
-          placeholder="Password"
-          formControlName="password"
-          [(ngModel)]="user.password"
-        />
-      </div>
-      <span class="error" *ngIf="password.touched && password.errors">
-        <ng-container *ngIf="password.errors['required']">Password is required.</ng-container>
-        <ng-container *ngIf="password.errors['passwordError']">Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.</ng-container>
-      </span>
-
-      <button class="btn btn-success" [disabled]="loginform.invalid">
-        <i class="fas fa-sign-in-alt"></i> Login
-      </button>
-    </form>
+    </div>
   </div>
 </div>

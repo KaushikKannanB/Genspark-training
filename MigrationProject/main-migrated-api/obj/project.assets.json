@@ -3563,11 +3563,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/main-migrated-api.csproj",
+      "projectUniqueName": "/Users/kaushik/Desktop/Genspark-training/MigrationProject/main-migrated-api/main-migrated-api.csproj",
       "projectName": "main-migrated-api",
-      "projectPath": "/Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/main-migrated-api.csproj",
+      "projectPath": "/Users/kaushik/Desktop/Genspark-training/MigrationProject/main-migrated-api/main-migrated-api.csproj",
       "packagesPath": "/Users/kaushik/.nuget/packages/",
-      "outputPath": "/Users/kaushik/Desktop/Genspark-training/day60-25th-July/main-migrated-api/obj/",
+      "outputPath": "/Users/kaushik/Desktop/Genspark-training/MigrationProject/main-migrated-api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/kaushik/.nuget/NuGet/NuGet.Config"
