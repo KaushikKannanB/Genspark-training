@@ -1,0 +1,208 @@
+:root {
+  --primary: #00bcd4;
+  --primary-hover: #26c6da;
+  --danger: #f44336;
+  --danger-hover: #e53935;
+  --text-light: #f5f5f5;
+  --text-muted: #b0bec5;
+  --bg-dark: #121212;
+  --bg-light: #1f1f2b;
+  --input-bg: #2a2a3d;
+  --border-color: #424242;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Sidebar */
+.vertical-navbar {
+  background-color: var(--bg-light);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.6);
+}
+
+.vertical-navbar .navbar-brand {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 32px;
+  text-decoration: none;
+}
+.vertical-navbar .navbar-brand span {
+  color: var(--text-light);
+}
+
+.navbar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.nav-link {
+  color: var(--text-light);
+  font-weight: 500;
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover,
+.nav-item.active .nav-link {
+  background-color: var(--input-bg);
+  color: var(--primary-hover);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  background-color: var(--danger);
+  color: white;
+  padding: 4px 7px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border-radius: 50%;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* Layout spacing */
+.nav-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90vh;
+}
+
+/* Button styles */
+.buttons .btn {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--text-light);
+  border: 1px solid var(--border-color);
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.buttons .btn:hover {
+  background-color: var(--input-bg);
+  color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: var(--danger-hover);
+  border-color: var(--danger-hover);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--bg-light);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.7);
+  width: 400px;
+  max-width: 90vw;
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-form input {
+  background-color: var(--input-bg);
+  color: var(--text-light);
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  font-size: 0.95rem;
+  width: 90%;
+  margin-left: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal-actions .btn {
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* Responsive for tablets & mobile */
+@media (max-width: 768px) {
+  .vertical-navbar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+  }
+
+  .vertical-navbar .navbar-nav {
+    flex-direction: row;
+    gap: 14px;
+  }
+
+  .buttons {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .buttons .btn {
+    width: auto;
+  }
+}
+.error {
+  color: #ff6b6b;
+  font-size: 0.875rem;
+  margin-top: -8px;
+  margin-bottom: 10px;
+  display: block;
+}

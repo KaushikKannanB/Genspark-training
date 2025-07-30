@@ -1,0 +1,92 @@
+
+<div class="filter-bar align-items-center mt-3 gap-2">
+  <input
+    type="text"
+    [(ngModel)]="searchByName"
+    (input)="filterLogs()"
+    placeholder="Search by Product Name..."
+    class="form-control"
+    style="max-width: 250px;"
+  />
+  <input
+    type="text"
+    [(ngModel)]="searchBywhoupdated"
+    (input)="filterLogs()"
+    placeholder="Search by Updated By..."
+    class="form-control"
+    style="max-width: 250px;"
+  />
+  <input
+    type="date"
+    [(ngModel)]="searchByWhenMin"
+    (change)="filterLogs()" 
+    placeholder="Search by Date"
+    class="form-control"
+    style="max-width: 250px;"
+  />
+  <input
+    type="date"
+    [(ngModel)]="searchByWhenMax"
+    (change)="filterLogs()" 
+    placeholder="Search by Date"
+    class="form-control"
+    style="max-width: 250px;"
+  />
+  <button class="btn-dark" (click)="downloadCSV()">⬇ Download CSV</button>
+</div>
+
+@if(filteredlogs!=null) {
+  <div class="table-responsive mt-3">
+    <table class="table table-dark table-hover table-bordered table-sm align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Inventory ID</th>
+          <th>Product Name</th>
+          <th>Old Stock</th>
+          <th>New Stock</th>
+          <th>
+            Updated At
+            <button class="btn btn-link p-0" (click)="sortByDate()" title="Sort by Date">
+              {{ sortAsc ? '▲' : '▼' }}
+            </button>
+          </th>
+          <th>Updated By</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of paginatedLogs; trackBy: trackByInventoryId">
+          <td>{{log.inventoryId}}</td>
+          <td>{{log.prodName}}</td>
+          <td>{{log.oldStock}}</td>
+          <td>{{log.newStock}}</td>
+          <td>{{log.updatedAt | date:'medium'}}</td>
+          <td>{{log.updatedBy}}</td>
+          <td>
+            <span 
+              class="badge"
+              [ngClass]="{
+                'bg-success': log.newStock > log.oldStock,
+                'bg-danger': log.newStock < log.oldStock,
+                'bg-secondary': log.newStock == log.oldStock
+              }"
+            >
+              {{log.newStock > log.oldStock ? 'Add' : (log.newStock < log.oldStock ? 'Reduce' : 'No Change')}}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+}
+<div class="table-actions">
+  <div class="pagination">
+    <button 
+      *ngFor="let page of pages; let i = index" 
+      (click)="goToPage(i + 1)" 
+      [class.active]="i + 1 === currentPage"
+    >
+      {{ i + 1 }}
+    </button>
+  </div>
+</div>

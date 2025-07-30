@@ -1,0 +1,13 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+
+/* Push the content beside the sidebar */
+.content-area {
+  margin-left: 220px; /* same as .vertical-navbar width */
+  /* padding: 24px; */
+  flex-grow: 1;
+  /* background-color: #312f2f; */
+}

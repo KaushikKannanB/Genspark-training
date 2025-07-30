@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="left">
+    <div class="welcome-text ">
+      <div class="well d-flex align-items-center gap-1">
+        <h1><span class="material-symbols-outlined">
+local_shipping
+</span> Inven<span>Tree</span></h1><br>
+      </div>
+      <p><i class="fas fa-boxes-stacked"></i> Manage your <strong>inventory</strong> better.</p>
+      <p><i class="fas fa-chart-line"></i> Track updates & streamline <strong>efficiency</strong>.</p>
+    </div>
+  </div>
+
+  <div class="right">
+    <form [formGroup]="loginform" (ngSubmit)="handlelogin()" class="login-form">
+      <h2>Login to Inven<span>Tree</span></h2>
+
+      <!-- Email -->
+      <div class="input-wrapper">
+        <i class="fas fa-envelope"></i>
+        <input
+          type="text"
+          placeholder="Email"
+          formControlName="email"
+          [(ngModel)]="user.email"
+        />
+      </div>
+      <span class="error" *ngIf="email.touched && email.errors">
+        <ng-container *ngIf="email.errors['required']">Email is required.</ng-container>
+        <ng-container *ngIf="email.errors['invalidEmail']">Invalid email format.</ng-container>
+      </span>
+
+      <!-- Password -->
+      <div class="input-wrapper">
+        <i class="fas fa-lock"></i>
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          [(ngModel)]="user.password"
+        />
+      </div>
+      <span class="error" *ngIf="password.touched && password.errors">
+        <ng-container *ngIf="password.errors['required']">Password is required.</ng-container>
+        <ng-container *ngIf="password.errors['passwordError']">Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.</ng-container>
+      </span>
+
+      <button class="btn btn-success" [disabled]="loginform.invalid">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+    </form>
+  </div>
+</div>

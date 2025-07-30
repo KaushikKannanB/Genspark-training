@@ -1,0 +1,78 @@
+<div class="filter-bar align-items-center mt-3 gap-2">
+  <input
+    type="text"
+    [(ngModel)]="searchByName"
+    (input)="filterLogs()"
+    placeholder="Search by Product Name..."
+    class="form-control"
+  />
+  <input
+    type="text"
+    [(ngModel)]="searchBywhoupdated"
+    (input)="filterLogs()"
+    placeholder="Search by Updated By..."
+    class="form-control"
+  />
+  <select [(ngModel)]="searchByFieldUpdated" (change)="filterLogs()" class="form-control">
+    <option value="">All Fields</option>
+    <option value="Price">Price</option>
+    <option value="Description">Description</option>
+  </select>
+  <input
+    type="date"
+    [(ngModel)]="searchByWhenMin"
+    (change)="filterLogs()"
+    class="form-control"
+  />
+  <input
+    type="date"
+    [(ngModel)]="searchByWhenMax"
+    (change)="filterLogs()"
+    class="form-control"
+  />
+  <button class="btn-dark" (click)="downloadCSV()">⬇ Download CSV</button>
+</div>
+
+@if(filteredlogs!=null) {
+  <div class="table-responsive mt-3">
+    <table class="table table-dark table-hover table-bordered table-sm align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Product Name</th>
+          <th>Field Updated</th>
+          <th>Old Value</th>
+          <th>New Value</th>
+          <th>
+            Updated At
+            <button class="btn btn-link p-0" (click)="sortByDate()" title="Sort by Date">
+              {{ sortAsc ? '▲' : '▼' }}
+            </button>
+          </th>
+          <th>Updated By</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of paginatedLogs; trackBy: trackById">
+          <td>{{log.prodName}}</td>
+          <td>{{log.fieldUpdated}}</td>
+          <td>{{log.oldValue}}</td>
+          <td>{{log.newValue}}</td>
+          <td>{{log.updatedAt | date:'medium'}}</td>
+          <td>{{log.updatedBy}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+}
+
+<div class="table-actions">
+  <div class="pagination">
+    <button 
+      *ngFor="let page of pages; let i = index" 
+      (click)="goToPage(i + 1)" 
+      [class.active]="i + 1 === currentPage"
+    >
+      {{ i + 1 }}
+    </button>
+  </div>
+</div>
