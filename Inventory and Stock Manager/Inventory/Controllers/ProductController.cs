@@ -18,6 +18,7 @@ namespace Inventory.Controllers
         private readonly ICurrentUserService currentUserService;
 
         private readonly IProductService prodService;
+        private readonly IFAQService fAQService;
         private readonly IHubContext<NotificationHub> hubContext;
 
         private readonly IRepository<string, Category> categrepo;
@@ -31,7 +32,7 @@ namespace Inventory.Controllers
 
 
 
-        public ProductController(IManagerService man, ICurrentUserService cu, IHubContext<NotificationHub> hub, IRepository<string, ProductUpdateLog> prod, IRepository<string, StockLogging> st, IRepository<string, Inventories> i, IRepository<string, Product> pro, IProductService pr, IAdminService ad, IRepository<string, Category> ca)
+        public ProductController(IFAQService f, IManagerService man, ICurrentUserService cu, IHubContext<NotificationHub> hub, IRepository<string, ProductUpdateLog> prod, IRepository<string, StockLogging> st, IRepository<string, Inventories> i, IRepository<string, Product> pro, IProductService pr, IAdminService ad, IRepository<string, Category> ca)
         {
             adminService = ad;
             categrepo = ca;
@@ -43,6 +44,7 @@ namespace Inventory.Controllers
             hubContext = hub;
             currentUserService = cu;
             managerService = man;
+            fAQService = f;
         }
 
         [Authorize]
@@ -345,7 +347,16 @@ namespace Inventory.Controllers
                 ProdLogs = myupdsprod
             };
             return Ok(prodsummary);
-            
+
         }
+
+        [Authorize]
+        [HttpGet("ask-specific-questions")]
+        public async Task<IActionResult> GetQueries(string question)
+        {
+            string answer = await fAQService.GetSpecificQueries(question);
+            return Ok(answer);
+        }
+
     }
 }

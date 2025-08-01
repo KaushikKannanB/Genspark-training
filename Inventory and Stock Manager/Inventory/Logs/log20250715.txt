@@ -7380,3 +7380,90 @@ FROM "Managers" AS m
 2025-07-15 16:54:45.955 +05:30 [INF] Executed endpoint 'Inventory.Controllers.AdminController.GetAllManagers (Inventory)'
 2025-07-15 16:54:45.955 +05:30 [INF] HTTP GET /api/admin/Get-All-Managers responded 200 in 146.1706 ms
 2025-07-15 16:54:45.956 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/api/admin/Get-All-Managers - 200 null application/json; charset=utf-8 148.8483ms
+2025-07-15 17:04:40.047 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-07-15 17:04:40.048 +05:30 [INF] HTTP GET /notificationHub responded 101 in 653626.1727 ms
+2025-07-15 17:04:40.048 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=tHdA8is8_gXDmamNsIIAAQ - 101 null null 653627.6417ms
+2025-07-15 17:05:47.893 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 17:05:47.894 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:05:47.894 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 204 null null 1.6268ms
+2025-07-15 17:05:47.896 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 17:05:47.896 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:05:47.897 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-07-15 17:05:47.897 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-07-15 17:05:47.897 +05:30 [INF] HTTP POST /notificationHub/negotiate responded 200 in 1.2896 ms
+2025-07-15 17:05:47.898 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.8055ms
+2025-07-15 17:05:47.909 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/notificationHub?id=L731R24u3kHRs7X3vDl4fg - null null
+2025-07-15 17:05:47.909 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:05:47.910 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-07-15 17:20:06.965 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-07-15 17:20:06.968 +05:30 [INF] HTTP GET /notificationHub responded 101 in 859131.5747 ms
+2025-07-15 17:20:06.969 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=L731R24u3kHRs7X3vDl4fg - 101 null null 859133.0519ms
+2025-07-15 17:37:59.811 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 17:37:59.812 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:37:59.813 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 204 null null 2.5974ms
+2025-07-15 17:37:59.816 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 17:37:59.816 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:37:59.820 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-07-15 17:37:59.822 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-07-15 17:37:59.822 +05:30 [INF] HTTP POST /notificationHub/negotiate responded 200 in 5.3959 ms
+2025-07-15 17:37:59.822 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 6.4713ms
+2025-07-15 17:37:59.832 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/notificationHub?id=Ix-6agYUPjVaoNVuuPRnkg - null null
+2025-07-15 17:37:59.832 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:37:59.833 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-07-15 17:46:17.027 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-07-15 17:46:17.029 +05:30 [INF] HTTP GET /notificationHub responded 101 in 497171.5269 ms
+2025-07-15 17:46:17.030 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=Ix-6agYUPjVaoNVuuPRnkg - 101 null null 497172.809ms
+2025-07-15 17:56:01.937 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 17:56:01.939 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:56:01.939 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 204 null null 2.0215ms
+2025-07-15 17:56:01.941 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 17:56:01.942 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:56:01.953 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-07-15 17:56:01.954 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-07-15 17:56:01.954 +05:30 [INF] HTTP POST /notificationHub/negotiate responded 200 in 12.1636 ms
+2025-07-15 17:56:01.954 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 12.8595ms
+2025-07-15 17:56:02.281 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/notificationHub?id=_RQy6Ss5qG6lvSqJw0Q6IA - null null
+2025-07-15 17:56:02.282 +05:30 [INF] CORS policy execution successful.
+2025-07-15 17:56:02.283 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-07-15 21:29:19.306 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-07-15 21:29:19.307 +05:30 [INF] HTTP GET /notificationHub responded 101 in 509257.6072 ms
+2025-07-15 21:29:19.307 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=_RQy6Ss5qG6lvSqJw0Q6IA - 101 null null 509259.046ms
+2025-07-15 21:30:55.787 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 21:30:55.788 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:30:55.788 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 204 null null 1.3973ms
+2025-07-15 21:30:55.790 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 21:30:55.790 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:30:55.791 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-07-15 21:30:55.791 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-07-15 21:30:55.792 +05:30 [INF] HTTP POST /notificationHub/negotiate responded 200 in 2.0383 ms
+2025-07-15 21:30:55.792 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 2.49ms
+2025-07-15 21:30:56.038 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/notificationHub?id=6E6jqZbSzIR88WfwkH-YAQ - null null
+2025-07-15 21:30:56.038 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:30:56.039 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-07-15 21:30:56.268 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 21:30:56.269 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:30:56.269 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-07-15 21:30:56.270 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-07-15 21:30:56.270 +05:30 [INF] HTTP POST /notificationHub/negotiate responded 200 in 1.2420 ms
+2025-07-15 21:30:56.271 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 3.4588ms
+2025-07-15 21:30:56.350 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/notificationHub?id=z2TuxsikgyioiXg7xIpMrg - null null
+2025-07-15 21:30:56.351 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:30:56.353 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-07-15 21:30:59.012 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-07-15 21:30:59.012 +05:30 [INF] HTTP GET /notificationHub responded 101 in 2660.9822 ms
+2025-07-15 21:30:59.013 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=z2TuxsikgyioiXg7xIpMrg - 101 null null 2662.388ms
+2025-07-15 21:39:25.246 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-07-15 21:39:25.247 +05:30 [INF] HTTP GET /notificationHub responded 101 in 509209.2985 ms
+2025-07-15 21:39:25.247 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5077/notificationHub?id=6E6jqZbSzIR88WfwkH-YAQ - 101 null null 509209.8305ms
+2025-07-15 21:51:00.986 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 21:51:00.987 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:51:00.988 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 204 null null 1.1919ms
+2025-07-15 21:51:00.989 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-15 21:51:00.990 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:51:00.990 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-07-15 21:51:00.992 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-07-15 21:51:00.993 +05:30 [INF] HTTP POST /notificationHub/negotiate responded 200 in 2.4307 ms
+2025-07-15 21:51:00.993 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5077/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 3.5225ms
+2025-07-15 21:51:01.081 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5077/notificationHub?id=SE7L-sEwESfVSFfLj-8fWQ - null null
+2025-07-15 21:51:01.081 +05:30 [INF] CORS policy execution successful.
+2025-07-15 21:51:01.082 +05:30 [INF] Executing endpoint '/notificationHub'
