@@ -11,6 +11,7 @@ import { AdminDashboard } from './admin-dashboard/admin-dashboard';
 import { Profile } from './profile/profile';
 import { ManagerActivity } from './manager-activity/manager-activity';
 import { Dashboard } from './dashboard/dashboard';
+import { Chatbot } from './chatbot/chatbot';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -24,5 +25,5 @@ export const routes: Routes = [
     {path:'add-product', component:AddProduct},
     {path:'notifications',component:Notifications},
     {path:'admin-dashboard',component:AdminDashboard},
-    {path:'dashboard', component:Dashboard}
+    {path:'dashboard', component:Dashboard},
 ];

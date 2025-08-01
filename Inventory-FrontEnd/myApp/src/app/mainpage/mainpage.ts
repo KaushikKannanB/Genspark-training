@@ -5,10 +5,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AUthService } from '../services/Authentication.service';
+import { Chatbot } from '../chatbot/chatbot';
+import { ChatbotModalService } from '../services/chat.service';
 
 @Component({
   selector: 'app-mainpage',
-  imports: [FormsModule, CommonModule,RouterLink],
+  imports: [FormsModule, CommonModule,RouterLink, Chatbot],
   templateUrl: './mainpage.html',
   styleUrl: './mainpage.css',
   encapsulation: ViewEncapsulation.None
@@ -21,9 +23,16 @@ export class Mainpage implements OnInit{
     userid:string='';
     newcategory='';
     enablecategoryAdd:boolean=false;
-    constructor( private authservice:AUthService, private prodservice: ProductService) {}
-  
+    constructor( private authservice:AUthService, private prodservice: ProductService,private chatbotService: ChatbotModalService) {}
+    showChatbot = false;
+
+    toggleChatbot() {
+      this.showChatbot = !this.showChatbot;
+    }
     ngOnInit(): void {
+      this.chatbotService.visibility$.subscribe(show => {
+        this.showChatbot = show;
+      });
       this.token = localStorage.getItem("token");
       if (this.token) {
         this.authservice.setRole(this.token);
@@ -39,6 +48,9 @@ export class Mainpage implements OnInit{
         if (storedUserId) {
           this.userid = storedUserId;
         }
+    }
+    closeChatbot() {
+      this.chatbotService.close();
     }
     setenablecategoryAdd()
     {

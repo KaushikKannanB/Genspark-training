@@ -1,0 +1,30 @@
+<div class="chatbot-container">
+  <div class="chatbot-header">
+    <h2>Assistant</h2>
+    <button (click)="closeChat()">&times;</button>
+  </div>
+
+  <div class="chatbot-body" id="chat-body">
+    <div *ngFor="let msg of messages" [ngClass]="msg.sender === 'user' ? 'message user' : 'message bot'">
+      <div class="message-bubble">
+        {{ msg.text }}
+      </div>
+    </div>
+  </div>
+
+  <form (ngSubmit)="sendMessage()" class="chatbot-input">
+    <input
+      type="text"
+      [(ngModel)]="input"
+      name="input"
+      placeholder="Type your message..."
+      required
+    />
+    <button type="submit">
+      <svg xmlns="http://www.w3.org/2000/svg" class="send-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </button>
+  </form>
+</div>

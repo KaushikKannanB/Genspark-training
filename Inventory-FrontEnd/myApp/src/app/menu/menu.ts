@@ -6,6 +6,7 @@ import { AUthService } from '../services/Authentication.service';
 import { AdminManagerService } from '../services/AdminManager.service';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordStrengthValidator } from '../misc/PasswordValidator';
+import { ChatbotModalService } from '../services/chat.service';
 
 @Component({
   selector: 'app-menu',
@@ -23,7 +24,7 @@ export class Menu implements OnInit {
   loginform:FormGroup;
 
 
-  constructor(private fb: FormBuilder, public notifyService: NotificationService, public authservice:AUthService, private router :Router, private admmanservice:AdminManagerService) {
+  constructor(private fb: FormBuilder, public notifyService: NotificationService, public authservice:AUthService, private router :Router, private admmanservice:AdminManagerService,private chatbotService: ChatbotModalService) {
     this.loginform = new FormGroup({
       password: new FormControl(null, [Validators.required, passwordStrengthValidator()])
     });
@@ -33,6 +34,9 @@ export class Menu implements OnInit {
       this.role=role;
     });
     
+  }
+  openChatbot() {
+    this.chatbotService.open();
   }
   get password() {
     return this.loginform.get('password')!;

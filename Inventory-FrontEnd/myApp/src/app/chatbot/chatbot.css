@@ -1,0 +1,117 @@
+.chatbot-container {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 390px;
+  min-height: 700px;
+  max-height: 700px;
+  background-color: var(--surface, #252537);
+  color: white;
+  border: 1px solid var(--border, #33344d);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  font-family: sans-serif;
+  z-index: 50;
+}
+
+.chatbot-header {
+  background-color: var(--surface-dark, #1a1a2c);
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border, #33344d);
+  font-weight: bold;
+}
+
+.chatbot-header button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.chatbot-header button:hover {
+  color: #f87171;
+}
+
+.chatbot-body {
+  padding: 1rem;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.message {
+  display: flex;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.bot {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  max-width: 75%;
+  padding: 0.6rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.message.user .message-bubble {
+  background-color: #2563eb;
+  color: white;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.message.bot .message-bubble {
+  background-color: #3f3f46;
+  color: white;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.chatbot-input {
+  display: flex;
+  border-top: 1px solid var(--border, #33344d);
+  background-color: var(--surface-dark, #1a1a2c);
+  padding: 0.5rem;
+}
+
+.chatbot-input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  color: white;
+  font-size: 0.9rem;
+  placeholder-color: white;
+}
+
+.chatbot-input input::placeholder {
+  color: #ccc;
+}
+
+.chatbot-input button {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.send-icon {
+  width: 20px;
+  height: 20px;
+}
